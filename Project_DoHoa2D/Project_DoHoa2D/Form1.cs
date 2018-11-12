@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Project_DoHoa2D
 {
     public partial class Form1 : Form
@@ -15,6 +16,14 @@ namespace Project_DoHoa2D
         public Form1()
         {
             InitializeComponent();
+            
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            MyLine a = new MyLine(10, 10, 50, 50);
+            a.Draw(g, Color.Violet, 5,1);
         }
     }
 }
