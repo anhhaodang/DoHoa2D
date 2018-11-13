@@ -22,11 +22,13 @@ namespace Project_DoHoa2D
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            MyLine a = new MyLine(100, 100, 100, 50);
+            MyLine a = new MyLine(1000, 100, 100, 50);
             a.Draw(g, Color.Violet, 5,1);
             a.Rotation(Math.PI / 4);
             a.Draw(g,Color.Black);
 
+            MyCircle b = new MyCircle(30, 100, 90);
+            b.Draw(g);
         }
     }
 }

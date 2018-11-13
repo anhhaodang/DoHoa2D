@@ -22,6 +22,16 @@ namespace Project_DoHoa2D
             this.width = 1;
         }
 
+        public MyCircle(int v1, int v2, int v3)
+        {
+            this.p = new Point(v1, v2);
+            this.r = v3;
+            this.outlineColor = Color.Black;
+            this.dashStyle = DashStyle.Solid;
+            this.fillColor = Color.White;
+            this.width = 1;
+        }
+
         public MyCircle(int v1, int v2, int v3, Color? ocolor, Color? fcolor, DashStyle? d, float? w)
         {
             this.p = new Point(v1, v2);
