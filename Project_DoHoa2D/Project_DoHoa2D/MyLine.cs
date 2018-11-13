@@ -16,7 +16,7 @@ namespace Project_DoHoa2D
         private Color color = Color.Black;
         private int dashStyle = 0;
         private float width = 1;
-        
+
         public MyLine()
         {
             this.a = new Point(0, 0);
@@ -59,7 +59,7 @@ namespace Project_DoHoa2D
             graphics.DrawLine(myPen, a, b);
         }
 
-        public void Draw(Graphics graphics, Color color, int penStyle=0, float width=1)
+        public void Draw(Graphics graphics, Color color, int penStyle = 0, float width = 1)
         {
 
             Pen myPen = new Pen(color);
@@ -67,7 +67,7 @@ namespace Project_DoHoa2D
             this.dashStyle = penStyle;
             this.width = width;
             if (width > 1)
-                myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid; 
+                myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
             else
                 switch (penStyle)
                 {
@@ -79,13 +79,13 @@ namespace Project_DoHoa2D
                     case 5: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom; break;
                 }
             myPen.Width = width;
-            if (penStyle >=0 && penStyle <=5)
+            if (penStyle >= 0 && penStyle <= 5)
                 graphics.DrawLine(myPen, a, b);
         }
 
         public void Save(string filePath)
         {
-            string data = a.X.ToString() + " " + a.Y.ToString() + " " + b.X.ToString() + " " + b.Y.ToString() 
+            string data = a.X.ToString() + " " + a.Y.ToString() + " " + b.X.ToString() + " " + b.Y.ToString()
                  + " " + dashStyle.ToString() + " " + width.ToString() + " " + color.ToArgb().ToString();
             File.WriteAllText(filePath, data);
         }
@@ -97,7 +97,6 @@ namespace Project_DoHoa2D
                 string data;
                 data = File.ReadAllText(filePath);
                 char delimiters = ' ';
-                int x1, y1, x2, y2;
                 string[] dt = data.Split(delimiters);
                 a = new Point(Int32.Parse(dt[0]), Int32.Parse(dt[1]));
                 b = new Point(Int32.Parse(dt[2]), Int32.Parse(dt[3]));
@@ -106,6 +105,40 @@ namespace Project_DoHoa2D
                 color = Color.FromArgb(Convert.ToInt32(dt[6]));
 
             }
+        }
+
+        public void Translation(int tr_x, int tr_y)
+        {
+            this.a.X += tr_x; this.a.Y += tr_y;
+            this.b.X += tr_x; this.b.Y += tr_y;
+        }
+
+        public void Scaling(Point scalingPoint, Point newPoint)
+        {
+            float da = (scalingPoint.X - a.X) * (scalingPoint.X - a.X) + (scalingPoint.Y - a.Y) * (scalingPoint.Y - a.Y);
+            float db = (scalingPoint.X - b.X) * (scalingPoint.X - b.X) + (scalingPoint.Y - b.Y) * (scalingPoint.Y - b.Y);
+            if (da > db)
+                this.b = newPoint;
+            else
+                this.a = newPoint;
+        }
+
+        public void Rotation(double alpha)
+        {
+            Point mid = new Point((this.a.X + this.b.X) / 2, (this.a.Y + this.b.Y) / 2);
+            Translation(-mid.X, -mid.Y);
+
+            int x, y;
+            x = Convert.ToInt32(Math.Cos(alpha) * this.a.X - Math.Sin(alpha) * this.a.Y);
+            y = Convert.ToInt32(Math.Sin(alpha) * this.a.X + Math.Cos(alpha) * this.a.Y);
+            this.a.X = x; this.a.Y = y;
+
+            x = Convert.ToInt32(Math.Cos(alpha) * this.b.X - Math.Sin(alpha) * this.b.Y);
+            y = Convert.ToInt32(Math.Sin(alpha) * this.b.X + Math.Cos(alpha) * this.b.Y);
+            this.b.X = x; this.b.Y = y;
+
+            Translation(mid.X, mid.Y);
+
         }
     }
 }

@@ -22,11 +22,10 @@ namespace Project_DoHoa2D
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            MyLine a = new MyLine(10, 10, 50, 50);
+            MyLine a = new MyLine(100, 100, 100, 50);
             a.Draw(g, Color.Violet, 5,1);
-            //a.Save("ahihi.txt");
-            a.Open("ahihi.txt");
-            a.Draw(g);
+            a.Rotation(Math.PI / 4);
+            a.Draw(g,Color.Black);
 
         }
     }
