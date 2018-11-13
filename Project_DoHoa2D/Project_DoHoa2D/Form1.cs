@@ -24,6 +24,9 @@ namespace Project_DoHoa2D
             Graphics g = e.Graphics;
             MyLine a = new MyLine(10, 10, 50, 50);
             a.Draw(g, Color.Violet, 5,1);
+            //a.Save("ahihi.txt");
+            a.Open("ahihi.txt");
+            a.Draw(g);
 
         }
     }

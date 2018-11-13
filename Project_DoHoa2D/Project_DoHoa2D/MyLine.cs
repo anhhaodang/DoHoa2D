@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Project_DoHoa2D
 {
@@ -11,6 +13,9 @@ namespace Project_DoHoa2D
     {
         private Point a;
         private Point b;
+        private Color color = Color.Black;
+        private int dashStyle = 0;
+        private float width = 1;
         
         public MyLine()
         {
@@ -29,13 +34,28 @@ namespace Project_DoHoa2D
 
         public void Draw(Graphics graphics)
         {
-            Pen myPen = new Pen(Color.Black);
-            graphics.DrawLine(myPen, a, b);
+            Pen myPen = new Pen(color);
+            if (width > 1)
+                myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            else
+                switch (dashStyle)
+                {
+                    case 0: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid; break;
+                    case 1: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash; break;
+                    case 2: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot; break;
+                    case 3: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot; break;
+                    case 4: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot; break;
+                    case 5: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom; break;
+                }
+            myPen.Width = width;
+            if (dashStyle >= 0 && dashStyle <= 5)
+                graphics.DrawLine(myPen, a, b);
         }
 
         public void Draw(Graphics graphics, Color color)
         {
             Pen myPen = new Pen(color);
+            this.color = color;
             graphics.DrawLine(myPen, a, b);
         }
 
@@ -43,6 +63,9 @@ namespace Project_DoHoa2D
         {
 
             Pen myPen = new Pen(color);
+            this.color = color;
+            this.dashStyle = penStyle;
+            this.width = width;
             if (width > 1)
                 myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid; 
             else
@@ -59,6 +82,34 @@ namespace Project_DoHoa2D
             if (penStyle >=0 && penStyle <=5)
                 graphics.DrawLine(myPen, a, b);
         }
-       
+
+        public void Save(string filePath)
+        {
+            string data = a.X.ToString() + " " + a.Y.ToString() + " " + b.X.ToString() + " " + b.Y.ToString() 
+                 + " " + dashStyle.ToString() + " " + width.ToString() + " " + color.ToArgb().ToString();
+            File.WriteAllText(filePath, data);
+        }
+
+        public void Open(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                string data;
+                data = File.ReadAllText(filePath);
+                char delimiters = ' ';
+                int x1, y1, x2, y2;
+                string[] dt = data.Split(delimiters);
+                x1 = Int32.Parse(dt[0]);
+                y1 = Int32.Parse(dt[1]);
+                x2 = Int32.Parse(dt[2]);
+                y2 = Int32.Parse(dt[3]);
+                a = new Point(x1, y1);
+                b = new Point(x2, y2);
+                this.dashStyle = Int32.Parse(dt[4]);
+                this.width = Int32.Parse(dt[5]);
+                color = Color.FromArgb(Convert.ToInt32(dt[6]));
+
+            }
+        }
     }
 }
