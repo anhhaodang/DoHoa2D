@@ -3,7 +3,7 @@ using System.Drawing.Drawing2D;
 
 namespace Project_DoHoa2D
 {
-    internal class MyCircle: 
+    internal class MyCircle 
     {
         private Point center;
         private int radius;
@@ -85,13 +85,15 @@ namespace Project_DoHoa2D
 
         public void SetSelected(bool Selected, Graphics g)
         {
+            Color c;
             if (Selected)
-            {
-                g.DrawRectangle(new Pen(Color.Cyan), center.X, center.Y - radius, 1, 1);
-                g.DrawRectangle(new Pen(Color.Cyan), center.X, center.Y + radius, 1, 1);
-                g.DrawRectangle(new Pen(Color.Cyan), center.X - radius, center.Y, 1, 1);
-                g.DrawRectangle(new Pen(Color.Cyan), center.X + radius, center.Y, 1, 1);
-            }
+                c = this.borderColor;
+            else c = Color.Cyan; 
+            
+            g.DrawRectangle(new Pen(c), center.X, center.Y - radius, 1, 1);
+            g.DrawRectangle(new Pen(c), center.X, center.Y + radius, 1, 1);
+            g.DrawRectangle(new Pen(c), center.X - radius, center.Y, 1, 1);
+            g.DrawRectangle(new Pen(c), center.X + radius, center.Y, 1, 1);
         }
     }
 }
