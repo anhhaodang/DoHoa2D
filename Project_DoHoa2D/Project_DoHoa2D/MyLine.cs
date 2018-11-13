@@ -99,12 +99,8 @@ namespace Project_DoHoa2D
                 char delimiters = ' ';
                 int x1, y1, x2, y2;
                 string[] dt = data.Split(delimiters);
-                x1 = Int32.Parse(dt[0]);
-                y1 = Int32.Parse(dt[1]);
-                x2 = Int32.Parse(dt[2]);
-                y2 = Int32.Parse(dt[3]);
-                a = new Point(x1, y1);
-                b = new Point(x2, y2);
+                a = new Point(Int32.Parse(dt[0]), Int32.Parse(dt[1]));
+                b = new Point(Int32.Parse(dt[2]), Int32.Parse(dt[3]));
                 this.dashStyle = Int32.Parse(dt[4]);
                 this.width = Int32.Parse(dt[5]);
                 color = Color.FromArgb(Convert.ToInt32(dt[6]));
