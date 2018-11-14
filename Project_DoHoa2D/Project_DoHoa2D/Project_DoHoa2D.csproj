@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="MyCircle.cs" />
     <Compile Include="MyLine.cs" />
+    <Compile Include="MyShape.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

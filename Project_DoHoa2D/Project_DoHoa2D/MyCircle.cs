@@ -14,6 +14,7 @@ namespace Project_DoHoa2D
 
         public MyCircle()
         {
+            MyShape f = new MyShape();
             this.center = new Point(0, 0);
             this.radius = 10;
             this.borderColor = Color.Black;
