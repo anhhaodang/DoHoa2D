@@ -29,45 +29,44 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Save));
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnLine = new System.Windows.Forms.Button();
+            this.btnRectangle = new System.Windows.Forms.Button();
+            this.btnCircle = new System.Windows.Forms.Button();
+            this.btnEllipse = new System.Windows.Forms.Button();
+            this.btnPolygon = new System.Windows.Forms.Button();
+            this.btnParabol = new System.Windows.Forms.Button();
+            this.pnlShape = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button23 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cboDashstyle = new System.Windows.Forms.ComboBox();
+            this.nudWitdh = new System.Windows.Forms.NumericUpDown();
+            this.pnlColors = new System.Windows.Forms.Panel();
+            this.btnColorAqua = new System.Windows.Forms.Button();
+            this.btnColorFuchsia = new System.Windows.Forms.Button();
+            this.btnColorTeal = new System.Windows.Forms.Button();
+            this.btnColorPurple = new System.Windows.Forms.Button();
+            this.btnColorBlue = new System.Windows.Forms.Button();
+            this.btnColorRed = new System.Windows.Forms.Button();
+            this.btnColorNavy = new System.Windows.Forms.Button();
+            this.btnColorMaroon = new System.Windows.Forms.Button();
+            this.btnColorYellow = new System.Windows.Forms.Button();
+            this.btnColorWhite = new System.Windows.Forms.Button();
+            this.btnColorOlive = new System.Windows.Forms.Button();
+            this.btnColorGray = new System.Windows.Forms.Button();
+            this.btnColorLime = new System.Windows.Forms.Button();
+            this.btnColorGreen = new System.Windows.Forms.Button();
+            this.btnColorSilver = new System.Windows.Forms.Button();
+            this.btnColorBlack = new System.Windows.Forms.Button();
+            this.pnlTools = new System.Windows.Forms.Panel();
+            this.chkKeepRatio = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.button27 = new System.Windows.Forms.Button();
-            this.button26 = new System.Windows.Forms.Button();
-            this.button25 = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
+            this.nudRateScaleY = new System.Windows.Forms.NumericUpDown();
+            this.nudRateScaleX = new System.Windows.Forms.NumericUpDown();
+            this.btnScale = new System.Windows.Forms.Button();
+            this.btnRotate = new System.Windows.Forms.Button();
+            this.btnMove = new System.Windows.Forms.Button();
+            this.btnFill = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,523 +74,513 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button28 = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.btnCurrentColor = new System.Windows.Forms.Button();
+            this.pnlAdjustScale = new System.Windows.Forms.Panel();
+            this.pnlRotateAngel = new System.Windows.Forms.Panel();
+            this.nudRotateAngel = new System.Windows.Forms.NumericUpDown();
+            this.btnZigzag = new System.Windows.Forms.Button();
+            this.btnArc = new System.Windows.Forms.Button();
+            this.pnlShape.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudWitdh)).BeginInit();
+            this.pnlColors.SuspendLayout();
+            this.pnlTools.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRateScaleY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRateScaleX)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.pnlAdjustScale.SuspendLayout();
+            this.pnlRotateAngel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRotateAngel)).BeginInit();
             this.SuspendLayout();
             // 
-            // button2
+            // btnLine
             // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(2, 2);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(24, 26);
-            this.button2.TabIndex = 0;
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnLine.BackColor = System.Drawing.Color.White;
+            this.btnLine.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnLine.FlatAppearance.BorderSize = 0;
+            this.btnLine.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnLine.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnLine.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLine.Image = ((System.Drawing.Image)(resources.GetObject("btnLine.Image")));
+            this.btnLine.Location = new System.Drawing.Point(3, 2);
+            this.btnLine.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnLine.Name = "btnLine";
+            this.btnLine.Size = new System.Drawing.Size(32, 32);
+            this.btnLine.TabIndex = 0;
+            this.btnLine.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btnRectangle
             // 
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(31, 2);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(24, 26);
-            this.button3.TabIndex = 0;
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnRectangle.BackColor = System.Drawing.Color.White;
+            this.btnRectangle.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnRectangle.FlatAppearance.BorderSize = 0;
+            this.btnRectangle.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnRectangle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnRectangle.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnRectangle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRectangle.Image = ((System.Drawing.Image)(resources.GetObject("btnRectangle.Image")));
+            this.btnRectangle.Location = new System.Drawing.Point(41, 2);
+            this.btnRectangle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRectangle.Name = "btnRectangle";
+            this.btnRectangle.Size = new System.Drawing.Size(32, 32);
+            this.btnRectangle.TabIndex = 0;
+            this.btnRectangle.UseVisualStyleBackColor = false;
             // 
-            // button4
+            // btnCircle
             // 
-            this.button4.BackColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.Location = new System.Drawing.Point(59, 2);
-            this.button4.Margin = new System.Windows.Forms.Padding(2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(24, 26);
-            this.button4.TabIndex = 0;
-            this.button4.UseVisualStyleBackColor = false;
+            this.btnCircle.BackColor = System.Drawing.Color.White;
+            this.btnCircle.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCircle.FlatAppearance.BorderSize = 0;
+            this.btnCircle.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnCircle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnCircle.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnCircle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCircle.Image = ((System.Drawing.Image)(resources.GetObject("btnCircle.Image")));
+            this.btnCircle.Location = new System.Drawing.Point(79, 2);
+            this.btnCircle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCircle.Name = "btnCircle";
+            this.btnCircle.Size = new System.Drawing.Size(32, 32);
+            this.btnCircle.TabIndex = 0;
+            this.btnCircle.UseVisualStyleBackColor = false;
             // 
-            // button5
+            // btnEllipse
             // 
-            this.button5.BackColor = System.Drawing.Color.White;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.Location = new System.Drawing.Point(88, 2);
-            this.button5.Margin = new System.Windows.Forms.Padding(2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(24, 26);
-            this.button5.TabIndex = 0;
-            this.button5.UseVisualStyleBackColor = false;
+            this.btnEllipse.BackColor = System.Drawing.Color.White;
+            this.btnEllipse.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnEllipse.FlatAppearance.BorderSize = 0;
+            this.btnEllipse.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnEllipse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnEllipse.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnEllipse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEllipse.Image = ((System.Drawing.Image)(resources.GetObject("btnEllipse.Image")));
+            this.btnEllipse.Location = new System.Drawing.Point(117, 2);
+            this.btnEllipse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnEllipse.Name = "btnEllipse";
+            this.btnEllipse.Size = new System.Drawing.Size(32, 32);
+            this.btnEllipse.TabIndex = 0;
+            this.btnEllipse.UseVisualStyleBackColor = false;
             // 
-            // button6
+            // btnPolygon
             // 
-            this.button6.BackColor = System.Drawing.Color.White;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
-            this.button6.Location = new System.Drawing.Point(116, 2);
-            this.button6.Margin = new System.Windows.Forms.Padding(2);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(24, 26);
-            this.button6.TabIndex = 0;
-            this.button6.UseVisualStyleBackColor = false;
+            this.btnPolygon.BackColor = System.Drawing.Color.White;
+            this.btnPolygon.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnPolygon.FlatAppearance.BorderSize = 0;
+            this.btnPolygon.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnPolygon.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnPolygon.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnPolygon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPolygon.Image = ((System.Drawing.Image)(resources.GetObject("btnPolygon.Image")));
+            this.btnPolygon.Location = new System.Drawing.Point(155, 2);
+            this.btnPolygon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnPolygon.Name = "btnPolygon";
+            this.btnPolygon.Size = new System.Drawing.Size(32, 32);
+            this.btnPolygon.TabIndex = 0;
+            this.btnPolygon.UseVisualStyleBackColor = false;
             // 
-            // button7
+            // btnParabol
             // 
-            this.button7.BackColor = System.Drawing.Color.White;
-            this.button7.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
-            this.button7.Location = new System.Drawing.Point(2, 33);
-            this.button7.Margin = new System.Windows.Forms.Padding(2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(24, 26);
-            this.button7.TabIndex = 0;
-            this.button7.UseVisualStyleBackColor = false;
+            this.btnParabol.BackColor = System.Drawing.Color.White;
+            this.btnParabol.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.btnParabol.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnParabol.FlatAppearance.BorderSize = 0;
+            this.btnParabol.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnParabol.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnParabol.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnParabol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnParabol.Image = ((System.Drawing.Image)(resources.GetObject("btnParabol.Image")));
+            this.btnParabol.Location = new System.Drawing.Point(3, 41);
+            this.btnParabol.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnParabol.Name = "btnParabol";
+            this.btnParabol.Size = new System.Drawing.Size(32, 32);
+            this.btnParabol.TabIndex = 0;
+            this.btnParabol.UseVisualStyleBackColor = false;
             // 
-            // panel1
+            // pnlShape
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button6);
-            this.panel1.Controls.Add(this.button7);
-            this.panel1.Controls.Add(this.button5);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Location = new System.Drawing.Point(20, 32);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(149, 65);
-            this.panel1.TabIndex = 2;
+            this.pnlShape.BackColor = System.Drawing.Color.White;
+            this.pnlShape.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlShape.Controls.Add(this.btnPolygon);
+            this.pnlShape.Controls.Add(this.btnArc);
+            this.pnlShape.Controls.Add(this.btnZigzag);
+            this.pnlShape.Controls.Add(this.btnParabol);
+            this.pnlShape.Controls.Add(this.btnEllipse);
+            this.pnlShape.Controls.Add(this.btnLine);
+            this.pnlShape.Controls.Add(this.btnCircle);
+            this.pnlShape.Controls.Add(this.btnRectangle);
+            this.pnlShape.Location = new System.Drawing.Point(27, 39);
+            this.pnlShape.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlShape.Name = "pnlShape";
+            this.pnlShape.Size = new System.Drawing.Size(198, 80);
+            this.pnlShape.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(194, 32);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(259, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(72, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "DashStyle";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(194, 66);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(259, 81);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(44, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Width";
             // 
-            // comboBox1
+            // cboDashstyle
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cboDashstyle.FormattingEnabled = true;
+            this.cboDashstyle.Items.AddRange(new object[] {
             "Solid",
             "Dot",
             "Dash",
             "DashDot",
             "DashDotDot"});
-            this.comboBox1.Location = new System.Drawing.Point(254, 32);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(92, 21);
-            this.comboBox1.TabIndex = 4;
+            this.cboDashstyle.Location = new System.Drawing.Point(339, 39);
+            this.cboDashstyle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboDashstyle.Name = "cboDashstyle";
+            this.cboDashstyle.Size = new System.Drawing.Size(121, 24);
+            this.cboDashstyle.TabIndex = 4;
             // 
-            // numericUpDown1
+            // nudWitdh
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(254, 66);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(35, 20);
-            this.numericUpDown1.TabIndex = 5;
+            this.nudWitdh.Location = new System.Drawing.Point(339, 81);
+            this.nudWitdh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nudWitdh.Name = "nudWitdh";
+            this.nudWitdh.Size = new System.Drawing.Size(47, 22);
+            this.nudWitdh.TabIndex = 5;
             // 
-            // panel2
+            // pnlColors
             // 
-            this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.button23);
-            this.panel2.Controls.Add(this.button15);
-            this.panel2.Controls.Add(this.button22);
-            this.panel2.Controls.Add(this.button14);
-            this.panel2.Controls.Add(this.button21);
-            this.panel2.Controls.Add(this.button13);
-            this.panel2.Controls.Add(this.button20);
-            this.panel2.Controls.Add(this.button12);
-            this.panel2.Controls.Add(this.button19);
-            this.panel2.Controls.Add(this.button11);
-            this.panel2.Controls.Add(this.button18);
-            this.panel2.Controls.Add(this.button10);
-            this.panel2.Controls.Add(this.button17);
-            this.panel2.Controls.Add(this.button16);
-            this.panel2.Controls.Add(this.button9);
-            this.panel2.Controls.Add(this.button8);
-            this.panel2.Location = new System.Drawing.Point(649, 34);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(162, 48);
-            this.panel2.TabIndex = 6;
+            this.pnlColors.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlColors.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlColors.Controls.Add(this.btnColorAqua);
+            this.pnlColors.Controls.Add(this.btnColorFuchsia);
+            this.pnlColors.Controls.Add(this.btnColorTeal);
+            this.pnlColors.Controls.Add(this.btnColorPurple);
+            this.pnlColors.Controls.Add(this.btnColorBlue);
+            this.pnlColors.Controls.Add(this.btnColorRed);
+            this.pnlColors.Controls.Add(this.btnColorNavy);
+            this.pnlColors.Controls.Add(this.btnColorMaroon);
+            this.pnlColors.Controls.Add(this.btnColorYellow);
+            this.pnlColors.Controls.Add(this.btnColorWhite);
+            this.pnlColors.Controls.Add(this.btnColorOlive);
+            this.pnlColors.Controls.Add(this.btnColorGray);
+            this.pnlColors.Controls.Add(this.btnColorLime);
+            this.pnlColors.Controls.Add(this.btnColorGreen);
+            this.pnlColors.Controls.Add(this.btnColorSilver);
+            this.pnlColors.Controls.Add(this.btnColorBlack);
+            this.pnlColors.Location = new System.Drawing.Point(865, 42);
+            this.pnlColors.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlColors.Name = "pnlColors";
+            this.pnlColors.Size = new System.Drawing.Size(215, 59);
+            this.pnlColors.TabIndex = 6;
             // 
-            // button23
+            // btnColorAqua
             // 
-            this.button23.BackColor = System.Drawing.Color.Aqua;
-            this.button23.FlatAppearance.BorderSize = 0;
-            this.button23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button23.Location = new System.Drawing.Point(140, 24);
-            this.button23.Margin = new System.Windows.Forms.Padding(2);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(15, 16);
-            this.button23.TabIndex = 0;
-            this.button23.UseVisualStyleBackColor = false;
+            this.btnColorAqua.BackColor = System.Drawing.Color.Aqua;
+            this.btnColorAqua.FlatAppearance.BorderSize = 0;
+            this.btnColorAqua.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorAqua.Location = new System.Drawing.Point(187, 30);
+            this.btnColorAqua.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorAqua.Name = "btnColorAqua";
+            this.btnColorAqua.Size = new System.Drawing.Size(20, 20);
+            this.btnColorAqua.TabIndex = 0;
+            this.btnColorAqua.UseVisualStyleBackColor = false;
             // 
-            // button15
+            // btnColorFuchsia
             // 
-            this.button15.BackColor = System.Drawing.Color.Fuchsia;
-            this.button15.FlatAppearance.BorderSize = 0;
-            this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button15.Location = new System.Drawing.Point(140, 3);
-            this.button15.Margin = new System.Windows.Forms.Padding(2);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(15, 16);
-            this.button15.TabIndex = 0;
-            this.button15.UseVisualStyleBackColor = false;
+            this.btnColorFuchsia.BackColor = System.Drawing.Color.Fuchsia;
+            this.btnColorFuchsia.FlatAppearance.BorderSize = 0;
+            this.btnColorFuchsia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorFuchsia.Location = new System.Drawing.Point(187, 4);
+            this.btnColorFuchsia.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorFuchsia.Name = "btnColorFuchsia";
+            this.btnColorFuchsia.Size = new System.Drawing.Size(20, 20);
+            this.btnColorFuchsia.TabIndex = 0;
+            this.btnColorFuchsia.UseVisualStyleBackColor = false;
             // 
-            // button22
+            // btnColorTeal
             // 
-            this.button22.BackColor = System.Drawing.Color.Teal;
-            this.button22.FlatAppearance.BorderSize = 0;
-            this.button22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button22.Location = new System.Drawing.Point(120, 24);
-            this.button22.Margin = new System.Windows.Forms.Padding(2);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(15, 16);
-            this.button22.TabIndex = 0;
-            this.button22.UseVisualStyleBackColor = false;
+            this.btnColorTeal.BackColor = System.Drawing.Color.Teal;
+            this.btnColorTeal.FlatAppearance.BorderSize = 0;
+            this.btnColorTeal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorTeal.Location = new System.Drawing.Point(160, 30);
+            this.btnColorTeal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorTeal.Name = "btnColorTeal";
+            this.btnColorTeal.Size = new System.Drawing.Size(20, 20);
+            this.btnColorTeal.TabIndex = 0;
+            this.btnColorTeal.UseVisualStyleBackColor = false;
             // 
-            // button14
+            // btnColorPurple
             // 
-            this.button14.BackColor = System.Drawing.Color.Purple;
-            this.button14.FlatAppearance.BorderSize = 0;
-            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button14.Location = new System.Drawing.Point(120, 3);
-            this.button14.Margin = new System.Windows.Forms.Padding(2);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(15, 16);
-            this.button14.TabIndex = 0;
-            this.button14.UseVisualStyleBackColor = false;
+            this.btnColorPurple.BackColor = System.Drawing.Color.Purple;
+            this.btnColorPurple.FlatAppearance.BorderSize = 0;
+            this.btnColorPurple.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorPurple.Location = new System.Drawing.Point(160, 4);
+            this.btnColorPurple.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorPurple.Name = "btnColorPurple";
+            this.btnColorPurple.Size = new System.Drawing.Size(20, 20);
+            this.btnColorPurple.TabIndex = 0;
+            this.btnColorPurple.UseVisualStyleBackColor = false;
             // 
-            // button21
+            // btnColorBlue
             // 
-            this.button21.BackColor = System.Drawing.Color.Blue;
-            this.button21.FlatAppearance.BorderSize = 0;
-            this.button21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button21.Location = new System.Drawing.Point(100, 24);
-            this.button21.Margin = new System.Windows.Forms.Padding(2);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(15, 16);
-            this.button21.TabIndex = 0;
-            this.button21.UseVisualStyleBackColor = false;
+            this.btnColorBlue.BackColor = System.Drawing.Color.Blue;
+            this.btnColorBlue.FlatAppearance.BorderSize = 0;
+            this.btnColorBlue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorBlue.Location = new System.Drawing.Point(133, 30);
+            this.btnColorBlue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorBlue.Name = "btnColorBlue";
+            this.btnColorBlue.Size = new System.Drawing.Size(20, 20);
+            this.btnColorBlue.TabIndex = 0;
+            this.btnColorBlue.UseVisualStyleBackColor = false;
             // 
-            // button13
+            // btnColorRed
             // 
-            this.button13.BackColor = System.Drawing.Color.Red;
-            this.button13.FlatAppearance.BorderSize = 0;
-            this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button13.Location = new System.Drawing.Point(100, 3);
-            this.button13.Margin = new System.Windows.Forms.Padding(2);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(15, 16);
-            this.button13.TabIndex = 0;
-            this.button13.UseVisualStyleBackColor = false;
+            this.btnColorRed.BackColor = System.Drawing.Color.Red;
+            this.btnColorRed.FlatAppearance.BorderSize = 0;
+            this.btnColorRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorRed.Location = new System.Drawing.Point(133, 4);
+            this.btnColorRed.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorRed.Name = "btnColorRed";
+            this.btnColorRed.Size = new System.Drawing.Size(20, 20);
+            this.btnColorRed.TabIndex = 0;
+            this.btnColorRed.UseVisualStyleBackColor = false;
             // 
-            // button20
+            // btnColorNavy
             // 
-            this.button20.BackColor = System.Drawing.Color.Navy;
-            this.button20.FlatAppearance.BorderSize = 0;
-            this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button20.Location = new System.Drawing.Point(81, 24);
-            this.button20.Margin = new System.Windows.Forms.Padding(2);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(15, 16);
-            this.button20.TabIndex = 0;
-            this.button20.UseVisualStyleBackColor = false;
+            this.btnColorNavy.BackColor = System.Drawing.Color.Navy;
+            this.btnColorNavy.FlatAppearance.BorderSize = 0;
+            this.btnColorNavy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorNavy.Location = new System.Drawing.Point(108, 30);
+            this.btnColorNavy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorNavy.Name = "btnColorNavy";
+            this.btnColorNavy.Size = new System.Drawing.Size(20, 20);
+            this.btnColorNavy.TabIndex = 0;
+            this.btnColorNavy.UseVisualStyleBackColor = false;
             // 
-            // button12
+            // btnColorMaroon
             // 
-            this.button12.BackColor = System.Drawing.Color.Maroon;
-            this.button12.FlatAppearance.BorderSize = 0;
-            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button12.Location = new System.Drawing.Point(81, 3);
-            this.button12.Margin = new System.Windows.Forms.Padding(2);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(15, 16);
-            this.button12.TabIndex = 0;
-            this.button12.UseVisualStyleBackColor = false;
+            this.btnColorMaroon.BackColor = System.Drawing.Color.Maroon;
+            this.btnColorMaroon.FlatAppearance.BorderSize = 0;
+            this.btnColorMaroon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorMaroon.Location = new System.Drawing.Point(108, 4);
+            this.btnColorMaroon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorMaroon.Name = "btnColorMaroon";
+            this.btnColorMaroon.Size = new System.Drawing.Size(20, 20);
+            this.btnColorMaroon.TabIndex = 0;
+            this.btnColorMaroon.UseVisualStyleBackColor = false;
             // 
-            // button19
+            // btnColorYellow
             // 
-            this.button19.BackColor = System.Drawing.Color.Yellow;
-            this.button19.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button19.FlatAppearance.BorderSize = 0;
-            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button19.Location = new System.Drawing.Point(62, 24);
-            this.button19.Margin = new System.Windows.Forms.Padding(2);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(15, 16);
-            this.button19.TabIndex = 0;
-            this.button19.UseVisualStyleBackColor = false;
+            this.btnColorYellow.BackColor = System.Drawing.Color.Yellow;
+            this.btnColorYellow.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnColorYellow.FlatAppearance.BorderSize = 0;
+            this.btnColorYellow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorYellow.Location = new System.Drawing.Point(83, 30);
+            this.btnColorYellow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorYellow.Name = "btnColorYellow";
+            this.btnColorYellow.Size = new System.Drawing.Size(20, 20);
+            this.btnColorYellow.TabIndex = 0;
+            this.btnColorYellow.UseVisualStyleBackColor = false;
             // 
-            // button11
+            // btnColorWhite
             // 
-            this.button11.BackColor = System.Drawing.Color.White;
-            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Location = new System.Drawing.Point(62, 3);
-            this.button11.Margin = new System.Windows.Forms.Padding(2);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(15, 16);
-            this.button11.TabIndex = 0;
-            this.button11.UseVisualStyleBackColor = false;
+            this.btnColorWhite.BackColor = System.Drawing.Color.White;
+            this.btnColorWhite.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnColorWhite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorWhite.Location = new System.Drawing.Point(83, 4);
+            this.btnColorWhite.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorWhite.Name = "btnColorWhite";
+            this.btnColorWhite.Size = new System.Drawing.Size(20, 20);
+            this.btnColorWhite.TabIndex = 0;
+            this.btnColorWhite.UseVisualStyleBackColor = false;
             // 
-            // button18
+            // btnColorOlive
             // 
-            this.button18.BackColor = System.Drawing.Color.Olive;
-            this.button18.FlatAppearance.BorderSize = 0;
-            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button18.Location = new System.Drawing.Point(42, 24);
-            this.button18.Margin = new System.Windows.Forms.Padding(2);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(15, 16);
-            this.button18.TabIndex = 0;
-            this.button18.UseVisualStyleBackColor = false;
+            this.btnColorOlive.BackColor = System.Drawing.Color.Olive;
+            this.btnColorOlive.FlatAppearance.BorderSize = 0;
+            this.btnColorOlive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorOlive.Location = new System.Drawing.Point(56, 30);
+            this.btnColorOlive.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorOlive.Name = "btnColorOlive";
+            this.btnColorOlive.Size = new System.Drawing.Size(20, 20);
+            this.btnColorOlive.TabIndex = 0;
+            this.btnColorOlive.UseVisualStyleBackColor = false;
             // 
-            // button10
+            // btnColorGray
             // 
-            this.button10.BackColor = System.Drawing.Color.Gray;
-            this.button10.FlatAppearance.BorderSize = 0;
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(42, 3);
-            this.button10.Margin = new System.Windows.Forms.Padding(2);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(15, 16);
-            this.button10.TabIndex = 0;
-            this.button10.UseVisualStyleBackColor = false;
+            this.btnColorGray.BackColor = System.Drawing.Color.Gray;
+            this.btnColorGray.FlatAppearance.BorderSize = 0;
+            this.btnColorGray.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorGray.Location = new System.Drawing.Point(56, 4);
+            this.btnColorGray.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorGray.Name = "btnColorGray";
+            this.btnColorGray.Size = new System.Drawing.Size(20, 20);
+            this.btnColorGray.TabIndex = 0;
+            this.btnColorGray.UseVisualStyleBackColor = false;
             // 
-            // button17
+            // btnColorLime
             // 
-            this.button17.BackColor = System.Drawing.Color.Lime;
-            this.button17.FlatAppearance.BorderSize = 0;
-            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button17.Location = new System.Drawing.Point(22, 24);
-            this.button17.Margin = new System.Windows.Forms.Padding(2);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(15, 16);
-            this.button17.TabIndex = 0;
-            this.button17.UseVisualStyleBackColor = false;
+            this.btnColorLime.BackColor = System.Drawing.Color.Lime;
+            this.btnColorLime.FlatAppearance.BorderSize = 0;
+            this.btnColorLime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorLime.Location = new System.Drawing.Point(29, 30);
+            this.btnColorLime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorLime.Name = "btnColorLime";
+            this.btnColorLime.Size = new System.Drawing.Size(20, 20);
+            this.btnColorLime.TabIndex = 0;
+            this.btnColorLime.UseVisualStyleBackColor = false;
             // 
-            // button16
+            // btnColorGreen
             // 
-            this.button16.BackColor = System.Drawing.Color.Green;
-            this.button16.FlatAppearance.BorderSize = 0;
-            this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button16.Location = new System.Drawing.Point(3, 24);
-            this.button16.Margin = new System.Windows.Forms.Padding(2);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(15, 16);
-            this.button16.TabIndex = 0;
-            this.button16.UseVisualStyleBackColor = false;
+            this.btnColorGreen.BackColor = System.Drawing.Color.Green;
+            this.btnColorGreen.FlatAppearance.BorderSize = 0;
+            this.btnColorGreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorGreen.Location = new System.Drawing.Point(4, 30);
+            this.btnColorGreen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorGreen.Name = "btnColorGreen";
+            this.btnColorGreen.Size = new System.Drawing.Size(20, 20);
+            this.btnColorGreen.TabIndex = 0;
+            this.btnColorGreen.UseVisualStyleBackColor = false;
             // 
-            // button9
+            // btnColorSilver
             // 
-            this.button9.BackColor = System.Drawing.Color.Silver;
-            this.button9.FlatAppearance.BorderSize = 0;
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Location = new System.Drawing.Point(22, 3);
-            this.button9.Margin = new System.Windows.Forms.Padding(2);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(15, 16);
-            this.button9.TabIndex = 0;
-            this.button9.UseVisualStyleBackColor = false;
+            this.btnColorSilver.BackColor = System.Drawing.Color.Silver;
+            this.btnColorSilver.FlatAppearance.BorderSize = 0;
+            this.btnColorSilver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorSilver.Location = new System.Drawing.Point(29, 4);
+            this.btnColorSilver.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorSilver.Name = "btnColorSilver";
+            this.btnColorSilver.Size = new System.Drawing.Size(20, 20);
+            this.btnColorSilver.TabIndex = 0;
+            this.btnColorSilver.UseVisualStyleBackColor = false;
             // 
-            // button8
+            // btnColorBlack
             // 
-            this.button8.BackColor = System.Drawing.Color.Black;
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(3, 3);
-            this.button8.Margin = new System.Windows.Forms.Padding(2);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(15, 16);
-            this.button8.TabIndex = 0;
-            this.button8.UseVisualStyleBackColor = false;
+            this.btnColorBlack.BackColor = System.Drawing.Color.Black;
+            this.btnColorBlack.FlatAppearance.BorderSize = 0;
+            this.btnColorBlack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnColorBlack.Location = new System.Drawing.Point(4, 4);
+            this.btnColorBlack.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnColorBlack.Name = "btnColorBlack";
+            this.btnColorBlack.Size = new System.Drawing.Size(20, 20);
+            this.btnColorBlack.TabIndex = 0;
+            this.btnColorBlack.UseVisualStyleBackColor = false;
             // 
-            // panel3
+            // pnlTools
             // 
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.checkBox1);
-            this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Controls.Add(this.numericUpDown3);
-            this.panel3.Controls.Add(this.numericUpDown2);
-            this.panel3.Controls.Add(this.button27);
-            this.panel3.Controls.Add(this.button26);
-            this.panel3.Controls.Add(this.button25);
-            this.panel3.Controls.Add(this.button24);
-            this.panel3.Location = new System.Drawing.Point(365, 32);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(240, 76);
-            this.panel3.TabIndex = 7;
+            this.pnlTools.Controls.Add(this.btnScale);
+            this.pnlTools.Controls.Add(this.btnRotate);
+            this.pnlTools.Controls.Add(this.btnMove);
+            this.pnlTools.Controls.Add(this.btnFill);
+            this.pnlTools.Location = new System.Drawing.Point(487, 39);
+            this.pnlTools.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlTools.Name = "pnlTools";
+            this.pnlTools.Size = new System.Drawing.Size(167, 40);
+            this.pnlTools.TabIndex = 7;
             // 
-            // label5
+            // chkKeepRatio
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(147, 7);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(34, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Scale";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(178, 34);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(51, 30);
-            this.checkBox1.TabIndex = 6;
-            this.checkBox1.Text = "Keep\r\nRatio";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkKeepRatio.AutoSize = true;
+            this.chkKeepRatio.Location = new System.Drawing.Point(107, 6);
+            this.chkKeepRatio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkKeepRatio.Name = "chkKeepRatio";
+            this.chkKeepRatio.Size = new System.Drawing.Size(63, 38);
+            this.chkKeepRatio.TabIndex = 6;
+            this.chkKeepRatio.Text = "Keep\r\nRatio";
+            this.chkKeepRatio.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(101, 57);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(5, 34);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(14, 13);
+            this.label4.Size = new System.Drawing.Size(17, 17);
             this.label4.TabIndex = 1;
             this.label4.Text = "Y";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(101, 34);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(5, 6);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(14, 13);
+            this.label3.Size = new System.Drawing.Size(17, 17);
             this.label3.TabIndex = 1;
             this.label3.Text = "X";
             // 
-            // numericUpDown3
+            // nudRateScaleY
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(118, 53);
-            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(44, 20);
-            this.numericUpDown3.TabIndex = 5;
+            this.nudRateScaleY.Location = new System.Drawing.Point(27, 29);
+            this.nudRateScaleY.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nudRateScaleY.Name = "nudRateScaleY";
+            this.nudRateScaleY.Size = new System.Drawing.Size(59, 22);
+            this.nudRateScaleY.TabIndex = 5;
             // 
-            // numericUpDown2
+            // nudRateScaleX
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(118, 34);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(44, 20);
-            this.numericUpDown2.TabIndex = 5;
+            this.nudRateScaleX.Location = new System.Drawing.Point(27, 6);
+            this.nudRateScaleX.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nudRateScaleX.Name = "nudRateScaleX";
+            this.nudRateScaleX.Size = new System.Drawing.Size(59, 22);
+            this.nudRateScaleX.TabIndex = 5;
             // 
-            // button27
+            // btnScale
             // 
-            this.button27.BackColor = System.Drawing.Color.White;
-            this.button27.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button27.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button27.Image = ((System.Drawing.Image)(resources.GetObject("button27.Image")));
-            this.button27.Location = new System.Drawing.Point(118, 2);
-            this.button27.Margin = new System.Windows.Forms.Padding(2);
-            this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(24, 26);
-            this.button27.TabIndex = 0;
-            this.button27.UseVisualStyleBackColor = false;
+            this.btnScale.BackColor = System.Drawing.Color.White;
+            this.btnScale.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnScale.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnScale.Image = ((System.Drawing.Image)(resources.GetObject("btnScale.Image")));
+            this.btnScale.Location = new System.Drawing.Point(117, 2);
+            this.btnScale.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnScale.Name = "btnScale";
+            this.btnScale.Size = new System.Drawing.Size(32, 32);
+            this.btnScale.TabIndex = 0;
+            this.btnScale.UseVisualStyleBackColor = false;
             // 
-            // button26
+            // btnRotate
             // 
-            this.button26.BackColor = System.Drawing.Color.White;
-            this.button26.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button26.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button26.Image = ((System.Drawing.Image)(resources.GetObject("button26.Image")));
-            this.button26.Location = new System.Drawing.Point(59, 2);
-            this.button26.Margin = new System.Windows.Forms.Padding(2);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(24, 26);
-            this.button26.TabIndex = 0;
-            this.button26.UseVisualStyleBackColor = false;
+            this.btnRotate.BackColor = System.Drawing.Color.White;
+            this.btnRotate.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnRotate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRotate.Image = ((System.Drawing.Image)(resources.GetObject("btnRotate.Image")));
+            this.btnRotate.Location = new System.Drawing.Point(79, 2);
+            this.btnRotate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRotate.Name = "btnRotate";
+            this.btnRotate.Size = new System.Drawing.Size(32, 32);
+            this.btnRotate.TabIndex = 0;
+            this.btnRotate.UseVisualStyleBackColor = false;
             // 
-            // button25
+            // btnMove
             // 
-            this.button25.BackColor = System.Drawing.Color.White;
-            this.button25.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button25.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button25.Image = ((System.Drawing.Image)(resources.GetObject("button25.Image")));
-            this.button25.Location = new System.Drawing.Point(31, 2);
-            this.button25.Margin = new System.Windows.Forms.Padding(2);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(24, 26);
-            this.button25.TabIndex = 0;
-            this.button25.UseVisualStyleBackColor = false;
+            this.btnMove.BackColor = System.Drawing.Color.White;
+            this.btnMove.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnMove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMove.Image = ((System.Drawing.Image)(resources.GetObject("btnMove.Image")));
+            this.btnMove.Location = new System.Drawing.Point(41, 2);
+            this.btnMove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnMove.Name = "btnMove";
+            this.btnMove.Size = new System.Drawing.Size(32, 32);
+            this.btnMove.TabIndex = 0;
+            this.btnMove.UseVisualStyleBackColor = false;
             // 
-            // button24
+            // btnFill
             // 
-            this.button24.BackColor = System.Drawing.Color.White;
-            this.button24.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button24.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button24.Image = ((System.Drawing.Image)(resources.GetObject("button24.Image")));
-            this.button24.Location = new System.Drawing.Point(2, 2);
-            this.button24.Margin = new System.Windows.Forms.Padding(2);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(24, 26);
-            this.button24.TabIndex = 0;
-            this.button24.UseVisualStyleBackColor = false;
+            this.btnFill.BackColor = System.Drawing.Color.White;
+            this.btnFill.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnFill.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFill.Image = ((System.Drawing.Image)(resources.GetObject("btnFill.Image")));
+            this.btnFill.Location = new System.Drawing.Point(3, 2);
+            this.btnFill.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnFill.Name = "btnFill";
+            this.btnFill.Size = new System.Drawing.Size(32, 32);
+            this.btnFill.TabIndex = 0;
+            this.btnFill.UseVisualStyleBackColor = false;
             // 
             // menuStrip1
             // 
@@ -601,8 +590,8 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(886, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1181, 28);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -614,126 +603,194 @@
             this.saveToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(44, 24);
             this.toolStripMenuItem1.Text = "File";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
             this.newToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // button28
+            // btnCurrentColor
             // 
-            this.button28.BackColor = System.Drawing.Color.Black;
-            this.button28.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button28.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button28.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button28.Location = new System.Drawing.Point(618, 44);
-            this.button28.Margin = new System.Windows.Forms.Padding(2);
-            this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(26, 28);
-            this.button28.TabIndex = 0;
-            this.button28.UseVisualStyleBackColor = false;
+            this.btnCurrentColor.BackColor = System.Drawing.Color.Black;
+            this.btnCurrentColor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCurrentColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCurrentColor.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCurrentColor.Location = new System.Drawing.Point(824, 54);
+            this.btnCurrentColor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCurrentColor.Name = "btnCurrentColor";
+            this.btnCurrentColor.Size = new System.Drawing.Size(35, 34);
+            this.btnCurrentColor.TabIndex = 0;
+            this.btnCurrentColor.UseVisualStyleBackColor = false;
+            // 
+            // pnlAdjustScale
+            // 
+            this.pnlAdjustScale.Controls.Add(this.nudRateScaleY);
+            this.pnlAdjustScale.Controls.Add(this.chkKeepRatio);
+            this.pnlAdjustScale.Controls.Add(this.nudRateScaleX);
+            this.pnlAdjustScale.Controls.Add(this.label3);
+            this.pnlAdjustScale.Controls.Add(this.label4);
+            this.pnlAdjustScale.Location = new System.Drawing.Point(579, 84);
+            this.pnlAdjustScale.Name = "pnlAdjustScale";
+            this.pnlAdjustScale.Size = new System.Drawing.Size(174, 60);
+            this.pnlAdjustScale.TabIndex = 10;
+            // 
+            // pnlRotateAngel
+            // 
+            this.pnlRotateAngel.Controls.Add(this.nudRotateAngel);
+            this.pnlRotateAngel.Location = new System.Drawing.Point(485, 84);
+            this.pnlRotateAngel.Name = "pnlRotateAngel";
+            this.pnlRotateAngel.Size = new System.Drawing.Size(88, 30);
+            this.pnlRotateAngel.TabIndex = 11;
+            // 
+            // nudRotateAngel
+            // 
+            this.nudRotateAngel.Location = new System.Drawing.Point(15, 3);
+            this.nudRotateAngel.Name = "nudRotateAngel";
+            this.nudRotateAngel.Size = new System.Drawing.Size(62, 22);
+            this.nudRotateAngel.TabIndex = 0;
+            // 
+            // btnZigzag
+            // 
+            this.btnZigzag.BackColor = System.Drawing.Color.White;
+            this.btnZigzag.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.btnZigzag.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnZigzag.FlatAppearance.BorderSize = 0;
+            this.btnZigzag.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnZigzag.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnZigzag.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnZigzag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZigzag.Image = ((System.Drawing.Image)(resources.GetObject("btnZigzag.Image")));
+            this.btnZigzag.Location = new System.Drawing.Point(41, 41);
+            this.btnZigzag.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnZigzag.Name = "btnZigzag";
+            this.btnZigzag.Size = new System.Drawing.Size(32, 32);
+            this.btnZigzag.TabIndex = 0;
+            this.btnZigzag.UseVisualStyleBackColor = false;
+            // 
+            // btnArc
+            // 
+            this.btnArc.BackColor = System.Drawing.Color.White;
+            this.btnArc.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.btnArc.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnArc.FlatAppearance.BorderSize = 0;
+            this.btnArc.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnArc.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnArc.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnArc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnArc.Image = ((System.Drawing.Image)(resources.GetObject("btnArc.Image")));
+            this.btnArc.Location = new System.Drawing.Point(79, 42);
+            this.btnArc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnArc.Name = "btnArc";
+            this.btnArc.Size = new System.Drawing.Size(32, 32);
+            this.btnArc.TabIndex = 0;
+            this.btnArc.UseVisualStyleBackColor = false;
             // 
             // Save
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 609);
+            this.ClientSize = new System.Drawing.Size(1181, 750);
+            this.Controls.Add(this.pnlRotateAngel);
+            this.Controls.Add(this.pnlAdjustScale);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.pnlTools);
+            this.Controls.Add(this.pnlColors);
+            this.Controls.Add(this.nudWitdh);
+            this.Controls.Add(this.cboDashstyle);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button28);
+            this.Controls.Add(this.pnlShape);
+            this.Controls.Add(this.btnCurrentColor);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Save";
             this.Text = "MyPaint";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            this.pnlShape.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudWitdh)).EndInit();
+            this.pnlColors.ResumeLayout(false);
+            this.pnlTools.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudRateScaleY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRateScaleX)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.pnlAdjustScale.ResumeLayout(false);
+            this.pnlAdjustScale.PerformLayout();
+            this.pnlRotateAngel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudRotateAngel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnPolygon;
+        private System.Windows.Forms.Button btnEllipse;
+        private System.Windows.Forms.Button btnCircle;
+        private System.Windows.Forms.Button btnParabol;
+        private System.Windows.Forms.Button btnRectangle;
+        private System.Windows.Forms.Button btnLine;
+        private System.Windows.Forms.Panel pnlShape;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button23;
-        private System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button19;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ComboBox cboDashstyle;
+        private System.Windows.Forms.NumericUpDown nudWitdh;
+        private System.Windows.Forms.Panel pnlColors;
+        private System.Windows.Forms.Button btnColorAqua;
+        private System.Windows.Forms.Button btnColorFuchsia;
+        private System.Windows.Forms.Button btnColorTeal;
+        private System.Windows.Forms.Button btnColorPurple;
+        private System.Windows.Forms.Button btnColorBlue;
+        private System.Windows.Forms.Button btnColorRed;
+        private System.Windows.Forms.Button btnColorNavy;
+        private System.Windows.Forms.Button btnColorMaroon;
+        private System.Windows.Forms.Button btnColorYellow;
+        private System.Windows.Forms.Button btnColorWhite;
+        private System.Windows.Forms.Button btnColorOlive;
+        private System.Windows.Forms.Button btnColorGray;
+        private System.Windows.Forms.Button btnColorLime;
+        private System.Windows.Forms.Button btnColorGreen;
+        private System.Windows.Forms.Button btnColorSilver;
+        private System.Windows.Forms.Button btnColorBlack;
+        private System.Windows.Forms.Panel pnlTools;
+        private System.Windows.Forms.CheckBox chkKeepRatio;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.Button button26;
-        private System.Windows.Forms.Button button25;
-        private System.Windows.Forms.Button button24;
-        private System.Windows.Forms.Button button27;
+        private System.Windows.Forms.NumericUpDown nudRateScaleY;
+        private System.Windows.Forms.NumericUpDown nudRateScaleX;
+        private System.Windows.Forms.Button btnRotate;
+        private System.Windows.Forms.Button btnMove;
+        private System.Windows.Forms.Button btnFill;
+        private System.Windows.Forms.Button btnScale;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -741,7 +798,12 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.Button button28;
+        private System.Windows.Forms.Button btnCurrentColor;
+        private System.Windows.Forms.Panel pnlAdjustScale;
+        private System.Windows.Forms.Panel pnlRotateAngel;
+        private System.Windows.Forms.NumericUpDown nudRotateAngel;
+        private System.Windows.Forms.Button btnArc;
+        private System.Windows.Forms.Button btnZigzag;
     }
 }
 
