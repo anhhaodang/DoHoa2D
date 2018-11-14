@@ -6,15 +6,28 @@ namespace Project_DoHoa2D
 {
     public abstract class MyShape
     {
-        private List<Point> point;
-        private Color borderColor;
-        private DashStyle dashStyle;
-        private float width;
+        protected List<Point> point;
+        protected Color borderColor = Color.Black;
+        protected DashStyle dashStyle;
+        protected float width = 1;
 
-        public MyShape()
-        {
-        }
+        public abstract void Set(Point point, int index);
+        public abstract Point Get(int index);
 
-        public abstract void Draw();
+        public abstract void Draw(Graphics graphics);
+        public abstract void Draw(Graphics graphics, Color borderColor);
+        public abstract void Draw(Graphics graphics, Color borderColor, DashStyle dashStyle, float width = 1);
+
+        public abstract void Translation(Point Src, Point Des);
+        public abstract void Scaling(Point pivotPoint, float Sx, float Sy);
+        public abstract void Rotation(double alpha);
+
+        public abstract void Save(string filePath);
+        public abstract void Open(string data);
+
+
+
+
+
     }
 }

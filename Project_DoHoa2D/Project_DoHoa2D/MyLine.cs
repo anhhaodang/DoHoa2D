@@ -6,141 +6,175 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Drawing.Drawing2D;
 
 namespace Project_DoHoa2D
 {
-    class MyLine
+    class MyLine : MyShape
     {
-        private Point a;
-        private Point b;
-        private Color color = Color.Black;
-        private int dashStyle = 0;
-        private float width = 1;
+        private int numPoint;
 
         public MyLine()
         {
-            this.a = new Point(0, 0);
-            this.b = new Point(0, 0);
+            point = new List<Point>(2);
+            point.Add(new Point(0, 0));
+            point.Add(new Point(1, 1));
+            this.numPoint = 2;
         }
         public MyLine(Point a, Point b)
         {
-            this.a = a; this.b = b;
+            point = new List<Point>(2);
+            point.Add(a);
+            point.Add(b);
+            this.numPoint = 2;
         }
         public MyLine(int x1, int y1, int x2, int y2)
         {
-            this.a = new Point(x1, y1);
-            this.b = new Point(x2, y2);
+            point = new List<Point>(2);
+            point.Add(new Point(x1, y1));
+            point.Add(new Point(x2, y2));
+            this.numPoint = 2;
         }
 
-        public void Draw(Graphics graphics)
+        public override void Draw(Graphics graphics)
         {
-            Pen myPen = new Pen(color);
+            Pen myPen = new Pen(borderColor);
             if (width > 1)
                 myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
             else
-                switch (dashStyle)
-                {
-                    case 0: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid; break;
-                    case 1: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash; break;
-                    case 2: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot; break;
-                    case 3: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot; break;
-                    case 4: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot; break;
-                    case 5: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom; break;
-                }
+                myPen.DashStyle = dashStyle;
             myPen.Width = width;
-            if (dashStyle >= 0 && dashStyle <= 5)
-                graphics.DrawLine(myPen, a, b);
+          //  if (dashStyle >= 0 && dashStyle <= 5)
+                graphics.DrawLine(myPen, point[0], point[1]);
         }
 
-        public void Draw(Graphics graphics, Color color)
+        public override void Draw(Graphics graphics, Color borderColor)
         {
-            Pen myPen = new Pen(color);
-            this.color = color;
-            graphics.DrawLine(myPen, a, b);
+            Pen myPen = new Pen(borderColor);
+            this.borderColor = borderColor;
+            graphics.DrawLine(myPen, point[0], point[1]);
         }
 
-        public void Draw(Graphics graphics, Color color, int penStyle = 0, float width = 1)
+        public override void Draw(Graphics graphics, Color borderColor, DashStyle dashStyle, float width = 1)
         {
 
-            Pen myPen = new Pen(color);
-            this.color = color;
-            this.dashStyle = penStyle;
+            Pen myPen = new Pen(borderColor);
+            this.borderColor = borderColor;
+            this.dashStyle = dashStyle;
             this.width = width;
             if (width > 1)
                 myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
             else
             {
-                switch (penStyle)
-                {
-                    case 0: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid; break;
-                    case 1: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash; break;
-                    case 2: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot; break;
-                    case 3: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot; break;
-                    case 4: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot; break;
-                    case 5: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom; break;
-                }
-                myPen.Width = width;
+                myPen.DashStyle = dashStyle;
             }
-            if (penStyle >= 0 && penStyle <= 5)
-                graphics.DrawLine(myPen, a, b);
+            myPen.Width = width;
+            // if (penStyle >= 0 && penStyle <= 5)
+            graphics.DrawLine(myPen, point[0], point[1]);
+
         }
 
-        public void Save(string filePath)
+
+        public override void Set(Point point, int index)
         {
-            string data = a.X.ToString() + " " + a.Y.ToString() + " " + b.X.ToString() + " " + b.Y.ToString()
-                 + " " + dashStyle.ToString() + " " + width.ToString() + " " + color.ToArgb().ToString();
-            File.WriteAllText(filePath, data);
+            this.point[index] = point;
+        }
+        public override Point Get(int index)
+        {
+            return this.point[index];
         }
 
-        public void Open(string filePath)
+        public override void Save(string filePath)
         {
-            if (File.Exists(filePath))
+            Point a = this.Get(0);
+            Point b = this.Get(1);
+            string data = "Line " +  a.X.ToString() + " " + a.Y.ToString() + " " + b.X.ToString() + " " + b.Y.ToString()
+                 + " " + dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + "\n";
+
+            StreamWriter sw = File.AppendText(filePath);
+            sw.WriteLine(data);
+            sw.Close();
+        }
+
+        public override void Open(string data)
+        {
+            char delimiters = ' ';
+            string[] dt = data.Split(delimiters);
+            Point a = new Point(Int32.Parse(dt[1]), Int32.Parse(dt[2]));
+            Point b = new Point(Int32.Parse(dt[3]), Int32.Parse(dt[4]));
+
+            point = new List<Point>(2);
+            point.Add(a);
+            point.Add(b);
+
+            switch (dt[5])
             {
-                string data;
-                data = File.ReadAllText(filePath);
-                char delimiters = ' ';
-                string[] dt = data.Split(delimiters);
-                a = new Point(Int32.Parse(dt[0]), Int32.Parse(dt[1]));
-                b = new Point(Int32.Parse(dt[2]), Int32.Parse(dt[3]));
-                this.dashStyle = Int32.Parse(dt[4]);
-                this.width = Int32.Parse(dt[5]);
-                color = Color.FromArgb(Convert.ToInt32(dt[6]));
+                case "Dash": this.dashStyle = DashStyle.Dash; break;
+                case "DashDot": this.dashStyle = DashStyle.DashDot; break;
+                case "DashDotDot": this.dashStyle = DashStyle.DashDotDot; break;
+                case "Dot": this.dashStyle = DashStyle.Dot; break;
+                case "Solid": this.dashStyle = DashStyle.Solid; break;
+                case "Custom": this.dashStyle = DashStyle.Custom; break;
+            }
+            this.width = Int32.Parse(dt[6]);
+            this.borderColor = Color.FromArgb(Convert.ToInt32(dt[7]));
 
+        }
+
+        public override void Translation(Point Src, Point Des)
+        {
+            Point a = this.Get(0);
+            Point b = this.Get(1);
+            a.X += Des.X - Src.X; a.Y += Des.Y - Src.Y;
+            b.X += Des.X - Src.X; b.Y += Des.Y - Src.Y;
+            this.Set(a, 0);
+            this.Set(b, 1);
+
+        }
+
+
+        public override void Scaling(Point pivotPoint, float Sx, float Sy)
+        {
+            Point a = this.Get(0);
+            Point b = this.Get(1);
+            float da = (pivotPoint.X - a.X) * (pivotPoint.X - a.X) + (pivotPoint.Y - a.Y) * (pivotPoint.Y - a.Y);
+            float db = (pivotPoint.X - b.X) * (pivotPoint.X - b.X) + (pivotPoint.Y - b.Y) * (pivotPoint.Y - b.Y);
+            if (da < db)
+            {
+                b.X = (int)Sx * b.X;
+                b.Y = (int)Sy * b.Y;
+                this.Set(b, 1);
+            }
+            else
+            {
+                a.X = (int)Sx * a.X;
+                a.Y = (int)Sy * a.Y;
+                this.Set(a, 0);
             }
         }
 
-        public void Translation(int tr_x, int tr_y)
+        public override void Rotation(double alpha)
         {
-            this.a.X += tr_x; this.a.Y += tr_y;
-            this.b.X += tr_x; this.b.Y += tr_y;
-        }
-
-        public void Scaling(Point scalingPoint, Point newPoint)
-        {
-            float da = (scalingPoint.X - a.X) * (scalingPoint.X - a.X) + (scalingPoint.Y - a.Y) * (scalingPoint.Y - a.Y);
-            float db = (scalingPoint.X - b.X) * (scalingPoint.X - b.X) + (scalingPoint.Y - b.Y) * (scalingPoint.Y - b.Y);
-            if (da > db)
-                this.b = newPoint;
-            else
-                this.a = newPoint;
-        }
-
-        public void Rotation(double alpha)
-        {
-            Point mid = new Point((this.a.X + this.b.X) / 2, (this.a.Y + this.b.Y) / 2);
-            Translation(-mid.X, -mid.Y);
-
+            Point a = this.Get(0);
+            Point b = this.Get(1);
+            Point mid = new Point((a.X + b.X) / 2, (a.Y + b.Y) / 2);
+            Translation(mid,new Point(0,0));
+            a = this.Get(0);
+            b = this.Get(1);
             int x, y;
-            x = Convert.ToInt32(Math.Cos(alpha) * this.a.X - Math.Sin(alpha) * this.a.Y);
-            y = Convert.ToInt32(Math.Sin(alpha) * this.a.X + Math.Cos(alpha) * this.a.Y);
-            this.a.X = x; this.a.Y = y;
+            x = Convert.ToInt32(Math.Cos(alpha) * a.X - Math.Sin(alpha) * a.Y);
+            y = Convert.ToInt32(Math.Sin(alpha) * a.X + Math.Cos(alpha) * a.Y);
+            a.X = x; a.Y = y;
 
-            x = Convert.ToInt32(Math.Cos(alpha) * this.b.X - Math.Sin(alpha) * this.b.Y);
-            y = Convert.ToInt32(Math.Sin(alpha) * this.b.X + Math.Cos(alpha) * this.b.Y);
-            this.b.X = x; this.b.Y = y;
+            x = Convert.ToInt32(Math.Cos(alpha) * b.X - Math.Sin(alpha) * b.Y);
+            y = Convert.ToInt32(Math.Sin(alpha) * b.X + Math.Cos(alpha) * b.Y);
+            b.X = x; b.Y = y;
 
-            Translation(mid.X, mid.Y);
+            this.Set(a, 0);
+            this.Set(b, 1);
+            Translation(new Point(0,0) , mid);
 
         }
+
     }
 }

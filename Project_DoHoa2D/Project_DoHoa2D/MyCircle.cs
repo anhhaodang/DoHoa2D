@@ -3,7 +3,7 @@ using System.Drawing.Drawing2D;
 
 namespace Project_DoHoa2D
 {
-    internal class MyCircle : MyShape
+    class MyCircle // : MyShape
     {
         private Point center;
         private int radius;
@@ -14,7 +14,7 @@ namespace Project_DoHoa2D
 
         public MyCircle()
         {
-            MyShape f = new MyShape();
+            //MyShape f = new MyShape();
             this.center = new Point(0, 0);
             this.radius = 10;
             this.borderColor = Color.Black;

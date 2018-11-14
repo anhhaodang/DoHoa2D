@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace Project_DoHoa2D
 {
-    public partial class Form1 : Form
+    public partial class Save : Form
     {
-        public Form1()
+        public Save()
         {
             InitializeComponent();
             
@@ -23,9 +23,7 @@ namespace Project_DoHoa2D
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            int y = 115;
-            MyLine a = new MyLine(0, y, 1000, y);
-            a.Draw(g);
+            
             
             Point point1 = new Point(30, 600);
             Point point2 = new Point(40, 300);
@@ -42,6 +40,14 @@ namespace Project_DoHoa2D
             MyCircle b = new MyCircle(200, 300, 40);
             b.ConfigureStyle(BorderColor: Color.Brown, DashStyle: DashStyle.DashDotDot);
             b.Draw(g);
+
+
+            MyShape c = new MyRectangle(100,100,200,100,200,200,100,200);
+            c.Draw(g);
+            c.Save("ahihi.txt");
+           // c.Open("Retangle 100 100 200 100 200 200 100 200 Solid 1 -1146130 - 1");
+            c.Draw(g);
         }
+
     }
 }

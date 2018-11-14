@@ -1,93 +1,171 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Project_DoHoa2D
 {
-    class MyRectangle 
+    class MyRectangle : MyShape
     {
-        private Point p1, p2, p3, p4;
-        private Color borderColor = Color.Black;
         private Color backgroundColor = Color.White;
-        private int dashStyle = 0;
-        private float width = 1;
+
+        private int numPoint = 4;
 
         public MyRectangle()
         {
-            this.p1 = new Point(0, 0);
-            this.p2 = new Point(10, 0);
-            this.p3 = new Point(10, 10);
-            this.p4 = new Point(0, 10);
+            point = new List<Point>(4);
+            point.Add(new Point(0, 0));
+            point.Add(new Point(10, 0));
+            point.Add(new Point(10, 10));
+            point.Add(new Point(0, 10));
+
+            this.numPoint = 4;
         }
 
         public MyRectangle(Point p1, Point p2, Point p3, Point p4)
         {
-            this.p1 = p1; this.p2 = p2; this.p3 = p3; this.p4 = p4;
+            point = new List<Point>(4);
+            point.Add(p1);
+            point.Add(p2);
+            point.Add(p3);
+            point.Add(p4);
+            this.numPoint = 4;
         }
 
         public MyRectangle(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
         {
-            this.p1 = new Point(x1, y1);
-            this.p2 = new Point(x2, y2);
-            this.p3 = new Point(x3, y3);
-            this.p4 = new Point(x4, y4);
+            point = new List<Point>(4);
+            point.Add(new Point(x1, y1));
+            point.Add(new Point(x2, y2));
+            point.Add(new Point(x3, y3));
+            point.Add(new Point(x4, y4));
+            this.numPoint = 4;
         }
 
-        public void Draw(Graphics graphics)
-        {
-            Pen myPen = new Pen(this.borderColor);
-            graphics.DrawLine(myPen, p1, p2);
-            graphics.DrawLine(myPen, p2, p3);
-            graphics.DrawLine(myPen, p3, p4);
-            graphics.DrawLine(myPen, p4, p1);
-           
-            
-
-        }
-        public void Draw(Graphics graphics, Color borderColor)
+        public override void Draw(Graphics graphics)
         {
             Pen myPen = new Pen(borderColor);
-            this.borderColor = borderColor; 
-            graphics.DrawLine(myPen, p1, p2);
-            graphics.DrawLine(myPen, p2, p3);
-            graphics.DrawLine(myPen, p3, p4);
-            graphics.DrawLine(myPen, p4, p1);
+            if (width > 1)
+                myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            else
+                myPen.DashStyle = dashStyle;
+            myPen.Width = width;
+            graphics.DrawLine(myPen, point[0], point[1]);
+            graphics.DrawLine(myPen, point[1], point[2]);
+            graphics.DrawLine(myPen, point[2], point[3]);
+            graphics.DrawLine(myPen, point[3], point[0]);
+
+
+        }
+        public override void Draw(Graphics graphics, Color borderColor)
+        {
+            Pen myPen = new Pen(borderColor);
+            this.borderColor = borderColor;
+            graphics.DrawLine(myPen, point[0], point[1]);
+            graphics.DrawLine(myPen, point[1], point[2]);
+            graphics.DrawLine(myPen, point[2], point[3]);
+            graphics.DrawLine(myPen, point[3], point[0]);
 
         }
 
-        public void Draw(Graphics graphics, Color borderColor, int penStyle = 0, float width = 1)
+        public override void Draw(Graphics graphics, Color borderColor, DashStyle dashStyle, float width = 1)
         {
 
             Pen myPen = new Pen(borderColor);
             this.borderColor = borderColor;
-            this.dashStyle = penStyle;
+            this.dashStyle = dashStyle;
             this.width = width;
             if (width > 1)
-                myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+                myPen.DashStyle = DashStyle.Solid;
             else
             {
-                switch (penStyle)
-                {
-                    case 0: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid; break;
-                    case 1: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash; break;
-                    case 2: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot; break;
-                    case 3: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot; break;
-                    case 4: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot; break;
-                    case 5: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom; break;
-                }
-                myPen.Width = width;
+                myPen.DashStyle = dashStyle;
             }
-            if (penStyle >= 0 && penStyle <= 5)
-            {
-                graphics.DrawLine(myPen, p1, p2);
-                graphics.DrawLine(myPen, p2, p3);
-                graphics.DrawLine(myPen, p3, p4);
-                graphics.DrawLine(myPen, p4, p1);
-            }
+            myPen.Width = width;
+            // if (penStyle >= 0 && penStyle <= 5)
+            graphics.DrawLine(myPen, point[0], point[1]);
+            graphics.DrawLine(myPen, point[1], point[2]);
+            graphics.DrawLine(myPen, point[2], point[3]);
+            graphics.DrawLine(myPen, point[3], point[0]);
+
         }
 
+        public override Point Get(int index)
+        {
+            return this.point[index];
+        }
+
+        public override void Set(Point point, int index)
+        {
+            this.point[index] = point;
+        }
+
+        public override void Open(string data)
+        {
+            char delimiters = ' ';
+            string[] dt = data.Split(delimiters);
+            Point p1= new Point(Int32.Parse(dt[1]), Int32.Parse(dt[2]));
+            Point p2= new Point(Int32.Parse(dt[3]), Int32.Parse(dt[4]));
+            Point p3= new Point(Int32.Parse(dt[5]), Int32.Parse(dt[6]));
+            Point p4= new Point(Int32.Parse(dt[7]), Int32.Parse(dt[8]));
+
+            point = new List<Point>(4);
+            point.Add(p1); point.Add(p2); point.Add(p3); point.Add(p4);
+
+            switch (dt[9])
+            {
+                case "Dash": this.dashStyle = DashStyle.Dash; break;
+                case "DashDot": this.dashStyle = DashStyle.DashDot; break;
+                case "DashDotDot": this.dashStyle = DashStyle.DashDotDot; break;
+                case "Dot": this.dashStyle = DashStyle.Dot; break;
+                case "Solid": this.dashStyle = DashStyle.Solid; break;
+                case "Custom": this.dashStyle = DashStyle.Custom; break;
+            }
+            this.width = Int32.Parse(dt[10]);
+            this.borderColor = Color.FromArgb(Convert.ToInt32(dt[11]));
+            this.backgroundColor = Color.FromArgb(Convert.ToInt32(dt[12]));
+
+        }
+
+        public override void Save(string filePath)
+        {
+            Point p1 = this.Get(0);
+            Point p2 = this.Get(1);
+            Point p3 = this.Get(2);
+            Point p4 = this.Get(3);
+
+            string data = "Retangle " + p1.X.ToString() + " " + p1.Y.ToString() + " " + p2.X.ToString() + " " + p2.Y.ToString()
+                 +" " + p3.X.ToString() + " " + p3.Y.ToString() + " " + p4.X.ToString() + " " + p4.Y.ToString() + " " +  dashStyle.ToString() 
+                 + " " + width.ToString() + " " + borderColor.ToArgb().ToString()+ " " + backgroundColor.ToArgb().ToString() + "\n";
+
+            StreamWriter sw = File.AppendText(filePath);
+            sw.WriteLine(data);
+            sw.Close();
+        }
+
+        public override void Translation(Point Src, Point Des)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Scaling(Point pivotPoint, float Sx, float Sy)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Rotation(double alpha)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+      
+
+     
     }
 }
