@@ -3,7 +3,7 @@ using System.Drawing.Drawing2D;
 
 namespace Project_DoHoa2D
 {
-    internal class MyCircle 
+    internal class MyCircle : MyShape
     {
         private Point center;
         private int radius;
