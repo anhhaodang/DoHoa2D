@@ -149,17 +149,84 @@ namespace Project_DoHoa2D
 
         public override void Translation(Point Src, Point Des)
         {
-            throw new NotImplementedException();
+            Point p1 = this.Get(0); Point p2 = this.Get(1);
+            Point p3 = this.Get(2); Point p4 = this.Get(3);
+
+            p1.X += Des.X - Src.X; p1.Y += Des.Y - Src.Y;
+            p2.X += Des.X - Src.X; p2.Y += Des.Y - Src.Y;
+            p3.X += Des.X - Src.X; p3.Y += Des.Y - Src.Y;
+            p4.X += Des.X - Src.X; p4.Y += Des.Y - Src.Y;
+
+            this.Set(p1, 0); this.Set(p2, 1);
+            this.Set(p3, 2); this.Set(p4, 3);
         }
 
         public override void Scaling(Point pivotPoint, float Sx, float Sy)
         {
-            throw new NotImplementedException();
+            Point p1 = this.Get(0); Point p2 = this.Get(1);
+            Point p3 = this.Get(2); Point p4 = this.Get(3);
+
+            Point mid = new Point((p1.X + p3.X) / 2, (p1.Y + p3.Y) / 2);
+            Translation(mid, new Point(0, 0));
+            p1 = this.Get(0); p2 = this.Get(1);
+            p3 = this.Get(2); p4 = this.Get(3);
+
+            p1.X = (int)(Sx * p1.X); p1.Y = (int)(Sy * p1.Y);
+            p2.X = (int)(Sx * p2.X); p2.Y = (int)(Sy * p2.Y);
+            p3.X = (int)(Sx * p3.X); p3.Y = (int)(Sy * p3.Y);
+            p4.X = (int)(Sx * p4.X); p4.Y = (int)(Sy * p4.Y);
+
+
+            this.Set(p1, 0); this.Set(p2, 1);
+            this.Set(p3, 2); this.Set(p4, 3);
+
+            Translation(new Point(0, 0), mid);
+
         }
 
         public override void Rotation(double alpha)
         {
-            throw new NotImplementedException();
+            Point p1 = this.Get(0); Point p2 = this.Get(1);
+            Point p3 = this.Get(2); Point p4 = this.Get(3);
+
+            Point mid = new Point((p1.X + p3.X) / 2, (p1.Y + p3.Y) / 2);
+            Translation(mid, new Point(0, 0));
+            p1 = this.Get(0); p2 = this.Get(1);
+            p3 = this.Get(2); p4 = this.Get(3);
+
+            int x, y;
+            x = Convert.ToInt32(Math.Cos(alpha) * p1.X - Math.Sin(alpha) * p1.Y);
+            y = Convert.ToInt32(Math.Sin(alpha) * p1.X + Math.Cos(alpha) * p1.Y);
+            p1.X = x; p1.Y = y;
+
+            x = Convert.ToInt32(Math.Cos(alpha) * p2.X - Math.Sin(alpha) * p2.Y);
+            y = Convert.ToInt32(Math.Sin(alpha) * p2.X + Math.Cos(alpha) * p2.Y);
+            p2.X = x; p2.Y = y;
+
+            x = Convert.ToInt32(Math.Cos(alpha) * p3.X - Math.Sin(alpha) * p3.Y);
+            y = Convert.ToInt32(Math.Sin(alpha) * p3.X + Math.Cos(alpha) * p3.Y);
+            p3.X = x; p3.Y = y;
+
+            x = Convert.ToInt32(Math.Cos(alpha) * p4.X - Math.Sin(alpha) * p4.Y);
+            y = Convert.ToInt32(Math.Sin(alpha) * p4.X + Math.Cos(alpha) * p4.Y);
+            p4.X = x; p4.Y = y;
+
+
+            this.Set(p1, 0); this.Set(p2, 1);
+            this.Set(p3, 2); this.Set(p4, 3);
+
+            Translation(new Point(0, 0), mid);
+        }
+
+        public void Fill(Graphics g, Color backgroudColor)
+        {
+            //Brush myBush = new Brush;
+            
+            SolidBrush solidBrush = new SolidBrush(backgroudColor);
+            Point[] myPoint = new Point[] { };
+            for (int i = 0; i < numPoint; i++)
+                myPoint[i] = point[i];
+            g.FillPolygon(solidBrush, myPoint);
         }
      
     }
