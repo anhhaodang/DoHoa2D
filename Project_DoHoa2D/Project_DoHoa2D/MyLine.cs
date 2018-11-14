@@ -141,16 +141,29 @@ namespace Project_DoHoa2D
             float db = (pivotPoint.X - b.X) * (pivotPoint.X - b.X) + (pivotPoint.Y - b.Y) * (pivotPoint.Y - b.Y);
             if (da < db)
             {
-                b.X = (int)Sx * b.X;
-                b.Y = (int)Sy * b.Y;
+                b.X = (int)(Sx * b.X);
+                b.Y = (int)(Sy * b.Y);
                 this.Set(b, 1);
             }
             else
             {
-                a.X = (int)Sx * a.X;
-                a.Y = (int)Sy * a.Y;
+                a.X = (int)(Sx * a.X);
+                a.Y = (int)(Sy * a.Y);
                 this.Set(a, 0);
             }
+
+            //Point a = this.Get(0);
+            //Point b = this.Get(1);
+            //Point mid = new Point((a.X + b.X) / 2, (a.Y + b.Y) / 2);
+            //Translation(mid, new Point(0, 0));
+            //a = this.Get(0);
+            //b = this.Get(1);
+
+            //a.X = (int)(Sx * a.X); a.Y = (int)(Sy * a.Y);
+            //b.X = (int)(Sx * b.X); b.Y = (int)(Sy * b.Y);
+            //this.Set(a, 0);
+            //this.Set(b, 1);
+            //Translation(new Point(0, 0), mid);
         }
 
         public override void Rotation(double alpha)

@@ -41,12 +41,23 @@ namespace Project_DoHoa2D
             b.ConfigureStyle(BorderColor: Color.Brown, DashStyle: DashStyle.DashDotDot);
             b.Draw(g);
 
+            MyShape c = new MyRectangle(100, 100, 400, 100, 400, 400, 100, 400);
+            c.Draw(g);
+            //c.Save("ahihi.txt");
+            //c.Open("Retangle 100 100 200 100 200 200 100 200 Solid 1 -1146130 -1");
+            //c.Draw(g);
+            c.Translation(new Point(250, 250), new Point(500, 500));
+            c.Draw(g);
 
-            MyShape c = new MyRectangle(100,100,200,100,200,200,100,200);
-            c.Draw(g);
-            c.Save("ahihi.txt");
-           // c.Open("Retangle 100 100 200 100 200 200 100 200 Solid 1 -1146130 - 1");
-            c.Draw(g);
+            c.Rotation(Math.PI / 8);
+            c.Draw(g, Color.Red);
+
+            //MyShape line = new MyLine(300,300,400,500);
+            //line.Draw(g, Color.Black);
+            //line.Scaling(new Point(350, 400), 2f, 0.5f);
+            //line.Draw(g, Color.Red);
+
+
         }
 
     }
