@@ -69,6 +69,7 @@ namespace Project_DoHoa2D
             if (width > 1)
                 myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
             else
+            {
                 switch (penStyle)
                 {
                     case 0: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid; break;
@@ -78,7 +79,8 @@ namespace Project_DoHoa2D
                     case 4: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot; break;
                     case 5: myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom; break;
                 }
-            myPen.Width = width;
+                myPen.Width = width;
+            }
             if (penStyle >= 0 && penStyle <= 5)
                 graphics.DrawLine(myPen, a, b);
         }

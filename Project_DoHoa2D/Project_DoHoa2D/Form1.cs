@@ -27,6 +27,9 @@ namespace Project_DoHoa2D
             a.Rotation(Math.PI / 4);
             a.Draw(g,Color.Black);
 
+            MyRectangle b = new MyRectangle(10, 10, 50, 10, 50, 50, 10, 50);
+            b.Draw(g,Color.Blue,3,3);
+            
         }
     }
 }
