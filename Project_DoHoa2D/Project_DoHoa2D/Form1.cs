@@ -17,7 +17,42 @@ namespace Project_DoHoa2D
         public Save()
         {
             InitializeComponent();
+
+            List<Button> shapes = new List<Button>();
+            #region Add Button Shape
+            shapes.Add(btnLine);
+            shapes.Add(btnRectangle);
+            shapes.Add(btnCircle);
+            shapes.Add(btnEllipse);
+            shapes.Add(btnPolygon);
+            shapes.Add(btnParabol);
+            shapes.Add(btnZigzag);
+            shapes.Add(btnArc);
+            #endregion
             
+            List<Button> tools = new List<Button>();
+            #region Add Button Tool
+            tools.Add(btnFill);
+            tools.Add(btnMove);
+            tools.Add(btnRotate);
+            tools.Add(btnScale);
+            #endregion
+            
+            String[] colors = { "Black", "Silver","Gray", "White", "Maroon","Red","Purple","Fuchsia",
+            "Green","Lime","Olive","Yellow","Navy","Blue","Teal","Aqua"};
+
+            #region Set Default Value
+            cboDashstyle.SelectedIndex = 0;
+            nudWitdh.Value = 1;
+            int currentShape = 0; //Line
+            shapes[currentShape].BackColor = Color.AliceBlue;
+            int currentTool = -1; //Nothing
+            int currentColor = 0;
+            btnCurrentColor.BackColor = Color.FromName(colors[currentColor]);
+            #endregion
+
+            pnlRotateAngel.Visible = false;
+            pnlAdjustScale.Visible = false;
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -36,10 +71,6 @@ namespace Project_DoHoa2D
             Point[] curvePoints2 = { point1, point2, point3, point4, point5};
             g.DrawCurve(new Pen(Color.Black), curvePoints);
             g.DrawCurve(new Pen(Color.Blue), curvePoints2);
-
-            MyCircle b = new MyCircle(200, 300, 40);
-            b.ConfigureStyle(BorderColor: Color.Brown, DashStyle: DashStyle.DashDotDot);
-            b.Draw(g);
 
 
             MyShape c = new MyRectangle(100,100,200,100,200,200,100,200);

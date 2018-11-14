@@ -8,7 +8,7 @@ namespace Project_DoHoa2D
     {
         protected List<Point> point;
         protected Color borderColor = Color.Black;
-        protected DashStyle dashStyle;
+        protected DashStyle dashStyle = DashStyle.Solid;
         protected float width = 1;
 
         public abstract void Set(Point point, int index);
@@ -24,10 +24,5 @@ namespace Project_DoHoa2D
 
         public abstract void Save(string filePath);
         public abstract void Open(string data);
-
-
-
-
-
     }
 }
