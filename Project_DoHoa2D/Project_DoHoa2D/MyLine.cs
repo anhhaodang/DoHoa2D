@@ -135,35 +135,35 @@ namespace Project_DoHoa2D
 
         public override void Scaling(Point pivotPoint, float Sx, float Sy)
         {
-            Point a = this.Get(0);
-            Point b = this.Get(1);
-            float da = (pivotPoint.X - a.X) * (pivotPoint.X - a.X) + (pivotPoint.Y - a.Y) * (pivotPoint.Y - a.Y);
-            float db = (pivotPoint.X - b.X) * (pivotPoint.X - b.X) + (pivotPoint.Y - b.Y) * (pivotPoint.Y - b.Y);
-            if (da < db)
-            {
-                b.X = (int)(Sx * b.X);
-                b.Y = (int)(Sy * b.Y);
-                this.Set(b, 1);
-            }
-            else
-            {
-                a.X = (int)(Sx * a.X);
-                a.Y = (int)(Sy * a.Y);
-                this.Set(a, 0);
-            }
-
             //Point a = this.Get(0);
             //Point b = this.Get(1);
-            //Point mid = new Point((a.X + b.X) / 2, (a.Y + b.Y) / 2);
-            //Translation(mid, new Point(0, 0));
-            //a = this.Get(0);
-            //b = this.Get(1);
+            //float da = (pivotPoint.X - a.X) * (pivotPoint.X - a.X) + (pivotPoint.Y - a.Y) * (pivotPoint.Y - a.Y);
+            //float db = (pivotPoint.X - b.X) * (pivotPoint.X - b.X) + (pivotPoint.Y - b.Y) * (pivotPoint.Y - b.Y);
+            //if (da < db)
+            //{
+            //    b.X = (int)(Sx * b.X);
+            //    b.Y = (int)(Sy * b.Y);
+            //    this.Set(b, 1);
+            //}
+            //else
+            //{
+            //    a.X = (int)(Sx * a.X);
+            //    a.Y = (int)(Sy * a.Y);
+            //    this.Set(a, 0);
+            //}
 
-            //a.X = (int)(Sx * a.X); a.Y = (int)(Sy * a.Y);
-            //b.X = (int)(Sx * b.X); b.Y = (int)(Sy * b.Y);
-            //this.Set(a, 0);
-            //this.Set(b, 1);
-            //Translation(new Point(0, 0), mid);
+            Point a = this.Get(0);
+            Point b = this.Get(1);
+            Point mid = new Point((a.X + b.X) / 2, (a.Y + b.Y) / 2);
+            Translation(pivotPoint, new Point(0, 0));
+            a = this.Get(0);
+            b = this.Get(1);
+
+            a.X = (int)(Sx * a.X); a.Y = (int)(Sy * a.Y);
+            b.X = (int)(Sx * b.X); b.Y = (int)(Sy * b.Y);
+            this.Set(a, 0);
+            this.Set(b, 1);
+            Translation(new Point(0, 0), pivotPoint);
         }
 
         public override void Rotation(double alpha)
@@ -175,6 +175,7 @@ namespace Project_DoHoa2D
             a = this.Get(0);
             b = this.Get(1);
             int x, y;
+            alpha = -alpha;
             x = Convert.ToInt32(Math.Cos(alpha) * a.X - Math.Sin(alpha) * a.Y);
             y = Convert.ToInt32(Math.Sin(alpha) * a.X + Math.Cos(alpha) * a.Y);
             a.X = x; a.Y = y;
@@ -189,5 +190,9 @@ namespace Project_DoHoa2D
 
         }
 
+        public override void Fill(Graphics graphics, Color backgroundColor, int fillStyle)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

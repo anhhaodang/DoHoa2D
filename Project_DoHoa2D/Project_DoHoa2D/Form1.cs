@@ -73,11 +73,18 @@ namespace Project_DoHoa2D
             g.DrawCurve(new Pen(Color.Blue), curvePoints2);
 
 
-            MyShape c = new MyRectangle(100,100,200,100,200,200,100,200);
-            c.Draw(g);
-            c.Save("ahihi.txt");
-           // c.Open("Retangle 100 100 200 100 200 200 100 200 Solid 1 -1146130 - 1");
-            c.Draw(g);
+
+            MyShape hcn = new MyRectangle(200, 200, 500, 200, 500, 500, 200, 500);
+            hcn.Draw(g);
+            g.ScaleTransform(0.5f, 0.5f);
+            hcn.Draw(g, Color.Blue);
+
+            
+            
+            g.ResetTransform();
+            MyShape hcn1 = new MyRectangle(200, 200, 300, 200, 300, 300, 200, 300);
+            hcn1.Draw(g);
+
         }
 
     }

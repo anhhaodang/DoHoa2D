@@ -10,6 +10,9 @@ namespace Project_DoHoa2D
         protected Color borderColor = Color.Black;
         protected DashStyle dashStyle = DashStyle.Solid;
         protected float width = 1;
+        protected Color backgroundColor = Color.White;
+        protected int fillStyle = 0;
+
 
         public abstract void Set(Point point, int index);
         public abstract Point Get(int index);
@@ -24,5 +27,7 @@ namespace Project_DoHoa2D
 
         public abstract void Save(string filePath);
         public abstract void Open(string data);
+
+        public abstract void Fill(Graphics graphics, Color backgroundColor, int fillStyle);
     }
 }

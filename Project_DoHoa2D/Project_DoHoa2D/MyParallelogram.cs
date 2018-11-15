@@ -9,23 +9,22 @@ using System.Threading.Tasks;
 
 namespace Project_DoHoa2D
 {
-    class MyRectangle : MyShape
+    class MyParallelogram : MyShape
     {
-
         private int numPoint = 4;
 
-        public MyRectangle()
+        public MyParallelogram()
         {
             point = new List<Point>(4);
-            point.Add(new Point(100, 100));
-            point.Add(new Point(110, 100));
-            point.Add(new Point(110, 110));
-            point.Add(new Point(100, 110));
+            point.Add(new Point(200, 100));
+            point.Add(new Point(500, 100));
+            point.Add(new Point(100, 300));
+            point.Add(new Point(400, 300));
 
             this.numPoint = 4;
         }
 
-        public MyRectangle(Point p1, Point p2, Point p3, Point p4)
+        public MyParallelogram(Point p1, Point p2, Point p3, Point p4)
         {
             point = new List<Point>(4);
             point.Add(p1);
@@ -35,7 +34,7 @@ namespace Project_DoHoa2D
             this.numPoint = 4;
         }
 
-        public MyRectangle(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
+        public MyParallelogram(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
         {
             point = new List<Point>(4);
             point.Add(new Point(x1, y1));
@@ -44,7 +43,6 @@ namespace Project_DoHoa2D
             point.Add(new Point(x4, y4));
             this.numPoint = 4;
         }
-
         public override void Draw(Graphics graphics)
         {
             Pen myPen = new Pen(borderColor);
@@ -57,9 +55,8 @@ namespace Project_DoHoa2D
             graphics.DrawLine(myPen, point[1], point[2]);
             graphics.DrawLine(myPen, point[2], point[3]);
             graphics.DrawLine(myPen, point[3], point[0]);
-
-
         }
+
         public override void Draw(Graphics graphics, Color borderColor)
         {
             Pen myPen = new Pen(borderColor);
@@ -68,12 +65,10 @@ namespace Project_DoHoa2D
             graphics.DrawLine(myPen, point[1], point[2]);
             graphics.DrawLine(myPen, point[2], point[3]);
             graphics.DrawLine(myPen, point[3], point[0]);
-
         }
 
         public override void Draw(Graphics graphics, Color borderColor, DashStyle dashStyle, float width = 1)
         {
-
             Pen myPen = new Pen(borderColor);
             this.borderColor = borderColor;
             this.dashStyle = dashStyle;
@@ -90,21 +85,20 @@ namespace Project_DoHoa2D
             graphics.DrawLine(myPen, point[1], point[2]);
             graphics.DrawLine(myPen, point[2], point[3]);
             graphics.DrawLine(myPen, point[3], point[0]);
+        }
 
+
+
+        public override void Set(Point point, int index)
+        {
+            this.point[index] = point;
         }
 
         public override Point Get(int index)
         {
-            if (index >= 0 && index <= numPoint - 1)
-                return this.point[index];
-            return this.point[0];
+            return this.point[index];
         }
 
-        public override void Set(Point point, int index)
-        {
-            if (index >= 0 && index <= numPoint - 1)
-                this.point[index] = point;
-        }
 
         public override void Save(string filePath)
         {
@@ -113,7 +107,7 @@ namespace Project_DoHoa2D
             Point p3 = this.Get(2);
             Point p4 = this.Get(3);
 
-            string data = "Retangle " + p1.X.ToString() + " " + p1.Y.ToString() + " " + p2.X.ToString() + " " + p2.Y.ToString()
+            string data = "Parallelogram " + p1.X.ToString() + " " + p1.Y.ToString() + " " + p2.X.ToString() + " " + p2.Y.ToString()
                  + " " + p3.X.ToString() + " " + p3.Y.ToString() + " " + p4.X.ToString() + " " + p4.Y.ToString() + " " + dashStyle.ToString()
                  + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + " " + backgroundColor.ToArgb().ToString()
                  + " " + fillStyle.ToString() + "\n";
@@ -127,10 +121,10 @@ namespace Project_DoHoa2D
         {
             char delimiters = ' ';
             string[] dt = data.Split(delimiters);
-            Point p1= new Point(Int32.Parse(dt[1]), Int32.Parse(dt[2]));
-            Point p2= new Point(Int32.Parse(dt[3]), Int32.Parse(dt[4]));
-            Point p3= new Point(Int32.Parse(dt[5]), Int32.Parse(dt[6]));
-            Point p4= new Point(Int32.Parse(dt[7]), Int32.Parse(dt[8]));
+            Point p1 = new Point(Int32.Parse(dt[1]), Int32.Parse(dt[2]));
+            Point p2 = new Point(Int32.Parse(dt[3]), Int32.Parse(dt[4]));
+            Point p3 = new Point(Int32.Parse(dt[5]), Int32.Parse(dt[6]));
+            Point p4 = new Point(Int32.Parse(dt[7]), Int32.Parse(dt[8]));
 
             point = new List<Point>(4);
             point.Add(p1); point.Add(p2); point.Add(p3); point.Add(p4);
@@ -162,29 +156,6 @@ namespace Project_DoHoa2D
 
             this.Set(p1, 0); this.Set(p2, 1);
             this.Set(p3, 2); this.Set(p4, 3);
-        }
-
-        public override void Scaling(Point pivotPoint, float Sx, float Sy)
-        {
-            Point p1 = this.Get(0); Point p2 = this.Get(1);
-            Point p3 = this.Get(2); Point p4 = this.Get(3);
-
-            Point mid = new Point((p1.X + p3.X) / 2, (p1.Y + p3.Y) / 2);
-            Translation(mid, new Point(0, 0));
-            p1 = this.Get(0); p2 = this.Get(1);
-            p3 = this.Get(2); p4 = this.Get(3);
-
-            p1.X = (int)(Sx * p1.X); p1.Y = (int)(Sy * p1.Y);
-            p2.X = (int)(Sx * p2.X); p2.Y = (int)(Sy * p2.Y);
-            p3.X = (int)(Sx * p3.X); p3.Y = (int)(Sy * p3.Y);
-            p4.X = (int)(Sx * p4.X); p4.Y = (int)(Sy * p4.Y);
-
-
-            this.Set(p1, 0); this.Set(p2, 1);
-            this.Set(p3, 2); this.Set(p4, 3);
-
-            Translation(new Point(0, 0), mid);
-
         }
 
         public override void Rotation(double alpha)
@@ -222,6 +193,30 @@ namespace Project_DoHoa2D
             Translation(new Point(0, 0), mid);
         }
 
+
+        public override void Scaling(Point pivotPoint, float Sx, float Sy)
+        {
+            Point p1 = this.Get(0); Point p2 = this.Get(1);
+            Point p3 = this.Get(2); Point p4 = this.Get(3);
+
+            Point mid = new Point((p1.X + p3.X) / 2, (p1.Y + p3.Y) / 2);
+            Translation(mid, new Point(0, 0));
+            p1 = this.Get(0); p2 = this.Get(1);
+            p3 = this.Get(2); p4 = this.Get(3);
+
+            p1.X = (int)(Sx * p1.X); p1.Y = (int)(Sy * p1.Y);
+            p2.X = (int)(Sx * p2.X); p2.Y = (int)(Sy * p2.Y);
+            p3.X = (int)(Sx * p3.X); p3.Y = (int)(Sy * p3.Y);
+            p4.X = (int)(Sx * p4.X); p4.Y = (int)(Sy * p4.Y);
+
+
+            this.Set(p1, 0); this.Set(p2, 1);
+            this.Set(p3, 2); this.Set(p4, 3);
+
+            Translation(new Point(0, 0), mid);
+        }
+
+
         public override void Fill(Graphics g, Color backgroundColor, int fillStyle)
         {
             Point[] myPoint = new Point[4];
@@ -234,10 +229,12 @@ namespace Project_DoHoa2D
             HatchBrush myHatchBrush;
             switch (fillStyle)
             {
-                case 0: solidBrush = new SolidBrush(backgroundColor);
-                        g.FillPolygon(solidBrush, myPoint); break;
-                case 1: myHatchBrush = new HatchBrush(HatchStyle.Horizontal, Color.Beige, backgroundColor);
-                        g.FillPolygon(myHatchBrush,myPoint); break;
+                case 0:
+                    solidBrush = new SolidBrush(backgroundColor);
+                    g.FillPolygon(solidBrush, myPoint); break;
+                case 1:
+                    myHatchBrush = new HatchBrush(HatchStyle.Horizontal, Color.Beige, backgroundColor);
+                    g.FillPolygon(myHatchBrush, myPoint); break;
                 case 2:
                     myHatchBrush = new HatchBrush(HatchStyle.BackwardDiagonal, Color.Beige, backgroundColor);
                     g.FillPolygon(myHatchBrush, myPoint); break;
@@ -260,13 +257,8 @@ namespace Project_DoHoa2D
                     myHatchBrush = new HatchBrush(HatchStyle.DashedDownwardDiagonal, Color.Beige, backgroundColor);
                     g.FillPolygon(myHatchBrush, myPoint); break;
             }
-            
-            
-            
 
         }
-
-
 
     }
 }

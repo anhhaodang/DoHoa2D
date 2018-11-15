@@ -54,6 +54,9 @@
     </Compile>
     <Compile Include="MyCircle.cs" />
     <Compile Include="MyLine.cs" />
+    <Compile Include="MyParallelogram.cs" />
+    <Compile Include="MyPolygon.cs" />
+    <Compile Include="MyPolyline.cs" />
     <Compile Include="MyRectangle.cs" />
     <Compile Include="MyShape.cs" />
     <Compile Include="Program.cs" />
