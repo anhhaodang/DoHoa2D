@@ -36,6 +36,8 @@
             this.btnPolygon = new System.Windows.Forms.Button();
             this.btnParabol = new System.Windows.Forms.Button();
             this.pnlShape = new System.Windows.Forms.Panel();
+            this.btnArc = new System.Windows.Forms.Button();
+            this.btnZigzag = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cboDashstyle = new System.Windows.Forms.ComboBox();
@@ -58,15 +60,15 @@
             this.btnColorSilver = new System.Windows.Forms.Button();
             this.btnColorBlack = new System.Windows.Forms.Button();
             this.pnlTools = new System.Windows.Forms.Panel();
+            this.btnScale = new System.Windows.Forms.Button();
+            this.btnRotate = new System.Windows.Forms.Button();
+            this.btnMove = new System.Windows.Forms.Button();
+            this.btnFill = new System.Windows.Forms.Button();
             this.chkKeepRatio = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.nudRateScaleY = new System.Windows.Forms.NumericUpDown();
             this.nudRateScaleX = new System.Windows.Forms.NumericUpDown();
-            this.btnScale = new System.Windows.Forms.Button();
-            this.btnRotate = new System.Windows.Forms.Button();
-            this.btnMove = new System.Windows.Forms.Button();
-            this.btnFill = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,8 +80,6 @@
             this.pnlAdjustScale = new System.Windows.Forms.Panel();
             this.pnlRotateAngel = new System.Windows.Forms.Panel();
             this.nudRotateAngel = new System.Windows.Forms.NumericUpDown();
-            this.btnZigzag = new System.Windows.Forms.Button();
-            this.btnArc = new System.Windows.Forms.Button();
             this.pnlShape.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudWitdh)).BeginInit();
             this.pnlColors.SuspendLayout();
@@ -108,6 +108,7 @@
             this.btnLine.Size = new System.Drawing.Size(32, 32);
             this.btnLine.TabIndex = 0;
             this.btnLine.UseVisualStyleBackColor = false;
+            this.btnLine.Click += new System.EventHandler(this.button_Shape_Click);
             // 
             // btnRectangle
             // 
@@ -125,6 +126,7 @@
             this.btnRectangle.Size = new System.Drawing.Size(32, 32);
             this.btnRectangle.TabIndex = 0;
             this.btnRectangle.UseVisualStyleBackColor = false;
+            this.btnRectangle.Click += new System.EventHandler(this.button_Shape_Click);
             // 
             // btnCircle
             // 
@@ -142,6 +144,7 @@
             this.btnCircle.Size = new System.Drawing.Size(32, 32);
             this.btnCircle.TabIndex = 0;
             this.btnCircle.UseVisualStyleBackColor = false;
+            this.btnCircle.Click += new System.EventHandler(this.button_Shape_Click);
             // 
             // btnEllipse
             // 
@@ -159,6 +162,7 @@
             this.btnEllipse.Size = new System.Drawing.Size(32, 32);
             this.btnEllipse.TabIndex = 0;
             this.btnEllipse.UseVisualStyleBackColor = false;
+            this.btnEllipse.Click += new System.EventHandler(this.button_Shape_Click);
             // 
             // btnPolygon
             // 
@@ -176,6 +180,7 @@
             this.btnPolygon.Size = new System.Drawing.Size(32, 32);
             this.btnPolygon.TabIndex = 0;
             this.btnPolygon.UseVisualStyleBackColor = false;
+            this.btnPolygon.Click += new System.EventHandler(this.button_Shape_Click);
             // 
             // btnParabol
             // 
@@ -194,6 +199,7 @@
             this.btnParabol.Size = new System.Drawing.Size(32, 32);
             this.btnParabol.TabIndex = 0;
             this.btnParabol.UseVisualStyleBackColor = false;
+            this.btnParabol.Click += new System.EventHandler(this.button_Shape_Click);
             // 
             // pnlShape
             // 
@@ -212,6 +218,44 @@
             this.pnlShape.Name = "pnlShape";
             this.pnlShape.Size = new System.Drawing.Size(198, 80);
             this.pnlShape.TabIndex = 2;
+            // 
+            // btnArc
+            // 
+            this.btnArc.BackColor = System.Drawing.Color.White;
+            this.btnArc.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.btnArc.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnArc.FlatAppearance.BorderSize = 0;
+            this.btnArc.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnArc.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnArc.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnArc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnArc.Image = ((System.Drawing.Image)(resources.GetObject("btnArc.Image")));
+            this.btnArc.Location = new System.Drawing.Point(79, 42);
+            this.btnArc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnArc.Name = "btnArc";
+            this.btnArc.Size = new System.Drawing.Size(32, 32);
+            this.btnArc.TabIndex = 0;
+            this.btnArc.UseVisualStyleBackColor = false;
+            this.btnArc.Click += new System.EventHandler(this.button_Shape_Click);
+            // 
+            // btnZigzag
+            // 
+            this.btnZigzag.BackColor = System.Drawing.Color.White;
+            this.btnZigzag.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.btnZigzag.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnZigzag.FlatAppearance.BorderSize = 0;
+            this.btnZigzag.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnZigzag.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnZigzag.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnZigzag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZigzag.Image = ((System.Drawing.Image)(resources.GetObject("btnZigzag.Image")));
+            this.btnZigzag.Location = new System.Drawing.Point(41, 41);
+            this.btnZigzag.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnZigzag.Name = "btnZigzag";
+            this.btnZigzag.Size = new System.Drawing.Size(32, 32);
+            this.btnZigzag.TabIndex = 0;
+            this.btnZigzag.UseVisualStyleBackColor = false;
+            this.btnZigzag.Click += new System.EventHandler(this.button_Shape_Click);
             // 
             // label1
             // 
@@ -291,6 +335,7 @@
             this.btnColorAqua.Size = new System.Drawing.Size(20, 20);
             this.btnColorAqua.TabIndex = 0;
             this.btnColorAqua.UseVisualStyleBackColor = false;
+            this.btnColorAqua.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorFuchsia
             // 
@@ -303,6 +348,7 @@
             this.btnColorFuchsia.Size = new System.Drawing.Size(20, 20);
             this.btnColorFuchsia.TabIndex = 0;
             this.btnColorFuchsia.UseVisualStyleBackColor = false;
+            this.btnColorFuchsia.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorTeal
             // 
@@ -315,6 +361,7 @@
             this.btnColorTeal.Size = new System.Drawing.Size(20, 20);
             this.btnColorTeal.TabIndex = 0;
             this.btnColorTeal.UseVisualStyleBackColor = false;
+            this.btnColorTeal.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorPurple
             // 
@@ -327,6 +374,7 @@
             this.btnColorPurple.Size = new System.Drawing.Size(20, 20);
             this.btnColorPurple.TabIndex = 0;
             this.btnColorPurple.UseVisualStyleBackColor = false;
+            this.btnColorPurple.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorBlue
             // 
@@ -339,6 +387,7 @@
             this.btnColorBlue.Size = new System.Drawing.Size(20, 20);
             this.btnColorBlue.TabIndex = 0;
             this.btnColorBlue.UseVisualStyleBackColor = false;
+            this.btnColorBlue.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorRed
             // 
@@ -351,6 +400,7 @@
             this.btnColorRed.Size = new System.Drawing.Size(20, 20);
             this.btnColorRed.TabIndex = 0;
             this.btnColorRed.UseVisualStyleBackColor = false;
+            this.btnColorRed.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorNavy
             // 
@@ -363,6 +413,7 @@
             this.btnColorNavy.Size = new System.Drawing.Size(20, 20);
             this.btnColorNavy.TabIndex = 0;
             this.btnColorNavy.UseVisualStyleBackColor = false;
+            this.btnColorNavy.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorMaroon
             // 
@@ -375,6 +426,7 @@
             this.btnColorMaroon.Size = new System.Drawing.Size(20, 20);
             this.btnColorMaroon.TabIndex = 0;
             this.btnColorMaroon.UseVisualStyleBackColor = false;
+            this.btnColorMaroon.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorYellow
             // 
@@ -388,6 +440,7 @@
             this.btnColorYellow.Size = new System.Drawing.Size(20, 20);
             this.btnColorYellow.TabIndex = 0;
             this.btnColorYellow.UseVisualStyleBackColor = false;
+            this.btnColorYellow.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorWhite
             // 
@@ -400,6 +453,7 @@
             this.btnColorWhite.Size = new System.Drawing.Size(20, 20);
             this.btnColorWhite.TabIndex = 0;
             this.btnColorWhite.UseVisualStyleBackColor = false;
+            this.btnColorWhite.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorOlive
             // 
@@ -412,6 +466,7 @@
             this.btnColorOlive.Size = new System.Drawing.Size(20, 20);
             this.btnColorOlive.TabIndex = 0;
             this.btnColorOlive.UseVisualStyleBackColor = false;
+            this.btnColorOlive.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorGray
             // 
@@ -424,6 +479,7 @@
             this.btnColorGray.Size = new System.Drawing.Size(20, 20);
             this.btnColorGray.TabIndex = 0;
             this.btnColorGray.UseVisualStyleBackColor = false;
+            this.btnColorGray.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorLime
             // 
@@ -436,6 +492,7 @@
             this.btnColorLime.Size = new System.Drawing.Size(20, 20);
             this.btnColorLime.TabIndex = 0;
             this.btnColorLime.UseVisualStyleBackColor = false;
+            this.btnColorLime.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorGreen
             // 
@@ -448,6 +505,7 @@
             this.btnColorGreen.Size = new System.Drawing.Size(20, 20);
             this.btnColorGreen.TabIndex = 0;
             this.btnColorGreen.UseVisualStyleBackColor = false;
+            this.btnColorGreen.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorSilver
             // 
@@ -460,6 +518,7 @@
             this.btnColorSilver.Size = new System.Drawing.Size(20, 20);
             this.btnColorSilver.TabIndex = 0;
             this.btnColorSilver.UseVisualStyleBackColor = false;
+            this.btnColorSilver.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // btnColorBlack
             // 
@@ -472,6 +531,7 @@
             this.btnColorBlack.Size = new System.Drawing.Size(20, 20);
             this.btnColorBlack.TabIndex = 0;
             this.btnColorBlack.UseVisualStyleBackColor = false;
+            this.btnColorBlack.Click += new System.EventHandler(this.button_Color_Click);
             // 
             // pnlTools
             // 
@@ -479,11 +539,67 @@
             this.pnlTools.Controls.Add(this.btnRotate);
             this.pnlTools.Controls.Add(this.btnMove);
             this.pnlTools.Controls.Add(this.btnFill);
-            this.pnlTools.Location = new System.Drawing.Point(487, 39);
+            this.pnlTools.Location = new System.Drawing.Point(485, 39);
             this.pnlTools.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlTools.Name = "pnlTools";
             this.pnlTools.Size = new System.Drawing.Size(167, 40);
             this.pnlTools.TabIndex = 7;
+            // 
+            // btnScale
+            // 
+            this.btnScale.BackColor = System.Drawing.Color.White;
+            this.btnScale.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnScale.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnScale.Image = ((System.Drawing.Image)(resources.GetObject("btnScale.Image")));
+            this.btnScale.Location = new System.Drawing.Point(117, 2);
+            this.btnScale.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnScale.Name = "btnScale";
+            this.btnScale.Size = new System.Drawing.Size(32, 32);
+            this.btnScale.TabIndex = 0;
+            this.btnScale.UseVisualStyleBackColor = false;
+            this.btnScale.Click += new System.EventHandler(this.button_Tool_Click);
+            // 
+            // btnRotate
+            // 
+            this.btnRotate.BackColor = System.Drawing.Color.White;
+            this.btnRotate.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnRotate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRotate.Image = ((System.Drawing.Image)(resources.GetObject("btnRotate.Image")));
+            this.btnRotate.Location = new System.Drawing.Point(79, 2);
+            this.btnRotate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRotate.Name = "btnRotate";
+            this.btnRotate.Size = new System.Drawing.Size(32, 32);
+            this.btnRotate.TabIndex = 0;
+            this.btnRotate.UseVisualStyleBackColor = false;
+            this.btnRotate.Click += new System.EventHandler(this.button_Tool_Click);
+            // 
+            // btnMove
+            // 
+            this.btnMove.BackColor = System.Drawing.Color.White;
+            this.btnMove.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnMove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMove.Image = ((System.Drawing.Image)(resources.GetObject("btnMove.Image")));
+            this.btnMove.Location = new System.Drawing.Point(41, 2);
+            this.btnMove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnMove.Name = "btnMove";
+            this.btnMove.Size = new System.Drawing.Size(32, 32);
+            this.btnMove.TabIndex = 0;
+            this.btnMove.UseVisualStyleBackColor = false;
+            this.btnMove.Click += new System.EventHandler(this.button_Tool_Click);
+            // 
+            // btnFill
+            // 
+            this.btnFill.BackColor = System.Drawing.Color.White;
+            this.btnFill.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnFill.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFill.Image = ((System.Drawing.Image)(resources.GetObject("btnFill.Image")));
+            this.btnFill.Location = new System.Drawing.Point(3, 2);
+            this.btnFill.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnFill.Name = "btnFill";
+            this.btnFill.Size = new System.Drawing.Size(32, 32);
+            this.btnFill.TabIndex = 0;
+            this.btnFill.UseVisualStyleBackColor = false;
+            this.btnFill.Click += new System.EventHandler(this.button_Tool_Click);
             // 
             // chkKeepRatio
             // 
@@ -529,58 +645,6 @@
             this.nudRateScaleX.Name = "nudRateScaleX";
             this.nudRateScaleX.Size = new System.Drawing.Size(59, 22);
             this.nudRateScaleX.TabIndex = 5;
-            // 
-            // btnScale
-            // 
-            this.btnScale.BackColor = System.Drawing.Color.White;
-            this.btnScale.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnScale.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnScale.Image = ((System.Drawing.Image)(resources.GetObject("btnScale.Image")));
-            this.btnScale.Location = new System.Drawing.Point(117, 2);
-            this.btnScale.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnScale.Name = "btnScale";
-            this.btnScale.Size = new System.Drawing.Size(32, 32);
-            this.btnScale.TabIndex = 0;
-            this.btnScale.UseVisualStyleBackColor = false;
-            // 
-            // btnRotate
-            // 
-            this.btnRotate.BackColor = System.Drawing.Color.White;
-            this.btnRotate.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnRotate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRotate.Image = ((System.Drawing.Image)(resources.GetObject("btnRotate.Image")));
-            this.btnRotate.Location = new System.Drawing.Point(79, 2);
-            this.btnRotate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnRotate.Name = "btnRotate";
-            this.btnRotate.Size = new System.Drawing.Size(32, 32);
-            this.btnRotate.TabIndex = 0;
-            this.btnRotate.UseVisualStyleBackColor = false;
-            // 
-            // btnMove
-            // 
-            this.btnMove.BackColor = System.Drawing.Color.White;
-            this.btnMove.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnMove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMove.Image = ((System.Drawing.Image)(resources.GetObject("btnMove.Image")));
-            this.btnMove.Location = new System.Drawing.Point(41, 2);
-            this.btnMove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnMove.Name = "btnMove";
-            this.btnMove.Size = new System.Drawing.Size(32, 32);
-            this.btnMove.TabIndex = 0;
-            this.btnMove.UseVisualStyleBackColor = false;
-            // 
-            // btnFill
-            // 
-            this.btnFill.BackColor = System.Drawing.Color.White;
-            this.btnFill.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnFill.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFill.Image = ((System.Drawing.Image)(resources.GetObject("btnFill.Image")));
-            this.btnFill.Location = new System.Drawing.Point(3, 2);
-            this.btnFill.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnFill.Name = "btnFill";
-            this.btnFill.Size = new System.Drawing.Size(32, 32);
-            this.btnFill.TabIndex = 0;
-            this.btnFill.UseVisualStyleBackColor = false;
             // 
             // menuStrip1
             // 
@@ -641,7 +705,7 @@
             this.btnCurrentColor.BackColor = System.Drawing.Color.Black;
             this.btnCurrentColor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnCurrentColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCurrentColor.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCurrentColor.ForeColor = System.Drawing.Color.White;
             this.btnCurrentColor.Location = new System.Drawing.Point(824, 54);
             this.btnCurrentColor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCurrentColor.Name = "btnCurrentColor";
@@ -676,42 +740,6 @@
             this.nudRotateAngel.Size = new System.Drawing.Size(62, 22);
             this.nudRotateAngel.TabIndex = 0;
             // 
-            // btnZigzag
-            // 
-            this.btnZigzag.BackColor = System.Drawing.Color.White;
-            this.btnZigzag.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.btnZigzag.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnZigzag.FlatAppearance.BorderSize = 0;
-            this.btnZigzag.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnZigzag.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnZigzag.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnZigzag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZigzag.Image = ((System.Drawing.Image)(resources.GetObject("btnZigzag.Image")));
-            this.btnZigzag.Location = new System.Drawing.Point(41, 41);
-            this.btnZigzag.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnZigzag.Name = "btnZigzag";
-            this.btnZigzag.Size = new System.Drawing.Size(32, 32);
-            this.btnZigzag.TabIndex = 0;
-            this.btnZigzag.UseVisualStyleBackColor = false;
-            // 
-            // btnArc
-            // 
-            this.btnArc.BackColor = System.Drawing.Color.White;
-            this.btnArc.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.btnArc.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnArc.FlatAppearance.BorderSize = 0;
-            this.btnArc.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnArc.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnArc.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnArc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnArc.Image = ((System.Drawing.Image)(resources.GetObject("btnArc.Image")));
-            this.btnArc.Location = new System.Drawing.Point(79, 42);
-            this.btnArc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnArc.Name = "btnArc";
-            this.btnArc.Size = new System.Drawing.Size(32, 32);
-            this.btnArc.TabIndex = 0;
-            this.btnArc.UseVisualStyleBackColor = false;
-            // 
             // Save
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -729,11 +757,12 @@
             this.Controls.Add(this.pnlShape);
             this.Controls.Add(this.btnCurrentColor);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Save";
             this.Text = "MyPaint";
+            this.Click += new System.EventHandler(this.button_Color_Click);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.pnlShape.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudWitdh)).EndInit();
