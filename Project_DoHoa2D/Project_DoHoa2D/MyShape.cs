@@ -28,10 +28,9 @@ namespace Project_DoHoa2D
 
         public abstract void Save(string filePath);
         public abstract void Open(string data);
-
         public abstract void Fill(Graphics graphics, Color backgroundColor, int fillStyle);
 
-        public void Configure(Color? BorderColor, DashStyle? DashStyle, float? Width, float? Angel, bool? IsSelected)
+        public void Configure(Color? BorderColor = null, DashStyle? DashStyle = null, float? Width = null, float? Angel = null, bool? IsSelected = null)
         {
             if (BorderColor.HasValue)
                 borderColor = BorderColor.Value;

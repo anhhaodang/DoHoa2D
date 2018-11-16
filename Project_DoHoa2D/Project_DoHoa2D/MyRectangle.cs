@@ -17,42 +17,39 @@ namespace Project_DoHoa2D
 
         public MyRectangle()
         {
-            point = new List<Point>(4);
+            point = new List<Point>(2);
             point.Add(new Point(100, 100));
-            point.Add(new Point(110, 100));
             point.Add(new Point(110, 110));
-            point.Add(new Point(100, 110));
 
         }
 
-        public MyRectangle(Point p1, Point p2, Point p3, Point p4)
+        public MyRectangle(Point p1, Point p2)
         {
-            point = new List<Point>(4);
+            point = new List<Point>(2);
             point.Add(p1);
             point.Add(p2);
-            point.Add(p3);
-            point.Add(p4);
         }
 
-        public MyRectangle(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
+        public MyRectangle(int x1, int y1, int x2, int y2)
         {
-            point = new List<Point>(4);
+            point = new List<Point>(2);
             point.Add(new Point(x1, y1));
             point.Add(new Point(x2, y2));
-            point.Add(new Point(x3, y3));
-            point.Add(new Point(x4, y4));
         }
 
         public override void Draw(Graphics graphics)
         {
-            graphics.TranslateTransform((point[0].X + point[2].X) / 2, (point[0].Y + point[2].Y) / 2);
+            Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
+            Point p1 = new Point(Math.Max(point[0].X, point[1].X), Math.Max(point[0].Y, point[1].Y));
+
+            graphics.TranslateTransform((p0.X + p1.X) / 2, (p0.Y + p1.Y) / 2);
             graphics.RotateTransform(angle);
 
             Pen myPen = new Pen(borderColor);
             myPen.DashStyle = dashStyle;
             myPen.Width = width;
 
-            Rectangle r = new Rectangle(new Point(-(point[2].X - point[0].X)/2,-(point[2].Y - point[0].Y)/2), new Size(point[2].X - point[0].X, point[2].Y - point[0].Y));
+            Rectangle r = new Rectangle(new Point(-(p1.X - p0.X)/2,-(p1.Y - p0.Y)/2), new Size(p1.X - p0.X, p1.Y - p0.Y));
              
             if (isFill)
                 graphics.FillRectangle(new SolidBrush(backgroundColor), r);
@@ -64,26 +61,32 @@ namespace Project_DoHoa2D
 
         public override Point Get(int index)
         {
-            if (index >= 0 && index <= 1)
                 return this.point[index];
-            return this.point[0];
         }
 
         public override void Set(Point point, int index)
         {
-            if (index >= 0 && index <= 1)
                 this.point[index] = point;
+        }
+
+        public void Configure(Color? BorderColor = null, DashStyle? DashStyle = null, 
+            float? Width = null, float? Angel = null, bool? IsSelected = null, bool? IsFill = null, Color? BackgroundColor = null)
+        {
+            base.Configure(BorderColor, DashStyle, Width, Angel, IsSelected);
+            if (IsFill.HasValue)
+                isFill = IsFill.Value;
+            if (BackgroundColor.HasValue)
+                backgroundColor = BackgroundColor.Value;
         }
 
         public override void Save(string filePath)
         {
             Point p1 = this.Get(0);
             Point p2 = this.Get(1);
-            Point p3 = this.Get(2);
-            Point p4 = this.Get(3);
+
 
             string data = "Retangle " + p1.X.ToString() + " " + p1.Y.ToString() + " " + p2.X.ToString() + " " + p2.Y.ToString()
-                 + " " + p3.X.ToString() + " " + p3.Y.ToString() + " " + p4.X.ToString() + " " + p4.Y.ToString() + " " + dashStyle.ToString()
+                 + " " + dashStyle.ToString()
                  + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + " " + backgroundColor.ToArgb().ToString()
                  + " " + fillStyle.ToString() + "\n";
 
@@ -98,13 +101,11 @@ namespace Project_DoHoa2D
             string[] dt = data.Split(delimiters);
             Point p1= new Point(Int32.Parse(dt[1]), Int32.Parse(dt[2]));
             Point p2= new Point(Int32.Parse(dt[3]), Int32.Parse(dt[4]));
-            Point p3= new Point(Int32.Parse(dt[5]), Int32.Parse(dt[6]));
-            Point p4= new Point(Int32.Parse(dt[7]), Int32.Parse(dt[8]));
 
-            point = new List<Point>(4);
-            point.Add(p1); point.Add(p2); point.Add(p3); point.Add(p4);
+            point = new List<Point>(2);
+            point.Add(p1); point.Add(p2);
 
-            switch (dt[9])
+            switch (dt[5])
             {
                 case "Dash": this.dashStyle = DashStyle.Dash; break;
                 case "DashDot": this.dashStyle = DashStyle.DashDot; break;
@@ -113,24 +114,18 @@ namespace Project_DoHoa2D
                 case "Solid": this.dashStyle = DashStyle.Solid; break;
                 case "Custom": this.dashStyle = DashStyle.Custom; break;
             }
-            this.width = Int32.Parse(dt[10]);
-            this.borderColor = Color.FromArgb(Convert.ToInt32(dt[11]));
-            this.backgroundColor = Color.FromArgb(Convert.ToInt32(dt[12]));
-            this.fillStyle = Int32.Parse(dt[13]);
+            this.width = Int32.Parse(dt[6]);
+            this.borderColor = Color.FromArgb(Convert.ToInt32(dt[7]));
+            this.backgroundColor = Color.FromArgb(Convert.ToInt32(dt[8]));
+            this.fillStyle = Int32.Parse(dt[9]);
         }
 
-      
-        public override void Fill(Graphics g, Color backgroundColor, int fillStyle)
-        {
-            
-
-        }
 
         public override bool Inside(Point p)
         {
             bool res = false;
             GraphicsPath path = new GraphicsPath();
-            path.AddRectangle(new Rectangle(point[0], new Size(point[2].X - point[0].X, point[2].Y - point[0].Y)));
+            path.AddRectangle(new Rectangle(point[0], new Size(point[1].X - point[0].X, point[1].Y - point[0].Y)));
 
             if (isFill)
                 res = path.IsVisible(p);
@@ -144,8 +139,13 @@ namespace Project_DoHoa2D
 
         public override void Move(Point d)
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < point.Count; i++)
                 Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
+        }
+
+        public override void Fill(Graphics graphics, Color backgroundColor, int fillStyle)
+        {
+            throw new NotImplementedException();
         }
     }
 }
