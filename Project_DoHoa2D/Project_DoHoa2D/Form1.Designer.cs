@@ -58,8 +58,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
             this.cmbFillStyle = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.pnlShape.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -341,6 +341,7 @@
             this.btnSelect.Size = new System.Drawing.Size(24, 26);
             this.btnSelect.TabIndex = 0;
             this.btnSelect.UseVisualStyleBackColor = false;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // pnlMain
             // 
@@ -428,6 +429,14 @@
             this.panel2.Size = new System.Drawing.Size(200, 92);
             this.panel2.TabIndex = 18;
             // 
+            // cmbFillStyle
+            // 
+            this.cmbFillStyle.FormattingEnabled = true;
+            this.cmbFillStyle.Location = new System.Drawing.Point(56, 45);
+            this.cmbFillStyle.Name = "cmbFillStyle";
+            this.cmbFillStyle.Size = new System.Drawing.Size(121, 21);
+            this.cmbFillStyle.TabIndex = 17;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -436,14 +445,6 @@
             this.label3.Size = new System.Drawing.Size(45, 13);
             this.label3.TabIndex = 16;
             this.label3.Text = "Fill Style";
-            // 
-            // cmbFillStyle
-            // 
-            this.cmbFillStyle.FormattingEnabled = true;
-            this.cmbFillStyle.Location = new System.Drawing.Point(56, 45);
-            this.cmbFillStyle.Name = "cmbFillStyle";
-            this.cmbFillStyle.Size = new System.Drawing.Size(121, 21);
-            this.cmbFillStyle.TabIndex = 17;
             // 
             // Form1
             // 

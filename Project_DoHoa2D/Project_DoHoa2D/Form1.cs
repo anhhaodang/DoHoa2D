@@ -19,6 +19,7 @@ namespace Project_DoHoa2D
 
         int currentShape;
 
+        private bool isDrawing;
         private bool isMouseDown;
         private bool isDrawingCurve;
         private bool isDrawingPolygon;
@@ -33,30 +34,16 @@ namespace Project_DoHoa2D
             shapeButtons = new List<Button> {btnSelect, btnLine, btnRectangle, btnCircle, btnEllipse, btnPolygon, btnParabol, btnZigzag, btnArc };
             #endregion
 
-            #region Add Tool Buttons
-            //toolButtons = new List<Button> { btnFill, btnMove, btnRotate, btnScale };
-            #endregion
-
-            #region Add Color Buttons
-            //colorButtons = new List<Button>();
-            //for (int i = 0; i < colorList.Length; i++)
-            //    colorButtons.Add(
-            //        (Button)this.Controls.Find("btnColor" + colorList[i], true)[0]
-            //        );
-            #endregion
+           
+           
       
             #region Set Default Value
             cmbDashstyle.SelectedIndex = 0;
             trackBar1.Value = 1;
             currentShape = (int)CurrentShape.Line; //Line
             shapeButtons[0].BackColor = CONST.COLOR_CURRENT_SHAPE;
-            currentTool = -1; //Nothing
-            currentColor = 0;
-            btnBorderColor.BackColor = Color.FromName(colorList[currentColor]);
            
 
-            //pnlRotateAngel.Visible = false;
-            //pnlAdjustScale.Visible = false;
             #endregion
         }
 
@@ -113,16 +100,16 @@ namespace Project_DoHoa2D
 
         private void btnColor_MouseDown(object sender, MouseEventArgs e)
         {
-            Button clickedButton = sender as Button;
-            for (int i = 0; i < colorButtons.Count; i++)
-                if (clickedButton == colorButtons[i])
-                {
-                    currentColor = i;
-                    if (e.Button == MouseButtons.Left)
-                        btnBorderColor.BackColor = Color.FromName(colorList[i]);
-                    else btnBackColor.BackColor = Color.FromName(colorList[i]);
-                    break;
-                }
+            //Button clickedButton = sender as Button;
+            //for (int i = 0; i < colorButtons.Count; i++)
+            //    if (clickedButton == colorButtons[i])
+            //    {
+            //        currentColor = i;
+            //        if (e.Button == MouseButtons.Left)
+            //            btnBorderColor.BackColor = Color.FromName(colorList[i]);
+            //        else btnBackColor.BackColor = Color.FromName(colorList[i]);
+            //        break;
+            //    }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -153,5 +140,9 @@ namespace Project_DoHoa2D
 
         }
 
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            isDrawing = false;
+        }
     }
 }
