@@ -12,9 +12,9 @@ namespace Project_DoHoa2D
     public enum Mode
     {
         Select,
-        Moving,
         Drawing,
         SelectedShape,
+        Moving,
         Scaling,
         Rotating
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -19,6 +20,8 @@ namespace Project_DoHoa2D
         public bool isSelected = false;
 
         public abstract bool Inside(Point p);
+        public abstract bool AtRotatePosition(Point p);
+        public abstract bool AtBoundingBox(Point p);
         public abstract void Move(Point d);
 
         public abstract void Set(Point point, int index);
@@ -53,6 +56,23 @@ namespace Project_DoHoa2D
                 fillStyle = FillStyle.Value;
             if (IsFill.HasValue)
                 isFill = IsFill.Value;
+        }
+
+        public Point Rotate(Point origin, Point p, float alpha)
+        {
+            int x = p.X - origin.X;
+            int y = p.Y - origin.Y;
+
+            alpha = (float)Math.PI / 180 * alpha;
+
+            int tempX = Convert.ToInt32(Math.Cos(alpha) * x - Math.Sin(alpha) * y);
+            int tempY = Convert.ToInt32(Math.Sin(alpha) * x + Math.Cos(alpha) * y);
+
+            x = tempX + origin.X;
+            y = tempY + origin.Y;
+
+            Point res = new Point(x, y);
+            return res;
         }
     }
 }
