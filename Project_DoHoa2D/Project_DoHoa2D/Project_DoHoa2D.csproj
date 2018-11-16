@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CONST.cs" />
-    <Compile Include="Curve.cs" />
+    <Compile Include="MyCurve.cs" />
     <Compile Include="DrawArea.cs">
       <SubType>Component</SubType>
     </Compile>

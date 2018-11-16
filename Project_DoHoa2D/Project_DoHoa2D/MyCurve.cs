@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Project_DoHoa2D
 {
-    class Curve : MyShape
+    class MyCurve : MyShape
     {
         List<Point> BoundingBox;
 
-        Curve()
+        MyCurve()
         {
 
         }
@@ -56,12 +56,6 @@ namespace Project_DoHoa2D
             graphics.RotateTransform(angel);
 
         }
-        public override void Draw(Graphics graphics, Color borderColor){ }
-        public override void Draw(Graphics graphics, Color borderColor, DashStyle dashStyle, float width = 1){ }
-
-        public override void Translation(Point Src, Point Des){ }
-        public override void Scaling(Point pivotPoint, float Sx, float Sy){ }
-        public override void Rotation(double alpha){ }
 
         public override void Save(string filePath){ }
         public override void Open(string data){ }

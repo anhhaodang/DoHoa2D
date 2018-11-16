@@ -69,8 +69,8 @@ namespace Project_DoHoa2D
         private void pnlMain_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-            
+            for (int i = 0; i < shapes.Count; i++)
+                shapes[i].Draw(e.Graphics);
         }
 
         private void pnlMain_MouseDown(object sender, MouseEventArgs e)

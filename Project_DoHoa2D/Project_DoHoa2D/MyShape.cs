@@ -6,14 +6,11 @@ namespace Project_DoHoa2D
 {
     public abstract class MyShape
     {
-        protected GraphicsPath path;
+        public abstract GraphicsPath path { get; }
         protected List<Point> point;
         protected Color borderColor = Color.Black;
         protected DashStyle dashStyle = DashStyle.Solid;
         protected float width = 1;
-
-        protected Color backgroundColor = Color.White;
-        protected int fillStyle = 0;
 
         public float angel = 0;
         public bool isSelected = false;
@@ -36,7 +33,7 @@ namespace Project_DoHoa2D
 
         public abstract void Fill(Graphics graphics, Color backgroundColor, int fillStyle);
 
-        public void Configure(Color? BorderColor, DashStyle? DashStyle, float? Width, Color? BackgoundColor, int? FillStyle, float? Angel, bool? IsSelected)
+        public void Configure(Color? BorderColor, DashStyle? DashStyle, float? Width, float? Angel, bool? IsSelected)
         {
             if (BorderColor.HasValue)
                 borderColor = BorderColor.Value;
@@ -44,10 +41,6 @@ namespace Project_DoHoa2D
                 dashStyle = DashStyle.Value;
             if (Width.HasValue)
                 width = Width.Value;
-            if (BackgoundColor.HasValue)
-                backgroundColor = BackgoundColor.Value;
-            if (FillStyle.HasValue)
-                fillStyle = FillStyle.Value;
             if (Angel.HasValue)
                 angel = Angel.Value;
             if (IsSelected.HasValue)

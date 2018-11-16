@@ -8,8 +8,9 @@ namespace Project_DoHoa2D
 {
     class MyCircle : MyShape
     {
+        protected int fillStyle = 0;
         private bool isFill;
-        private Color fillColor;
+        private Color backgroundColor;
 
         public MyCircle()
         {
@@ -23,7 +24,16 @@ namespace Project_DoHoa2D
             point.Add(p2);
         }
 
+        public override GraphicsPath path
+        {
+            get
+            {
+                GraphicsPath p = new GraphicsPath();
 
+                return p;
+
+            }
+        }
 
         public override void Set(Point point, int index){ }
         public override Point Get(int index){ return new Point(0, 0); }
@@ -37,7 +47,7 @@ namespace Project_DoHoa2D
             Rectangle r = new Rectangle(-d / 2, -d / 2, d, d);
 
             if (isFill)
-                graphics.FillEllipse(new SolidBrush(fillColor), r);
+                graphics.FillEllipse(new SolidBrush(backgroundColor), r);
 
             Pen p = new Pen(borderColor);
             p.DashStyle = dashStyle;
