@@ -6,7 +6,6 @@ namespace Project_DoHoa2D
 {
     public abstract class MyShape
     {
-        public abstract GraphicsPath path { get; }
         protected List<Point> point;
         protected Color borderColor = Color.Black;
         protected DashStyle dashStyle = DashStyle.Solid;
@@ -14,7 +13,6 @@ namespace Project_DoHoa2D
 
         public float angel = 0;
         public bool isSelected = false;
-
 
         public abstract bool Inside(Point p);
         public abstract void Move(Point d);

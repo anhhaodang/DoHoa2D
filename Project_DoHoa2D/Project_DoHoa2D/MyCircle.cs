@@ -24,17 +24,6 @@ namespace Project_DoHoa2D
             point.Add(p2);
         }
 
-        public override GraphicsPath path
-        {
-            get
-            {
-                GraphicsPath p = new GraphicsPath();
-
-                return p;
-
-            }
-        }
-
         public override void Set(Point point, int index){ }
         public override Point Get(int index){ return new Point(0, 0); }
 

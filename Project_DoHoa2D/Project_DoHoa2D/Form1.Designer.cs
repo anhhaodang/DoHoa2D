@@ -83,6 +83,7 @@
             this.pnlMain = new Project_DoHoa2D.DrawArea();
             this.btnBackColor = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.ckbFill = new System.Windows.Forms.CheckBox();
             this.pnlShape.SuspendLayout();
             this.pnlColors.SuspendLayout();
             this.pnlTools.SuspendLayout();
@@ -799,11 +800,22 @@
             this.trackBar1.Size = new System.Drawing.Size(144, 56);
             this.trackBar1.TabIndex = 14;
             // 
+            // ckbFill
+            // 
+            this.ckbFill.AutoSize = true;
+            this.ckbFill.Location = new System.Drawing.Point(79, 126);
+            this.ckbFill.Name = "ckbFill";
+            this.ckbFill.Size = new System.Drawing.Size(47, 21);
+            this.ckbFill.TabIndex = 15;
+            this.ckbFill.Text = "Fill";
+            this.ckbFill.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1181, 750);
+            this.Controls.Add(this.ckbFill);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.btnBackColor);
             this.Controls.Add(this.pnlMain);
@@ -898,6 +910,7 @@
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.Button btnBackColor;
         private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.CheckBox ckbFill;
     }
 }
 
