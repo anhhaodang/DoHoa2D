@@ -31,45 +31,41 @@ namespace Project_DoHoa2D
             this.numPoint = n;
         }
 
+        public Point[] ConvertPoint(List<Point> point, Point pivot)
+        {
+            Point[] myPoint = new Point[point.Count];
+            for (int i = 0; i < point.Count; i++)
+            {
+                myPoint[i].X = point[i].X - pivot.X;
+                myPoint[i].Y = point[i].Y - pivot.Y;
+            }
+            return myPoint;
+        }
 
         public override void Draw(Graphics graphics)
         {
-            Pen myPen = new Pen(borderColor);
-            if (width > 1)
-                myPen.DashStyle = DashStyle.Solid;
-            else
-                myPen.DashStyle = dashStyle;
-            myPen.Width = width;
-            for (int i = 0; i < numPoint - 1; i++)
-                graphics.DrawLine(myPen, point[i], point[i + 1]);
-        }
+            int x = 0, y = 0;
 
-        public override void Draw(Graphics graphics, Color borderColor)
-        {
-            Pen myPen = new Pen(borderColor);
-            this.borderColor = borderColor;
-            for (int i = 0; i < numPoint - 1; i++)
-                graphics.DrawLine(myPen, point[i], point[i + 1]);
-        }
-
-        public override void Draw(Graphics graphics, Color borderColor, DashStyle dashStyle, float width = 1)
-        {
-            Pen myPen = new Pen(borderColor);
-            this.borderColor = borderColor;
-            this.dashStyle = dashStyle;
-            this.width = width;
-            if (width > 1)
-                myPen.DashStyle = DashStyle.Solid;
-            else
+            for (int i = 0; i < numPoint; i++)
             {
-                myPen.DashStyle = dashStyle;
+                x += point[i].X; y += point[i].Y;
             }
+            x /= numPoint; y /= numPoint;
+
+            Point pivot = new Point(x, y);
+            Point[] polyline = ConvertPoint(point, pivot);
+
+            graphics.TranslateTransform(x, y);
+            graphics.RotateTransform(angle);
+
+            Pen myPen = new Pen(borderColor);
+            myPen.DashStyle = dashStyle;
             myPen.Width = width;
-            for (int i = 0; i < numPoint - 1; i++)
-                graphics.DrawLine(myPen, point[i], point[i + 1]);
+
+            graphics.DrawLines(myPen, polyline);
+            graphics.ResetTransform();
         }
 
-        
 
         public override void Set(Point point, int index)
         {
@@ -97,7 +93,7 @@ namespace Project_DoHoa2D
                 data += p[i].Y.ToString() + " ";
             }
             data += dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString()
-                + " " + backgroundColor.ToArgb().ToString() + " " + fillStyle.ToString() + "\n";
+              + "\n";
             StreamWriter sw = File.AppendText(filePath);
             sw.WriteLine(data);
             sw.Close();
@@ -129,99 +125,36 @@ namespace Project_DoHoa2D
             }
             this.width = Int32.Parse(dt[numPoint * 2 + 2]);
             this.borderColor = Color.FromArgb(Convert.ToInt32(numPoint * 2 + 3));
-            this.backgroundColor = Color.FromArgb(Convert.ToInt32(numPoint * 2 + 4));
-            this.fillStyle = Int32.Parse(dt[numPoint * 2 + 5]);
         }
 
        
 
-
-        public override void Translation(Point Src, Point Des)
-        {
-            Point[] p = new Point[numPoint];
-            for (int i = 0; i < numPoint; i++)
-                p[i] = this.Get(i);
-
-            for (int i = 0; i < numPoint; i++)
-            {
-                p[i].X += Des.X - Src.X;
-                p[i].Y += Des.Y - Src.Y;
-            }
-
-            for (int i = 0; i < numPoint; i++)
-                this.Set(p[i], i);
-        }
-
-
-        public override void Scaling(Point pivotPoint, float Sx, float Sy)
-        {
-            Point[] p = new Point[numPoint];
-            for (int i = 0; i < numPoint; i++)
-                p[i] = this.Get(i);
-
-            int x = 0, y = 0;
-            for (int i = 0; i < numPoint; i++)
-            {
-                x += p[i].X; y += p[i].Y;
-            }
-            x /= numPoint; y /= numPoint;
-
-            Point mid = new Point(x, y);
-
-            Translation(mid, new Point(0, 0));
-            for (int i = 0; i < numPoint; i++)
-                p[i] = this.Get(i);
-
-
-            for (int i = 0; i < numPoint; i++)
-            {
-                p[i].X = (int)(Sx * p[i].X);
-                p[i].Y = (int)(Sy * p[i].Y);
-            }
-
-            for (int i = 0; i < numPoint; i++)
-                this.Set(p[i], i);
-
-            Translation(new Point(0, 0), mid);
-        }
-
-        public override void Rotation(double alpha)
-        {
-            Point[] p = new Point[numPoint];
-            for (int i = 0; i < numPoint; i++)
-                p[i] = this.Get(i);
-
-            int x = 0, y = 0;
-            for (int i = 0; i < numPoint; i++)
-            {
-                x += p[i].X; y += p[i].Y;
-            }
-            x /= numPoint; y /= numPoint;
-
-            Point mid = new Point(x, y);
-
-            Translation(mid, new Point(0, 0));
-            for (int i = 0; i < numPoint; i++)
-                p[i] = this.Get(i);
-            alpha = -alpha;
-
-
-            for (int i = 0; i < numPoint; i++)
-            {
-                x = Convert.ToInt32(Math.Cos(alpha) * p[i].X - Math.Sin(alpha) * p[i].Y);
-                y = Convert.ToInt32(Math.Sin(alpha) * p[i].X + Math.Cos(alpha) * p[i].Y);
-                p[i].X = x; p[i].Y = y;
-            }
-
-            for (int i = 0; i < numPoint; i++)
-                this.Set(p[i], i);
-
-            Translation(new Point(0, 0), mid);
-        }
-
         public override void Fill(Graphics graphics, Color backgroundColor, int fillStyle)
         {
             throw new NotImplementedException();
+        }
+
+        public override bool Inside(Point p)
+        {
+            bool res = false;
+
+            Point[] polyline = new Point[numPoint];
+            for (int i = 0; i < numPoint; i++)
+                polyline[i] = point[i];
+
+            GraphicsPath path = new GraphicsPath();
+            path.AddLines(polyline);
+
+            Pen pen = new Pen(borderColor, width + 2);
+            res = path.IsOutlineVisible(p, pen);
+
+            return res;
+        }
+
+        public override void Move(Point d)
+        {
+            for (int i = 0; i < numPoint; i++)
+                Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
         }
     }
 }

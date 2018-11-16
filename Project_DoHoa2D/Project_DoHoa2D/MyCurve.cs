@@ -53,7 +53,7 @@ namespace Project_DoHoa2D
             int w = BoundingBox[1].X - BoundingBox[0].X;
             int h = BoundingBox[1].Y - BoundingBox[0].Y;
             graphics.TranslateTransform(point[0].X + w / 2, point[0].Y + h / 2);
-            graphics.RotateTransform(angel);
+            graphics.RotateTransform(angle);
 
         }
 

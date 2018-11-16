@@ -15,13 +15,8 @@ namespace Project_DoHoa2D
     public partial class Form1 : Form
     {
         List<Button> shapeButtons;
-        List<Button> toolButtons;
-        List<Button> colorButtons;
         List<MyShape> shapes;
-        String[] colorList = { "Black", "Silver","Gray", "White", "Maroon","Red","Purple","Fuchsia",
-            "Green","Lime","Olive","Yellow","Navy","Blue","Teal","Aqua"};
 
-        int currentTool, currentColor;
         int currentShape;
 
         private bool isMouseDown;
@@ -39,19 +34,19 @@ namespace Project_DoHoa2D
             #endregion
 
             #region Add Tool Buttons
-            toolButtons = new List<Button> { btnFill, btnMove, btnRotate, btnScale };
+            //toolButtons = new List<Button> { btnFill, btnMove, btnRotate, btnScale };
             #endregion
 
             #region Add Color Buttons
-            colorButtons = new List<Button>();
-            for (int i = 0; i < colorList.Length; i++)
-                colorButtons.Add(
-                    (Button)this.Controls.Find("btnColor" + colorList[i], true)[0]
-                    );
+            //colorButtons = new List<Button>();
+            //for (int i = 0; i < colorList.Length; i++)
+            //    colorButtons.Add(
+            //        (Button)this.Controls.Find("btnColor" + colorList[i], true)[0]
+            //        );
             #endregion
       
             #region Set Default Value
-            cboDashstyle.SelectedIndex = 0;
+            cmbDashstyle.SelectedIndex = 0;
             trackBar1.Value = 1;
             currentShape = (int)CurrentShape.Line; //Line
             shapeButtons[0].BackColor = CONST.COLOR_CURRENT_SHAPE;
@@ -60,8 +55,8 @@ namespace Project_DoHoa2D
             btnBorderColor.BackColor = Color.FromName(colorList[currentColor]);
            
 
-            pnlRotateAngel.Visible = false;
-            pnlAdjustScale.Visible = false;
+            //pnlRotateAngel.Visible = false;
+            //pnlAdjustScale.Visible = false;
             #endregion
         }
 
@@ -69,8 +64,26 @@ namespace Project_DoHoa2D
         private void pnlMain_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            for (int i = 0; i < shapes.Count; i++)
-                shapes[i].Draw(e.Graphics);
+            //for (int i = 0; i < shapes.Count; i++)
+            //    shapes[i].Draw(e.Graphics);
+
+            Graphics g = e.Graphics;
+            MyShape hcn = new MyPolyline(new Point(20, 20), new Point(60, 20), new Point(60, 60), new Point( 50, 80) , new Point(20, 60));
+            hcn.Draw(g);
+
+            hcn.angle = -30;
+            hcn.Draw(g);
+            g.ResetTransform();
+
+            //MyShape line = new MyLine(140, 120, 200, 200);
+            //line.Draw(g);
+
+            //line.angle = -60;
+            //line.Draw(g);
+
+            //g.ResetTransform();
+            //MyShape hcn1 = new MyRectangle(200, 200, 300, 200, 300, 300, 200, 300);
+            //hcn1.Draw(g);
         }
 
         private void pnlMain_MouseDown(object sender, MouseEventArgs e)
@@ -95,57 +108,8 @@ namespace Project_DoHoa2D
 
         }
 
-        private void button_Shape_Click(object sender, EventArgs e)
-        {
-            if (currentTool != -1)
-            {
-                toolButtons[currentTool].BackColor = Color.White;
-                currentTool = -1;
-                pnlAdjustScale.Visible = false;
-                pnlRotateAngel.Visible = false;
-            }
-           
-            Button clikedShapeButton = sender as Button;
-            shapeButtons[currentShape].BackColor = Color.Transparent;
-            for (int i = 0; i < shapeButtons.Count; i++)
-            if (clikedShapeButton == shapeButtons[i])
-            {
-                currentShape = i;
-                shapeButtons[currentShape].BackColor = CONST.COLOR_CURRENT_SHAPE;
-                break;
-            }
-        }
-
-        private void button_Tool_Click(object sender, EventArgs e)
-        {
-            Button clikedButton = sender as Button;
-            if (currentTool != -1)
-                toolButtons[currentTool].BackColor = Color.White;
-            for(int i = 0; i < toolButtons.Count; i++)
-                if(clikedButton == toolButtons[i])
-                {
-                    currentTool = i;
-                    toolButtons[currentTool].BackColor = CONST.COLOR_CURRENT_TOOL;
-                    break;
-                }
-
-            pnlRotateAngel.Visible = (clikedButton == btnRotate);
-            pnlAdjustScale.Visible = (clikedButton == btnScale);
-        }
-
-      
-
-        private void button_Color_Click(object sender, EventArgs e)
-        {
-            Button clickedButton = sender as Button;
-            for (int i = 0; i < colorButtons.Count; i++)
-                if (clickedButton == colorButtons[i])
-                {
-                    currentColor = i;             
-                    btnBorderColor.BackColor = Color.FromName(colorList[i]);
-                    break;
-                }
-        }
+       
+     
 
         private void btnColor_MouseDown(object sender, MouseEventArgs e)
         {
@@ -161,36 +125,31 @@ namespace Project_DoHoa2D
                 }
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
+            //Graphics g = e.Graphics;
             
             
-            Point point1 = new Point(30, 600);
-            Point point2 = new Point(40, 300);
-            Point point3 = new Point(50, 200);
-            Point point4 = new Point(60, 300);
-            Point point5 = new Point(70, 600);
+            //Point point1 = new Point(30, 600);
+            //Point point2 = new Point(40, 300);
+            //Point point3 = new Point(50, 200);
+            //Point point4 = new Point(60, 300);
+            //Point point5 = new Point(70, 600);
             
                 
-            Point[] curvePoints = { point1, point3, point5 };
-            Point[] curvePoints2 = { point1, point2, point3, point4, point5};
-            g.DrawCurve(new Pen(Color.Black), curvePoints);
-            g.DrawCurve(new Pen(Color.Blue), curvePoints2);
+            //Point[] curvePoints = { point1, point3, point5 };
+            //Point[] curvePoints2 = { point1, point2, point3, point4, point5};
+            //g.DrawCurve(new Pen(Color.Black), curvePoints);
+            //g.DrawCurve(new Pen(Color.Blue), curvePoints2);
 
 
 
-            MyShape hcn = new MyRectangle(200, 200, 500, 200, 500, 500, 200, 500);
-            hcn.Draw(g);
-            g.ScaleTransform(0.5f, 0.5f);
-            hcn.Draw(g, Color.Blue);
-
-            g.RotateTransform(30);
-            hcn.Draw(g, Color.Green);
-
-            g.ResetTransform();
-            MyShape hcn1 = new MyRectangle(200, 200, 300, 200, 300, 300, 200, 300);
-            hcn1.Draw(g);
+           
 
         }
 

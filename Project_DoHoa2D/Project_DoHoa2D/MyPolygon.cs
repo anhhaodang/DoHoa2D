@@ -11,7 +11,12 @@ namespace Project_DoHoa2D
 {
     class MyPolygon: MyShape
     {
+        protected int fillStyle = 0;
+        private bool isFill = false;
+        private Color backgroundColor = Color.White;
         private int numPoint;
+
+
         public MyPolygon()
         {
             point = new List<Point>(4);
@@ -30,48 +35,45 @@ namespace Project_DoHoa2D
             foreach (Point pi in p)
                 point.Add(pi);
             this.numPoint = n;
+            
+        }
+
+        public Point[] ConvertPoint(List<Point> point, Point pivot)
+        {
+            Point[] myPoint = new Point[point.Count];
+            for (int i = 0; i < point.Count; i++)
+            {
+                myPoint[i].X = point[i].X - pivot.X;
+                myPoint[i].Y = point[i].Y - pivot.Y;
+            }
+            return myPoint;
         }
 
         public override void Draw(Graphics graphics)
         {
-            Pen myPen = new Pen(borderColor);
-            if (width > 1)
-                myPen.DashStyle = DashStyle.Solid;
-            else
-                myPen.DashStyle = dashStyle;
-            myPen.Width = width;
-            for (int i = 0; i < numPoint - 1; i++)
-                graphics.DrawLine(myPen, point[i], point[i+1]);
-            graphics.DrawLine(myPen, point[numPoint - 1], point[0]);
 
-        }
-
-        public override void Draw(Graphics graphics, Color borderColor)
-        {
-            Pen myPen = new Pen(borderColor);
-            this.borderColor = borderColor;
-            for (int i = 0; i < numPoint - 1; i++)
-                graphics.DrawLine(myPen, point[i], point[i + 1]);
-            graphics.DrawLine(myPen, point[numPoint - 1], point[0]);
-        }
-
-        public override void Draw(Graphics graphics, Color borderColor, DashStyle dashStyle, float width = 1)
-        {
-            Pen myPen = new Pen(borderColor);
-            this.borderColor = borderColor;
-            this.dashStyle = dashStyle;
-            this.width = width;
-            if (width > 1)
-                myPen.DashStyle = DashStyle.Solid;
-            else
+            int x = 0, y = 0;
+            for (int i = 0; i < numPoint; i++)
             {
-                myPen.DashStyle = dashStyle;
+                x += point[i].X; y += point[i].Y;
             }
-            myPen.Width = width;
-            for (int i = 0; i < numPoint - 1; i++)
-                graphics.DrawLine(myPen, point[i], point[i + 1]);
-            graphics.DrawLine(myPen, point[numPoint - 1], point[0]);
+            x /= numPoint; y /= numPoint;
 
+            Point pivot = new Point(x, y);
+            Point[] polygon = ConvertPoint(point, pivot);
+
+            graphics.TranslateTransform(x,y);
+            graphics.RotateTransform(angle);
+
+            Pen myPen = new Pen(borderColor);
+            myPen.DashStyle = dashStyle;
+            myPen.Width = width;
+
+            if (isFill)
+                graphics.FillPolygon(new SolidBrush(backgroundColor), polygon);
+
+            graphics.DrawPolygon(myPen, polygon);
+            graphics.ResetTransform();
         }
 
         public override void Set(Point point, int index)
@@ -136,128 +138,37 @@ namespace Project_DoHoa2D
             this.fillStyle = Int32.Parse(dt[numPoint * 2 + 5]);
         }
 
-        public override void Translation(Point Src, Point Des)
-        {
-            Point[] p = new Point[numPoint];
-            for (int i = 0; i < numPoint; i++)
-                p[i] = this.Get(i);
-
-            for (int i = 0; i < numPoint; i++)
-            {
-                p[i].X += Des.X - Src.X;
-                p[i].Y += Des.Y - Src.Y;
-            }
-
-            for (int i = 0; i < numPoint; i++)
-                this.Set(p[i], i);
-        }
-
-        public override void Scaling(Point pivotPoint, float Sx, float Sy)
-        {
-            Point[] p = new Point[numPoint];
-            for (int i = 0; i < numPoint; i++)
-                p[i] = this.Get(i);
-
-            int x = 0, y = 0;
-            for (int i = 0; i < numPoint; i++)
-            {
-                x += p[i].X; y += p[i].Y;
-            }
-            x /= numPoint; y /= numPoint;
-
-            Point mid = new Point(x,y);
-
-            Translation(mid, new Point(0, 0));
-            for (int i = 0; i < numPoint; i++)
-                p[i] = this.Get(i);
-
-
-            for (int i = 0; i < numPoint; i++)
-            {
-                p[i].X = (int)(Sx * p[i].X);
-                p[i].Y = (int)(Sy * p[i].Y);
-            }
-
-            for (int i = 0; i < numPoint; i++)
-                this.Set(p[i], i);
-
-            Translation(new Point(0, 0), mid);
-        }
-
-        public override void Rotation(double alpha)
-        {
-            Point[] p = new Point[numPoint];
-            for (int i = 0; i < numPoint; i++)
-                p[i] = this.Get(i);
-
-            int x = 0, y = 0;
-            for (int i = 0; i < numPoint; i++)
-            {
-                x += p[i].X; y += p[i].Y;
-            }
-            x /= numPoint; y /= numPoint;
-
-            Point mid = new Point(x, y);
-
-            Translation(mid, new Point(0, 0));
-            for (int i = 0; i < numPoint; i++)
-                p[i] = this.Get(i);
-            alpha = -alpha;
-
-
-            for (int i = 0; i < numPoint; i++)
-            {
-                x = Convert.ToInt32(Math.Cos(alpha) * p[i].X - Math.Sin(alpha) * p[i].Y);
-                y = Convert.ToInt32(Math.Sin(alpha) * p[i].X + Math.Cos(alpha) * p[i].Y);
-                p[i].X = x; p[i].Y = y;
-            }
-
-            for (int i = 0; i < numPoint; i++)
-                this.Set(p[i], i);
-
-            Translation(new Point(0, 0), mid);
-        }
-
+      
         public override void Fill(Graphics g, Color backgroundColor, int fillStyle)
         {
-            Point[] p = new Point[numPoint];
-            for (int i = 0; i < numPoint; i++)
-                p[i] = this.Get(i);
-
-
-            SolidBrush solidBrush;
-            HatchBrush myHatchBrush;
-            switch (fillStyle)
-            {
-                case 0:
-                    solidBrush = new SolidBrush(backgroundColor);
-                    g.FillPolygon(solidBrush, p); break;
-                case 1:
-                    myHatchBrush = new HatchBrush(HatchStyle.Horizontal, Color.Beige, backgroundColor);
-                    g.FillPolygon(myHatchBrush, p); break;
-                case 2:
-                    myHatchBrush = new HatchBrush(HatchStyle.BackwardDiagonal, Color.Beige, backgroundColor);
-                    g.FillPolygon(myHatchBrush, p); break;
-                case 3:
-                    myHatchBrush = new HatchBrush(HatchStyle.Cross, Color.Beige, backgroundColor);
-                    g.FillPolygon(myHatchBrush, p); break;
-                case 4:
-                    myHatchBrush = new HatchBrush(HatchStyle.DarkDownwardDiagonal, Color.Beige, backgroundColor);
-                    g.FillPolygon(myHatchBrush, p); break;
-                case 5:
-                    myHatchBrush = new HatchBrush(HatchStyle.DarkHorizontal, Color.Beige, backgroundColor);
-                    g.FillPolygon(myHatchBrush, p); break;
-                case 6:
-                    myHatchBrush = new HatchBrush(HatchStyle.DarkUpwardDiagonal, Color.Beige, backgroundColor);
-                    g.FillPolygon(myHatchBrush, p); break;
-                case 7:
-                    myHatchBrush = new HatchBrush(HatchStyle.DarkVertical, Color.Beige, backgroundColor);
-                    g.FillPolygon(myHatchBrush, p); break;
-                case 8:
-                    myHatchBrush = new HatchBrush(HatchStyle.DashedDownwardDiagonal, Color.Beige, backgroundColor);
-                    g.FillPolygon(myHatchBrush, p); break;
-            }
+           
         }
 
+        public override bool Inside(Point p)
+        {
+            bool res = false;
+
+            Point[] polygon = new Point[numPoint];
+            for (int i = 0; i < numPoint; i++)
+                polygon[i] = point[i];
+
+            GraphicsPath path = new GraphicsPath();
+            path.AddPolygon(polygon);
+
+            if (isFill)
+                res = path.IsVisible(p);
+            else
+            {
+                Pen pen = new Pen(borderColor, width + 2);
+                res = path.IsOutlineVisible(p, pen);
+            }
+            return res;
+        }
+
+        public override void Move(Point d)
+        {
+            for (int i = 0; i < numPoint; i++)
+                Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
+        }
     }
 }

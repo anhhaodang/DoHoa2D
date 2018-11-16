@@ -50,7 +50,7 @@ namespace Project_DoHoa2D
             int w = point[1].X - point[0].X; 
             int h = point[1].Y - point[0].Y;
             graphics.TranslateTransform(point[0].X + w / 2, point[0].Y + h / 2);
-            graphics.RotateTransform(angel);
+            graphics.RotateTransform(angle);
 
             Point[] points = { new Point(-w / 2, -h / 2), new Point(0, 0), new Point(w / 2, -h / 2) };
 
@@ -63,13 +63,7 @@ namespace Project_DoHoa2D
             graphics.DrawCurve(p, points);
             graphics.ResetTransform();
         }
-        public override void Draw(Graphics graphics, Color borderColor){ }
-        public override void Draw(Graphics graphics, Color borderColor, DashStyle dashStyle, float width = 1){ }
-
-        public override void Translation(Point Src, Point Des){ }
-        public override void Scaling(Point pivotPoint, float Sx, float Sy){ }
-        public override void Rotation(double alpha){ }
-
+      
         public override void Save(string filePath){ }
         public override void Open(string data){ }
 
