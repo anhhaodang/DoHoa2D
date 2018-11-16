@@ -18,6 +18,7 @@ namespace Project_DoHoa2D
         List<MyShape> shapes = new List<MyShape>();
 
         Mode mode;
+
         int currentShape;
 
         private bool isDrawing;
@@ -55,7 +56,6 @@ namespace Project_DoHoa2D
             isDrawing = false;
             mode = Mode.Select;
             currentShape = -1; //No Shape
-
             #endregion
 
 
@@ -68,23 +68,6 @@ namespace Project_DoHoa2D
             for (int i = 0; i < shapes.Count; i++)
                 shapes[i].Draw(e.Graphics);
 
-            //Graphics g = e.Graphics;
-            //MyShape hcn = new MyPolyline(new Point(20, 20), new Point(60, 20), new Point(60, 60), new Point( 50, 80) , new Point(20, 60));
-            //hcn.Draw(g);
-
-            //hcn.angle = -30;
-            //hcn.Draw(g);
-            //g.ResetTransform();
-
-            //MyShape line = new MyLine(140, 120, 200, 200);
-            //line.Draw(g);
-
-            //line.angle = -60;
-            //line.Draw(g);
-
-            //g.ResetTransform();
-            //MyShape hcn1 = new MyRectangle(200, 200, 300, 200, 300, 300, 200, 300);
-            //hcn1.Draw(g);
         }
 
         private void pnlMain_MouseDown(object sender, MouseEventArgs e)

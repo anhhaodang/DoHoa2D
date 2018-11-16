@@ -56,7 +56,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnlFill = new System.Windows.Forms.Panel();
             this.cmbFillStyle = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.pnlMain = new Project_DoHoa2D.DrawArea();
@@ -64,7 +64,7 @@
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.pnlFill.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnLine
@@ -416,16 +416,16 @@
             this.panel1.Size = new System.Drawing.Size(252, 113);
             this.panel1.TabIndex = 17;
             // 
-            // panel2
+            // pnlFill
             // 
-            this.panel2.Controls.Add(this.cmbFillStyle);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.ckbFill);
-            this.panel2.Location = new System.Drawing.Point(588, 33);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(267, 113);
-            this.panel2.TabIndex = 18;
+            this.pnlFill.Controls.Add(this.cmbFillStyle);
+            this.pnlFill.Controls.Add(this.label3);
+            this.pnlFill.Controls.Add(this.ckbFill);
+            this.pnlFill.Location = new System.Drawing.Point(588, 33);
+            this.pnlFill.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlFill.Name = "pnlFill";
+            this.pnlFill.Size = new System.Drawing.Size(267, 113);
+            this.pnlFill.TabIndex = 18;
             // 
             // cmbFillStyle
             // 
@@ -465,7 +465,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1181, 750);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.pnlFill);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -489,8 +489,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.pnlFill.ResumeLayout(false);
+            this.pnlFill.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -525,7 +525,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnlFill;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbFillStyle;
     }
