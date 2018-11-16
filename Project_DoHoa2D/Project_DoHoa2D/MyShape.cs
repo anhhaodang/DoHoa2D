@@ -10,6 +10,10 @@ namespace Project_DoHoa2D
         protected Color borderColor = Color.Black;
         protected DashStyle dashStyle = DashStyle.Solid;
         protected float width = 1;
+        protected int fillStyle = 0;
+        protected Color backgroundColor = Color.White;
+        public bool isFill = false;
+
 
         public float angle = 0;
         public bool isSelected = false;
@@ -28,9 +32,10 @@ namespace Project_DoHoa2D
 
         public abstract void Save(string filePath);
         public abstract void Open(string data);
-        public abstract void Fill(Graphics graphics, Color backgroundColor, int fillStyle);
 
-        public void Configure(Color? BorderColor = null, DashStyle? DashStyle = null, float? Width = null, float? Angel = null, bool? IsSelected = null)
+        public void Configure(Color? BorderColor = null, DashStyle? DashStyle = null, float? Width = null, 
+                        float? Angel = null, bool? IsSelected = null, Color? BackgroundColor = null, 
+                        int? FillStyle = null, bool? IsFill =null)
         {
             if (BorderColor.HasValue)
                 borderColor = BorderColor.Value;
@@ -42,6 +47,12 @@ namespace Project_DoHoa2D
                 angle = Angel.Value;
             if (IsSelected.HasValue)
                 isSelected = IsSelected.Value;
+            if (BackgroundColor.HasValue)
+                backgroundColor = BackgroundColor.Value;
+            if (FillStyle.HasValue)
+                fillStyle = FillStyle.Value;
+            if (IsFill.HasValue)
+                isFill = IsFill.Value;
         }
     }
 }

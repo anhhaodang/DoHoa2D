@@ -10,9 +10,6 @@ namespace Project_DoHoa2D
 {
     class MyParabol : MyShape
     {
-        private bool isFill;
-        private Color fillColor;
-
         MyParabol()
         {
             this.point.Add(new Point(10, 10));
@@ -55,7 +52,7 @@ namespace Project_DoHoa2D
             Point[] points = { new Point(-w / 2, -h / 2), new Point(0, 0), new Point(w / 2, -h / 2) };
 
             if (isFill)
-                graphics.FillClosedCurve(new SolidBrush(fillColor), points);
+                graphics.FillClosedCurve(new SolidBrush(backgroundColor), points);
 
             Pen p = new Pen(borderColor);
             p.DashStyle = dashStyle;
@@ -67,9 +64,5 @@ namespace Project_DoHoa2D
         public override void Save(string filePath){ }
         public override void Open(string data){ }
 
-        public override void Fill(Graphics graphics, Color backgroundColor, int fillStyle)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

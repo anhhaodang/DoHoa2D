@@ -11,9 +11,6 @@ namespace Project_DoHoa2D
 {
     class MyPolygon: MyShape
     {
-        protected int fillStyle = 0;
-        private bool isFill = false;
-        private Color backgroundColor = Color.White;
         private int numPoint;
 
 
@@ -139,10 +136,6 @@ namespace Project_DoHoa2D
         }
 
       
-        public override void Fill(Graphics g, Color backgroundColor, int fillStyle)
-        {
-           
-        }
 
         public override bool Inside(Point p)
         {

@@ -98,11 +98,6 @@ namespace Project_DoHoa2D
 
        
 
-        public override void Fill(Graphics graphics, Color backgroundColor, int fillStyle)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool Inside(Point p)
         {
             bool res = false;

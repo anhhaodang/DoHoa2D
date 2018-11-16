@@ -11,10 +11,6 @@ namespace Project_DoHoa2D
 {
     class MyParallelogram : MyShape
     {
-        protected int fillStyle = 0;
-        private bool isFill = false;
-        private Color backgroundColor = Color.White;
-
         public MyParallelogram()
         {
             point = new List<Point>(4);
@@ -127,11 +123,6 @@ namespace Project_DoHoa2D
         }
 
        
-        public override void Fill(Graphics g, Color backgroundColor, int fillStyle)
-        {
-           
-        }
-
         public override bool Inside(Point p)
         {
             bool res = false;

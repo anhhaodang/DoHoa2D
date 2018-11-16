@@ -60,6 +60,5 @@ namespace Project_DoHoa2D
         public override void Save(string filePath){ }
         public override void Open(string data){ }
 
-        public override void Fill(Graphics graphics, Color backgroundColor, int fillStyle){ }
     }
 }
