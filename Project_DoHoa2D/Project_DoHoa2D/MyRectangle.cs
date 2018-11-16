@@ -11,9 +11,6 @@ namespace Project_DoHoa2D
 {
     class MyRectangle : MyShape
     {
-        protected int fillStyle = 0;
-        private bool isFill = false;
-        private Color backgroundColor = Color.White;
 
         public MyRectangle()
         {
@@ -143,9 +140,5 @@ namespace Project_DoHoa2D
                 Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
         }
 
-        public override void Fill(Graphics graphics, Color backgroundColor, int fillStyle)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

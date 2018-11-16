@@ -175,5 +175,38 @@ namespace Project_DoHoa2D
             mode = Mode.Select;
             
         }
+
+        private void btnBorderColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                btnBorderColor.BackColor = colorDialog.Color;
+            }
+
+            for (int i=0; i<shapes.Count; i++)
+            {
+                if (shapes[i].isSelected)
+                    shapes[i].Configure(BorderColor: btnBorderColor.BackColor);
+            }
+            pnlMain.Invalidate();
+
+        }
+
+        private void btnBackColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                btnBackColor.BackColor = colorDialog.Color;
+            }
+
+            for (int i = 0; i < shapes.Count; i++)
+            {
+                if (shapes[i].isSelected && shapes[i].isFill)
+                    shapes[i].Configure(BackgroundColor: btnBackColor.BackColor);
+            }
+            pnlMain.Invalidate();
+        }
     }
 }

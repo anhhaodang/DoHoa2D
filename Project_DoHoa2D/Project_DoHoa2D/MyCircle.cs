@@ -8,9 +8,6 @@ namespace Project_DoHoa2D
 {
     class MyCircle : MyShape
     {
-        protected int fillStyle = 0;
-        private bool isFill;
-        private Color backgroundColor;
 
         public MyCircle()
         {
@@ -106,6 +103,5 @@ namespace Project_DoHoa2D
                 Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
         }
 
-        public override void Fill(Graphics graphics, Color backgroundColor, int fillStyle) { }
     }
 }
