@@ -12,56 +12,83 @@ using System.Windows.Forms;
 
 namespace Project_DoHoa2D
 {
-    public partial class Save : Form
+    public partial class Form1 : Form
     {
-        List<Button> shapes = new List<Button>();
-        List<Button> tools = new List<Button>();
-        List<Button> colors = new List<Button>();
+        List<Button> shapeButtons;
+        List<Button> toolButtons;
+        List<Button> colorButtons;
+        List<MyShape> shapes;
         String[] colorList = { "Black", "Silver","Gray", "White", "Maroon","Red","Purple","Fuchsia",
             "Green","Lime","Olive","Yellow","Navy","Blue","Teal","Aqua"};
-        int currentShape, currentTool, currentColor;
-        public Save()
+
+        int currentTool, currentColor;
+        int currentShape;
+
+        private bool isMouseDown;
+        private bool isDrawingCurve;
+        private bool isDrawingPolygon;
+        private bool isDrawingBezier;
+        private bool isMovingShape;
+
+        public Form1()
         {
             InitializeComponent();
-     
+
             #region Add Shape Buttons
-            shapes.Add(btnLine);
-            shapes.Add(btnRectangle);
-            shapes.Add(btnCircle);
-            shapes.Add(btnEllipse);
-            shapes.Add(btnPolygon);
-            shapes.Add(btnParabol);
-            shapes.Add(btnZigzag);
-            shapes.Add(btnArc);
+            shapeButtons = new List<Button> {btnSelect, btnLine, btnRectangle, btnCircle, btnEllipse, btnPolygon, btnParabol, btnZigzag, btnArc };
             #endregion
-                 
+
             #region Add Tool Buttons
-            tools.Add(btnFill);
-            tools.Add(btnMove);
-            tools.Add(btnRotate);
-            tools.Add(btnScale);
+            toolButtons = new List<Button> { btnFill, btnMove, btnRotate, btnScale };
             #endregion
 
             #region Add Color Buttons
+            colorButtons = new List<Button>();
             for (int i = 0; i < colorList.Length; i++)
-                colors.Add(
+                colorButtons.Add(
                     (Button)this.Controls.Find("btnColor" + colorList[i], true)[0]
                     );
             #endregion
-
+      
             #region Set Default Value
             cboDashstyle.SelectedIndex = 0;
-            nudWitdh.Value = 1;
-            currentShape = 0; //Line
-            shapes[currentShape].BackColor = CONST.COLOR_CURRENT_SHAPE;
+            trackBar1.Value = 1;
+            currentShape = (int)CurrentShape.Line; //Line
+            shapeButtons[0].BackColor = CONST.COLOR_CURRENT_SHAPE;
             currentTool = -1; //Nothing
             currentColor = 0;
-            btnCurrentColor.BackColor = Color.FromName(colorList[currentColor]);
-            #endregion
+            btnBorderColor.BackColor = Color.FromName(colorList[currentColor]);
+           
 
             pnlRotateAngel.Visible = false;
             pnlAdjustScale.Visible = false;
+            #endregion
         }
+
+        #region Paint's Action
+        private void pnlMain_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            
+        }
+
+        private void pnlMain_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void pnlMain_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void pnlMain_MouseUp(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        #endregion
 
         private void updatePanelToolChildren(int currentTool)
         {
@@ -72,19 +99,19 @@ namespace Project_DoHoa2D
         {
             if (currentTool != -1)
             {
-                tools[currentTool].BackColor = Color.White;
+                toolButtons[currentTool].BackColor = Color.White;
                 currentTool = -1;
                 pnlAdjustScale.Visible = false;
                 pnlRotateAngel.Visible = false;
             }
            
             Button clikedShapeButton = sender as Button;
-            shapes[currentShape].BackColor = Color.Transparent;
-            for (int i = 0; i < shapes.Count; i++)
-            if (clikedShapeButton == shapes[i])
+            shapeButtons[currentShape].BackColor = Color.Transparent;
+            for (int i = 0; i < shapeButtons.Count; i++)
+            if (clikedShapeButton == shapeButtons[i])
             {
                 currentShape = i;
-                shapes[currentShape].BackColor = CONST.COLOR_CURRENT_SHAPE;
+                shapeButtons[currentShape].BackColor = CONST.COLOR_CURRENT_SHAPE;
                 break;
             }
         }
@@ -93,12 +120,12 @@ namespace Project_DoHoa2D
         {
             Button clikedButton = sender as Button;
             if (currentTool != -1)
-                tools[currentTool].BackColor = Color.White;
-            for(int i = 0; i < tools.Count; i++)
-                if(clikedButton == tools[i])
+                toolButtons[currentTool].BackColor = Color.White;
+            for(int i = 0; i < toolButtons.Count; i++)
+                if(clikedButton == toolButtons[i])
                 {
                     currentTool = i;
-                    tools[currentTool].BackColor = CONST.COLOR_CURRENT_TOOL;
+                    toolButtons[currentTool].BackColor = CONST.COLOR_CURRENT_TOOL;
                     break;
                 }
 
@@ -106,14 +133,30 @@ namespace Project_DoHoa2D
             pnlAdjustScale.Visible = (clikedButton == btnScale);
         }
 
+      
+
         private void button_Color_Click(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
-            for (int i = 0; i < colors.Count; i++)
-                if (clickedButton == colors[i])
+            for (int i = 0; i < colorButtons.Count; i++)
+                if (clickedButton == colorButtons[i])
+                {
+                    currentColor = i;             
+                    btnBorderColor.BackColor = Color.FromName(colorList[i]);
+                    break;
+                }
+        }
+
+        private void btnColor_MouseDown(object sender, MouseEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            for (int i = 0; i < colorButtons.Count; i++)
+                if (clickedButton == colorButtons[i])
                 {
                     currentColor = i;
-                    btnCurrentColor.BackColor = Color.FromName(colorList[i]);
+                    if (e.Button == MouseButtons.Left)
+                        btnBorderColor.BackColor = Color.FromName(colorList[i]);
+                    else btnBackColor.BackColor = Color.FromName(colorList[i]);
                     break;
                 }
         }
@@ -142,8 +185,9 @@ namespace Project_DoHoa2D
             g.ScaleTransform(0.5f, 0.5f);
             hcn.Draw(g, Color.Blue);
 
-            
-            
+            g.RotateTransform(30);
+            hcn.Draw(g, Color.Green);
+
             g.ResetTransform();
             MyShape hcn1 = new MyRectangle(200, 200, 300, 200, 300, 300, 200, 300);
             hcn1.Draw(g);

@@ -16,7 +16,7 @@ namespace Project_DoHoa2D
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Save());
+            Application.Run(new Form1());
         }
     }
 }

@@ -48,31 +48,31 @@ namespace Project_DoHoa2D
                 graphics.DrawLine(myPen, point[0], point[1]);
         }
 
-        public override void Draw(Graphics graphics, Color borderColor)
-        {
-            Pen myPen = new Pen(borderColor);
-            this.borderColor = borderColor;
-            graphics.DrawLine(myPen, point[0], point[1]);
-        }
+        //public override void Draw(Graphics graphics, Color borderColor)
+        //{
+        //    Pen myPen = new Pen(borderColor);
+        //    this.borderColor = borderColor;
+        //    graphics.DrawLine(myPen, point[0], point[1]);
+        //}
 
-        public override void Draw(Graphics graphics, Color borderColor, DashStyle dashStyle, float width = 1)
-        {
+        //public override void Draw(Graphics graphics, Color borderColor, DashStyle dashStyle, float width = 1)
+        //{
 
-            Pen myPen = new Pen(borderColor);
-            this.borderColor = borderColor;
-            this.dashStyle = dashStyle;
-            this.width = width;
-            if (width > 1)
-                myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            else
-            {
-                myPen.DashStyle = dashStyle;
-            }
-            myPen.Width = width;
-            // if (penStyle >= 0 && penStyle <= 5)
-            graphics.DrawLine(myPen, point[0], point[1]);
+        //    Pen myPen = new Pen(borderColor);
+        //    this.borderColor = borderColor;
+        //    this.dashStyle = dashStyle;
+        //    this.width = width;
+        //    if (width > 1)
+        //        myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+        //    else
+        //    {
+        //        myPen.DashStyle = dashStyle;
+        //    }
+        //    myPen.Width = width;
+        //    // if (penStyle >= 0 && penStyle <= 5)
+        //    graphics.DrawLine(myPen, point[0], point[1]);
 
-        }
+        //}
 
 
         public override void Set(Point point, int index)

@@ -47,6 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CONST.cs" />
+    <Compile Include="Curve.cs" />
+    <Compile Include="DrawArea.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +59,7 @@
     </Compile>
     <Compile Include="MyCircle.cs" />
     <Compile Include="MyLine.cs" />
+    <Compile Include="MyParabol.cs" />
     <Compile Include="MyParallelogram.cs" />
     <Compile Include="MyPolygon.cs" />
     <Compile Include="MyPolyline.cs" />

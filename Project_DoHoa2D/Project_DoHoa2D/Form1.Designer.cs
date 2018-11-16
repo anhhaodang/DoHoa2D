@@ -1,6 +1,6 @@
 ﻿namespace Project_DoHoa2D
 {
-    partial class Save
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Save));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnLine = new System.Windows.Forms.Button();
             this.btnRectangle = new System.Windows.Forms.Button();
             this.btnCircle = new System.Windows.Forms.Button();
@@ -41,7 +41,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cboDashstyle = new System.Windows.Forms.ComboBox();
-            this.nudWitdh = new System.Windows.Forms.NumericUpDown();
             this.pnlColors = new System.Windows.Forms.Panel();
             this.btnColorAqua = new System.Windows.Forms.Button();
             this.btnColorFuchsia = new System.Windows.Forms.Button();
@@ -76,12 +75,15 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnCurrentColor = new System.Windows.Forms.Button();
+            this.btnBorderColor = new System.Windows.Forms.Button();
             this.pnlAdjustScale = new System.Windows.Forms.Panel();
             this.pnlRotateAngel = new System.Windows.Forms.Panel();
             this.nudRotateAngel = new System.Windows.Forms.NumericUpDown();
+            this.btnSelect = new System.Windows.Forms.Button();
+            this.pnlMain = new Project_DoHoa2D.DrawArea();
+            this.btnBackColor = new System.Windows.Forms.Button();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.pnlShape.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudWitdh)).BeginInit();
             this.pnlColors.SuspendLayout();
             this.pnlTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudRateScaleY)).BeginInit();
@@ -90,6 +92,7 @@
             this.pnlAdjustScale.SuspendLayout();
             this.pnlRotateAngel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudRotateAngel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLine
@@ -213,7 +216,7 @@
             this.pnlShape.Controls.Add(this.btnLine);
             this.pnlShape.Controls.Add(this.btnCircle);
             this.pnlShape.Controls.Add(this.btnRectangle);
-            this.pnlShape.Location = new System.Drawing.Point(27, 39);
+            this.pnlShape.Location = new System.Drawing.Point(79, 42);
             this.pnlShape.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlShape.Name = "pnlShape";
             this.pnlShape.Size = new System.Drawing.Size(198, 80);
@@ -260,7 +263,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(259, 39);
+            this.label1.Location = new System.Drawing.Point(311, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 17);
             this.label1.TabIndex = 3;
@@ -269,7 +272,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(259, 81);
+            this.label2.Location = new System.Drawing.Point(311, 84);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 17);
             this.label2.TabIndex = 3;
@@ -284,19 +287,11 @@
             "Dash",
             "DashDot",
             "DashDotDot"});
-            this.cboDashstyle.Location = new System.Drawing.Point(339, 39);
+            this.cboDashstyle.Location = new System.Drawing.Point(391, 42);
             this.cboDashstyle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboDashstyle.Name = "cboDashstyle";
             this.cboDashstyle.Size = new System.Drawing.Size(121, 24);
             this.cboDashstyle.TabIndex = 4;
-            // 
-            // nudWitdh
-            // 
-            this.nudWitdh.Location = new System.Drawing.Point(339, 81);
-            this.nudWitdh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.nudWitdh.Name = "nudWitdh";
-            this.nudWitdh.Size = new System.Drawing.Size(47, 22);
-            this.nudWitdh.TabIndex = 5;
             // 
             // pnlColors
             // 
@@ -336,6 +331,7 @@
             this.btnColorAqua.TabIndex = 0;
             this.btnColorAqua.UseVisualStyleBackColor = false;
             this.btnColorAqua.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorAqua.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorFuchsia
             // 
@@ -349,6 +345,7 @@
             this.btnColorFuchsia.TabIndex = 0;
             this.btnColorFuchsia.UseVisualStyleBackColor = false;
             this.btnColorFuchsia.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorFuchsia.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorTeal
             // 
@@ -362,6 +359,7 @@
             this.btnColorTeal.TabIndex = 0;
             this.btnColorTeal.UseVisualStyleBackColor = false;
             this.btnColorTeal.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorTeal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorPurple
             // 
@@ -375,6 +373,7 @@
             this.btnColorPurple.TabIndex = 0;
             this.btnColorPurple.UseVisualStyleBackColor = false;
             this.btnColorPurple.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorPurple.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorBlue
             // 
@@ -388,6 +387,7 @@
             this.btnColorBlue.TabIndex = 0;
             this.btnColorBlue.UseVisualStyleBackColor = false;
             this.btnColorBlue.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorBlue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorRed
             // 
@@ -401,6 +401,7 @@
             this.btnColorRed.TabIndex = 0;
             this.btnColorRed.UseVisualStyleBackColor = false;
             this.btnColorRed.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorRed.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorNavy
             // 
@@ -414,6 +415,7 @@
             this.btnColorNavy.TabIndex = 0;
             this.btnColorNavy.UseVisualStyleBackColor = false;
             this.btnColorNavy.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorNavy.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorMaroon
             // 
@@ -427,6 +429,7 @@
             this.btnColorMaroon.TabIndex = 0;
             this.btnColorMaroon.UseVisualStyleBackColor = false;
             this.btnColorMaroon.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorMaroon.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorYellow
             // 
@@ -441,6 +444,7 @@
             this.btnColorYellow.TabIndex = 0;
             this.btnColorYellow.UseVisualStyleBackColor = false;
             this.btnColorYellow.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorYellow.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorWhite
             // 
@@ -454,6 +458,7 @@
             this.btnColorWhite.TabIndex = 0;
             this.btnColorWhite.UseVisualStyleBackColor = false;
             this.btnColorWhite.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorWhite.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorOlive
             // 
@@ -467,6 +472,7 @@
             this.btnColorOlive.TabIndex = 0;
             this.btnColorOlive.UseVisualStyleBackColor = false;
             this.btnColorOlive.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorOlive.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorGray
             // 
@@ -480,6 +486,7 @@
             this.btnColorGray.TabIndex = 0;
             this.btnColorGray.UseVisualStyleBackColor = false;
             this.btnColorGray.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorGray.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorLime
             // 
@@ -493,6 +500,7 @@
             this.btnColorLime.TabIndex = 0;
             this.btnColorLime.UseVisualStyleBackColor = false;
             this.btnColorLime.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorLime.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorGreen
             // 
@@ -506,6 +514,7 @@
             this.btnColorGreen.TabIndex = 0;
             this.btnColorGreen.UseVisualStyleBackColor = false;
             this.btnColorGreen.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorGreen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorSilver
             // 
@@ -519,6 +528,7 @@
             this.btnColorSilver.TabIndex = 0;
             this.btnColorSilver.UseVisualStyleBackColor = false;
             this.btnColorSilver.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorSilver.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // btnColorBlack
             // 
@@ -532,6 +542,7 @@
             this.btnColorBlack.TabIndex = 0;
             this.btnColorBlack.UseVisualStyleBackColor = false;
             this.btnColorBlack.Click += new System.EventHandler(this.button_Color_Click);
+            this.btnColorBlack.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnColor_MouseDown);
             // 
             // pnlTools
             // 
@@ -539,7 +550,7 @@
             this.pnlTools.Controls.Add(this.btnRotate);
             this.pnlTools.Controls.Add(this.btnMove);
             this.pnlTools.Controls.Add(this.btnFill);
-            this.pnlTools.Location = new System.Drawing.Point(485, 39);
+            this.pnlTools.Location = new System.Drawing.Point(537, 42);
             this.pnlTools.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlTools.Name = "pnlTools";
             this.pnlTools.Size = new System.Drawing.Size(167, 40);
@@ -673,25 +684,25 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(126, 26);
             this.newToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(126, 26);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
-            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(126, 26);
+            this.saveToolStripMenuItem.Text = "Form1";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(126, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // aboutToolStripMenuItem
@@ -700,18 +711,18 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // btnCurrentColor
+            // btnBorderColor
             // 
-            this.btnCurrentColor.BackColor = System.Drawing.Color.Black;
-            this.btnCurrentColor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnCurrentColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCurrentColor.ForeColor = System.Drawing.Color.White;
-            this.btnCurrentColor.Location = new System.Drawing.Point(824, 54);
-            this.btnCurrentColor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnCurrentColor.Name = "btnCurrentColor";
-            this.btnCurrentColor.Size = new System.Drawing.Size(35, 34);
-            this.btnCurrentColor.TabIndex = 0;
-            this.btnCurrentColor.UseVisualStyleBackColor = false;
+            this.btnBorderColor.BackColor = System.Drawing.Color.Black;
+            this.btnBorderColor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnBorderColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBorderColor.ForeColor = System.Drawing.Color.White;
+            this.btnBorderColor.Location = new System.Drawing.Point(821, 52);
+            this.btnBorderColor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnBorderColor.Name = "btnBorderColor";
+            this.btnBorderColor.Size = new System.Drawing.Size(40, 39);
+            this.btnBorderColor.TabIndex = 0;
+            this.btnBorderColor.UseVisualStyleBackColor = false;
             // 
             // pnlAdjustScale
             // 
@@ -720,7 +731,7 @@
             this.pnlAdjustScale.Controls.Add(this.nudRateScaleX);
             this.pnlAdjustScale.Controls.Add(this.label3);
             this.pnlAdjustScale.Controls.Add(this.label4);
-            this.pnlAdjustScale.Location = new System.Drawing.Point(579, 84);
+            this.pnlAdjustScale.Location = new System.Drawing.Point(631, 87);
             this.pnlAdjustScale.Name = "pnlAdjustScale";
             this.pnlAdjustScale.Size = new System.Drawing.Size(174, 60);
             this.pnlAdjustScale.TabIndex = 10;
@@ -728,7 +739,7 @@
             // pnlRotateAngel
             // 
             this.pnlRotateAngel.Controls.Add(this.nudRotateAngel);
-            this.pnlRotateAngel.Location = new System.Drawing.Point(485, 84);
+            this.pnlRotateAngel.Location = new System.Drawing.Point(537, 87);
             this.pnlRotateAngel.Name = "pnlRotateAngel";
             this.pnlRotateAngel.Size = new System.Drawing.Size(88, 30);
             this.pnlRotateAngel.TabIndex = 11;
@@ -740,32 +751,82 @@
             this.nudRotateAngel.Size = new System.Drawing.Size(62, 22);
             this.nudRotateAngel.TabIndex = 0;
             // 
-            // Save
+            // btnSelect
+            // 
+            this.btnSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnSelect.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSelect.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnSelect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelect.Image = ((System.Drawing.Image)(resources.GetObject("btnSelect.Image")));
+            this.btnSelect.Location = new System.Drawing.Point(28, 61);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(32, 32);
+            this.btnSelect.TabIndex = 0;
+            this.btnSelect.UseVisualStyleBackColor = false;
+            this.btnSelect.Click += new System.EventHandler(this.button_Shape_Click);
+            // 
+            // pnlMain
+            // 
+            this.pnlMain.BackColor = System.Drawing.Color.White;
+            this.pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlMain.Location = new System.Drawing.Point(0, 153);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(1181, 606);
+            this.pnlMain.TabIndex = 12;
+            this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
+            this.pnlMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseDown);
+            // 
+            // btnBackColor
+            // 
+            this.btnBackColor.BackColor = System.Drawing.Color.Red;
+            this.btnBackColor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnBackColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBackColor.ForeColor = System.Drawing.Color.White;
+            this.btnBackColor.Location = new System.Drawing.Point(828, 58);
+            this.btnBackColor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnBackColor.Name = "btnBackColor";
+            this.btnBackColor.Size = new System.Drawing.Size(26, 26);
+            this.btnBackColor.TabIndex = 13;
+            this.btnBackColor.UseVisualStyleBackColor = false;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(377, 85);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(144, 56);
+            this.trackBar1.TabIndex = 14;
+            // 
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1181, 750);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.btnBackColor);
+            this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlRotateAngel);
             this.Controls.Add(this.pnlAdjustScale);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnlTools);
+            this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.pnlColors);
-            this.Controls.Add(this.nudWitdh);
             this.Controls.Add(this.cboDashstyle);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pnlShape);
-            this.Controls.Add(this.btnCurrentColor);
+            this.Controls.Add(this.btnBorderColor);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Save";
+            this.Name = "Form1";
             this.Text = "MyPaint";
             this.Click += new System.EventHandler(this.button_Color_Click);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.pnlShape.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nudWitdh)).EndInit();
             this.pnlColors.ResumeLayout(false);
             this.pnlTools.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudRateScaleY)).EndInit();
@@ -776,6 +837,7 @@
             this.pnlAdjustScale.PerformLayout();
             this.pnlRotateAngel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudRotateAngel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -792,7 +854,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cboDashstyle;
-        private System.Windows.Forms.NumericUpDown nudWitdh;
         private System.Windows.Forms.Panel pnlColors;
         private System.Windows.Forms.Button btnColorAqua;
         private System.Windows.Forms.Button btnColorFuchsia;
@@ -827,12 +888,16 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.Button btnCurrentColor;
+        private System.Windows.Forms.Button btnBorderColor;
         private System.Windows.Forms.Panel pnlAdjustScale;
         private System.Windows.Forms.Panel pnlRotateAngel;
         private System.Windows.Forms.NumericUpDown nudRotateAngel;
         private System.Windows.Forms.Button btnArc;
         private System.Windows.Forms.Button btnZigzag;
+        private DrawArea pnlMain;
+        private System.Windows.Forms.Button btnSelect;
+        private System.Windows.Forms.Button btnBackColor;
+        private System.Windows.Forms.TrackBar trackBar1;
     }
 }
 
