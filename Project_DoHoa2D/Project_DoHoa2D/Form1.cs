@@ -97,13 +97,13 @@ namespace Project_DoHoa2D
 
         private void button_Shape_Click(object sender, EventArgs e)
         {
-            if (currentTool != -1)
-            {
-                toolButtons[currentTool].BackColor = Color.White;
-                currentTool = -1;
-                pnlAdjustScale.Visible = false;
-                pnlRotateAngel.Visible = false;
-            }
+            //if (currentTool != -1)
+            //{
+            //    toolButtons[currentTool].BackColor = Color.White;
+            //    currentTool = -1;
+            //    pnlAdjustScale.Visible = false;
+            //    pnlRotateAngel.Visible = false;
+            //}
            
             Button clikedShapeButton = sender as Button;
             shapeButtons[currentShape].BackColor = Color.Transparent;
