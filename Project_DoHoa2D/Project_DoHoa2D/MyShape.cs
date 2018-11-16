@@ -11,7 +11,7 @@ namespace Project_DoHoa2D
         protected DashStyle dashStyle = DashStyle.Solid;
         protected float width = 1;
 
-        public float angel = 0;
+        public float angle = 0;
         public bool isSelected = false;
 
         public abstract bool Inside(Point p);
@@ -40,7 +40,7 @@ namespace Project_DoHoa2D
             if (Width.HasValue)
                 width = Width.Value;
             if (Angel.HasValue)
-                angel = Angel.Value;
+                angle = Angel.Value;
             if (IsSelected.HasValue)
                 isSelected = IsSelected.Value;
         }

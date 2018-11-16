@@ -31,7 +31,7 @@ namespace Project_DoHoa2D
 
             int d = point[1].X - point[0].X; //Đường kính đường tròn
             graphics.TranslateTransform(point[0].X + d / 2, point[0].Y + d / 2);
-            graphics.RotateTransform(angel);
+            graphics.RotateTransform(angle);
 
             Rectangle r = new Rectangle(-d / 2, -d / 2, d, d);
 
