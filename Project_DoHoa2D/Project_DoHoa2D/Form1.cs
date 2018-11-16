@@ -190,6 +190,9 @@ namespace Project_DoHoa2D
             btnSelect.BackColor = CONST.COLOR_ACTIVE_SELECT_BUTTON;
             isDrawing = false;
             mode = Mode.Select;
+
+            panel1.Enabled = false;
+            panel2.Enabled = false;
             
         }
 
