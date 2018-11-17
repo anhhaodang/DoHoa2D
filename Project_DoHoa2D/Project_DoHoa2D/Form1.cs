@@ -56,7 +56,7 @@ namespace Project_DoHoa2D
             #region Set Default Value
             btnSelect.BackColor = Color.SkyBlue;
             cmbDashstyle.SelectedIndex = 0;
-            trackBar1.Value = 1;
+            trkWidth.Value = 1;
             isDrawing = false;
             mode = Mode.Select;
             ckbFill.Checked = false;
@@ -130,7 +130,7 @@ namespace Project_DoHoa2D
                 if (btnLine.BackColor != Color.Transparent)
                 {
                     MyLine line = new MyLine(e.Location, e.Location);
-                    line.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor);
+                    line.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
                     shapes.Add(line);
                 }
                 else if (btnRectangle.BackColor != Color.Transparent)
@@ -146,11 +146,11 @@ namespace Project_DoHoa2D
                         else if (cmbFillStyle.SelectedIndex > 0)
                         {
                             rectangle.fillStyle = 1;
-                            rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
+                            rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
                         }
                     }
 
-                    rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor);
+                    rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
 
                     shapes.Add(rectangle);
                 }
@@ -182,7 +182,7 @@ namespace Project_DoHoa2D
                     MyCircle circle = new MyCircle(e.Location, e.Location);
                     if (ckbFill.Checked)
                         circle.isFill = true;
-                    circle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor);
+                    circle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
                     shapes.Add(circle);
                 }
                 mode = Mode.Drawing;
@@ -270,7 +270,7 @@ namespace Project_DoHoa2D
             else if (mode == Mode.Moving)
             {
                 pnlMain.Cursor = Cursors.SizeAll;
-                Point distance = new Point(e.Location.X - prevPosition.X, e.Location.Y - prevPosition.Y);
+                Point distance = Point.Subtract(e.Location, new Size(prevPosition));
                 selectedShape.Move(distance);
                 prevPosition = e.Location;
                 pnlMain.Invalidate();
@@ -530,6 +530,16 @@ namespace Project_DoHoa2D
         {
 
         }
+
+        private void trkWidth_Scroll(object sender, EventArgs e)
+        {
+            if (selectedShape != null)
+            {
+                selectedShape.Configure(Width: trkWidth.Value + 1);
+                pnlMain.Invalidate();
+                    }
+
+        }
     }
 }
 
@@ -541,10 +551,11 @@ namespace Project_DoHoa2D
  * Fix bug đang có:
  * (fixed) - Không chọn được hình chữ nhật vẽ ngược
  * (fixed) - Khong chon được hình sau khi scale hoặc xoay
- * - Di chuyển hình tròn
- * - Scale hình chữ nhật, bị ngược điểm
- * - Không vẽ được hình tròn theo hướng 2 giờ
- * - Lỗi khi scale hình tròn
+ * (fixed) - Scale hình chữ nhật, bị ngược điểm
+ * (fixed) Di chuyển hình tròn
+ * (fixed) Lỗi Scale hcn khi có góc
+ * (fixed) Không vẽ được hình tròn theo hướng 2 giờ
+ * (fixed) Lỗi khi scale hình tròn
  * - Lỗi khi shape được chọn nằm chồng lên shape khác thì không scale được
  * - Chỉnh sửa hàm Draw  (thêm thuộc tính fill Style)
  * 

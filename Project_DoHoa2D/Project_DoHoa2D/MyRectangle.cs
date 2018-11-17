@@ -78,9 +78,9 @@ namespace Project_DoHoa2D
                 return this.point[index];
         }
 
-        public override void Set(Point point, int index)
+        public override void Set(Point p, int index)
         {
-                this.point[index] = point;
+                this.point[index] = base.Rotate(base.Center(), p, -angle);
         }
 
         public void Configure(Color? BorderColor = null, DashStyle? DashStyle = null, 
@@ -139,10 +139,7 @@ namespace Project_DoHoa2D
 
         public override bool Inside(Point p)
         {
-            if (angle != 0)
-            {
-                p = base.Rotate(base.Center(), p, -angle);
-            }
+            p = base.Rotate(base.Center(), p, -angle);
 
             bool res = false;
             GraphicsPath path = new GraphicsPath();
@@ -161,17 +158,16 @@ namespace Project_DoHoa2D
 
         public override void Move(Point d)
         {
-            for (int i = 0; i < point.Count; i++)
-                Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
+            for (int i = 0; i < 2; i++)
+            {
+                Point p = new Point(point[i].X + d.X, point[i].Y + d.Y);
+                point[i] = p;
+            }
         }
 
         public override bool AtScalePosition(Point p)
         {
-            if (angle != 0)
-            {
-                p = base.Rotate(base.Center(), p, -angle);
-            }
-
+            p = base.Rotate(base.Center(), p, -angle);
             if (Math.Abs(p.X - point[0].X) < 5 && Math.Abs(p.Y - point[0].Y) < 5)
                     return true;
             return false;
@@ -179,11 +175,7 @@ namespace Project_DoHoa2D
 
         public override bool AtRotatePosition(Point p)
         {
-            if (angle != 0)
-            {
-                p = base.Rotate(base.Center(), p, -angle);
-            }
-
+            p = base.Rotate(base.Center(), p, -angle);
             return (point[0].X - p.X > 5 && point[0].X - p.X < 15 
                 && point[0].Y - p.Y > 5 && point[0].Y - p.Y < 15);
         }
