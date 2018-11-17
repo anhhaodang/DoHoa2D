@@ -36,6 +36,10 @@ namespace Project_DoHoa2D
 
         public override void Draw(Graphics graphics)
         {
+            Pen p = new Pen(Color.Blue);
+            p.DashStyle = DashStyle.Dash;
+            graphics.DrawRectangle(p, new Rectangle(point[0], new Size(point[1].X - point[0].X, point[1].Y - point[0].Y)));
+
             Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
             Point p1 = new Point(Math.Max(point[0].X, point[1].X), Math.Max(point[0].Y, point[1].Y));
 
@@ -64,7 +68,6 @@ namespace Project_DoHoa2D
             {
                 int size = 3;
                 graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(pTopLeft.X - size, pTopLeft.Y - size, size * 2, size * 2));
-
             }
             graphics.ResetTransform();
         }
@@ -166,7 +169,7 @@ namespace Project_DoHoa2D
         {
             if (angle != 0)
             {
-                p = base.Rotate(base.Center(), p, angle);
+                p = base.Rotate(base.Center(), p, -angle);
             }
 
             if (Math.Abs(p.X - point[0].X) < 5 && Math.Abs(p.Y - point[0].Y) < 5)
@@ -178,7 +181,7 @@ namespace Project_DoHoa2D
         {
             if (angle != 0)
             {
-                p = base.Rotate(base.Center(), p, angle);
+                p = base.Rotate(base.Center(), p, -angle);
             }
 
             return (point[0].X - p.X > 5 && point[0].X - p.X < 15 

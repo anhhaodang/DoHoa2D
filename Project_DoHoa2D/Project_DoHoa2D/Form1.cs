@@ -32,14 +32,13 @@ namespace Project_DoHoa2D
         private bool isDrawingPolygon;
         private bool isDrawingBezier;
         private bool isMovingShape;
-        private bool isCheck;
 
         public Form1()
         {
             InitializeComponent();
 
             #region Add Shape Buttons
-            shapeButtons = new List<Button> {btnSelect, btnLine, btnRectangle, btnParallelogram, btnCircle, btnEllipse, btnPolygon, btnParabol, btnZigzag, btnArc };
+            shapeButtons = new List<Button> { btnSelect, btnLine, btnRectangle, btnParallelogram, btnCircle, btnEllipse, btnPolygon, btnParabol, btnZigzag, btnArc };
             #endregion
 
             #region Add Tool Buttons
@@ -61,7 +60,6 @@ namespace Project_DoHoa2D
             isDrawing = false;
             mode = Mode.Select;
             ckbFill.Checked = false;
-            isCheck = false;
             cmbFillStyle.Enabled = false;
             currentShape = -1; //No Shape
 
@@ -76,7 +74,6 @@ namespace Project_DoHoa2D
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             for (int i = 0; i < shapes.Count; i++)
                 shapes[i].Draw(e.Graphics);
-
         }
 
         private void pnlMain_MouseDown(object sender, MouseEventArgs e)
@@ -98,6 +95,14 @@ namespace Project_DoHoa2D
                         selectedShape = shapes[i];
                         mode = Mode.Scaling;
                     }
+                    else if (shapes[i].AtRotatePosition(e.Location))
+                    {
+                        shapes[i].isSelected = true;
+                        prevPosition = e.Location;
+                        selectedShape = shapes[i];
+                        mode = Mode.Rotating;
+                    }
+
                     else
 
                    //Nghiên cứu gộp 3 hàm Inside, AtPositionRotate và AtScale thành
@@ -113,11 +118,6 @@ namespace Project_DoHoa2D
                         break;
                     }
                 }
-                //else if (shapes[i].AtPositionRotate(e.Location))
-                //{
-                //mode = Mode.Rotating;
-
-                //}
 
                 pnlMain.Invalidate();
 
@@ -146,8 +146,7 @@ namespace Project_DoHoa2D
                         else if (cmbFillStyle.SelectedIndex > 0)
                         {
                             rectangle.fillStyle = 1;
-                            rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor, 
-                                            HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
+                            rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
                         }
                     }
 
@@ -174,7 +173,7 @@ namespace Project_DoHoa2D
                 //Nếu đang vẽ Polygon, PolyLines, Bezier thì set e.location vào điểm cuối,
                 //vẫn giữ Mode.Drawing
                 shapes[shapes.Count - 1].Set(e.Location, 1);
-              //  mode = Mode.WaitingDraw;
+                //  mode = Mode.WaitingDraw;
                 pnlMain.Invalidate();
                 mode = Mode.WaitingDraw; //Vẽ xong đối tượng
             }
@@ -207,10 +206,18 @@ namespace Project_DoHoa2D
                 pnlMain.Cursor = Cursors.Default;
                 for (int i = 0; i < shapes.Count; i++)
                 {
-                    if (shapes[i].isSelected && shapes[i].AtScalePosition(e.Location))
+                    if (shapes[i].isSelected)
                     {
-                        pnlMain.Cursor = Cursors.SizeNESW;
-                        break;
+                        if (shapes[i].AtRotatePosition(e.Location))
+                        {
+                            pnlMain.Cursor = Cursors.PanEast;
+                            break;
+                        }
+                        if (shapes[i].AtScalePosition(e.Location))
+                        {
+                            pnlMain.Cursor = Cursors.SizeNESW;
+                            break;
+                        }
                     }
                     else if (shapes[i].Inside(e.Location))
                     {
@@ -220,7 +227,7 @@ namespace Project_DoHoa2D
                 }
             }
 
-            else if(mode == Mode.Moving)
+            else if (mode == Mode.Moving)
             {
                 pnlMain.Cursor = Cursors.SizeAll;
                 Point distance = new Point(e.Location.X - prevPosition.X, e.Location.Y - prevPosition.Y);
@@ -231,8 +238,10 @@ namespace Project_DoHoa2D
 
             else if (mode == Mode.Rotating)
             {
-                //Rotate thôi
-                //Chỉnh chuột lại
+                float alpha = (float)selectedShape.CalculateAngel(selectedShape.Center(), prevPosition, e.Location);
+                prevPosition = e.Location;
+                selectedShape.Configure(Angel: alpha);
+                pnlMain.Invalidate();
             }
             else if (mode == Mode.Scaling)
             {
@@ -240,7 +249,7 @@ namespace Project_DoHoa2D
                 pnlMain.Invalidate();
             }
 
-            
+
         }
 
         private void pnlMain_MouseUp(object sender, MouseEventArgs e)
@@ -248,14 +257,27 @@ namespace Project_DoHoa2D
             switch (mode)
             {
                 case Mode.Scaling:
+                    if (selectedShape is MyRectangle
+                        || selectedShape is MyParallelogram
+                        || selectedShape is MyCircle
+                        )
+                        shapes[shapes.Count - 1].Normalize();
+                    mode = Mode.Select;
+                    break;
                 case Mode.Rotating:
                 case Mode.Moving:
                 case Mode.Select:
                     mode = Mode.Select;
                     break;
 
-                case Mode.WaitingDraw:
-                    shapes[shapes.Count - 1].Normalize();
+                case Mode.WaitingDraw: //Vẽ xong hình, cần Normalize
+                    if (BtnChecked(btnRectangle)
+                        || BtnChecked(btnParallelogram)
+                        || BtnChecked(btnCircle)
+                        || BtnChecked(btnEllipse)
+                        || BtnChecked(btnParabol)
+                        )
+                        shapes[shapes.Count - 1].Normalize();
                     mode = Mode.WaitingDraw;
                     break;
                 case Mode.Drawing:
@@ -264,7 +286,12 @@ namespace Project_DoHoa2D
             }
 
             isMouseDown = false;
-        } 
+        }
+
+        private bool BtnChecked(Button b)
+        {
+            return (b.BackColor != Color.Transparent);
+        }
 
         private void pnlMain_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -273,30 +300,6 @@ namespace Project_DoHoa2D
 
         #endregion
 
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            //Graphics g = e.Graphics;
-            
-            
-            //Point point1 = new Point(30, 600);
-            //Point point2 = new Point(40, 300);
-            //Point point3 = new Point(50, 200);
-            //Point point4 = new Point(60, 300);
-            //Point point5 = new Point(70, 600);
-            
-                
-            //Point[] curvePoints = { point1, point3, point5 };
-            //Point[] curvePoints2 = { point1, point2, point3, point4, point5};
-            //g.DrawCurve(new Pen(Color.Black), curvePoints);
-            //g.DrawCurve(new Pen(Color.Blue), curvePoints2);
-
-        }
 
         private void btnShape_MouseClick(object sender, MouseEventArgs e)
         {
@@ -318,7 +321,7 @@ namespace Project_DoHoa2D
             isDrawing = false;
             mode = Mode.Select;
 
-            
+
         }
 
         private void btnBorderColor_Click(object sender, EventArgs e)
@@ -329,7 +332,7 @@ namespace Project_DoHoa2D
                 btnBorderColor.BackColor = colorDialog.Color;
             }
 
-            for (int i=0; i<shapes.Count; i++)
+            for (int i = 0; i < shapes.Count; i++)
             {
                 if (shapes[i].isSelected)
                     shapes[i].Configure(BorderColor: btnBorderColor.BackColor);
@@ -367,19 +370,20 @@ namespace Project_DoHoa2D
 
         private void ckbFill_CheckedChanged(object sender, EventArgs e)
         {
-            if (isCheck)
-            {
-                ckbFill.Checked = false;
-                cmbFillStyle.Enabled = false;
-                isCheck = false;
-                
-            }
-            else
-            {
-                ckbFill.Checked = true;
-                cmbFillStyle.Enabled = true;
-                isCheck = true;
-            }
+            //if (isCheck)
+            //{
+            //    ckbFill.Checked = false;
+            //    cmbFillStyle.Enabled = false;
+            //    isCheck = false;
+            //}
+            //else
+            //{
+            //    ckbFill.Checked = true;
+            //    cmbFillStyle.Enabled = true;
+            //    isCheck = true;
+            //}
+
+            cmbFillStyle.Enabled = ckbFill.Checked;
         }
 
         private void cmbFillStyle_SelectedIndexChanged(object sender, EventArgs e)
@@ -397,6 +401,20 @@ namespace Project_DoHoa2D
             pnlMain.Invalidate();
         }
 
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete && selectedShape != null)
+            {
+                for (int i = 0; i < shapes.Count; i++)
+                    if (shapes[i].isSelected)
+                    {
+                        shapes.RemoveAt(i);
+                        selectedShape = null;
+                        pnlMain.Invalidate();
+                    }
+            }
+        }
+
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFile = new SaveFileDialog();
@@ -407,7 +425,7 @@ namespace Project_DoHoa2D
             saveFile.FileName = "MyShapes.txt";
             if (saveFile.ShowDialog() == DialogResult.OK)
             {
-                for (int i=0; i<shapes.Count; i++)
+                for (int i = 0; i < shapes.Count; i++)
                 {
                     shapes[i].Save(saveFile.FileName);
                 }
@@ -425,11 +443,11 @@ namespace Project_DoHoa2D
                 string line, firstWord = null;
                 while ((line = streamReader.ReadLine()) != null)
                 {
-                    if (line !="")
+                    if (line != "")
                         firstWord = line.Substring(0, line.IndexOf(" "));
                     switch (firstWord)
                     {
-                        
+
                         case "Line":
                             MyShape myLine = new MyLine();
                             myLine.Open(line);
@@ -472,18 +490,17 @@ namespace Project_DoHoa2D
         {
 
         }
-        
     }
 }
 
 
-
 #region Những việc còn lại
 /*
- * Thêm chức năng Rotate
+ * (Added) Thêm chức năng Rotate
  * Thêm các đối tượng Ellipse, Parabol
  * Fix bug đang có:
  * (fixed) - Không chọn được hình chữ nhật vẽ ngược
+ * (fixed) - Khong chon được hình sau khi scale hoặc xoay
  * - Di chuyển hình tròn
  * - Scale hình chữ nhật, bị ngược điểm
  * - Không vẽ được hình tròn theo hướng 2 giờ
@@ -491,6 +508,7 @@ namespace Project_DoHoa2D
  * - Lỗi khi shape được chọn nằm chồng lên shape khác thì không scale được
  * - Chỉnh sửa hàm Draw  (thêm thuộc tính fill Style)
  * 
+ * Thêm các thuộc tính của các hình có thể tô
  * Hoàn thiện chức năng Scale, Rotate của những thằng còn lại ngoại trừ Line, Rect, Circle
  * Thêm chức năng Save, Load.
  * 
