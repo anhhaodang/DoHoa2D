@@ -88,7 +88,8 @@ namespace Project_DoHoa2D
             string data = "Parallelogram " + p1.X.ToString() + " " + p1.Y.ToString() + " " + p2.X.ToString() + " " + p2.Y.ToString()
                  + " " + p3.X.ToString() + " " + p3.Y.ToString() + " " + p4.X.ToString() + " " + p4.Y.ToString() + " " + dashStyle.ToString()
                  + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + " " + backgroundColor.ToArgb().ToString()
-                 + " " + fillStyle.ToString() + "\n";
+                + " " + fillStyle.ToString() + " " + isFill.ToString() + " " + hatchStyle.GetHashCode() + "\n";
+
 
             StreamWriter sw = File.AppendText(filePath);
             sw.WriteLine(data);
@@ -120,6 +121,8 @@ namespace Project_DoHoa2D
             this.borderColor = Color.FromArgb(Convert.ToInt32(dt[11]));
             this.backgroundColor = Color.FromArgb(Convert.ToInt32(dt[12]));
             this.fillStyle = Int32.Parse(dt[13]);
+            this.isFill = bool.Parse(dt[14]);
+            this.hatchStyle = (HatchStyle)(Int32.Parse(dt[15]));
         }
 
        

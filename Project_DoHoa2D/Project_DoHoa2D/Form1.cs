@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,7 +75,8 @@ namespace Project_DoHoa2D
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             for (int i = 0; i < shapes.Count; i++)
-                shapes[i].Draw(e.Graphics);     
+                shapes[i].Draw(e.Graphics);
+
         }
 
         private void pnlMain_MouseDown(object sender, MouseEventArgs e)
@@ -144,7 +146,8 @@ namespace Project_DoHoa2D
                         else if (cmbFillStyle.SelectedIndex > 0)
                         {
                             rectangle.fillStyle = 1;
-                            rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
+                            rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor, 
+                                            HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
                         }
                     }
 
@@ -359,6 +362,7 @@ namespace Project_DoHoa2D
         private void btnUnfillableShape_Click(object sender, EventArgs e)
         {
             ckbFill.Enabled = false;
+            cmbFillStyle.Enabled = false;
         }
 
         private void ckbFill_CheckedChanged(object sender, EventArgs e)
@@ -392,6 +396,83 @@ namespace Project_DoHoa2D
             }
             pnlMain.Invalidate();
         }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.InitialDirectory = "d:\\";
+            saveFile.Filter = "Txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFile.FilterIndex = 2;
+            saveFile.RestoreDirectory = true;
+            saveFile.FileName = "MyShapes.txt";
+            if (saveFile.ShowDialog() == DialogResult.OK)
+            {
+                for (int i=0; i<shapes.Count; i++)
+                {
+                    shapes[i].Save(saveFile.FileName);
+                }
+            }
+        }
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.InitialDirectory = "d:\\";
+
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                string filename = openFile.FileName;
+                StreamReader streamReader = new StreamReader(filename);
+                string line, firstWord = null;
+                while ((line = streamReader.ReadLine()) != null)
+                {
+                    if (line !="")
+                        firstWord = line.Substring(0, line.IndexOf(" "));
+                    switch (firstWord)
+                    {
+                        
+                        case "Line":
+                            MyShape myLine = new MyLine();
+                            myLine.Open(line);
+                            shapes.Add(myLine);
+                            break;
+
+                        case "Rectangle":
+                            MyShape myRectangle = new MyRectangle();
+                            myRectangle.Open(line);
+                            shapes.Add(myRectangle);
+                            break;
+                        case "Parallelogram":
+                            MyShape myParallelogram = new MyParallelogram();
+                            myParallelogram.Open(line);
+                            shapes.Add(myParallelogram);
+                            break;
+                        case "Circle":
+                            MyShape myCircle = new MyCircle();
+                            myCircle.Open(line);
+                            shapes.Add(myCircle);
+                            break;
+                        case "Polygon":
+                            MyShape myPolygon = new MyPolygon();
+                            myPolygon.Open(line);
+                            shapes.Add(myPolygon);
+                            break;
+                        case "Polyline":
+                            MyShape myPolyline = new MyPolyline();
+                            myPolyline.Open(line);
+                            shapes.Add(myPolyline);
+                            break;
+                    }
+                    pnlMain.Invalidate();
+                    firstWord = "";
+                }
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        
     }
 }
 
