@@ -47,9 +47,18 @@ namespace Project_DoHoa2D
             myPen.Width = width;
             Point pTopLeft = new Point(-(p1.X - p0.X) / 2, -(p1.Y - p0.Y) / 2);
             Rectangle r = new Rectangle(pTopLeft, new Size(p1.X - p0.X, p1.Y - p0.Y));
-             
+
             if (isFill)
-                graphics.FillRectangle(new SolidBrush(backgroundColor), r);
+            {
+                if (fillStyle == 0)
+                    graphics.FillRectangle(new SolidBrush(backgroundColor), r);
+                else
+                {
+                    HatchBrush hatchBrush = new HatchBrush(hatchStyle, backgroundColor);
+                    graphics.FillRectangle(hatchBrush, r);
+
+                }
+            }
             graphics.DrawRectangle(myPen, r);
             if (isSelected)
             {
@@ -133,6 +142,7 @@ namespace Project_DoHoa2D
             bool res = false;
             GraphicsPath path = new GraphicsPath();
             path.AddRectangle(new Rectangle(point[0], new Size(point[1].X - point[0].X, point[1].Y - point[0].Y)));
+
 
             if (isFill)
                 res = path.IsVisible(p);

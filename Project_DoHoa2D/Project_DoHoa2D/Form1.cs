@@ -75,6 +75,55 @@ namespace Project_DoHoa2D
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             for (int i = 0; i < shapes.Count; i++)
                 shapes[i].Draw(e.Graphics);
+
+            HatchBrush hatchBrush;
+            hatchBrush = new HatchBrush(HatchStyle.Cross, Color.Red);
+            e.Graphics.FillRectangle(hatchBrush, new Rectangle(new Point(10, 10), new Size(200, 100)));
+            //HatchStyle.BackwardDiagonal;
+            //HatchStyle.Cross;
+            //HatchStyle.DarkDownwardDiagonal;
+            //HatchStyle.DarkHorizontal;
+            //HatchStyle.DarkUpwardDiagonal;
+            //HatchStyle.DarkVertical;
+            //HatchStyle.DashedDownwardDiagonal;
+            //HatchStyle.DashedHorizontal;
+            //HatchStyle.
+
+        //Vertical
+        //ForwardDiagonal
+        //BackwardDiagonal
+        //Cross
+        //DiagonalCross
+        //Percent05
+        //Percent10
+        //Percent20
+        //Percent25
+        //Percent30
+        //Percent40
+        //Percent50
+        //Percent60
+        //Percent70
+        //Percent75
+        //Percent80
+        //Percent90
+        //LightDownwardDiagonal
+        //LightUpwardDiagonal
+        //DarkDownwardDiagonal
+        //DarkUpwardDiagonal
+        //WideDownwardDiagonal
+        //WideUpwardDiagonal
+        //LightVertical
+        //LightHorizontal
+        //NarrowVertical
+        //NarrowHorizontal
+        //DarkVertical
+        //DarkHorizontal
+        //DashedDownwardDiagonal
+        //DashedUpwardDiagonal
+        //DashedHorizontal
+        //DashedVertical
+     
+     
         }
 
         private void pnlMain_MouseDown(object sender, MouseEventArgs e)
@@ -111,11 +160,15 @@ namespace Project_DoHoa2D
                         break;
                     }
                 }
-                    //else if (shapes[i].AtPositionRotate(e.Location))
-                    //{
-                    //mode = Mode.Rotating;
+                //else if (shapes[i].AtPositionRotate(e.Location))
+                //{
+                //mode = Mode.Rotating;
 
-                    //}
+                //}
+                
+               
+                  
+
  
             }
 
@@ -131,8 +184,21 @@ namespace Project_DoHoa2D
                 {
                     MyRectangle rectangle = new MyRectangle(e.Location, e.Location);
                     if (ckbFill.Checked)
+                    {
                         rectangle.isFill = true;
+                        if (cmbFillStyle.SelectedIndex == 0)
+                        {
+                            rectangle.fillStyle = 0;
+                        }
+                        else if (cmbFillStyle.SelectedIndex > 0)
+                        {
+                            rectangle.fillStyle = 1;
+                            rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
+                        }
+                    }
+
                     rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor);
+
                     shapes.Add(rectangle);
                 }
 
@@ -403,7 +469,20 @@ namespace Project_DoHoa2D
             }
         }
 
-       
+        private void cmbFillStyle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < shapes.Count; i++)
+            {
+                if (shapes[i].isSelected && shapes[i].isFill && cmbFillStyle.SelectedIndex > 0)
+                {
+                    shapes[i].Configure(HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
+                    shapes[i].Configure(FillStyle: 1); // chọn tô theo fill style
+                }
+                if (shapes[i].isSelected && shapes[i].isFill && cmbFillStyle.SelectedIndex == 0)
+                    shapes[i].Configure(FillStyle: 0); // chon solid color
+            }
+            pnlMain.Invalidate();
+        }
     }
 }
 

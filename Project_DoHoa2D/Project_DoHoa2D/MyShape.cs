@@ -11,7 +11,8 @@ namespace Project_DoHoa2D
         protected Color borderColor = Color.Black;
         protected DashStyle dashStyle = DashStyle.Solid;
         protected float width = 1;
-        protected int fillStyle = 0;
+        public int fillStyle = 0;
+        protected HatchStyle hatchStyle = HatchStyle.BackwardDiagonal;
         protected Color backgroundColor = Color.White;
         public bool isFill = false;
 
@@ -38,7 +39,7 @@ namespace Project_DoHoa2D
 
         public void Configure(Color? BorderColor = null, DashStyle? DashStyle = null, float? Width = null, 
                         float? Angel = null, bool? IsSelected = null, Color? BackgroundColor = null, 
-                        int? FillStyle = null, bool? IsFill =null)
+                        int? FillStyle = null, bool? IsFill =null, HatchStyle? HatchStyle = null)
         {
             if (BorderColor.HasValue)
                 borderColor = BorderColor.Value;
@@ -56,6 +57,9 @@ namespace Project_DoHoa2D
                 fillStyle = FillStyle.Value;
             if (IsFill.HasValue)
                 isFill = IsFill.Value;
+            if (HatchStyle.HasValue)
+                hatchStyle = HatchStyle.Value;
+
         }
 
         public Point Rotate(Point origin, Point p, float alpha)

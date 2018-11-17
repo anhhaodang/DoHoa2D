@@ -321,19 +321,19 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // aboutToolStripMenuItem
@@ -454,11 +454,45 @@
             // 
             this.cmbFillStyle.FormattingEnabled = true;
             this.cmbFillStyle.Items.AddRange(new object[] {
-            "Solid Color"});
+            "SolidColor",
+            "Vertical",
+            "ForwardDiagonal",
+            "BackwardDiagonal",
+            "Cross",
+            "DiagonalCross",
+            "Percent05",
+            "Percent10",
+            "Percent20",
+            "Percent25",
+            "Percent30",
+            "Percent40",
+            "Percent50",
+            "Percent60",
+            "Percent70",
+            "Percent75",
+            "Percent80",
+            "Percent90",
+            "LightDownwardDiagonal",
+            "LightUpwardDiagonal",
+            "DarkDownwardDiagonal",
+            "DarkUpwardDiagonal",
+            "WideDownwardDiagonal",
+            "WideUpwardDiagonal",
+            "LightVertical",
+            "LightHorizontal",
+            "NarrowVertical",
+            "NarrowHorizontal",
+            "DarkVertical",
+            "DarkHorizontal",
+            "DashedDownwardDiagonal",
+            "DashedUpwardDiagonal",
+            "DashedHorizontal",
+            "DashedVertical"});
             this.cmbFillStyle.Location = new System.Drawing.Point(56, 45);
             this.cmbFillStyle.Name = "cmbFillStyle";
             this.cmbFillStyle.Size = new System.Drawing.Size(121, 21);
             this.cmbFillStyle.TabIndex = 17;
+            this.cmbFillStyle.SelectedIndexChanged += new System.EventHandler(this.cmbFillStyle_SelectedIndexChanged);
             // 
             // label3
             // 
