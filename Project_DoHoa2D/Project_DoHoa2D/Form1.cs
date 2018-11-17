@@ -31,13 +31,14 @@ namespace Project_DoHoa2D
         private bool isDrawingPolygon;
         private bool isDrawingBezier;
         private bool isMovingShape;
+        private bool isCheck;
 
         public Form1()
         {
             InitializeComponent();
 
             #region Add Shape Buttons
-            shapeButtons = new List<Button> {btnSelect, btnLine, btnRectangle, btnCircle, btnEllipse, btnPolygon, btnParabol, btnZigzag, btnArc };
+            shapeButtons = new List<Button> {btnSelect, btnLine, btnRectangle, btnParallelogram, btnCircle, btnEllipse, btnPolygon, btnParabol, btnZigzag, btnArc };
             #endregion
 
             #region Add Tool Buttons
@@ -59,6 +60,7 @@ namespace Project_DoHoa2D
             isDrawing = false;
             mode = Mode.Select;
             ckbFill.Checked = false;
+            isCheck = false;
             cmbFillStyle.Enabled = false;
             currentShape = -1; //No Shape
 
@@ -122,20 +124,24 @@ namespace Project_DoHoa2D
                 if (btnLine.BackColor != Color.Transparent)
                 {
                     MyLine line = new MyLine(e.Location, e.Location);
-                    line.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1);
+                    line.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor);
                     shapes.Add(line);
                 }
                 else if (btnRectangle.BackColor != Color.Transparent)
                 {
                     MyRectangle rectangle = new MyRectangle(e.Location, e.Location);
-                    rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1);
+                    if (ckbFill.Checked)
+                        rectangle.isFill = true;
+                    rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor);
                     shapes.Add(rectangle);
                 }
 
                 else if (btnCircle.BackColor != Color.Transparent)
                 {
                     MyCircle circle = new MyCircle(e.Location, e.Location);
-                    circle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1);
+                    if (ckbFill.Checked)
+                        circle.isFill = true;
+                    circle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor);
                     shapes.Add(circle);
                 }
                 mode = Mode.Drawing;
@@ -326,6 +332,78 @@ namespace Project_DoHoa2D
             }
             pnlMain.Invalidate();
         }
+
+        private void btnLine_Click(object sender, EventArgs e)
+        {
+            ckbFill.Enabled = false;
+        }
+
+        private void btnZigzag_Click(object sender, EventArgs e)
+        {
+            ckbFill.Enabled = false;
+
+        }
+
+        private void btnArc_Click(object sender, EventArgs e)
+        {
+            ckbFill.Enabled = false;
+
+        }
+
+        private void btnRectangle_Click(object sender, EventArgs e)
+        {
+            ckbFill.Enabled = true;
+
+        }
+
+        private void btnParallelogram_Click(object sender, EventArgs e)
+        {
+            ckbFill.Enabled = true;
+
+        }
+
+        private void btnCircle_Click(object sender, EventArgs e)
+        {
+            ckbFill.Enabled = true;
+
+        }
+
+        private void btnEllipse_Click(object sender, EventArgs e)
+        {
+            ckbFill.Enabled = true;
+
+        }
+
+        private void btnPolygon_Click(object sender, EventArgs e)
+        {
+            ckbFill.Enabled = true;
+
+        }
+
+        private void btnParabol_Click(object sender, EventArgs e)
+        {
+            ckbFill.Enabled = true;
+
+        }
+
+        private void ckbFill_CheckedChanged(object sender, EventArgs e)
+        {
+            if (isCheck)
+            {
+                ckbFill.Checked = false;
+                cmbFillStyle.Enabled = false;
+                isCheck = false;
+                
+            }
+            else
+            {
+                ckbFill.Checked = true;
+                cmbFillStyle.Enabled = true;
+                isCheck = true;
+            }
+        }
+
+       
     }
 }
 
@@ -333,7 +411,6 @@ namespace Project_DoHoa2D
 
 #region Những việc còn lại
 /*
- * Thêm icon hình bình hành, Thêm chức năng fill
  * Thêm chức năng Rotate
  * Thêm các đối tượng Ellipse, Parabol
  * Fix bug đang có.
