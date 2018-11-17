@@ -93,10 +93,19 @@ namespace Project_DoHoa2D
             }
             this.width = Int32.Parse(dt[6]);
             this.borderColor = Color.FromArgb(Convert.ToInt32(dt[7]));
-
         }
 
-        
+        //public override bool AtRotatePosition(Point p)
+        //{
+
+        //    return true;
+        //}
+
+        //public override bool AtBoundingBox(Point p)
+        //{
+
+        //    return true;
+        //}
 
         public override bool Inside(Point p)
         {

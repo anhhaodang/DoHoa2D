@@ -19,6 +19,10 @@ namespace Project_DoHoa2D
 
         Mode mode;
 
+        MyShape selectedShape;
+
+        private Point prevPosition;
+
         int currentShape;
 
         private bool isDrawing;
@@ -69,42 +73,78 @@ namespace Project_DoHoa2D
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             for (int i = 0; i < shapes.Count; i++)
                 shapes[i].Draw(e.Graphics);
-
         }
 
         private void pnlMain_MouseDown(object sender, MouseEventArgs e)
         {
-            if (mode == Mode.SelectedShape)
+            isMouseDown = true;
+
+            if (mode == Mode.Select)
+            {
+                for (int i = 0; i < shapes.Count; i++)
+                    shapes[i].isSelected = false;
+                selectedShape = null;
+                mode = Mode.Select;
+
+                for (int i = shapes.Count - 1; i>= 0 ; i--)
+
+                    //Nghiên cứu gộp 3 hàm Inside, AtPositionRotate và AtScale thành
+                    //StateCursor shapes[i].Calculate(e.Location)
+                    //Trả về StateCursor: inside, rotateSW, rotateSE, scaleSW, scaleSE...
+                    if (shapes[i].Inside(e.Location))
+                    {
+                        shapes[i].isSelected = true;
+                        selectedShape = shapes[i];
+                        mode = Mode.Draging;
+                        prevPosition = e.Location;
+                        break;
+                    }
+                    //else if (shapes[i].AtPositionRotate(e.Location))
+                    //{
+                    //mode = Mode.Rotating;
+
+                    //}
+                    //else if (shapes[i].AtPositionScale(e.Location))
+                    //{
+                    //mode = Mode.Scaling;
+                    //}
+            }
+
+            else if (mode == Mode.WaitingDraw)
             {
                 if (btnLine.BackColor != Color.Transparent)
                 {
                     MyLine line = new MyLine(e.Location, e.Location);
                     line.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1);
                     shapes.Add(line);
-                    mode = Mode.Drawing;
+                    //mode = Mode.WaitNewPoint;
                 }
                 else if (btnRectangle.BackColor != Color.Transparent)
                 {
                     MyRectangle rectangle = new MyRectangle(e.Location, e.Location);
                     rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1);
                     shapes.Add(rectangle);
-                    mode = Mode.Drawing;
+                    //mode = Mode.WaitNewPoint;
                 }
             }
 
-            else if (mode == Mode.Drawing)
+            else if (mode == Mode.WaitNewPoint)
             {
+                //Xet xem đang vẽ hình gì. Nếu vẽ hình Line, Rect, Circle, Ellipse, HBH
+                //Parabol thì thêm điểm e.Location vào 1, rồi về Mode.WaitingDraw
+                //Nếu đang vẽ Polygon, PolyLines, Bezier thì set e.location vào điểm cuối,
+                //vẫn giữ Mode.WaitNewPoint
                 shapes[shapes.Count - 1].Set(e.Location, 1);
-                mode = Mode.SelectedShape;
+                mode = Mode.WaitingDraw;
                 pnlMain.Invalidate();
             }
         }
 
         private void pnlMain_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mode == Mode.Drawing)
+            if (mode == Mode.WaitNewPoint)
             {
-                shapes[shapes.Count - 1].Set(e.Location, 1);
+                shapes[shapes.Count - 1].Set(e.Location, 1); //Set điểm cuối chứ không phải 1
                 pnlMain.Invalidate();
             }
             else if (mode == Mode.Select)
@@ -117,12 +157,38 @@ namespace Project_DoHoa2D
                         break;
                     }
             }
+
+            else if(mode == Mode.Draging)
+            {
+                pnlMain.Cursor = Cursors.SizeAll;
+                Point distance = new Point(e.Location.X - prevPosition.X, e.Location.Y - prevPosition.Y);
+                selectedShape.Move(distance);
+                prevPosition = e.Location;
+                pnlMain.Invalidate();
+            }
+
+            else if (mode == Mode.Rotating)
+            {
+                //Rotate thôi
+                //Chỉnh chuột lại
+            }
+            else if (mode == Mode.Scaling)
+            {
+                //Chỉnh chuột lại
+                //Scale bằng cách đổi giá trị boundingbox[0],[1]
+            }
+
+            
         }
 
         private void pnlMain_MouseUp(object sender, MouseEventArgs e)
         {
+            if (mode == Mode.WaitingDraw)
+                mode = Mode.WaitNewPoint;
 
-        }
+            isMouseDown = false;
+            mode = Mode.Select;
+        } 
 
         private void pnlMain_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -164,7 +230,7 @@ namespace Project_DoHoa2D
             clickedShape.BackColor = CONST.COLOR_CURRENT_SHAPE;
             btnSelect.BackColor = Color.Transparent;
             isDrawing = true;
-            mode = Mode.SelectedShape;
+            mode = Mode.WaitingDraw;
             pnlMain.Cursor = Cursors.Cross;
         }
 

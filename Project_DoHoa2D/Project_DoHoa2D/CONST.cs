@@ -13,7 +13,9 @@ namespace Project_DoHoa2D
     {
         Select,
         Drawing,
-        SelectedShape,
+        WaitingDraw,
+        WaitNewPoint,
+        Draging,
         Moving,
         Scaling,
         Rotating
