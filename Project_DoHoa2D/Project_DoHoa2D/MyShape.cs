@@ -20,8 +20,8 @@ namespace Project_DoHoa2D
         public bool isSelected = false;
 
         public abstract bool Inside(Point p);
-        public abstract bool AtRotatePosition(Point p);
-        public abstract bool AtBoundingBox(Point p);
+        //public abstract bool AtRotatePosition(Point p);
+        //public abstract bool AtBoundingBox(Point p);
         public abstract void Move(Point d);
 
         public abstract void Set(Point point, int index);

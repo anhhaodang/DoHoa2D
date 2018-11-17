@@ -140,5 +140,6 @@ namespace Project_DoHoa2D
                 Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
         }
 
+       
     }
 }

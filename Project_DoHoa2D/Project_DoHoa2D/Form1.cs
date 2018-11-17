@@ -55,6 +55,8 @@ namespace Project_DoHoa2D
             trackBar1.Value = 1;
             isDrawing = false;
             mode = Mode.Select;
+            ckbFill.Checked = false;
+            cmbFillStyle.Enabled = false;
             currentShape = -1; //No Shape
             #endregion
 
@@ -174,8 +176,6 @@ namespace Project_DoHoa2D
             isDrawing = false;
             mode = Mode.Select;
 
-            panel1.Enabled = false;
-            panel2.Enabled = false;
             
         }
 

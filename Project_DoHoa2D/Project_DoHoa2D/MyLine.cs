@@ -96,17 +96,7 @@ namespace Project_DoHoa2D
 
         }
 
-        public override bool AtRotatePosition(Point p)
-        {
-
-            return true;
-        }
-
-        public override bool AtBoundingBox(Point p)
-        {
-
-            return true;
-        }
+        
 
         public override bool Inside(Point p)
         {
