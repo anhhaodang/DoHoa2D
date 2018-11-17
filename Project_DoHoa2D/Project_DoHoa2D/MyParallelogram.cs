@@ -149,5 +149,10 @@ namespace Project_DoHoa2D
             for (int i = 0; i < 4; i++)
                 Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
         }
+
+        public override bool AtScalePosition(Point p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

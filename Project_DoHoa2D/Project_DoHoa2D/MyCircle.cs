@@ -23,16 +23,36 @@ namespace Project_DoHoa2D
             point.Add(p2);
         }
 
-        public override void Set(Point point, int index){ }
+        public override void Set(Point p, int index){
+            int d1 = p.X - point[0].X;
+            int d2 = p.Y - point[0].Y;
+            int d = Math.Min(Math.Abs(d1), Math.Abs(d2)); //Đường kính
+
+            point[index] = new Point(point[0].X + (d1 < 0 ? -d : d), point[1 - index].Y + (d2 < 0 ? -d : d));
+            //this.point[index] = p;
+
+        }
         public override Point Get(int index){ return new Point(0, 0); }
 
         public override void Draw(Graphics graphics){
 
-            int d = point[1].X - point[0].X; //Đường kính đường tròn
-            graphics.TranslateTransform(point[0].X + d / 2, point[0].Y + d / 2);
-            graphics.RotateTransform(angle);
+            if (isSelected)
+            {
+                //vẽ bao
+                Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
+                Point p1 = new Point(Math.Max(point[0].X, point[1].X), Math.Max(point[0].Y, point[1].Y));
 
-            Rectangle r = new Rectangle(-d / 2, -d / 2, d, d);
+                Pen penBound = new Pen(Color.Blue);
+                penBound.DashStyle = DashStyle.Dash;
+
+                graphics.DrawRectangle(penBound, new Rectangle(p0, new Size(p1.X - p0.X, p1.Y - p0.Y)));
+                int size = 3;
+                graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(p0.X - size, p0.Y - size, size * 2, size * 2));
+            }
+
+            int d = point[1].X - point[0].X; //Đường kính đường tròn
+
+            Rectangle r = new Rectangle(point[0].X, point[0].Y, d, d);
 
             if (isFill)
                 graphics.FillEllipse(new SolidBrush(backgroundColor), r);
@@ -41,10 +61,7 @@ namespace Project_DoHoa2D
             p.DashStyle = dashStyle;
             p.Width = width;
             graphics.DrawEllipse(p, r);
-            graphics.ResetTransform();
         }
-
-
 
         public override void Save(string filePath)
         {
@@ -85,6 +102,11 @@ namespace Project_DoHoa2D
 
         public override bool Inside(Point p)
         {
+            if (angle != 0)
+            {
+                p = base.Rotate(base.Center(), p, angle);
+            }
+
             bool res = false;
             GraphicsPath path = new GraphicsPath();
             path.AddEllipse(new Rectangle(point[0], new Size(point[1].X - point[0].X, point[1].Y - point[0].Y)));
@@ -105,5 +127,17 @@ namespace Project_DoHoa2D
                 Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
         }
 
+        public override bool AtScalePosition(Point p)
+        {
+            if (angle != 0)
+            {
+                p = base.Rotate(base.Center(), p, angle);
+            }
+            Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
+
+            if (Math.Abs(p.X - p0.X) < 5 && Math.Abs(p.Y - p0.Y) < 5)
+                return true;
+            return false;
+        }
     }
 }

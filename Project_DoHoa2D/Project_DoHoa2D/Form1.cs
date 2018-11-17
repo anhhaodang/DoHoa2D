@@ -61,6 +61,7 @@ namespace Project_DoHoa2D
             ckbFill.Checked = false;
             cmbFillStyle.Enabled = false;
             currentShape = -1; //No Shape
+
             #endregion
 
 
@@ -77,7 +78,6 @@ namespace Project_DoHoa2D
         private void pnlMain_MouseDown(object sender, MouseEventArgs e)
         {
             isMouseDown = true;
-            
 
             if (mode == Mode.Select)
             {
@@ -86,28 +86,35 @@ namespace Project_DoHoa2D
                 selectedShape = null;
                 mode = Mode.Select;
 
-                for (int i = shapes.Count - 1; i>= 0 ; i--)
-
-                    //Nghiên cứu gộp 3 hàm Inside, AtPositionRotate và AtScale thành
-                    //StateCursor shapes[i].Calculate(e.Location)
-                    //Trả về StateCursor: inside, rotateSW, rotateSE, scaleSW, scaleSE...
-                    if (shapes[i].Inside(e.Location))
+                for (int i = shapes.Count - 1; i >= 0; i--)
+                {
+                    if (shapes[i].AtScalePosition(e.Location))
                     {
                         shapes[i].isSelected = true;
                         selectedShape = shapes[i];
-                        mode = Mode.Draging;
+                        mode = Mode.Scaling;
+                    }
+                    else
+
+                   //Nghiên cứu gộp 3 hàm Inside, AtPositionRotate và AtScale thành
+                   //StateCursor shapes[i].Calculate(e.Location)
+                   //Trả về StateCursor: inside, rotateSW, rotateSE, scaleSW, scaleSE...
+                   if (shapes[i].Inside(e.Location))
+                    {
+                        shapes[i].isSelected = true;
+                        pnlMain.Invalidate(); //Vẽ boundingbox hoặc 2 đầu mút
+                        selectedShape = shapes[i];
+                        mode = Mode.Moving;
                         prevPosition = e.Location;
                         break;
                     }
+                }
                     //else if (shapes[i].AtPositionRotate(e.Location))
                     //{
                     //mode = Mode.Rotating;
 
                     //}
-                    //else if (shapes[i].AtPositionScale(e.Location))
-                    //{
-                    //mode = Mode.Scaling;
-                    //}
+ 
             }
 
             else if (mode == Mode.WaitingDraw)
@@ -117,14 +124,12 @@ namespace Project_DoHoa2D
                     MyLine line = new MyLine(e.Location, e.Location);
                     line.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1);
                     shapes.Add(line);
-                    //mode = Mode.WaitNewPoint;
                 }
                 else if (btnRectangle.BackColor != Color.Transparent)
                 {
                     MyRectangle rectangle = new MyRectangle(e.Location, e.Location);
                     rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1);
                     shapes.Add(rectangle);
-                    //mode = Mode.WaitNewPoint;
                 }
 
                 else if (btnCircle.BackColor != Color.Transparent)
@@ -132,23 +137,22 @@ namespace Project_DoHoa2D
                     MyCircle circle = new MyCircle(e.Location, e.Location);
                     circle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1);
                     shapes.Add(circle);
-                    //mode = Mode.WaitNewPoint;
                 }
-
+                mode = Mode.Drawing;
             }
 
-            else if (mode == Mode.WaitNewPoint)
+            else if (mode == Mode.Drawing)
             {
                 //Xet xem đang vẽ hình gì. Nếu vẽ hình Line, Rect, Circle, Ellipse, HBH
                 //Parabol thì thêm điểm e.Location vào 1, rồi về Mode.WaitingDraw
                 //Nếu đang vẽ Polygon, PolyLines, Bezier thì set e.location vào điểm cuối,
-                //vẫn giữ Mode.WaitNewPoint
+                //vẫn giữ Mode.Drawing
                 shapes[shapes.Count - 1].Set(e.Location, 1);
               //  mode = Mode.WaitingDraw;
                 pnlMain.Invalidate();
-                mode = Mode.Select;
+                mode = Mode.WaitingDraw; //Vẽ xong đối tượng
             }
-            else if (mode == Mode.Draging)
+            else if (mode == Mode.Moving)
             {
                 mode = Mode.Select;
                 pnlMain.Invalidate();
@@ -157,30 +161,40 @@ namespace Project_DoHoa2D
 
         private void pnlMain_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mode == Mode.WaitNewPoint)
+            if (mode == Mode.WaitingDraw)
             {
-                if (btnCircle.BackColor != Color.Transparent)
-                {
-                    Point curPoint = new Point(Math.Max(shapes[shapes.Count - 1].Get(0).X, e.Location.X),
-                                                Math.Max(shapes[shapes.Count - 1].Get(0).Y, e.Location.Y));
-                    shapes[shapes.Count - 1].Set(curPoint, 1);
-                }
-                else
-                    shapes[shapes.Count - 1].Set(e.Location, 1); //Set điểm cuối chứ không phải 1
+
+            }
+
+            else if (mode == Mode.Drawing)
+            {
+                //if (btnCircle.BackColor != Color.Transparent)
+                //{
+                //    int d = Math.Min(e.Location.X - );
+                //}
+                //else
+                shapes[shapes.Count - 1].Set(e.Location, 1); //Set điểm cuối chứ không phải 1
                 pnlMain.Invalidate();
             }
             else if (mode == Mode.Select)
             {
                 pnlMain.Cursor = Cursors.Default;
                 for (int i = 0; i < shapes.Count; i++)
-                    if (shapes[i].Inside(e.Location))
+                {
+                    if (shapes[i].isSelected && shapes[i].AtScalePosition(e.Location))
+                    {
+                        pnlMain.Cursor = Cursors.SizeNESW;
+                        break;
+                    }
+                    else if (shapes[i].Inside(e.Location))
                     {
                         pnlMain.Cursor = Cursors.SizeAll;
                         break;
                     }
+                }
             }
 
-            else if(mode == Mode.Draging)
+            else if(mode == Mode.Moving)
             {
                 pnlMain.Cursor = Cursors.SizeAll;
                 Point distance = new Point(e.Location.X - prevPosition.X, e.Location.Y - prevPosition.Y);
@@ -196,8 +210,8 @@ namespace Project_DoHoa2D
             }
             else if (mode == Mode.Scaling)
             {
-                //Chỉnh chuột lại
-                //Scale bằng cách đổi giá trị boundingbox[0],[1]
+                selectedShape.Set(e.Location, 0);
+                pnlMain.Invalidate();
             }
 
             
@@ -205,11 +219,24 @@ namespace Project_DoHoa2D
 
         private void pnlMain_MouseUp(object sender, MouseEventArgs e)
         {
-            if (mode == Mode.WaitingDraw)
-                mode = Mode.WaitNewPoint;
+            switch (mode)
+            {
+                case Mode.Scaling:
+                case Mode.Rotating:
+                case Mode.Moving:
+                case Mode.Select:
+                    mode = Mode.Select;
+                    break;
+
+                case Mode.WaitingDraw:
+                    mode = Mode.WaitingDraw;
+                    break;
+                case Mode.Drawing:
+                    mode = Mode.Drawing;
+                    break;
+            }
 
             isMouseDown = false;
-            //mode = Mode.Select;
         } 
 
         private void pnlMain_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -301,3 +328,19 @@ namespace Project_DoHoa2D
         }
     }
 }
+
+
+
+#region Những việc còn lại
+/*
+ * Thêm icon hình bình hành, Thêm chức năng fill
+ * Thêm chức năng Rotate
+ * Thêm các đối tượng Ellipse, Parabol
+ * Fix bug đang có.
+ * Hoàn thiện chức năng Scale, Rotate của những thằng còn lại ngoại trừ Line, Rect, Circle
+ * Thêm chức năng Save, Load. Fill Style
+ * 
+ * Thêm Hyperbol
+ * Thêm 1/2 circle, 1/2 ellipse
+ */
+#endregion

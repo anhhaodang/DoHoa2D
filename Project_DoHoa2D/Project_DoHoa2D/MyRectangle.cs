@@ -45,13 +45,18 @@ namespace Project_DoHoa2D
             Pen myPen = new Pen(borderColor);
             myPen.DashStyle = dashStyle;
             myPen.Width = width;
-
-            Rectangle r = new Rectangle(new Point(-(p1.X - p0.X)/2,-(p1.Y - p0.Y)/2), new Size(p1.X - p0.X, p1.Y - p0.Y));
+            Point pTopLeft = new Point(-(p1.X - p0.X) / 2, -(p1.Y - p0.Y) / 2);
+            Rectangle r = new Rectangle(pTopLeft, new Size(p1.X - p0.X, p1.Y - p0.Y));
              
             if (isFill)
                 graphics.FillRectangle(new SolidBrush(backgroundColor), r);
-
             graphics.DrawRectangle(myPen, r);
+            if (isSelected)
+            {
+                int size = 3;
+                graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(pTopLeft.X - size, pTopLeft.Y - size, size * 2, size * 2));
+
+            }
             graphics.ResetTransform();
         }
        
@@ -120,6 +125,11 @@ namespace Project_DoHoa2D
 
         public override bool Inside(Point p)
         {
+            if (angle != 0)
+            {
+                p = base.Rotate(base.Center(), p, angle);
+            }
+
             bool res = false;
             GraphicsPath path = new GraphicsPath();
             path.AddRectangle(new Rectangle(point[0], new Size(point[1].X - point[0].X, point[1].Y - point[0].Y)));
@@ -138,6 +148,18 @@ namespace Project_DoHoa2D
         {
             for (int i = 0; i < point.Count; i++)
                 Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
+        }
+
+        public override bool AtScalePosition(Point p)
+        {
+            if (angle != 0)
+            {
+                p = base.Rotate(base.Center(), p, angle);
+            }
+
+            if (Math.Abs(p.X - point[0].X) < 5 && Math.Abs(p.Y - point[0].Y) < 5)
+                    return true;
+            return false;
         }
     }
 }

@@ -33,7 +33,6 @@ namespace Project_DoHoa2D
 
         public override void Draw(Graphics graphics)
         {
-         
             Pen myPen = new Pen(borderColor);
             myPen.DashStyle = dashStyle;
             myPen.Width = width;
@@ -45,7 +44,14 @@ namespace Project_DoHoa2D
             int b = point[0].Y - (point[0].Y + point[1].Y) / 2;
             int c = point[1].X - (point[0].X + point[1].X) / 2;
             int d = point[1].Y - (point[0].Y + point[1].Y) / 2;
+            
             graphics.DrawLine(myPen, a, b, c, d);
+            if (isSelected)
+            {
+                int size = 3;
+                graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(a - size, b - size, size * 2, size * 2));
+                graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(c - size, d - size, size * 2, size * 2));
+            }
             graphics.ResetTransform();
         }
 
@@ -109,6 +115,10 @@ namespace Project_DoHoa2D
 
         public override bool Inside(Point p)
         {
+            if (angle != 0)
+            {
+                p = base.Rotate(base.Center(), p, angle);
+            }
             bool res = false;
             GraphicsPath path = new GraphicsPath();
             path.AddLine(point[0], point[1]);
@@ -124,6 +134,18 @@ namespace Project_DoHoa2D
         {
             for (int i = 0; i < 2; i++)
                 this.Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
+        }
+
+        public override bool AtScalePosition(Point p)
+        {
+            if (angle != 0)
+            {
+                p = base.Rotate(base.Center(), p, angle);
+            }
+
+            if (Math.Abs(p.X - point[0].X) < 5 && Math.Abs(p.Y - point[0].Y) < 5)
+                return true;
+            return false;
         }
     }
 }

@@ -12,10 +12,8 @@ namespace Project_DoHoa2D
     public enum Mode
     {
         Select,
-        Drawing,
         WaitingDraw,
-        WaitNewPoint,
-        Draging,
+        Drawing,
         Moving,
         Scaling,
         Rotating

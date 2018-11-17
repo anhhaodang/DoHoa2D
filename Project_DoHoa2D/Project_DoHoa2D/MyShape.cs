@@ -21,7 +21,7 @@ namespace Project_DoHoa2D
 
         public abstract bool Inside(Point p);
         //public abstract bool AtRotatePosition(Point p);
-        //public abstract bool AtBoundingBox(Point p);
+        public abstract bool AtScalePosition(Point p);
         public abstract void Move(Point d);
 
         public abstract void Set(Point point, int index);
@@ -73,6 +73,19 @@ namespace Project_DoHoa2D
 
             Point res = new Point(x, y);
             return res;
+        }
+
+        public Point Center()
+        {
+            int x = 0, y = 0;
+            int n = point.Count;
+            for (int i = 0; i < n; i++)
+            {
+                x += point[i].X; y += point[i].Y;
+            }
+            x /= n; y /= n;
+            Point res = new Point(x, y);
+            return res ;
         }
     }
 }

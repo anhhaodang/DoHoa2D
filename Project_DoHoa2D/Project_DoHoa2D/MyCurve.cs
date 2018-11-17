@@ -60,5 +60,9 @@ namespace Project_DoHoa2D
         public override void Save(string filePath){ }
         public override void Open(string data){ }
 
+        public override bool AtScalePosition(Point p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
