@@ -138,7 +138,7 @@ namespace Project_DoHoa2D
         {
             if (angle != 0)
             {
-                p = base.Rotate(base.Center(), p, angle);
+                p = base.Rotate(base.Center(), p, -angle);
             }
 
             bool res = false;
@@ -172,6 +172,17 @@ namespace Project_DoHoa2D
             if (Math.Abs(p.X - point[0].X) < 5 && Math.Abs(p.Y - point[0].Y) < 5)
                     return true;
             return false;
+        }
+
+        public override bool AtRotatePosition(Point p)
+        {
+            if (angle != 0)
+            {
+                p = base.Rotate(base.Center(), p, angle);
+            }
+
+            return (point[0].X - p.X > 5 && point[0].X - p.X < 15 
+                && point[0].Y - p.Y > 5 && point[0].Y - p.Y < 15);
         }
     }
 }

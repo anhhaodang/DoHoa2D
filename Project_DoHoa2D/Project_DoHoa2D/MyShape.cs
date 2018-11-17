@@ -21,7 +21,7 @@ namespace Project_DoHoa2D
         public bool isSelected = false;
 
         public abstract bool Inside(Point p);
-        //public abstract bool AtRotatePosition(Point p);
+        public abstract bool AtRotatePosition(Point p);
         public abstract bool AtScalePosition(Point p);
         public abstract void Move(Point d);
 
@@ -48,7 +48,7 @@ namespace Project_DoHoa2D
             if (Width.HasValue)
                 width = Width.Value;
             if (Angel.HasValue)
-                angle = Angel.Value;
+                angle += Angel.Value;
             if (IsSelected.HasValue)
                 isSelected = IsSelected.Value;
             if (BackgroundColor.HasValue)
@@ -99,6 +99,26 @@ namespace Project_DoHoa2D
 
             point[0] = p0;
             point[1] = p1;
+        }
+
+        private double Lenght(Point p)
+        {
+            return Math.Sqrt(p.X * p.X + p.Y * p.Y);
+        }
+
+        private double CalcAngleAOx(Point O, Point A)
+        {
+            if (A.X == O.X)
+                return A.Y > O.Y ? 90 : -90;
+            double res = Math.Atan((1.0 * A.Y - O.Y) / (A.X - O.X));
+            return res * 180 / Math.PI;
+        }
+
+        public double CalculateAngel(Point O, Point A, Point B) //Tính góc AOB
+        {
+            double AOx = CalcAngleAOx(O, A);
+            double BOx = CalcAngleAOx(O, B);
+            return BOx - AOx;
         }
     }
 }
