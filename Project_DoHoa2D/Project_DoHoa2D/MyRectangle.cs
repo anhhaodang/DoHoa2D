@@ -136,7 +136,7 @@ namespace Project_DoHoa2D
         {
             if (angle != 0)
             {
-                p = base.Rotate(base.Center(), p, angle);
+                p = base.Rotate(base.Center(), p, -angle);
             }
 
             bool res = false;

@@ -405,6 +405,20 @@ namespace Project_DoHoa2D
             }
             pnlMain.Invalidate();
         }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete && selectedShape != null)
+            {
+                for (int i = 0; i < shapes.Count; i++)
+                    if (shapes[i].isSelected)
+                    {
+                        shapes.RemoveAt(i);
+                        selectedShape = null;
+                        pnlMain.Invalidate();
+                    }
+            }
+        }
     }
 }
 
@@ -412,11 +426,11 @@ namespace Project_DoHoa2D
 
 #region Những việc còn lại
 /*
- * Thêm chức năng Rotate (đã thêm)
+ * (Added) Thêm chức năng Rotate
  * Thêm các đối tượng Ellipse, Parabol
  * Fix bug đang có:
  * (fixed) - Không chọn được hình chữ nhật vẽ ngược
- * - Khong chon được hcn sai khi scale hoặc xoay
+ * - Khong chon được hình sau khi scale hoặc xoay
  * - Di chuyển hình tròn
  * - Scale hình chữ nhật, bị ngược điểm
  * - Không vẽ được hình tròn theo hướng 2 giờ
@@ -424,6 +438,7 @@ namespace Project_DoHoa2D
  * - Lỗi khi shape được chọn nằm chồng lên shape khác thì không scale được
  * - Chỉnh sửa hàm Draw  (thêm thuộc tính fill Style)
  * 
+ * Thêm các thuộc tính của các hình có thể tô
  * Hoàn thiện chức năng Scale, Rotate của những thằng còn lại ngoại trừ Line, Rect, Circle
  * Thêm chức năng Save, Load.
  * 

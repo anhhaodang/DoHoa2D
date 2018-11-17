@@ -150,7 +150,13 @@ namespace Project_DoHoa2D
 
         public override bool AtRotatePosition(Point p)
         {
-            throw new NotImplementedException();
+            if (angle != 0)
+            {
+                p = base.Rotate(base.Center(), p, angle);
+            }
+
+            return (point[0].X - p.X > 5 && point[0].X - p.X < 15
+                && point[0].Y - p.Y > 5 && point[0].Y - p.Y < 15);
         }
     }
 }
