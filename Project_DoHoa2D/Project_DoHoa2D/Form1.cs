@@ -74,56 +74,7 @@ namespace Project_DoHoa2D
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             for (int i = 0; i < shapes.Count; i++)
-                shapes[i].Draw(e.Graphics);
-
-            HatchBrush hatchBrush;
-            hatchBrush = new HatchBrush(HatchStyle.Cross, Color.Red);
-            e.Graphics.FillRectangle(hatchBrush, new Rectangle(new Point(10, 10), new Size(200, 100)));
-            //HatchStyle.BackwardDiagonal;
-            //HatchStyle.Cross;
-            //HatchStyle.DarkDownwardDiagonal;
-            //HatchStyle.DarkHorizontal;
-            //HatchStyle.DarkUpwardDiagonal;
-            //HatchStyle.DarkVertical;
-            //HatchStyle.DashedDownwardDiagonal;
-            //HatchStyle.DashedHorizontal;
-            //HatchStyle.
-
-        //Vertical
-        //ForwardDiagonal
-        //BackwardDiagonal
-        //Cross
-        //DiagonalCross
-        //Percent05
-        //Percent10
-        //Percent20
-        //Percent25
-        //Percent30
-        //Percent40
-        //Percent50
-        //Percent60
-        //Percent70
-        //Percent75
-        //Percent80
-        //Percent90
-        //LightDownwardDiagonal
-        //LightUpwardDiagonal
-        //DarkDownwardDiagonal
-        //DarkUpwardDiagonal
-        //WideDownwardDiagonal
-        //WideUpwardDiagonal
-        //LightVertical
-        //LightHorizontal
-        //NarrowVertical
-        //NarrowHorizontal
-        //DarkVertical
-        //DarkHorizontal
-        //DashedDownwardDiagonal
-        //DashedUpwardDiagonal
-        //DashedHorizontal
-        //DashedVertical
-     
-     
+                shapes[i].Draw(e.Graphics);     
         }
 
         private void pnlMain_MouseDown(object sender, MouseEventArgs e)
@@ -165,11 +116,11 @@ namespace Project_DoHoa2D
                 //mode = Mode.Rotating;
 
                 //}
-                
-               
-                  
 
- 
+                pnlMain.Invalidate();
+
+
+
             }
 
             else if (mode == Mode.WaitingDraw)
@@ -301,6 +252,7 @@ namespace Project_DoHoa2D
                     break;
 
                 case Mode.WaitingDraw:
+                    shapes[shapes.Count - 1].Normalize();
                     mode = Mode.WaitingDraw;
                     break;
                 case Mode.Drawing:
@@ -399,57 +351,14 @@ namespace Project_DoHoa2D
             pnlMain.Invalidate();
         }
 
-        private void btnLine_Click(object sender, EventArgs e)
+        private void btnFillableShape_Click(object sender, EventArgs e)
+        {
+            ckbFill.Enabled = true;
+        }
+
+        private void btnUnfillableShape_Click(object sender, EventArgs e)
         {
             ckbFill.Enabled = false;
-        }
-
-        private void btnZigzag_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = false;
-
-        }
-
-        private void btnArc_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = false;
-
-        }
-
-        private void btnRectangle_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = true;
-
-        }
-
-        private void btnParallelogram_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = true;
-
-        }
-
-        private void btnCircle_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = true;
-
-        }
-
-        private void btnEllipse_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = true;
-
-        }
-
-        private void btnPolygon_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = true;
-
-        }
-
-        private void btnParabol_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = true;
-
         }
 
         private void ckbFill_CheckedChanged(object sender, EventArgs e)
@@ -492,9 +401,17 @@ namespace Project_DoHoa2D
 /*
  * Thêm chức năng Rotate
  * Thêm các đối tượng Ellipse, Parabol
- * Fix bug đang có.
+ * Fix bug đang có:
+ * (fixed) - Không chọn được hình chữ nhật vẽ ngược
+ * - Di chuyển hình tròn
+ * - Scale hình chữ nhật, bị ngược điểm
+ * - Không vẽ được hình tròn theo hướng 2 giờ
+ * - Lỗi khi scale hình tròn
+ * - Lỗi khi shape được chọn nằm chồng lên shape khác thì không scale được
+ * - Chỉnh sửa hàm Draw  (thêm thuộc tính fill Style)
+ * 
  * Hoàn thiện chức năng Scale, Rotate của những thằng còn lại ngoại trừ Line, Rect, Circle
- * Thêm chức năng Save, Load. Fill Style
+ * Thêm chức năng Save, Load.
  * 
  * Thêm Hyperbol
  * Thêm 1/2 circle, 1/2 ellipse
