@@ -96,6 +96,14 @@ namespace Project_DoHoa2D
                         selectedShape = shapes[i];
                         mode = Mode.Scaling;
                     }
+                    else if (shapes[i].AtRotatePosition(e.Location))
+                    {
+                        shapes[i].isSelected = true;
+                        prevPosition = e.Location;
+                        selectedShape = shapes[i];
+                        mode = Mode.Rotating;
+                    }
+
                     else
 
                    //Nghiên cứu gộp 3 hàm Inside, AtPositionRotate và AtScale thành
@@ -111,11 +119,6 @@ namespace Project_DoHoa2D
                         break;
                     }
                 }
-                //else if (shapes[i].AtPositionRotate(e.Location))
-                //{
-                //mode = Mode.Rotating;
-
-                //}
 
                 pnlMain.Invalidate();
 
@@ -204,10 +207,18 @@ namespace Project_DoHoa2D
                 pnlMain.Cursor = Cursors.Default;
                 for (int i = 0; i < shapes.Count; i++)
                 {
-                    if (shapes[i].isSelected && shapes[i].AtScalePosition(e.Location))
+                    if (shapes[i].isSelected)
                     {
-                        pnlMain.Cursor = Cursors.SizeNESW;
-                        break;
+                        if (shapes[i].AtRotatePosition(e.Location))
+                        {
+                            pnlMain.Cursor = Cursors.PanEast;
+                            break;
+                        }
+                        if (shapes[i].AtScalePosition(e.Location))
+                        {
+                            pnlMain.Cursor = Cursors.SizeNESW;
+                            break;
+                        }
                     }
                     else if (shapes[i].Inside(e.Location))
                     {
@@ -228,8 +239,10 @@ namespace Project_DoHoa2D
 
             else if (mode == Mode.Rotating)
             {
-                //Rotate thôi
-                //Chỉnh chuột lại
+                float alpha = (float) selectedShape.CalculateAngel(selectedShape.Center(), prevPosition, e.Location);
+                prevPosition = e.Location;
+                selectedShape.Configure(Angel: alpha);
+                pnlMain.Invalidate();
             }
             else if (mode == Mode.Scaling)
             {
@@ -399,10 +412,11 @@ namespace Project_DoHoa2D
 
 #region Những việc còn lại
 /*
- * Thêm chức năng Rotate
+ * Thêm chức năng Rotate (đã thêm)
  * Thêm các đối tượng Ellipse, Parabol
  * Fix bug đang có:
  * (fixed) - Không chọn được hình chữ nhật vẽ ngược
+ * - Khong chon được hcn sai khi scale hoặc xoay
  * - Di chuyển hình tròn
  * - Scale hình chữ nhật, bị ngược điểm
  * - Không vẽ được hình tròn theo hướng 2 giờ

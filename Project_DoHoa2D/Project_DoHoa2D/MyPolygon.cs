@@ -168,5 +168,10 @@ namespace Project_DoHoa2D
         {
             throw new NotImplementedException();
         }
+
+        public override bool AtRotatePosition(Point p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
