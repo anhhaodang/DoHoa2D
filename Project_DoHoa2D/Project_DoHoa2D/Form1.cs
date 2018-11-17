@@ -26,7 +26,6 @@ namespace Project_DoHoa2D
         int currentShape;
 
         private bool isDrawing;
-
         private bool isMouseDown;
         private bool isDrawingCurve;
         private bool isDrawingPolygon;
@@ -78,6 +77,7 @@ namespace Project_DoHoa2D
         private void pnlMain_MouseDown(object sender, MouseEventArgs e)
         {
             isMouseDown = true;
+            
 
             if (mode == Mode.Select)
             {
@@ -126,6 +126,15 @@ namespace Project_DoHoa2D
                     shapes.Add(rectangle);
                     //mode = Mode.WaitNewPoint;
                 }
+
+                else if (btnCircle.BackColor != Color.Transparent)
+                {
+                    MyCircle circle = new MyCircle(e.Location, e.Location);
+                    circle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1);
+                    shapes.Add(circle);
+                    //mode = Mode.WaitNewPoint;
+                }
+
             }
 
             else if (mode == Mode.WaitNewPoint)
@@ -135,7 +144,13 @@ namespace Project_DoHoa2D
                 //Nếu đang vẽ Polygon, PolyLines, Bezier thì set e.location vào điểm cuối,
                 //vẫn giữ Mode.WaitNewPoint
                 shapes[shapes.Count - 1].Set(e.Location, 1);
-                mode = Mode.WaitingDraw;
+              //  mode = Mode.WaitingDraw;
+                pnlMain.Invalidate();
+                mode = Mode.Select;
+            }
+            else if (mode == Mode.Draging)
+            {
+                mode = Mode.Select;
                 pnlMain.Invalidate();
             }
         }
@@ -144,7 +159,14 @@ namespace Project_DoHoa2D
         {
             if (mode == Mode.WaitNewPoint)
             {
-                shapes[shapes.Count - 1].Set(e.Location, 1); //Set điểm cuối chứ không phải 1
+                if (btnCircle.BackColor != Color.Transparent)
+                {
+                    Point curPoint = new Point(Math.Max(shapes[shapes.Count - 1].Get(0).X, e.Location.X),
+                                                Math.Max(shapes[shapes.Count - 1].Get(0).Y, e.Location.Y));
+                    shapes[shapes.Count - 1].Set(curPoint, 1);
+                }
+                else
+                    shapes[shapes.Count - 1].Set(e.Location, 1); //Set điểm cuối chứ không phải 1
                 pnlMain.Invalidate();
             }
             else if (mode == Mode.Select)
@@ -187,7 +209,7 @@ namespace Project_DoHoa2D
                 mode = Mode.WaitNewPoint;
 
             isMouseDown = false;
-            mode = Mode.Select;
+            //mode = Mode.Select;
         } 
 
         private void pnlMain_MouseDoubleClick(object sender, MouseEventArgs e)

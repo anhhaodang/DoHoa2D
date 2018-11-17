@@ -11,12 +11,14 @@ namespace Project_DoHoa2D
 
         public MyCircle()
         {
+            point = new List<Point>(2);
             this.point.Add(new Point(10, 10));
             this.point.Add(new Point(20, 20));
         }
 
         public MyCircle(Point p1, Point p2)
         {
+            point = new List<Point>(2);
             point.Add(p1);
             point.Add(p2);
         }
