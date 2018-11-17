@@ -99,7 +99,8 @@ namespace Project_DoHoa2D
                 data += p[i].Y.ToString() + " ";
             }
             data += dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString() 
-                + " " + backgroundColor.ToArgb().ToString() + " " + fillStyle.ToString() + "\n";
+                + " " + backgroundColor.ToArgb().ToString() + " " + fillStyle.ToString()
+                + " " + isFill.ToString() + " " + hatchStyle.GetHashCode() + "\n";
             StreamWriter sw = File.AppendText(filePath);
             sw.WriteLine(data);
             sw.Close();
@@ -133,6 +134,8 @@ namespace Project_DoHoa2D
             this.borderColor = Color.FromArgb(Convert.ToInt32(numPoint * 2 + 3));
             this.backgroundColor = Color.FromArgb(Convert.ToInt32(numPoint * 2 + 4));
             this.fillStyle = Int32.Parse(dt[numPoint * 2 + 5]);
+            this.isFill = bool.Parse(dt[numPoint * 2 + 6]);
+            this.hatchStyle = (HatchStyle)(Int32.Parse(dt[numPoint * 2 + 7]));
         }
 
       

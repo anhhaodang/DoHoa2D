@@ -99,10 +99,10 @@ namespace Project_DoHoa2D
             Point p2 = this.Get(1);
 
 
-            string data = "Retangle " + p1.X.ToString() + " " + p1.Y.ToString() + " " + p2.X.ToString() + " " + p2.Y.ToString()
+            string data = "Rectangle " + p1.X.ToString() + " " + p1.Y.ToString() + " " + p2.X.ToString() + " " + p2.Y.ToString()
                  + " " + dashStyle.ToString()
                  + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + " " + backgroundColor.ToArgb().ToString()
-                 + " " + fillStyle.ToString() + "\n";
+                 + " " + fillStyle.ToString() + " " + isFill.ToString() + " " + hatchStyle.GetHashCode()+  "\n";
 
             StreamWriter sw = File.AppendText(filePath);
             sw.WriteLine(data);
@@ -132,6 +132,8 @@ namespace Project_DoHoa2D
             this.borderColor = Color.FromArgb(Convert.ToInt32(dt[7]));
             this.backgroundColor = Color.FromArgb(Convert.ToInt32(dt[8]));
             this.fillStyle = Int32.Parse(dt[9]);
+            this.isFill = bool.Parse(dt[10]);
+            this.hatchStyle = (HatchStyle)(Int32.Parse(dt[11]));
         }
 
 
