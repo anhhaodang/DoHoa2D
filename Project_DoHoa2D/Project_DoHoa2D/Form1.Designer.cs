@@ -436,7 +436,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.cmbDashstyle);
             this.panel1.Location = new System.Drawing.Point(303, 33);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(252, 113);
             this.panel1.TabIndex = 17;
@@ -447,7 +447,7 @@
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.ckbFill);
             this.panel2.Location = new System.Drawing.Point(588, 33);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(267, 113);
             this.panel2.TabIndex = 18;
@@ -491,7 +491,7 @@
             "DashedHorizontal",
             "DashedVertical"});
             this.cmbFillStyle.Location = new System.Drawing.Point(75, 55);
-            this.cmbFillStyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbFillStyle.Margin = new System.Windows.Forms.Padding(4);
             this.cmbFillStyle.Name = "cmbFillStyle";
             this.cmbFillStyle.Size = new System.Drawing.Size(160, 24);
             this.cmbFillStyle.TabIndex = 17;
@@ -539,13 +539,11 @@
             this.Controls.Add(this.btnBorderColor);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "MyPaint";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.pnlShape.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);

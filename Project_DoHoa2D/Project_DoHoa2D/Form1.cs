@@ -31,7 +31,6 @@ namespace Project_DoHoa2D
         private bool isDrawingPolygon;
         private bool isDrawingBezier;
         private bool isMovingShape;
-        private bool isCheck;
 
         public Form1()
         {
@@ -60,7 +59,6 @@ namespace Project_DoHoa2D
             isDrawing = false;
             mode = Mode.Select;
             ckbFill.Checked = false;
-            isCheck = false;
             cmbFillStyle.Enabled = false;
             currentShape = -1; //No Shape
 
@@ -258,14 +256,27 @@ namespace Project_DoHoa2D
             switch (mode)
             {
                 case Mode.Scaling:
+                    if (selectedShape is MyRectangle
+                        || selectedShape is MyParallelogram 
+                        || selectedShape is MyCircle
+                        )
+                        shapes[shapes.Count - 1].Normalize();
+                    mode = Mode.Select;
+                    break;
                 case Mode.Rotating:
                 case Mode.Moving:
                 case Mode.Select:
                     mode = Mode.Select;
                     break;
 
-                case Mode.WaitingDraw:
-                    shapes[shapes.Count - 1].Normalize();
+                case Mode.WaitingDraw: //Vẽ xong hình, cần Normalize
+                    if (BtnChecked(btnRectangle)
+                        || BtnChecked(btnParallelogram)
+                        || BtnChecked(btnCircle)
+                        || BtnChecked(btnEllipse)
+                        || BtnChecked(btnParabol)
+                        )
+                        shapes[shapes.Count - 1].Normalize();
                     mode = Mode.WaitingDraw;
                     break;
                 case Mode.Drawing:
@@ -274,7 +285,12 @@ namespace Project_DoHoa2D
             }
 
             isMouseDown = false;
-        } 
+        }
+
+        private bool BtnChecked(Button b)
+        {
+            return (b.BackColor != Color.Transparent) ;
+        }
 
         private void pnlMain_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -283,30 +299,6 @@ namespace Project_DoHoa2D
 
         #endregion
 
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            //Graphics g = e.Graphics;
-            
-            
-            //Point point1 = new Point(30, 600);
-            //Point point2 = new Point(40, 300);
-            //Point point3 = new Point(50, 200);
-            //Point point4 = new Point(60, 300);
-            //Point point5 = new Point(70, 600);
-            
-                
-            //Point[] curvePoints = { point1, point3, point5 };
-            //Point[] curvePoints2 = { point1, point2, point3, point4, point5};
-            //g.DrawCurve(new Pen(Color.Black), curvePoints);
-            //g.DrawCurve(new Pen(Color.Blue), curvePoints2);
-
-        }
 
         private void btnShape_MouseClick(object sender, MouseEventArgs e)
         {
@@ -376,19 +368,20 @@ namespace Project_DoHoa2D
 
         private void ckbFill_CheckedChanged(object sender, EventArgs e)
         {
-            if (isCheck)
-            {
-                ckbFill.Checked = false;
-                cmbFillStyle.Enabled = false;
-                isCheck = false;
-                
-            }
-            else
-            {
-                ckbFill.Checked = true;
-                cmbFillStyle.Enabled = true;
-                isCheck = true;
-            }
+            //if (isCheck)
+            //{
+            //    ckbFill.Checked = false;
+            //    cmbFillStyle.Enabled = false;
+            //    isCheck = false;
+            //}
+            //else
+            //{
+            //    ckbFill.Checked = true;
+            //    cmbFillStyle.Enabled = true;
+            //    isCheck = true;
+            //}
+
+            cmbFillStyle.Enabled = ckbFill.Checked;
         }
 
         private void cmbFillStyle_SelectedIndexChanged(object sender, EventArgs e)
@@ -423,14 +416,13 @@ namespace Project_DoHoa2D
 }
 
 
-
 #region Những việc còn lại
 /*
  * (Added) Thêm chức năng Rotate
  * Thêm các đối tượng Ellipse, Parabol
  * Fix bug đang có:
  * (fixed) - Không chọn được hình chữ nhật vẽ ngược
- * - Khong chon được hình sau khi scale hoặc xoay
+ * (fixed) - Khong chon được hình sau khi scale hoặc xoay
  * - Di chuyển hình tròn
  * - Scale hình chữ nhật, bị ngược điểm
  * - Không vẽ được hình tròn theo hướng 2 giờ

@@ -48,7 +48,13 @@ namespace Project_DoHoa2D
             if (Width.HasValue)
                 width = Width.Value;
             if (Angel.HasValue)
+            {
                 angle += Angel.Value;
+                if (angle < -180)
+                    angle = 360 + angle;
+                else if (angle > 180)
+                    angle -= 360;
+            }
             if (IsSelected.HasValue)
                 isSelected = IsSelected.Value;
             if (BackgroundColor.HasValue)
