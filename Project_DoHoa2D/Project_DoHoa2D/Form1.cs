@@ -155,6 +155,28 @@ namespace Project_DoHoa2D
                     shapes.Add(rectangle);
                 }
 
+                else if (btnParallelogram.BackColor != Color.Transparent)
+                {
+                    MyParallelogram parallelogram = new MyParallelogram(e.Location, e.Location,e.Location, e.Location);
+                    if (ckbFill.Checked)
+                    {
+                        parallelogram.isFill = true;
+                        if (cmbFillStyle.SelectedIndex == 0)
+                        {
+                            parallelogram.fillStyle = 0;
+                        }
+                        else if (cmbFillStyle.SelectedIndex > 0)
+                        {
+                            parallelogram.fillStyle = 1;
+                            parallelogram.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
+                        }
+                    }
+
+                    parallelogram.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor);
+
+                    shapes.Add(parallelogram);
+                }
+
                 else if (btnCircle.BackColor != Color.Transparent)
                 {
                     MyCircle circle = new MyCircle(e.Location, e.Location);
@@ -174,6 +196,13 @@ namespace Project_DoHoa2D
                 //vẫn giữ Mode.Drawing
                 shapes[shapes.Count - 1].Set(e.Location, 1);
                 //  mode = Mode.WaitingDraw;
+                if (btnParallelogram.BackColor != Color.Transparent)
+                {
+                    shapes[shapes.Count - 1].Set(new Point(e.Location.X, (shapes[shapes.Count - 1].Get(0).Y + e.Location.Y) / 2), 1); //Set điểm cuối chứ không phải 1
+                    shapes[shapes.Count - 1].Set(e.Location, 2); //Set điểm cuối chứ không phải 1
+                    shapes[shapes.Count - 1].Set(new Point(shapes[shapes.Count - 1].Get(0).X, (shapes[shapes.Count - 1].Get(0).Y + e.Location.Y) / 2), 3); //Set điểm cuối chứ không phải 1
+
+                }
                 pnlMain.Invalidate();
                 mode = Mode.WaitingDraw; //Vẽ xong đối tượng
             }
@@ -198,7 +227,18 @@ namespace Project_DoHoa2D
                 //    int d = Math.Min(e.Location.X - );
                 //}
                 //else
+
+
                 shapes[shapes.Count - 1].Set(e.Location, 1); //Set điểm cuối chứ không phải 1
+
+                if (btnParallelogram.BackColor != Color.Transparent)
+                {
+                    shapes[shapes.Count - 1].Set(new Point(e.Location.X, (shapes[shapes.Count - 1].Get(0).Y + e.Location.Y)/2 ), 1); 
+                    shapes[shapes.Count - 1].Set(e.Location, 2 ); 
+                    shapes[shapes.Count - 1].Set(new Point(shapes[shapes.Count - 1].Get(0).X, (shapes[shapes.Count - 1].Get(0).Y + e.Location.Y) / 2), 3); 
+
+                }
+
                 pnlMain.Invalidate();
             }
             else if (mode == Mode.Select)

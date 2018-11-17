@@ -51,7 +51,12 @@ namespace Project_DoHoa2D
         public override void Draw(Graphics graphics)
         {
 
-            Point pivot = new Point((point[0].X + point[2].X) / 2, (point[0].Y + point[2].Y) / 2);
+            Point p0 = new Point(Math.Min(point[0].X, point[2].X), Math.Min(point[0].Y, point[2].Y));
+            Point p2 = new Point(Math.Max(point[0].X, point[2].X), Math.Max(point[0].Y, point[2].Y));
+
+            //Point pivot = new Point((point[0].X + point[2].X) / 2, (point[0].Y + point[2].Y) / 2);
+            Point pivot = new Point((p0.X + p2.X)/2, (p0.Y + p2.Y) / 2);
+
             graphics.TranslateTransform(pivot.X, pivot.Y);
             graphics.RotateTransform(angle);
 
@@ -59,9 +64,26 @@ namespace Project_DoHoa2D
             myPen.DashStyle = dashStyle;
             myPen.Width = width;
 
+            
+
             Point[] parallelogram = ConvertPoint(point, pivot);
             if (isFill)
-                graphics.FillPolygon(new SolidBrush(backgroundColor), parallelogram);
+            {
+                if (fillStyle == 0)
+                    graphics.FillPolygon(new SolidBrush(backgroundColor), parallelogram);
+                else
+                {
+                    HatchBrush hatchBrush = new HatchBrush(hatchStyle, backgroundColor);
+                    graphics.FillPolygon(hatchBrush, parallelogram);
+
+                }
+            }
+
+            if (isSelected)
+            {
+                int size = 3;
+                graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(point[0].X - size, point[0].Y - size, size * 2, size * 2));
+            }
 
             graphics.DrawPolygon(myPen, parallelogram);
             graphics.ResetTransform();
@@ -155,12 +177,13 @@ namespace Project_DoHoa2D
 
         public override bool AtScalePosition(Point p)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public override bool AtRotatePosition(Point p)
         {
-            throw new NotImplementedException();
+            return false;
+
         }
     }
 }
