@@ -87,5 +87,14 @@ namespace Project_DoHoa2D
             Point res = new Point(x, y);
             return res ;
         }
+
+        public void Normalize()
+        {
+            Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
+            Point p1 = new Point(Math.Max(point[0].X, point[1].X), Math.Max(point[0].Y, point[1].Y));
+
+            point[0] = p0;
+            point[1] = p1;
+        }
     }
 }

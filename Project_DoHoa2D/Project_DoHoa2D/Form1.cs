@@ -111,11 +111,12 @@ namespace Project_DoHoa2D
                         break;
                     }
                 }
-                    //else if (shapes[i].AtPositionRotate(e.Location))
-                    //{
-                    //mode = Mode.Rotating;
+                //else if (shapes[i].AtPositionRotate(e.Location))
+                //{
+                //mode = Mode.Rotating;
 
-                    //}
+                //}
+                pnlMain.Invalidate();
  
             }
 
@@ -235,6 +236,7 @@ namespace Project_DoHoa2D
                     break;
 
                 case Mode.WaitingDraw:
+                    shapes[shapes.Count - 1].Normalize();
                     mode = Mode.WaitingDraw;
                     break;
                 case Mode.Drawing:
@@ -243,7 +245,7 @@ namespace Project_DoHoa2D
             }
 
             isMouseDown = false;
-        } 
+        }
 
         private void pnlMain_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -260,20 +262,6 @@ namespace Project_DoHoa2D
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            //Graphics g = e.Graphics;
-            
-            
-            //Point point1 = new Point(30, 600);
-            //Point point2 = new Point(40, 300);
-            //Point point3 = new Point(50, 200);
-            //Point point4 = new Point(60, 300);
-            //Point point5 = new Point(70, 600);
-            
-                
-            //Point[] curvePoints = { point1, point3, point5 };
-            //Point[] curvePoints2 = { point1, point2, point3, point4, point5};
-            //g.DrawCurve(new Pen(Color.Black), curvePoints);
-            //g.DrawCurve(new Pen(Color.Blue), curvePoints2);
 
         }
 
@@ -333,57 +321,14 @@ namespace Project_DoHoa2D
             pnlMain.Invalidate();
         }
 
-        private void btnLine_Click(object sender, EventArgs e)
+        private void btnFillableShape_Click(object sender, EventArgs e)
+        {
+            ckbFill.Enabled = true;
+        }
+
+        private void btnUnfillableShape_Click(object sender, EventArgs e)
         {
             ckbFill.Enabled = false;
-        }
-
-        private void btnZigzag_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = false;
-
-        }
-
-        private void btnArc_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = false;
-
-        }
-
-        private void btnRectangle_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = true;
-
-        }
-
-        private void btnParallelogram_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = true;
-
-        }
-
-        private void btnCircle_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = true;
-
-        }
-
-        private void btnEllipse_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = true;
-
-        }
-
-        private void btnPolygon_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = true;
-
-        }
-
-        private void btnParabol_Click(object sender, EventArgs e)
-        {
-            ckbFill.Enabled = true;
-
         }
 
         private void ckbFill_CheckedChanged(object sender, EventArgs e)
@@ -413,7 +358,15 @@ namespace Project_DoHoa2D
 /*
  * Thêm chức năng Rotate
  * Thêm các đối tượng Ellipse, Parabol
- * Fix bug đang có.
+ * Fix bug đang có:
+ * (fixed) - Không chọn được hình chữ nhật vẽ ngược
+ * - Di chuyển hình tròn
+ * - Scale hình chữ nhật, bị ngược điểm
+ * - Không vẽ được hình tròn theo hướng 2 giờ
+ * - Lỗi khi scale hình tròn
+ * - Lỗi khi shape được chọn nằm chồng lên shape khác thì không scale được
+ * 
+ * 
  * Hoàn thiện chức năng Scale, Rotate của những thằng còn lại ngoại trừ Line, Rect, Circle
  * Thêm chức năng Save, Load. Fill Style
  * 
