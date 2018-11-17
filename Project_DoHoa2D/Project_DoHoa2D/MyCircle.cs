@@ -23,24 +23,33 @@ namespace Project_DoHoa2D
             point.Add(p2);
         }
 
-        public override void Set(Point p, int index){
-            int d1 = p.X - point[0].X;
-            int d2 = p.Y - point[0].Y;
+        public override void Set(Point p, int index)
+        {
+            int d1 = p.X - point[1 - index].X;
+            int d2 = p.Y - point[1 - index].Y;
             int d = Math.Min(Math.Abs(d1), Math.Abs(d2)); //Đường kính
+            int dx, dy;
+            if (d1 < 0)
+                dx = -d;
+            else dx = d;
 
-            point[index] = new Point(point[0].X + (d1 < 0 ? -d : d), point[1 - index].Y + (d2 < 0 ? -d : d));
-            //this.point[index] = p;
+            if (d2 < 0)
+                dy = -d;
+            else dy = d;
+
+            point[index] = new Point(point[1 - index].X + dx, point[1 - index].Y + dy);
 
         }
         public override Point Get(int index){ return new Point(0, 0); }
 
         public override void Draw(Graphics graphics){
 
+            Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
+            Point p1 = new Point(Math.Max(point[0].X, point[1].X), Math.Max(point[0].Y, point[1].Y));
+
             if (isSelected)
             {
                 //vẽ bao
-                Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
-                Point p1 = new Point(Math.Max(point[0].X, point[1].X), Math.Max(point[0].Y, point[1].Y));
 
                 Pen penBound = new Pen(Color.Blue);
                 penBound.DashStyle = DashStyle.Dash;
@@ -50,9 +59,9 @@ namespace Project_DoHoa2D
                 graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(p0.X - size, p0.Y - size, size * 2, size * 2));
             }
 
-            int d = point[1].X - point[0].X; //Đường kính đường tròn
+            int d = p1.X - p0.X; //Đường kính đường tròn
 
-            Rectangle r = new Rectangle(point[0].X, point[0].Y, d, d);
+            Rectangle r = new Rectangle(p0.X, p0.Y, d, d);
 
             if (isFill)
                 graphics.FillEllipse(new SolidBrush(backgroundColor), r);
@@ -123,8 +132,12 @@ namespace Project_DoHoa2D
 
         public override void Move(Point d)
         {
+            
             for (int i = 0; i < 2; i++)
-                Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
+            {
+                Point p = new Point(point[i].X + d.X, point[i].Y + d.Y);
+                point[i] = p;
+            }
         }
 
         public override bool AtScalePosition(Point p)
@@ -142,7 +155,7 @@ namespace Project_DoHoa2D
 
         public override bool AtRotatePosition(Point p)
         {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }

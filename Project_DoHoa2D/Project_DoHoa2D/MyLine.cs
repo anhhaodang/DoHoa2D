@@ -50,15 +50,15 @@ namespace Project_DoHoa2D
             {
                 int size = 3;
                 graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(a - size, b - size, size * 2, size * 2));
-                graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(c - size, d - size, size * 2, size * 2));
+                //graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(c - size, d - size, size * 2, size * 2));
             }
             graphics.ResetTransform();
         }
 
         
-        public override void Set(Point point, int index)
+        public override void Set(Point p, int index)
         {
-            this.point[index] = point;
+            this.point[index] = base.Rotate(base.Center(), p, -angle);
         }
         public override Point Get(int index)
         {
@@ -117,7 +117,7 @@ namespace Project_DoHoa2D
         {
             if (angle != 0)
             {
-                p = base.Rotate(base.Center(), p, angle);
+                p = base.Rotate(base.Center(), p, -angle);
             }
             bool res = false;
             GraphicsPath path = new GraphicsPath();
@@ -140,7 +140,7 @@ namespace Project_DoHoa2D
         {
             if (angle != 0)
             {
-                p = base.Rotate(base.Center(), p, angle);
+                p = base.Rotate(base.Center(), p, -angle);
             }
 
             if (Math.Abs(p.X - point[0].X) < 5 && Math.Abs(p.Y - point[0].Y) < 5)
@@ -152,7 +152,7 @@ namespace Project_DoHoa2D
         {
             if (angle != 0)
             {
-                p = base.Rotate(base.Center(), p, angle);
+                p = base.Rotate(base.Center(), p, -angle);
             }
 
             return (point[0].X - p.X > 5 && point[0].X - p.X < 15
