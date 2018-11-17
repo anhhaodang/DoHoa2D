@@ -139,6 +139,5 @@ namespace Project_DoHoa2D
             for (int i = 0; i < point.Count; i++)
                 Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
         }
-
     }
 }

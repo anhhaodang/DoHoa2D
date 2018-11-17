@@ -77,10 +77,10 @@
             this.btnLine.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLine.Image = ((System.Drawing.Image)(resources.GetObject("btnLine.Image")));
-            this.btnLine.Location = new System.Drawing.Point(2, 2);
-            this.btnLine.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLine.Location = new System.Drawing.Point(3, 2);
+            this.btnLine.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLine.Name = "btnLine";
-            this.btnLine.Size = new System.Drawing.Size(24, 26);
+            this.btnLine.Size = new System.Drawing.Size(32, 32);
             this.btnLine.TabIndex = 0;
             this.btnLine.UseVisualStyleBackColor = false;
             this.btnLine.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
@@ -95,10 +95,10 @@
             this.btnRectangle.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnRectangle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRectangle.Image = ((System.Drawing.Image)(resources.GetObject("btnRectangle.Image")));
-            this.btnRectangle.Location = new System.Drawing.Point(31, 2);
-            this.btnRectangle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRectangle.Location = new System.Drawing.Point(41, 2);
+            this.btnRectangle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRectangle.Name = "btnRectangle";
-            this.btnRectangle.Size = new System.Drawing.Size(24, 26);
+            this.btnRectangle.Size = new System.Drawing.Size(32, 32);
             this.btnRectangle.TabIndex = 0;
             this.btnRectangle.UseVisualStyleBackColor = false;
             this.btnRectangle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
@@ -113,10 +113,10 @@
             this.btnCircle.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnCircle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCircle.Image = ((System.Drawing.Image)(resources.GetObject("btnCircle.Image")));
-            this.btnCircle.Location = new System.Drawing.Point(59, 2);
-            this.btnCircle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCircle.Location = new System.Drawing.Point(79, 2);
+            this.btnCircle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCircle.Name = "btnCircle";
-            this.btnCircle.Size = new System.Drawing.Size(24, 26);
+            this.btnCircle.Size = new System.Drawing.Size(32, 32);
             this.btnCircle.TabIndex = 0;
             this.btnCircle.UseVisualStyleBackColor = false;
             this.btnCircle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
@@ -131,10 +131,10 @@
             this.btnEllipse.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnEllipse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEllipse.Image = ((System.Drawing.Image)(resources.GetObject("btnEllipse.Image")));
-            this.btnEllipse.Location = new System.Drawing.Point(88, 2);
-            this.btnEllipse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEllipse.Location = new System.Drawing.Point(117, 2);
+            this.btnEllipse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEllipse.Name = "btnEllipse";
-            this.btnEllipse.Size = new System.Drawing.Size(24, 26);
+            this.btnEllipse.Size = new System.Drawing.Size(32, 32);
             this.btnEllipse.TabIndex = 0;
             this.btnEllipse.UseVisualStyleBackColor = false;
             this.btnEllipse.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
@@ -149,10 +149,10 @@
             this.btnPolygon.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnPolygon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPolygon.Image = ((System.Drawing.Image)(resources.GetObject("btnPolygon.Image")));
-            this.btnPolygon.Location = new System.Drawing.Point(116, 2);
-            this.btnPolygon.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPolygon.Location = new System.Drawing.Point(155, 2);
+            this.btnPolygon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPolygon.Name = "btnPolygon";
-            this.btnPolygon.Size = new System.Drawing.Size(24, 26);
+            this.btnPolygon.Size = new System.Drawing.Size(32, 32);
             this.btnPolygon.TabIndex = 0;
             this.btnPolygon.UseVisualStyleBackColor = false;
             this.btnPolygon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
@@ -168,10 +168,10 @@
             this.btnParabol.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnParabol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnParabol.Image = ((System.Drawing.Image)(resources.GetObject("btnParabol.Image")));
-            this.btnParabol.Location = new System.Drawing.Point(2, 33);
-            this.btnParabol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnParabol.Location = new System.Drawing.Point(3, 41);
+            this.btnParabol.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnParabol.Name = "btnParabol";
-            this.btnParabol.Size = new System.Drawing.Size(24, 26);
+            this.btnParabol.Size = new System.Drawing.Size(32, 32);
             this.btnParabol.TabIndex = 0;
             this.btnParabol.UseVisualStyleBackColor = false;
             this.btnParabol.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
@@ -188,10 +188,10 @@
             this.pnlShape.Controls.Add(this.btnLine);
             this.pnlShape.Controls.Add(this.btnCircle);
             this.pnlShape.Controls.Add(this.btnRectangle);
-            this.pnlShape.Location = new System.Drawing.Point(59, 34);
-            this.pnlShape.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlShape.Location = new System.Drawing.Point(79, 42);
+            this.pnlShape.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlShape.Name = "pnlShape";
-            this.pnlShape.Size = new System.Drawing.Size(149, 65);
+            this.pnlShape.Size = new System.Drawing.Size(198, 80);
             this.pnlShape.TabIndex = 2;
             // 
             // btnArc
@@ -205,10 +205,10 @@
             this.btnArc.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnArc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnArc.Image = ((System.Drawing.Image)(resources.GetObject("btnArc.Image")));
-            this.btnArc.Location = new System.Drawing.Point(59, 34);
-            this.btnArc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnArc.Location = new System.Drawing.Point(79, 42);
+            this.btnArc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnArc.Name = "btnArc";
-            this.btnArc.Size = new System.Drawing.Size(24, 26);
+            this.btnArc.Size = new System.Drawing.Size(32, 32);
             this.btnArc.TabIndex = 0;
             this.btnArc.UseVisualStyleBackColor = false;
             this.btnArc.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
@@ -224,10 +224,10 @@
             this.btnZigzag.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnZigzag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnZigzag.Image = ((System.Drawing.Image)(resources.GetObject("btnZigzag.Image")));
-            this.btnZigzag.Location = new System.Drawing.Point(31, 33);
-            this.btnZigzag.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnZigzag.Location = new System.Drawing.Point(41, 41);
+            this.btnZigzag.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnZigzag.Name = "btnZigzag";
-            this.btnZigzag.Size = new System.Drawing.Size(24, 26);
+            this.btnZigzag.Size = new System.Drawing.Size(32, 32);
             this.btnZigzag.TabIndex = 0;
             this.btnZigzag.UseVisualStyleBackColor = false;
             this.btnZigzag.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
@@ -235,20 +235,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(2, 18);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(3, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(72, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "DashStyle";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 52);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(3, 64);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(44, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Width";
             // 
@@ -261,10 +259,10 @@
             "Dash",
             "DashDot",
             "DashDotDot"});
-            this.cmbDashstyle.Location = new System.Drawing.Point(62, 18);
-            this.cmbDashstyle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbDashstyle.Location = new System.Drawing.Point(83, 22);
+            this.cmbDashstyle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbDashstyle.Name = "cmbDashstyle";
-            this.cmbDashstyle.Size = new System.Drawing.Size(92, 21);
+            this.cmbDashstyle.Size = new System.Drawing.Size(121, 24);
             this.cmbDashstyle.TabIndex = 4;
             // 
             // menuStrip1
@@ -275,8 +273,8 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(886, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1181, 28);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -288,37 +286,37 @@
             this.saveToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(44, 24);
             this.toolStripMenuItem1.Text = "File";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(126, 26);
             this.newToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(126, 26);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(126, 26);
             this.saveToolStripMenuItem.Text = "Form1";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(126, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // btnBorderColor
@@ -328,10 +326,10 @@
             this.btnBorderColor.FlatAppearance.BorderSize = 0;
             this.btnBorderColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBorderColor.ForeColor = System.Drawing.Color.White;
-            this.btnBorderColor.Location = new System.Drawing.Point(665, 40);
-            this.btnBorderColor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBorderColor.Location = new System.Drawing.Point(887, 49);
+            this.btnBorderColor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBorderColor.Name = "btnBorderColor";
-            this.btnBorderColor.Size = new System.Drawing.Size(30, 32);
+            this.btnBorderColor.Size = new System.Drawing.Size(40, 39);
             this.btnBorderColor.TabIndex = 0;
             this.btnBorderColor.UseVisualStyleBackColor = false;
             this.btnBorderColor.Click += new System.EventHandler(this.btnBorderColor_Click);
@@ -345,10 +343,10 @@
             this.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelect.Image = ((System.Drawing.Image)(resources.GetObject("btnSelect.Image")));
-            this.btnSelect.Location = new System.Drawing.Point(21, 50);
-            this.btnSelect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSelect.Location = new System.Drawing.Point(28, 62);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(24, 26);
+            this.btnSelect.Size = new System.Drawing.Size(32, 32);
             this.btnSelect.TabIndex = 0;
             this.btnSelect.UseVisualStyleBackColor = false;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
@@ -360,29 +358,29 @@
             this.btnBackColor.FlatAppearance.BorderSize = 0;
             this.btnBackColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBackColor.ForeColor = System.Drawing.Color.White;
-            this.btnBackColor.Location = new System.Drawing.Point(724, 40);
-            this.btnBackColor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBackColor.Location = new System.Drawing.Point(965, 49);
+            this.btnBackColor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBackColor.Name = "btnBackColor";
-            this.btnBackColor.Size = new System.Drawing.Size(30, 32);
+            this.btnBackColor.Size = new System.Drawing.Size(40, 39);
             this.btnBackColor.TabIndex = 13;
             this.btnBackColor.UseVisualStyleBackColor = false;
             this.btnBackColor.Click += new System.EventHandler(this.btnBackColor_Click);
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(52, 53);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.trackBar1.Location = new System.Drawing.Point(69, 65);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(108, 45);
+            this.trackBar1.Size = new System.Drawing.Size(144, 56);
             this.trackBar1.TabIndex = 14;
             // 
             // ckbFill
             // 
             this.ckbFill.AutoSize = true;
-            this.ckbFill.Location = new System.Drawing.Point(10, 18);
-            this.ckbFill.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ckbFill.Location = new System.Drawing.Point(13, 22);
+            this.ckbFill.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ckbFill.Name = "ckbFill";
-            this.ckbFill.Size = new System.Drawing.Size(38, 17);
+            this.ckbFill.Size = new System.Drawing.Size(47, 21);
             this.ckbFill.TabIndex = 15;
             this.ckbFill.Text = "Fill";
             this.ckbFill.UseVisualStyleBackColor = true;
@@ -390,9 +388,10 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(662, 75);
+            this.label5.Location = new System.Drawing.Point(883, 92);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 26);
+            this.label5.Size = new System.Drawing.Size(51, 34);
             this.label5.TabIndex = 16;
             this.label5.Text = "Border\r\nColor";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -400,9 +399,10 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(706, 75);
+            this.label6.Location = new System.Drawing.Point(941, 92);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 26);
+            this.label6.Size = new System.Drawing.Size(84, 34);
             this.label6.TabIndex = 16;
             this.label6.Text = "Background\r\nColor";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -413,9 +413,10 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.cmbDashstyle);
-            this.panel1.Location = new System.Drawing.Point(227, 27);
+            this.panel1.Location = new System.Drawing.Point(303, 33);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(189, 92);
+            this.panel1.Size = new System.Drawing.Size(252, 113);
             this.panel1.TabIndex = 17;
             // 
             // panel2
@@ -423,25 +424,28 @@
             this.panel2.Controls.Add(this.cmbFillStyle);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.ckbFill);
-            this.panel2.Location = new System.Drawing.Point(441, 27);
+            this.panel2.Location = new System.Drawing.Point(588, 33);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 92);
+            this.panel2.Size = new System.Drawing.Size(267, 113);
             this.panel2.TabIndex = 18;
             // 
             // cmbFillStyle
             // 
             this.cmbFillStyle.FormattingEnabled = true;
-            this.cmbFillStyle.Location = new System.Drawing.Point(56, 45);
+            this.cmbFillStyle.Location = new System.Drawing.Point(75, 55);
+            this.cmbFillStyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbFillStyle.Name = "cmbFillStyle";
-            this.cmbFillStyle.Size = new System.Drawing.Size(121, 21);
+            this.cmbFillStyle.Size = new System.Drawing.Size(160, 24);
             this.cmbFillStyle.TabIndex = 17;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 49);
+            this.label3.Location = new System.Drawing.Point(8, 60);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 13);
+            this.label3.Size = new System.Drawing.Size(60, 17);
             this.label3.TabIndex = 16;
             this.label3.Text = "Fill Style";
             // 
@@ -449,21 +453,22 @@
             // 
             this.pnlMain.BackColor = System.Drawing.Color.White;
             this.pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlMain.Location = new System.Drawing.Point(0, 124);
-            this.pnlMain.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlMain.Location = new System.Drawing.Point(0, 153);
+            this.pnlMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(887, 493);
+            this.pnlMain.Size = new System.Drawing.Size(1181, 606);
             this.pnlMain.TabIndex = 12;
             this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
             this.pnlMain.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseDoubleClick);
             this.pnlMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseDown);
             this.pnlMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseMove);
+            this.pnlMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseUp);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 609);
+            this.ClientSize = new System.Drawing.Size(1181, 750);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label6);
@@ -475,6 +480,7 @@
             this.Controls.Add(this.pnlShape);
             this.Controls.Add(this.btnBorderColor);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
