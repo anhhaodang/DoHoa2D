@@ -131,6 +131,7 @@ namespace Project_DoHoa2D
         public void RemoveLastPoint()
         {
             point.RemoveAt(point.Count - 1);
+            numPoint--;
         }
     }
 }
