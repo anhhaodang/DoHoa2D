@@ -309,6 +309,7 @@ namespace Project_DoHoa2D
             else if (mode == Mode.Scaling)
             {
                 selectedShape.Set(e.Location, 0);
+
                 pnlMain.Invalidate();
             }
 
@@ -350,6 +351,7 @@ namespace Project_DoHoa2D
 
             isMouseDown = false;
         }
+
 
         private bool BtnChecked(Button b)
         {
