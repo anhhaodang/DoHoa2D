@@ -585,7 +585,7 @@ namespace Project_DoHoa2D
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void trkWidth_Scroll(object sender, EventArgs e)
