@@ -151,7 +151,7 @@ namespace Project_DoHoa2D
 
         public override void Extend_ExtendableShape(Point p)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

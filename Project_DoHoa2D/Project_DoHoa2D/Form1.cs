@@ -178,6 +178,15 @@ namespace Project_DoHoa2D
                     shapes.Add(polygon);
                 }
 
+                else if (BtnChecked(btnZigzag))
+                {
+                    MyPolyline polyline = new MyPolyline(e.Location, e.Location);
+
+                    polyline.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
+
+                    shapes.Add(polyline);
+                }
+
                 else if (BtnChecked(btnBezier))
                 {
                     MyBezier bezier = new MyBezier(e.Location, e.Location);
@@ -188,16 +197,45 @@ namespace Project_DoHoa2D
                 else if (BtnChecked(btnCircle))
                 {
                     MyCircle circle = new MyCircle(e.Location, e.Location);
+                   
                     if (ckbFill.Checked)
+                    {
                         circle.isFill = true;
+                        if (cmbFillStyle.SelectedIndex == 0)
+                        {
+                            circle.fillStyle = 0;
+                        }
+                        else if (cmbFillStyle.SelectedIndex > 0)
+                        {
+                            circle.fillStyle = 1;
+                            circle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
+                        }
+                    }
+
                     circle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
+
                     shapes.Add(circle);
                 }
 
                 else if (BtnChecked(btnEllipse))
                 {
                     MyEllipse ellipse = new MyEllipse(e.Location, e.Location);
-                    ellipse.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, IsFill: ckbFill.Checked);
+                    if (ckbFill.Checked)
+                    {
+                        ellipse.isFill = true;
+                        if (cmbFillStyle.SelectedIndex == 0)
+                        {
+                            ellipse.fillStyle = 0;
+                        }
+                        else if (cmbFillStyle.SelectedIndex > 0)
+                        {
+                            ellipse.fillStyle = 1;
+                            ellipse.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
+                        }
+                    }
+
+                    ellipse.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
+
                     shapes.Add(ellipse);
                 }
                 mode = Mode.Drawing;
@@ -205,7 +243,7 @@ namespace Project_DoHoa2D
 
             else if (mode == Mode.Drawing)
             {                
-                if (BtnChecked(btnPolygon))
+                if (BtnChecked(btnPolygon) || BtnChecked(btnZigzag))
                 {
                     shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
                     mode = Mode.Drawing;
@@ -244,7 +282,7 @@ namespace Project_DoHoa2D
             else if (mode == Mode.Drawing)
             {
                
-                if (BtnChecked(btnPolygon) || BtnChecked(btnBezier))
+                if (BtnChecked(btnPolygon) || BtnChecked(btnBezier) || BtnChecked(btnZigzag))
                 {
                     shapes[shapes.Count - 1].Set(e.Location, shapes[shapes.Count - 1].numPoint - 1);
                 }
@@ -346,7 +384,7 @@ namespace Project_DoHoa2D
         {
             if (mode == Mode.Drawing)
             {
-                if (BtnChecked(btnPolygon))
+                if (BtnChecked(btnPolygon) || BtnChecked(btnZigzag))
                 {
                     //shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
                     //shapes[shapes.Count - 1].RemoveLastPoint();
