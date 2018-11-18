@@ -8,6 +8,7 @@ namespace Project_DoHoa2D
     public abstract class MyShape
     {
         protected List<Point> point;
+        public int numPoint;
         protected Color borderColor = Color.Black;
         protected DashStyle dashStyle = DashStyle.Solid;
         protected float width = 1;
@@ -16,6 +17,7 @@ namespace Project_DoHoa2D
         protected Color backgroundColor = Color.White;
         public bool isFill = false;
 
+
         public float angle = 0;
         public bool isSelected = false;
 
@@ -23,8 +25,8 @@ namespace Project_DoHoa2D
         public abstract bool AtRotatePosition(Point p);
         public abstract bool AtScalePosition(Point p);
         public abstract void Move(Point d);
-
-        public abstract void Set(Point p, int index);
+        public abstract void Extend_ExtendableShape(Point p);
+        public abstract void Set(Point point, int index);
         public abstract Point Get(int index);
 
         public abstract void Draw(Graphics graphics);

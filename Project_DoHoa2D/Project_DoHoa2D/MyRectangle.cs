@@ -36,10 +36,6 @@ namespace Project_DoHoa2D
 
         public override void Draw(Graphics graphics)
         {
-            Pen p = new Pen(Color.Blue);
-            p.DashStyle = DashStyle.Dash;
-            graphics.DrawRectangle(p, new Rectangle(point[0], new Size(point[1].X - point[0].X, point[1].Y - point[0].Y)));
-
             Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
             Point p1 = new Point(Math.Max(point[0].X, point[1].X), Math.Max(point[0].Y, point[1].Y));
 
@@ -83,15 +79,15 @@ namespace Project_DoHoa2D
                 this.point[index] = base.Rotate(base.Center(), p, -angle);
         }
 
-        public void Configure(Color? BorderColor = null, DashStyle? DashStyle = null, 
-            float? Width = null, float? Angel = null, bool? IsSelected = null, bool? IsFill = null, Color? BackgroundColor = null)
-        {
-            base.Configure(BorderColor, DashStyle, Width, Angel, IsSelected);
-            if (IsFill.HasValue)
-                isFill = IsFill.Value;
-            if (BackgroundColor.HasValue)
-                backgroundColor = BackgroundColor.Value;
-        }
+        //public void Configure(Color? BorderColor = null, DashStyle? DashStyle = null, 
+        //    float? Width = null, float? Angel = null, bool? IsSelected = null, bool? IsFill = null, Color? BackgroundColor = null)
+        //{
+        //    base.Configure(BorderColor, DashStyle, Width, Angel, IsSelected);
+        //    if (IsFill.HasValue)
+        //        isFill = IsFill.Value;
+        //    if (BackgroundColor.HasValue)
+        //        backgroundColor = BackgroundColor.Value;
+        //}
 
         public override void Save(string filePath)
         {
@@ -178,6 +174,11 @@ namespace Project_DoHoa2D
             p = base.Rotate(base.Center(), p, -angle);
             return (point[0].X - p.X > 5 && point[0].X - p.X < 15 
                 && point[0].Y - p.Y > 5 && point[0].Y - p.Y < 15);
+        }
+
+        public override void Extend_ExtendableShape(Point p)
+        {
+            throw new NotImplementedException();
         }
     }
 }

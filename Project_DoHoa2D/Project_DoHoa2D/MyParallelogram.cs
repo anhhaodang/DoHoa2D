@@ -13,30 +13,24 @@ namespace Project_DoHoa2D
     {
         public MyParallelogram()
         {
-            point = new List<Point>(4);
-            point.Add(new Point(200, 100));
+            point = new List<Point>(2);
             point.Add(new Point(500, 100));
             point.Add(new Point(100, 300));
-            point.Add(new Point(400, 300));
 
         }
 
-        public MyParallelogram(Point p1, Point p2, Point p3, Point p4)
+        public MyParallelogram(Point p1, Point p2)
         {
-            point = new List<Point>(4);
+            point = new List<Point>(2);
             point.Add(p1);
             point.Add(p2);
-            point.Add(p3);
-            point.Add(p4);
         }
 
-        public MyParallelogram(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
+        public MyParallelogram(int x1, int y1, int x2, int y2)
         {
-            point = new List<Point>(4);
+            point = new List<Point>(2);
             point.Add(new Point(x1, y1));
             point.Add(new Point(x2, y2));
-            point.Add(new Point(x3, y3));
-            point.Add(new Point(x4, y4));
         }
         public Point[] ConvertPoint(List<Point> point, Point pivot)
         {
@@ -51,7 +45,11 @@ namespace Project_DoHoa2D
         public override void Draw(Graphics graphics)
         {
 
-            Point pivot = new Point((point[0].X + point[2].X) / 2, (point[0].Y + point[2].Y) / 2);
+            Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
+            Point p1 = new Point(Math.Max(point[0].X, point[1].X), Math.Max(point[0].Y, point[1].Y));
+
+            Point pivot = new Point((p0.X + p1.X)/2, (p0.Y + p1.Y) / 2);
+
             graphics.TranslateTransform(pivot.X, pivot.Y);
             graphics.RotateTransform(angle);
 
@@ -59,17 +57,41 @@ namespace Project_DoHoa2D
             myPen.DashStyle = dashStyle;
             myPen.Width = width;
 
-            Point[] parallelogram = ConvertPoint(point, pivot);
-            if (isFill)
-                graphics.FillPolygon(new SolidBrush(backgroundColor), parallelogram);
 
-            graphics.DrawPolygon(myPen, parallelogram);
+            Point[] parallelogram = ConvertPoint(point, pivot);
+            Point[] parallelogramToDraw = new Point[4];
+            parallelogramToDraw[0] = parallelogram[0]; parallelogramToDraw[2] = parallelogram[1];
+            parallelogramToDraw[1] = new Point((parallelogram[0].X+parallelogram[1].X) / 2, parallelogram[0].Y);
+            parallelogramToDraw[3] = new Point((parallelogram[0].X + parallelogram[1].X) / 2, parallelogram[1].Y);
+
+            Point pTopLeft = new Point(-(p1.X - p0.X) / 2, -(p1.Y - p0.Y) / 2);
+
+
+            if (isFill)
+            {
+                if (fillStyle == 0)
+                    graphics.FillPolygon(new SolidBrush(backgroundColor), parallelogramToDraw);
+                else
+                {
+                    HatchBrush hatchBrush = new HatchBrush(hatchStyle, backgroundColor);
+                    graphics.FillPolygon(hatchBrush, parallelogramToDraw);
+
+                }
+            }
+
+            if (isSelected)
+            {
+                int size = 3;
+                graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(pTopLeft.X - size, pTopLeft.Y - size, size * 2, size * 2));
+            }
+
+            graphics.DrawPolygon(myPen, parallelogramToDraw);
             graphics.ResetTransform();
         }
                
-        public override void Set(Point point, int index)
+        public override void Set(Point p, int index)
         {
-            this.point[index] = point;
+            this.point[index] = base.Rotate(base.Center(), p, -angle);
         }
 
         public override Point Get(int index)
@@ -82,11 +104,9 @@ namespace Project_DoHoa2D
         {
             Point p1 = this.Get(0);
             Point p2 = this.Get(1);
-            Point p3 = this.Get(2);
-            Point p4 = this.Get(3);
 
             string data = "Parallelogram " + p1.X.ToString() + " " + p1.Y.ToString() + " " + p2.X.ToString() + " " + p2.Y.ToString()
-                 + " " + p3.X.ToString() + " " + p3.Y.ToString() + " " + p4.X.ToString() + " " + p4.Y.ToString() + " " + dashStyle.ToString()
+                  + " " + dashStyle.ToString()
                  + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + " " + backgroundColor.ToArgb().ToString()
                 + " " + fillStyle.ToString() + " " + isFill.ToString() + " " + hatchStyle.GetHashCode() + "\n";
 
@@ -102,13 +122,11 @@ namespace Project_DoHoa2D
             string[] dt = data.Split(delimiters);
             Point p1 = new Point(Int32.Parse(dt[1]), Int32.Parse(dt[2]));
             Point p2 = new Point(Int32.Parse(dt[3]), Int32.Parse(dt[4]));
-            Point p3 = new Point(Int32.Parse(dt[5]), Int32.Parse(dt[6]));
-            Point p4 = new Point(Int32.Parse(dt[7]), Int32.Parse(dt[8]));
 
-            point = new List<Point>(4);
-            point.Add(p1); point.Add(p2); point.Add(p3); point.Add(p4);
+            point = new List<Point>(2);
+            point.Add(p1); point.Add(p2); 
 
-            switch (dt[9])
+            switch (dt[5])
             {
                 case "Dash": this.dashStyle = DashStyle.Dash; break;
                 case "DashDot": this.dashStyle = DashStyle.DashDot; break;
@@ -117,25 +135,28 @@ namespace Project_DoHoa2D
                 case "Solid": this.dashStyle = DashStyle.Solid; break;
                 case "Custom": this.dashStyle = DashStyle.Custom; break;
             }
-            this.width = Int32.Parse(dt[10]);
-            this.borderColor = Color.FromArgb(Convert.ToInt32(dt[11]));
-            this.backgroundColor = Color.FromArgb(Convert.ToInt32(dt[12]));
-            this.fillStyle = Int32.Parse(dt[13]);
-            this.isFill = bool.Parse(dt[14]);
-            this.hatchStyle = (HatchStyle)(Int32.Parse(dt[15]));
+            this.width = Int32.Parse(dt[6]);
+            this.borderColor = Color.FromArgb(Convert.ToInt32(dt[7]));
+            this.backgroundColor = Color.FromArgb(Convert.ToInt32(dt[8]));
+            this.fillStyle = Int32.Parse(dt[9]);
+            this.isFill = bool.Parse(dt[10]);
+            this.hatchStyle = (HatchStyle)(Int32.Parse(dt[11]));
         }
 
        
         public override bool Inside(Point p)
         {
+            p = base.Rotate(base.Center(), p, -angle);
+
             bool res = false;
 
-            Point[] parallelogram = new Point[4];
-            for (int i = 0; i < 4; i++)
-                parallelogram[i] = point[i];
+            Point[] parallelogramToDraw = new Point[4];
+            parallelogramToDraw[0] = point[0]; parallelogramToDraw[2] = point[1];
+            parallelogramToDraw[1] = new Point((point[0].X + point[1].X) / 2, point[0].Y);
+            parallelogramToDraw[3] = new Point((point[0].X + point[1].X) / 2, point[1].Y);
 
             GraphicsPath path = new GraphicsPath();
-            path.AddPolygon(parallelogram);
+            path.AddPolygon(parallelogramToDraw);
 
             if (isFill)
                 res = path.IsVisible(p);
@@ -149,16 +170,29 @@ namespace Project_DoHoa2D
 
         public override void Move(Point d)
         {
-            for (int i = 0; i < 4; i++)
-                Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
+            for (int i = 0; i < 2; i++)
+            {
+                Point p = new Point(point[i].X + d.X, point[i].Y + d.Y);
+                point[i] = p;
+            }
         }
 
         public override bool AtScalePosition(Point p)
         {
-            throw new NotImplementedException();
+            p = base.Rotate(base.Center(), p, -angle);
+            if (Math.Abs(p.X - point[0].X) < 5 && Math.Abs(p.Y - point[0].Y) < 5)
+                return true;
+            return false;
         }
 
         public override bool AtRotatePosition(Point p)
+        {
+            p = base.Rotate(base.Center(), p, -angle);
+            return (point[0].X - p.X > 5 && point[0].X - p.X < 15
+                && point[0].Y - p.Y > 5 && point[0].Y - p.Y < 15);
+        }
+
+        public override void Extend_ExtendableShape(Point p)
         {
             throw new NotImplementedException();
         }
