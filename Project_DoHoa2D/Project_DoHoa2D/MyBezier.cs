@@ -141,6 +141,8 @@ namespace Project_DoHoa2D
                 p[i] = this.Get(i);
 
             string data = "Bezier ";
+            data += point.Count.ToString() + " ";
+
             for (int i = 0; i < numPoint; i++)
             {
                 data += p[i].X.ToString() + " ";
@@ -154,18 +156,17 @@ namespace Project_DoHoa2D
         public override void Open(string data){
             char delimiters = ' ';
             string[] dt = data.Split(delimiters);
-            int numberString = dt.Length;
-            this.numPoint = (numberString - 6) / 2;
+            this.numPoint = Int32.Parse(dt[1]);
 
             Point[] p = new Point[numPoint];
-            for (int i = 0, j = 0; i < numPoint; i++, j += 2)
+            for (int i = 0, j = 1; i < numPoint; i++, j += 2)
                 p[i] = new Point(Int32.Parse(dt[(j + 1)]), Int32.Parse(dt[(j + 1) + 1]));
 
             point = new List<Point>(numPoint);
             for (int i = 0; i < numPoint; i++)
                 point.Add(p[i]);
 
-            switch (dt[numPoint * 2 + 1])
+            switch (dt[numPoint * 2 + 2])
             {
                 case "Dash": this.dashStyle = DashStyle.Dash; break;
                 case "DashDot": this.dashStyle = DashStyle.DashDot; break;
@@ -174,9 +175,9 @@ namespace Project_DoHoa2D
                 case "Solid": this.dashStyle = DashStyle.Solid; break;
                 case "Custom": this.dashStyle = DashStyle.Custom; break;
             }
-            this.width = Int32.Parse(dt[numPoint * 2 + 2]);
-            this.borderColor = Color.FromArgb(Convert.ToInt32(dt[numPoint * 2 + 3]));
-            this.angle = float.Parse(dt[numPoint * 2 + 4]);
+            this.width = Int32.Parse(dt[numPoint * 2 + 3]);
+            this.borderColor = Color.FromArgb(Convert.ToInt32(dt[numPoint * 2 + 4]));
+            this.angle = 0;//float.Parse(dt[numPoint * 2 + 5]);
         }
 
         public override bool AtScalePosition(Point p)
