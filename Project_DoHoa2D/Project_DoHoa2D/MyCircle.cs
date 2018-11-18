@@ -68,7 +68,17 @@ namespace Project_DoHoa2D
             Rectangle r = new Rectangle(p0.X, p0.Y, d, d);
 
             if (isFill)
-                graphics.FillEllipse(new SolidBrush(backgroundColor), r);
+            {
+                if (fillStyle == 0)
+                    graphics.FillEllipse(new SolidBrush(backgroundColor), r);
+                else
+                {
+                    HatchBrush hatchBrush = new HatchBrush(hatchStyle, backgroundColor);
+                    graphics.FillEllipse(hatchBrush, r);
+
+                }
+            }
+
 
             Pen p = new Pen(borderColor);
             p.DashStyle = dashStyle;
