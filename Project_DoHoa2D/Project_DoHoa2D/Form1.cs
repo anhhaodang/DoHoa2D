@@ -237,17 +237,25 @@ namespace Project_DoHoa2D
                 //Parabol thì thêm điểm e.Location vào 1, rồi về Mode.WaitingDraw
                 //Nếu đang vẽ Polygon, PolyLines, Bezier thì set e.location vào điểm cuối,
                 //vẫn giữ Mode.Drawing
-                if (btnPolygon.BackColor != Color.Transparent || btnBezier.BackColor != Color.Transparent)
+                if (btnPolygon.BackColor != Color.Transparent)
                 {
                     shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
                     mode = Mode.Drawing;
                 }
+                else if (btnBezier.BackColor != Color.Transparent)
+                {
+                    shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
+                    if (shapes[shapes.Count - 1].numPoint == 5)
+                    {
+                        mode = Mode.WaitingDraw; //Vẽ xong đối tượng
+                        shapes[shapes.Count - 1].RemoveLastPoint();
+                    }
+                }
                 else
                 {
-
                     shapes[shapes.Count - 1].Set(e.Location, 1);
                     //  mode = Mode.WaitingDraw;
-                    mode = Mode.WaitingDraw; //Vẽ xong đối tượng
+                    mode = Mode.WaitingDraw;
 
                 }
                 pnlMain.Invalidate();
