@@ -78,10 +78,13 @@ namespace Project_DoHoa2D
 
         public override void Save(string filePath)
         {
-            Point a = this.Get(0);
-            Point b = this.Get(1);
-            string data = "Circle " + a.X.ToString() + " " + a.Y.ToString() + " " + b.X.ToString() + " " + b.Y.ToString()
-                 + " " + dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + "\n";
+            Point p1 = this.Get(0);
+            Point p2 = this.Get(1);
+
+            string data = "Circle " + p1.X.ToString() + " " + p1.Y.ToString() + " " + p2.X.ToString() + " " + p2.Y.ToString()
+                 + " " + dashStyle.ToString()
+                 + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + " " + backgroundColor.ToArgb().ToString()
+                 + " " + fillStyle.ToString() + " " + isFill.ToString() + " " + hatchStyle.GetHashCode() + "\n";
 
             StreamWriter sw = File.AppendText(filePath);
             sw.WriteLine(data);

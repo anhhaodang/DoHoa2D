@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,12 +76,44 @@ namespace Project_DoHoa2D
 
         public override void Save(string filePath)
         {
-            throw new NotImplementedException();
+            Point p1 = this.Get(0);
+            Point p2 = this.Get(1);
+
+            string data = "Ellipse " + p1.X.ToString() + " " + p1.Y.ToString() + " " + p2.X.ToString() + " " + p2.Y.ToString()
+                 + " " + dashStyle.ToString()
+                 + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + " " + backgroundColor.ToArgb().ToString()
+                 + " " + fillStyle.ToString() + " " + isFill.ToString() + " " + hatchStyle.GetHashCode() + "\n";
+
+            StreamWriter sw = File.AppendText(filePath);
+            sw.WriteLine(data);
+            sw.Close();
         }
 
         public override void Open(string data)
         {
-            throw new NotImplementedException();
+            char delimiters = ' ';
+            string[] dt = data.Split(delimiters);
+            Point p1 = new Point(Int32.Parse(dt[1]), Int32.Parse(dt[2]));
+            Point p2 = new Point(Int32.Parse(dt[3]), Int32.Parse(dt[4]));
+
+            point = new List<Point>(2);
+            point.Add(p1); point.Add(p2);
+
+            switch (dt[5])
+            {
+                case "Dash": this.dashStyle = DashStyle.Dash; break;
+                case "DashDot": this.dashStyle = DashStyle.DashDot; break;
+                case "DashDotDot": this.dashStyle = DashStyle.DashDotDot; break;
+                case "Dot": this.dashStyle = DashStyle.Dot; break;
+                case "Solid": this.dashStyle = DashStyle.Solid; break;
+                case "Custom": this.dashStyle = DashStyle.Custom; break;
+            }
+            this.width = Int32.Parse(dt[6]);
+            this.borderColor = Color.FromArgb(Convert.ToInt32(dt[7]));
+            this.backgroundColor = Color.FromArgb(Convert.ToInt32(dt[8]));
+            this.fillStyle = Int32.Parse(dt[9]);
+            this.isFill = bool.Parse(dt[10]);
+            this.hatchStyle = (HatchStyle)(Int32.Parse(dt[11]));
         }
 
         public override bool Inside(Point p)

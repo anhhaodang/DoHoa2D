@@ -556,10 +556,20 @@ namespace Project_DoHoa2D
                             myCircle.Open(line);
                             shapes.Add(myCircle);
                             break;
+                        case "Ellipse":
+                            MyShape myEllipse = new MyEllipse();
+                            myEllipse.Open(line);
+                            shapes.Add(myEllipse);
+                            break;
                         case "Polygon":
                             MyShape myPolygon = new MyPolygon();
                             myPolygon.Open(line);
                             shapes.Add(myPolygon);
+                            break;
+                        case "Bezier":
+                            MyShape myBezier = new MyBezier();
+                            myBezier.Open(line);
+                            shapes.Add(myBezier);
                             break;
                         case "Polyline":
                             MyShape myPolyline = new MyPolyline();
