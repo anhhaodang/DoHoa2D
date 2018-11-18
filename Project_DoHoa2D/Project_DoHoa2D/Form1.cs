@@ -155,6 +155,13 @@ namespace Project_DoHoa2D
                     shapes.Add(rectangle);
                 }
 
+                else if (btnParabol.BackColor != Color.Transparent)
+                {
+                    MyParabol parabol = new MyParabol(e.Location, e.Location);
+                    parabol.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1);
+                    shapes.Add(parabol);
+                }
+
                 else if (btnParallelogram.BackColor != Color.Transparent)
                 {
                     MyParallelogram parallelogram = new MyParallelogram(e.Location, e.Location);

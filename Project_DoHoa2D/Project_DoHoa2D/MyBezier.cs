@@ -42,7 +42,15 @@ namespace Project_DoHoa2D
             bool res = false;
 
             GraphicsPath path = new GraphicsPath();
-            path.AddCurve(point.ToArray());
+            List<Point> pointArray = new List<Point>();
+            int i = 0;
+            while (pointArray.Count < 4)
+            {
+                pointArray.Add(point[i]);
+                if (i < point.Count - 1)
+                    i++;
+            }
+            path.AddBezier(pointArray[0], pointArray[1], pointArray[2], pointArray[3]);
 
             if (isFill)
                 res = path.IsVisible(p);
@@ -104,7 +112,7 @@ namespace Project_DoHoa2D
             }
 
             Point pivot = base.Center();
-            Point[] curve = ConvertPoint(point, pivot);
+            
 
             graphics.TranslateTransform(pivot.X, pivot.Y);
             graphics.RotateTransform(angle);
@@ -113,7 +121,16 @@ namespace Project_DoHoa2D
             myPen.DashStyle = dashStyle;
             myPen.Width = width;
 
-            graphics.DrawCurve(myPen, curve);
+            List<Point> pointArray = new List<Point>();
+            int idx = 0;
+            while (pointArray.Count < 4)
+            {
+                pointArray.Add(point[idx]);
+                if (idx < point.Count - 1)
+                    idx++;
+            }
+            Point[] bezier = ConvertPoint(pointArray, pivot);
+            graphics.DrawBezier(myPen, bezier[0], bezier[1], bezier[2], bezier[3]);
             graphics.ResetTransform();
 
         }
@@ -123,13 +140,13 @@ namespace Project_DoHoa2D
             for (int i = 0; i < numPoint; i++)
                 p[i] = this.Get(i);
 
-            string data = "Curve ";
+            string data = "Bezier ";
             for (int i = 0; i < numPoint; i++)
             {
                 data += p[i].X.ToString() + " ";
                 data += p[i].Y.ToString() + " ";
             }
-            data += dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + "\n";
+            data += dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + " " + angle.ToString() + "\n";
             StreamWriter sw = File.AppendText(filePath);
             sw.WriteLine(data);
             sw.Close();
@@ -158,7 +175,8 @@ namespace Project_DoHoa2D
                 case "Custom": this.dashStyle = DashStyle.Custom; break;
             }
             this.width = Int32.Parse(dt[numPoint * 2 + 2]);
-            this.borderColor = Color.FromArgb(Convert.ToInt32(numPoint * 2 + 3));
+            this.borderColor = Color.FromArgb(Convert.ToInt32(dt[numPoint * 2 + 3]));
+            this.angle = float.Parse(dt[numPoint * 2 + 4]);
         }
 
         public override bool AtScalePosition(Point p)
