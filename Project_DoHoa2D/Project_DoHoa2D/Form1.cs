@@ -17,21 +17,10 @@ namespace Project_DoHoa2D
     {
         List<Button> shapeButtons;
         List<MyShape> shapes = new List<MyShape>();
-
         Mode mode;
-
         MyShape selectedShape;
 
         private Point prevPosition;
-
-        int currentShape;
-
-        private bool isDrawing;
-        private bool isMouseDown;
-        private bool isDrawingCurve;
-        private bool isDrawingPolygon;
-        private bool isDrawingBezier;
-        private bool isMovingShape;
 
         public Form1()
         {
@@ -41,30 +30,15 @@ namespace Project_DoHoa2D
             shapeButtons = new List<Button> { btnSelect, btnLine, btnRectangle, btnParallelogram, btnCircle, btnEllipse, btnPolygon, btnParabol, btnZigzag, btnBezier };
             #endregion
 
-            #region Add Tool Buttons
-            //toolButtons = new List<Button> { btnFill, btnMove, btnRotate, btnScale };
-            #endregion
-
-            #region Add Color Buttons
-            //colorButtons = new List<Button>();
-            //for (int i = 0; i < colorList.Length; i++)
-            //    colorButtons.Add(
-            //        (Button)this.Controls.Find("btnColor" + colorList[i], true)[0]
-            //        );
-            #endregion
-
             #region Set Default Value
             btnSelect.BackColor = Color.SkyBlue;
             cmbDashstyle.SelectedIndex = 0;
             trkWidth.Value = 1;
-            isDrawing = false;
             mode = Mode.Select;
             ckbFill.Checked = false;
             cmbFillStyle.Enabled = false;
-            currentShape = -1; //No Shape
 
             #endregion
-
 
         }
 
@@ -77,9 +51,7 @@ namespace Project_DoHoa2D
         }
 
         private void pnlMain_MouseDown(object sender, MouseEventArgs e)
-        {
-            isMouseDown = true;
-
+        {          
             if (mode == Mode.Select)
             {
                 for (int i = 0; i < shapes.Count; i++)
@@ -127,13 +99,13 @@ namespace Project_DoHoa2D
 
             else if (mode == Mode.WaitingDraw)
             {
-                if (btnLine.BackColor != Color.Transparent)
+                if (BtnChecked(btnLine))
                 {
                     MyLine line = new MyLine(e.Location, e.Location);
                     line.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
                     shapes.Add(line);
                 }
-                else if (btnRectangle.BackColor != Color.Transparent)
+                else if (BtnChecked(btnRectangle))
                 {
                     MyRectangle rectangle = new MyRectangle(e.Location, e.Location);
                     if (ckbFill.Checked)
@@ -155,14 +127,14 @@ namespace Project_DoHoa2D
                     shapes.Add(rectangle);
                 }
 
-                else if (btnParabol.BackColor != Color.Transparent)
+                else if (BtnChecked(btnParabol))
                 {
                     MyParabol parabol = new MyParabol(e.Location, e.Location);
                     parabol.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1);
                     shapes.Add(parabol);
                 }
 
-                else if (btnParallelogram.BackColor != Color.Transparent)
+                else if (BtnChecked(btnParallelogram))
                 {
                     MyParallelogram parallelogram = new MyParallelogram(e.Location, e.Location);
                     if (ckbFill.Checked)
@@ -184,7 +156,7 @@ namespace Project_DoHoa2D
                     shapes.Add(parallelogram);
                 }
 
-                else if (btnPolygon.BackColor != Color.Transparent)
+                else if (BtnChecked(btnPolygon))
                 {
                     MyPolygon polygon = new MyPolygon(e.Location, e.Location);
                     if (ckbFill.Checked)
@@ -206,14 +178,14 @@ namespace Project_DoHoa2D
                     shapes.Add(polygon);
                 }
 
-                else if (btnBezier.BackColor != Color.Transparent)
+                else if (BtnChecked(btnBezier))
                 {
                     MyBezier bezier = new MyBezier(e.Location, e.Location);
                     bezier.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
                     shapes.Add(bezier);
                 }
 
-                else if (btnCircle.BackColor != Color.Transparent)
+                else if (BtnChecked(btnCircle))
                 {
                     MyCircle circle = new MyCircle(e.Location, e.Location);
                     if (ckbFill.Checked)
@@ -222,7 +194,7 @@ namespace Project_DoHoa2D
                     shapes.Add(circle);
                 }
 
-                else if (btnEllipse.BackColor != Color.Transparent)
+                else if (BtnChecked(btnEllipse))
                 {
                     MyEllipse ellipse = new MyEllipse(e.Location, e.Location);
                     ellipse.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, IsFill: ckbFill.Checked);
@@ -232,17 +204,13 @@ namespace Project_DoHoa2D
             }
 
             else if (mode == Mode.Drawing)
-            {
-                //Xet xem đang vẽ hình gì. Nếu vẽ hình Line, Rect, Circle, Ellipse, HBH
-                //Parabol thì thêm điểm e.Location vào 1, rồi về Mode.WaitingDraw
-                //Nếu đang vẽ Polygon, PolyLines, Bezier thì set e.location vào điểm cuối,
-                //vẫn giữ Mode.Drawing
-                if (btnPolygon.BackColor != Color.Transparent)
+            {                
+                if (BtnChecked(btnPolygon))
                 {
                     shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
                     mode = Mode.Drawing;
                 }
-                else if (btnBezier.BackColor != Color.Transparent)
+                else if (BtnChecked(btnBezier))
                 {
                     shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
                     if (shapes[shapes.Count - 1].numPoint == 5)
@@ -254,7 +222,6 @@ namespace Project_DoHoa2D
                 else
                 {
                     shapes[shapes.Count - 1].Set(e.Location, 1);
-                    //  mode = Mode.WaitingDraw;
                     mode = Mode.WaitingDraw;
 
                 }
@@ -277,7 +244,7 @@ namespace Project_DoHoa2D
             else if (mode == Mode.Drawing)
             {
                
-                if (btnPolygon.BackColor != Color.Transparent || btnBezier.BackColor != Color.Transparent)
+                if (BtnChecked(btnPolygon) || BtnChecked(btnBezier))
                 {
                     shapes[shapes.Count - 1].Set(e.Location, shapes[shapes.Count - 1].numPoint - 1);
                 }
@@ -334,8 +301,6 @@ namespace Project_DoHoa2D
 
                 pnlMain.Invalidate();
             }
-
-
         }
 
         private void pnlMain_MouseUp(object sender, MouseEventArgs e)
@@ -370,10 +335,7 @@ namespace Project_DoHoa2D
                     mode = Mode.Drawing;
                     break;
             }
-
-            isMouseDown = false;
         }
-
 
         private bool BtnChecked(Button b)
         {
@@ -384,14 +346,14 @@ namespace Project_DoHoa2D
         {
             if (mode == Mode.Drawing)
             {
-                if (btnPolygon.BackColor != Color.Transparent)
+                if (BtnChecked(btnPolygon))
                 {
                     //shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
                     //shapes[shapes.Count - 1].RemoveLastPoint();
                     //shapes[shapes.Count - 1].RemoveLastPoint();
                     mode = Mode.WaitingDraw;
                 }
-                else if (btnBezier.BackColor != Color.Transparent)
+                else if (BtnChecked(btnBezier))
                 {
                     shapes[shapes.Count - 1].RemoveLastPoint();
                     shapes[shapes.Count - 1].RemoveLastPoint();
@@ -401,7 +363,6 @@ namespace Project_DoHoa2D
                 pnlMain.Invalidate();
             }
         }
-
         #endregion
 
 
@@ -412,7 +373,6 @@ namespace Project_DoHoa2D
             Button clickedShape = sender as Button;
             clickedShape.BackColor = CONST.COLOR_CURRENT_SHAPE;
             btnSelect.BackColor = Color.Transparent;
-            isDrawing = true;
             mode = Mode.WaitingDraw;
             pnlMain.Cursor = Cursors.Cross;
         }
@@ -422,10 +382,7 @@ namespace Project_DoHoa2D
             for (int i = 0; i < shapeButtons.Count; i++)
                 shapeButtons[i].BackColor = Color.Transparent;
             btnSelect.BackColor = CONST.COLOR_ACTIVE_SELECT_BUTTON;
-            isDrawing = false;
             mode = Mode.Select;
-
-
         }
 
         private void btnBorderColor_Click(object sender, EventArgs e)
@@ -474,18 +431,6 @@ namespace Project_DoHoa2D
 
         private void ckbFill_CheckedChanged(object sender, EventArgs e)
         {
-            //if (isCheck)
-            //{
-            //    ckbFill.Checked = false;
-            //    cmbFillStyle.Enabled = false;
-            //    isCheck = false;
-            //}
-            //else
-            //{
-            //    ckbFill.Checked = true;
-            //    cmbFillStyle.Enabled = true;
-            //    isCheck = true;
-            //}
 
             cmbFillStyle.Enabled = ckbFill.Checked;
         }
