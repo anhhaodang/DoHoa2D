@@ -372,6 +372,8 @@ namespace Project_DoHoa2D
                 if (btnPolygon.BackColor != Color.Transparent)
                 {
                     //shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
+                    //shapes[shapes.Count - 1].RemoveLastPoint();
+                    //shapes[shapes.Count - 1].RemoveLastPoint();
                     mode = Mode.WaitingDraw;
                 }
                 else if (btnBezier.BackColor != Color.Transparent)

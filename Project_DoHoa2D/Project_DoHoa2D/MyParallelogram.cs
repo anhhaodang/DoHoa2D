@@ -108,7 +108,7 @@ namespace Project_DoHoa2D
             string data = "Parallelogram " + p1.X.ToString() + " " + p1.Y.ToString() + " " + p2.X.ToString() + " " + p2.Y.ToString()
                   + " " + dashStyle.ToString()
                  + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + " " + backgroundColor.ToArgb().ToString()
-                + " " + fillStyle.ToString() + " " + isFill.ToString() + " " + hatchStyle.GetHashCode() + "\n";
+                + " " + fillStyle.ToString() + " " + isFill.ToString() + " " + hatchStyle.GetHashCode() + " " + angle.ToString() + "\n";
 
 
             StreamWriter sw = File.AppendText(filePath);
@@ -141,9 +141,11 @@ namespace Project_DoHoa2D
             this.fillStyle = Int32.Parse(dt[9]);
             this.isFill = bool.Parse(dt[10]);
             this.hatchStyle = (HatchStyle)(Int32.Parse(dt[11]));
+            this.angle = float.Parse(dt[12]);
+
         }
 
-       
+
         public override bool Inside(Point p)
         {
             p = base.Rotate(base.Center(), p, -angle);

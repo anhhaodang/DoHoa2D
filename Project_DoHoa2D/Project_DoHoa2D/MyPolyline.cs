@@ -92,7 +92,7 @@ namespace Project_DoHoa2D
                 data += p[i].Y.ToString() + " ";
             }
             data += dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString()
-              + "\n";
+              + " " + angle.ToString() + "\n";
             StreamWriter sw = File.AppendText(filePath);
             sw.WriteLine(data);
             sw.Close();
@@ -124,9 +124,11 @@ namespace Project_DoHoa2D
             }
             this.width = Int32.Parse(dt[numPoint * 2 + 2]);
             this.borderColor = Color.FromArgb(Convert.ToInt32(numPoint * 2 + 3));
+            this.angle = float.Parse(dt[numPoint * 2 + 4]);
+
         }
 
-       
+
 
         public override bool Inside(Point p)
         {

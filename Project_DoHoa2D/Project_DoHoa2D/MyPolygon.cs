@@ -126,14 +126,14 @@ namespace Project_DoHoa2D
                 p[i] = this.Get(i);
 
             string data = "Polygon ";
-            for (int i = 0; i < numPoint; i++)
+            for (int i = 0; i < numPoint - 2; i++)
             {
                 data += p[i].X.ToString() + " ";
                 data += p[i].Y.ToString() + " ";
             }
             data += dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString() 
                 + " " + backgroundColor.ToArgb().ToString() + " " + fillStyle.ToString()
-                + " " + isFill.ToString() + " " + hatchStyle.GetHashCode() + "\n";
+                + " " + isFill.ToString() + " " + hatchStyle.GetHashCode() + " " + angle.ToString() + "\n";
             StreamWriter sw = File.AppendText(filePath);
             sw.WriteLine(data);
             sw.Close();
@@ -144,7 +144,7 @@ namespace Project_DoHoa2D
             char delimiters = ' ';
             string[] dt = data.Split(delimiters);
             int numberString = dt.Length;
-            this.numPoint = (numberString - 6) / 2;
+            this.numPoint = (numberString - 9) / 2;
 
             Point[] p = new Point[numPoint];
             for (int i = 0, j = 0; i < numPoint; i++, j+=2)
@@ -154,7 +154,8 @@ namespace Project_DoHoa2D
             for (int i = 0; i < numPoint; i++)
                 point.Add(p[i]);
 
-            switch (dt[numPoint * 2 +1])
+            int k = numPoint;
+            switch (dt[k * 2 +1])
             {
                 case "Dash": this.dashStyle = DashStyle.Dash; break;
                 case "DashDot": this.dashStyle = DashStyle.DashDot; break;
@@ -163,15 +164,17 @@ namespace Project_DoHoa2D
                 case "Solid": this.dashStyle = DashStyle.Solid; break;
                 case "Custom": this.dashStyle = DashStyle.Custom; break;
             }
-            this.width = Int32.Parse(dt[numPoint * 2 + 2]);
-            this.borderColor = Color.FromArgb(Convert.ToInt32(numPoint * 2 + 3));
-            this.backgroundColor = Color.FromArgb(Convert.ToInt32(numPoint * 2 + 4));
-            this.fillStyle = Int32.Parse(dt[numPoint * 2 + 5]);
-            this.isFill = bool.Parse(dt[numPoint * 2 + 6]);
-            this.hatchStyle = (HatchStyle)(Int32.Parse(dt[numPoint * 2 + 7]));
+            this.width = Int32.Parse(dt[k * 2 + 2]);
+            this.borderColor = Color.FromArgb(Convert.ToInt32(dt[k * 2 + 3]));
+            this.backgroundColor = Color.FromArgb(Convert.ToInt32(dt[k * 2 + 4]));
+            this.fillStyle = Int32.Parse(dt[k * 2 + 5]);
+            this.isFill = bool.Parse(dt[k * 2 + 6]);
+            this.hatchStyle = (HatchStyle)(Int32.Parse(dt[k * 2 + 7]));
+            this.angle = float.Parse(dt[k * 2 + 8]);
+
         }
 
-      
+
 
         public override bool Inside(Point p)
         {

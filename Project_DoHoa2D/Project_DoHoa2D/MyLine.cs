@@ -70,7 +70,8 @@ namespace Project_DoHoa2D
             Point a = this.Get(0);
             Point b = this.Get(1);
             string data = "Line " +  a.X.ToString() + " " + a.Y.ToString() + " " + b.X.ToString() + " " + b.Y.ToString()
-                 + " " + dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + "\n";
+                 + " " + dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString() 
+                 + " " + angle.ToString() + "\n";
 
             StreamWriter sw = File.AppendText(filePath);
             sw.WriteLine(data);
@@ -99,6 +100,7 @@ namespace Project_DoHoa2D
             }
             this.width = Int32.Parse(dt[6]);
             this.borderColor = Color.FromArgb(Convert.ToInt32(dt[7]));
+            this.angle = float.Parse(dt[8]);
         }
 
         public override bool Inside(Point p)
