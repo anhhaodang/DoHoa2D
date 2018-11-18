@@ -14,17 +14,12 @@ namespace Project_DoHoa2D
 
         public MyRectangle()
         {
-            point = new List<Point>(2);
-            point.Add(new Point(100, 100));
-            point.Add(new Point(110, 110));
-
+            point = new List<Point> { new Point(100, 100), new Point(110, 110) };
         }
 
         public MyRectangle(Point p1, Point p2)
         {
-            point = new List<Point>(2);
-            point.Add(p1);
-            point.Add(p2);
+            point = new List<Point> { p1, p2 };
         }
 
         public MyRectangle(int x1, int y1, int x2, int y2)
@@ -78,16 +73,6 @@ namespace Project_DoHoa2D
         {
                 this.point[index] = base.Rotate(base.Center(), p, -angle);
         }
-
-        //public void Configure(Color? BorderColor = null, DashStyle? DashStyle = null, 
-        //    float? Width = null, float? Angel = null, bool? IsSelected = null, bool? IsFill = null, Color? BackgroundColor = null)
-        //{
-        //    base.Configure(BorderColor, DashStyle, Width, Angel, IsSelected);
-        //    if (IsFill.HasValue)
-        //        isFill = IsFill.Value;
-        //    if (BackgroundColor.HasValue)
-        //        backgroundColor = BackgroundColor.Value;
-        //}
 
         public override void Save(string filePath)
         {
@@ -178,7 +163,7 @@ namespace Project_DoHoa2D
 
         public override void Extend_ExtendableShape(Point p)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
