@@ -11,7 +11,6 @@ namespace Project_DoHoa2D
 {
     class MyPolyline : MyShape
     {
-        private int numPoint;
         public MyPolyline()
         {
             point = new List<Point>(4);
@@ -158,6 +157,11 @@ namespace Project_DoHoa2D
         }
 
         public override bool AtRotatePosition(Point p)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Extend_ExtendableShape(Point p)
         {
             throw new NotImplementedException();
         }

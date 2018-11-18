@@ -157,7 +157,7 @@ namespace Project_DoHoa2D
 
                 else if (btnParallelogram.BackColor != Color.Transparent)
                 {
-                    MyParallelogram parallelogram = new MyParallelogram(e.Location, e.Location,e.Location, e.Location);
+                    MyParallelogram parallelogram = new MyParallelogram(e.Location, e.Location);
                     if (ckbFill.Checked)
                     {
                         parallelogram.isFill = true;
@@ -168,13 +168,35 @@ namespace Project_DoHoa2D
                         else if (cmbFillStyle.SelectedIndex > 0)
                         {
                             parallelogram.fillStyle = 1;
-                            parallelogram.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
+                            parallelogram.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
                         }
                     }
 
-                    parallelogram.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: 1, BackgroundColor: btnBackColor.BackColor);
+                    parallelogram.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
 
                     shapes.Add(parallelogram);
+                }
+
+                else if (btnPolygon.BackColor != Color.Transparent)
+                {
+                    MyPolygon polygon = new MyPolygon(e.Location, e.Location);
+                    if (ckbFill.Checked)
+                    {
+                        polygon.isFill = true;
+                        if (cmbFillStyle.SelectedIndex == 0)
+                        {
+                            polygon.fillStyle = 0;
+                        }
+                        else if (cmbFillStyle.SelectedIndex > 0)
+                        {
+                            polygon.fillStyle = 1;
+                            polygon.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
+                        }
+                    }
+
+                    polygon.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
+
+                    shapes.Add(polygon);
                 }
 
                 else if (btnCircle.BackColor != Color.Transparent)
@@ -194,17 +216,20 @@ namespace Project_DoHoa2D
                 //Parabol thì thêm điểm e.Location vào 1, rồi về Mode.WaitingDraw
                 //Nếu đang vẽ Polygon, PolyLines, Bezier thì set e.location vào điểm cuối,
                 //vẫn giữ Mode.Drawing
-                shapes[shapes.Count - 1].Set(e.Location, 1);
-                //  mode = Mode.WaitingDraw;
-                if (btnParallelogram.BackColor != Color.Transparent)
+                if (btnPolygon.BackColor != Color.Transparent)
                 {
-                    shapes[shapes.Count - 1].Set(new Point(e.Location.X, (shapes[shapes.Count - 1].Get(0).Y + e.Location.Y) / 2), 1); //Set điểm cuối chứ không phải 1
-                    shapes[shapes.Count - 1].Set(e.Location, 2); //Set điểm cuối chứ không phải 1
-                    shapes[shapes.Count - 1].Set(new Point(shapes[shapes.Count - 1].Get(0).X, (shapes[shapes.Count - 1].Get(0).Y + e.Location.Y) / 2), 3); //Set điểm cuối chứ không phải 1
+                    shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
+                    mode = Mode.Drawing;
+                }
+                else
+                {
+
+                    shapes[shapes.Count - 1].Set(e.Location, 1);
+                    //  mode = Mode.WaitingDraw;
+                    mode = Mode.WaitingDraw; //Vẽ xong đối tượng
 
                 }
                 pnlMain.Invalidate();
-                mode = Mode.WaitingDraw; //Vẽ xong đối tượng
             }
             else if (mode == Mode.Moving)
             {
@@ -228,16 +253,14 @@ namespace Project_DoHoa2D
                 //}
                 //else
 
-
-                shapes[shapes.Count - 1].Set(e.Location, 1); //Set điểm cuối chứ không phải 1
-
-                if (btnParallelogram.BackColor != Color.Transparent)
+                
+                if (btnPolygon.BackColor != Color.Transparent)
                 {
-                    shapes[shapes.Count - 1].Set(new Point(e.Location.X, (shapes[shapes.Count - 1].Get(0).Y + e.Location.Y)/2 ), 1); 
-                    shapes[shapes.Count - 1].Set(e.Location, 2 ); 
-                    shapes[shapes.Count - 1].Set(new Point(shapes[shapes.Count - 1].Get(0).X, (shapes[shapes.Count - 1].Get(0).Y + e.Location.Y) / 2), 3); 
-
+                    shapes[shapes.Count - 1].Set(e.Location, shapes[shapes.Count - 1].numPoint -1);
+                   //     .Set(e.Location, shapes[shapes.Count - 1].point.Count -1); //Set điểm cuối chứ không phải 1
                 }
+                else
+                    shapes[shapes.Count - 1].Set(e.Location, 1); 
 
                 pnlMain.Invalidate();
             }
@@ -335,7 +358,17 @@ namespace Project_DoHoa2D
 
         private void pnlMain_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-
+            if (mode == Mode.Drawing)
+            {
+                
+                if (btnPolygon.BackColor != Color.Transparent)
+                {
+                    shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
+                    mode = Mode.WaitingDraw;
+                }
+               
+                pnlMain.Invalidate();
+            }
         }
 
         #endregion
