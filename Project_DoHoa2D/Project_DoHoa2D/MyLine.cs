@@ -101,18 +101,6 @@ namespace Project_DoHoa2D
             this.borderColor = Color.FromArgb(Convert.ToInt32(dt[7]));
         }
 
-        //public override bool AtRotatePosition(Point p)
-        //{
-
-        //    return true;
-        //}
-
-        //public override bool AtBoundingBox(Point p)
-        //{
-
-        //    return true;
-        //}
-
         public override bool Inside(Point p)
         {
             if (angle != 0)

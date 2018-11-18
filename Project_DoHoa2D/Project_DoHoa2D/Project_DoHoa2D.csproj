@@ -58,6 +58,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="MyCircle.cs" />
+    <Compile Include="MyEllipse.cs" />
     <Compile Include="MyLine.cs" />
     <Compile Include="MyParabol.cs" />
     <Compile Include="MyParallelogram.cs" />

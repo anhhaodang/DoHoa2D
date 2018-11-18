@@ -207,6 +207,13 @@ namespace Project_DoHoa2D
                     circle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
                     shapes.Add(circle);
                 }
+
+                else if (btnEllipse.BackColor != Color.Transparent)
+                {
+                    MyEllipse ellipse = new MyEllipse(e.Location, e.Location);
+                    ellipse.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, IsFill: ckbFill.Checked);
+                    shapes.Add(ellipse);
+                }
                 mode = Mode.Drawing;
             }
 
