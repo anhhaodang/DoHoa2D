@@ -128,12 +128,9 @@ namespace Project_DoHoa2D
                 && point[0].Y - p.Y > 5 && point[0].Y - p.Y < 15);
         }
 
-        
-
-       
-
-
-        
-        
+        public override void Extend_ExtendableShape(Point p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
