@@ -127,5 +127,10 @@ namespace Project_DoHoa2D
             double BOx = CalcAngleAOx(O, B);
             return BOx - AOx;
         }
+
+        public void RemoveLastPoint()
+        {
+            point.RemoveAt(point.Count - 1);
+        }
     }
 }

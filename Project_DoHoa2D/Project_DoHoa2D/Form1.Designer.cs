@@ -36,7 +36,7 @@
             this.btnPolygon = new System.Windows.Forms.Button();
             this.btnParabol = new System.Windows.Forms.Button();
             this.pnlShape = new System.Windows.Forms.Panel();
-            this.btnArc = new System.Windows.Forms.Button();
+            this.btnBezier = new System.Windows.Forms.Button();
             this.btnZigzag = new System.Windows.Forms.Button();
             this.btnParallelogram = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -187,7 +187,7 @@
             this.pnlShape.BackColor = System.Drawing.Color.White;
             this.pnlShape.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlShape.Controls.Add(this.btnPolygon);
-            this.pnlShape.Controls.Add(this.btnArc);
+            this.pnlShape.Controls.Add(this.btnBezier);
             this.pnlShape.Controls.Add(this.btnZigzag);
             this.pnlShape.Controls.Add(this.btnParabol);
             this.pnlShape.Controls.Add(this.btnParallelogram);
@@ -201,25 +201,25 @@
             this.pnlShape.Size = new System.Drawing.Size(198, 80);
             this.pnlShape.TabIndex = 2;
             // 
-            // btnArc
+            // btnBezier
             // 
-            this.btnArc.BackColor = System.Drawing.Color.White;
-            this.btnArc.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.btnArc.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnArc.FlatAppearance.BorderSize = 0;
-            this.btnArc.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnArc.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnArc.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnArc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnArc.Image = ((System.Drawing.Image)(resources.GetObject("btnArc.Image")));
-            this.btnArc.Location = new System.Drawing.Point(119, 41);
-            this.btnArc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnArc.Name = "btnArc";
-            this.btnArc.Size = new System.Drawing.Size(32, 32);
-            this.btnArc.TabIndex = 0;
-            this.btnArc.UseVisualStyleBackColor = false;
-            this.btnArc.Click += new System.EventHandler(this.btnUnfillableShape_Click);
-            this.btnArc.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
+            this.btnBezier.BackColor = System.Drawing.Color.White;
+            this.btnBezier.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.btnBezier.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnBezier.FlatAppearance.BorderSize = 0;
+            this.btnBezier.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnBezier.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnBezier.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnBezier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBezier.Image = ((System.Drawing.Image)(resources.GetObject("btnBezier.Image")));
+            this.btnBezier.Location = new System.Drawing.Point(119, 41);
+            this.btnBezier.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnBezier.Name = "btnBezier";
+            this.btnBezier.Size = new System.Drawing.Size(32, 32);
+            this.btnBezier.TabIndex = 0;
+            this.btnBezier.UseVisualStyleBackColor = false;
+            this.btnBezier.Click += new System.EventHandler(this.btnUnfillableShape_Click);
+            this.btnBezier.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
             // 
             // btnZigzag
             // 
@@ -580,7 +580,7 @@
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button btnBorderColor;
-        private System.Windows.Forms.Button btnArc;
+        private System.Windows.Forms.Button btnBezier;
         private System.Windows.Forms.Button btnZigzag;
         private DrawArea pnlMain;
         private System.Windows.Forms.Button btnSelect;

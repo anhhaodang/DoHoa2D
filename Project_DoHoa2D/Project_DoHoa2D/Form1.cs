@@ -38,7 +38,7 @@ namespace Project_DoHoa2D
             InitializeComponent();
 
             #region Add Shape Buttons
-            shapeButtons = new List<Button> { btnSelect, btnLine, btnRectangle, btnParallelogram, btnCircle, btnEllipse, btnPolygon, btnParabol, btnZigzag, btnArc };
+            shapeButtons = new List<Button> { btnSelect, btnLine, btnRectangle, btnParallelogram, btnCircle, btnEllipse, btnPolygon, btnParabol, btnZigzag, btnBezier };
             #endregion
 
             #region Add Tool Buttons
@@ -199,6 +199,13 @@ namespace Project_DoHoa2D
                     shapes.Add(polygon);
                 }
 
+                else if (btnBezier.BackColor != Color.Transparent)
+                {
+                    MyBezier bezier = new MyBezier(e.Location, e.Location);
+                    bezier.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
+                    shapes.Add(bezier);
+                }
+
                 else if (btnCircle.BackColor != Color.Transparent)
                 {
                     MyCircle circle = new MyCircle(e.Location, e.Location);
@@ -223,7 +230,7 @@ namespace Project_DoHoa2D
                 //Parabol thì thêm điểm e.Location vào 1, rồi về Mode.WaitingDraw
                 //Nếu đang vẽ Polygon, PolyLines, Bezier thì set e.location vào điểm cuối,
                 //vẫn giữ Mode.Drawing
-                if (btnPolygon.BackColor != Color.Transparent)
+                if (btnPolygon.BackColor != Color.Transparent || btnBezier.BackColor != Color.Transparent)
                 {
                     shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
                     mode = Mode.Drawing;
@@ -254,17 +261,10 @@ namespace Project_DoHoa2D
 
             else if (mode == Mode.Drawing)
             {
-                //if (btnCircle.BackColor != Color.Transparent)
-                //{
-                //    int d = Math.Min(e.Location.X - );
-                //}
-                //else
-
-                
-                if (btnPolygon.BackColor != Color.Transparent)
+               
+                if (btnPolygon.BackColor != Color.Transparent || btnBezier.BackColor != Color.Transparent)
                 {
-                    shapes[shapes.Count - 1].Set(e.Location, shapes[shapes.Count - 1].numPoint -1);
-                   //     .Set(e.Location, shapes[shapes.Count - 1].point.Count -1); //Set điểm cuối chứ không phải 1
+                    shapes[shapes.Count - 1].Set(e.Location, shapes[shapes.Count - 1].numPoint - 1);
                 }
                 else
                     shapes[shapes.Count - 1].Set(e.Location, 1); 
@@ -367,10 +367,15 @@ namespace Project_DoHoa2D
         {
             if (mode == Mode.Drawing)
             {
-                
                 if (btnPolygon.BackColor != Color.Transparent)
                 {
-                    shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
+                    //shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
+                    mode = Mode.WaitingDraw;
+                }
+                else if (btnBezier.BackColor != Color.Transparent)
+                {
+                    shapes[shapes.Count - 1].RemoveLastPoint();
+                    shapes[shapes.Count - 1].RemoveLastPoint();
                     mode = Mode.WaitingDraw;
                 }
                
@@ -596,6 +601,7 @@ namespace Project_DoHoa2D
  * (fixed) Lỗi Scale hcn khi có góc
  * (fixed) Không vẽ được hình tròn theo hướng 2 giờ
  * (fixed) Lỗi khi scale hình tròn
+ * - Lỗi điểm neo của hình khi xoay quá nhiều
  * - Lỗi khi shape được chọn nằm chồng lên shape khác thì không scale được
  * - Chỉnh sửa hàm Draw  (thêm thuộc tính fill Style)
  * 

@@ -11,8 +11,6 @@ namespace Project_DoHoa2D
 {
     class MyPolygon: MyShape
     {
-
-
         public MyPolygon()
         {
             point = new List<Point>(4);
@@ -31,7 +29,6 @@ namespace Project_DoHoa2D
             foreach (Point pi in p)
                 point.Add(pi);
             this.numPoint = n;
-            
         }
 
         public override void Extend_ExtendableShape(Point p)
