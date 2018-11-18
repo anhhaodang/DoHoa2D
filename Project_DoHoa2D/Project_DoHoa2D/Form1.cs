@@ -120,9 +120,6 @@ namespace Project_DoHoa2D
                 }
 
                 pnlMain.Invalidate();
-
-
-
             }
 
             else if (mode == Mode.WaitingDraw)
@@ -163,6 +160,14 @@ namespace Project_DoHoa2D
                     circle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
                     shapes.Add(circle);
                 }
+
+                else if (btnEllipse.BackColor != Color.Transparent)
+                {
+                    MyEllipse ellipse = new MyEllipse(e.Location, e.Location);
+                    ellipse.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, IsFill: ckbFill.Checked);
+                    shapes.Add(ellipse);
+                }
+
                 mode = Mode.Drawing;
             }
 
@@ -173,6 +178,7 @@ namespace Project_DoHoa2D
                 //Nếu đang vẽ Polygon, PolyLines, Bezier thì set e.location vào điểm cuối,
                 //vẫn giữ Mode.Drawing
                 shapes[shapes.Count - 1].Set(e.Location, 1);
+
                 //  mode = Mode.WaitingDraw;
                 pnlMain.Invalidate();
                 mode = Mode.WaitingDraw; //Vẽ xong đối tượng

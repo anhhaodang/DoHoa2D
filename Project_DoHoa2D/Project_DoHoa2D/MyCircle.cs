@@ -40,7 +40,11 @@ namespace Project_DoHoa2D
             point[index] = new Point(point[1 - index].X + dx, point[1 - index].Y + dy);
 
         }
-        public override Point Get(int index){ return new Point(0, 0); }
+
+        public override Point Get(int index)
+        {
+            return new Point(0, 0);
+        }
 
         public override void Draw(Graphics graphics){
 
@@ -113,7 +117,7 @@ namespace Project_DoHoa2D
         {
             if (angle != 0)
             {
-                p = base.Rotate(base.Center(), p, angle);
+                p = base.Rotate(base.Center(), p, -angle);
             }
 
             bool res = false;
@@ -131,8 +135,7 @@ namespace Project_DoHoa2D
         }
 
         public override void Move(Point d)
-        {
-            
+        {    
             for (int i = 0; i < 2; i++)
             {
                 Point p = new Point(point[i].X + d.X, point[i].Y + d.Y);
@@ -144,7 +147,7 @@ namespace Project_DoHoa2D
         {
             if (angle != 0)
             {
-                p = base.Rotate(base.Center(), p, angle);
+                p = base.Rotate(base.Center(), p, -angle);
             }
             Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
 
