@@ -210,12 +210,45 @@ namespace Project_DoHoa2D
 
         public override bool AtScalePosition(Point p)
         {
+            if (angle != 0)
+            {
+                p = base.Rotate(base.Center(), p, angle);
+            }
+
+            int x_min, y_min;
+            x_min = point[0].X; y_min = point[0].Y;
+            for (int i = 0; i < numPoint; i++)
+            {
+                if (x_min > point[i].X) x_min = point[i].X;
+                if (y_min > point[i].Y) y_min = point[i].Y;
+            }
+
+            Point p0 = new Point(x_min, y_min);
+
+            if (Math.Abs(p.X - p0.X) < 5 && Math.Abs(p.Y - p0.Y) < 5)
+                return true;
             return false;
         }
 
         public override bool AtRotatePosition(Point p)
         {
-            return false;
+            if (angle != 0)
+            {
+                p = base.Rotate(base.Center(), p, angle);
+            }
+
+            int x_min, y_min;
+            x_min = point[0].X; y_min = point[0].Y;
+            for (int i = 0; i < numPoint; i++)
+            {
+                if (x_min > point[i].X) x_min = point[i].X;
+                if (y_min > point[i].Y) y_min = point[i].Y;
+            }
+
+            Point p0 = new Point(x_min, y_min);
+
+            return (p0.X - p.X > 5 && p0.X - p.X < 15
+                && p0.Y - p.Y > 5 && p0.Y - p.Y < 15);
 
         }
     }
