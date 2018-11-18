@@ -32,7 +32,7 @@ namespace Project_DoHoa2D
 
         public override Point Get(int index)
         {
-            return new Point(0, 0);
+            return this.point[index];
         }
 
         public override void Draw(Graphics graphics)
