@@ -43,13 +43,36 @@ namespace Project_DoHoa2D
 
         public override void Draw(Graphics graphics)
         {
+            int x_min, y_min, x_max, y_max;
+            x_min = x_max = point[0].X;
+            y_min = y_max = point[0].Y;
             int x = 0, y = 0;
-
             for (int i = 0; i < numPoint; i++)
             {
                 x += point[i].X; y += point[i].Y;
+                if (x_min > point[i].X) x_min = point[i].X;
+                if (y_min > point[i].Y) y_min = point[i].Y;
+                if (x_max < point[i].X) x_max = point[i].X;
+                if (y_max < point[i].Y) y_max = point[i].Y;
             }
+
+            Point p0 = new Point(x_min, y_min);
+            Point p1 = new Point(x_max, y_max);
+
+            if (isSelected)
+            {
+                //vẽ bao
+
+                Pen penBound = new Pen(Color.Blue);
+                penBound.DashStyle = DashStyle.Dash;
+
+                graphics.DrawRectangle(penBound, new Rectangle(p0, new Size(p1.X - p0.X, p1.Y - p0.Y)));
+                int size = 3;
+                graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(p0.X - size, p0.Y - size, size * 2, size * 2));
+            }
+
             x /= numPoint; y /= numPoint;
+
 
             Point pivot = new Point(x, y);
             Point[] polyline = ConvertPoint(point, pivot);
@@ -66,10 +89,10 @@ namespace Project_DoHoa2D
         }
 
 
-        public override void Set(Point point, int index)
+        public override void Set(Point p, int index)
         {
-            if (index >= 0 && index <= numPoint - 1)
-                this.point[index] = point;
+            this.point[index] = base.Rotate(base.Center(), p, -angle);
+
         }
 
         public override Point Get(int index)
@@ -86,7 +109,7 @@ namespace Project_DoHoa2D
                 p[i] = this.Get(i);
 
             string data = "Polyline ";
-            for (int i = 0; i < numPoint; i++)
+            for (int i = 0; i < numPoint - 2; i++)
             {
                 data += p[i].X.ToString() + " ";
                 data += p[i].Y.ToString() + " ";
@@ -103,7 +126,7 @@ namespace Project_DoHoa2D
             char delimiters = ' ';
             string[] dt = data.Split(delimiters);
             int numberString = dt.Length;
-            this.numPoint = (numberString - 6) / 2;
+            this.numPoint = (numberString - 5) / 2;
 
             Point[] p = new Point[numPoint];
             for (int i = 0, j = 0; i < numPoint; i++, j += 2)
@@ -132,6 +155,8 @@ namespace Project_DoHoa2D
 
         public override bool Inside(Point p)
         {
+            p = base.Rotate(base.Center(), p, -angle);
+
             bool res = false;
 
             Point[] polyline = new Point[numPoint];
@@ -150,22 +175,60 @@ namespace Project_DoHoa2D
         public override void Move(Point d)
         {
             for (int i = 0; i < numPoint; i++)
-                Set(new Point(point[i].X + d.X, point[i].Y + d.Y), i);
+            {
+                Point p = new Point(point[i].X + d.X, point[i].Y + d.Y);
+                point[i] = p;
+            }
         }
 
         public override bool AtScalePosition(Point p)
         {
-            throw new NotImplementedException();
+            if (angle != 0)
+            {
+                p = base.Rotate(base.Center(), p, angle);
+            }
+
+            int x_min, y_min;
+            x_min = point[0].X; y_min = point[0].Y;
+            for (int i = 0; i < numPoint; i++)
+            {
+                if (x_min > point[i].X) x_min = point[i].X;
+                if (y_min > point[i].Y) y_min = point[i].Y;
+            }
+
+            Point p0 = new Point(x_min, y_min);
+
+            if (Math.Abs(p.X - p0.X) < 5 && Math.Abs(p.Y - p0.Y) < 5)
+                return true;
+            return false;
         }
 
         public override bool AtRotatePosition(Point p)
         {
-            throw new NotImplementedException();
+            if (angle != 0)
+            {
+                p = base.Rotate(base.Center(), p, angle);
+            }
+
+            int x_min, y_min;
+            x_min = point[0].X; y_min = point[0].Y;
+            for (int i = 0; i < numPoint; i++)
+            {
+                if (x_min > point[i].X) x_min = point[i].X;
+                if (y_min > point[i].Y) y_min = point[i].Y;
+            }
+
+            Point p0 = new Point(x_min, y_min);
+
+            return (p0.X - p.X > 5 && p0.X - p.X < 15
+                && p0.Y - p.Y > 5 && p0.Y - p.Y < 15);
+
         }
 
         public override void Extend_ExtendableShape(Point p)
         {
-            throw new NotImplementedException();
+            point.Add(p);
+            this.numPoint += 1;
         }
     }
 }

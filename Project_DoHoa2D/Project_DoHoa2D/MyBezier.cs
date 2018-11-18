@@ -135,7 +135,8 @@ namespace Project_DoHoa2D
 
         }
 
-        public override void Save(string filePath){
+        public override void Save(string filePath)
+        {
             Point[] p = new Point[numPoint];
             for (int i = 0; i < numPoint; i++)
                 p[i] = this.Get(i);
@@ -153,7 +154,8 @@ namespace Project_DoHoa2D
             sw.WriteLine(data);
             sw.Close();
         }
-        public override void Open(string data){
+        public override void Open(string data)
+        {
             char delimiters = ' ';
             string[] dt = data.Split(delimiters);
             this.numPoint = Int32.Parse(dt[1]);
@@ -179,6 +181,7 @@ namespace Project_DoHoa2D
             this.borderColor = Color.FromArgb(Convert.ToInt32(dt[numPoint * 2 + 4]));
             this.angle = 0;//float.Parse(dt[numPoint * 2 + 5]);
         }
+        
 
         public override bool AtScalePosition(Point p)
         {
