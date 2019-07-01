@@ -8,7 +8,7 @@ namespace Project_DoHoa2D
 {
     public abstract class MyShape
     {
-        protected List<Point> point;
+        protected List<Point> points;
         public int numPoint;
         protected Color borderColor = Color.Black;
         protected DashStyle dashStyle = DashStyle.Solid;
@@ -18,23 +18,106 @@ namespace Project_DoHoa2D
         protected Color backgroundColor = Color.White;
         public bool isFill = false;
 
-
         public float angle = 0;
         public bool isSelected = false;
 
-        public abstract bool Inside(Point p);
-        public abstract bool AtRotatePosition(Point p);
-        public abstract bool AtScalePosition(Point p);
+        public bool Inside(Point p, Rectangle boundingBox)
+        {
+            bool res = false;
+            GraphicsPath path = this.GetGraphicsPath(boundingBox);
+
+            if (isFill)
+                res = path.IsVisible(p);
+            else
+            {
+                Pen pen = new Pen(borderColor, width + 5);
+                res = path.IsOutlineVisible(p, pen);
+            }
+            return res;
+        }
+
+        protected abstract GraphicsPath GetGraphicsPath(Rectangle boundingBox);
+
+        public bool AtRotatePosition(Point p, Rectangle boundingBox)
+        { 
+            Point rotatePosition = this.GetRotatePosition(boundingBox);
+            return Utils.Near(p, rotatePosition, 5);
+        }
+
+        public int AtScalePosition(Point p, Rectangle boundingBox)
+        {
+            List<Point> corners = new List<Point>();
+            corners.Add(boundingBox.Location);
+            corners.Add(boundingBox.Location + new Size(0, boundingBox.Height));
+            corners.Add(boundingBox.Location + boundingBox.Size);
+            corners.Add(boundingBox.Location + new Size(boundingBox.Width, 0));
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (Utils.Near(p, corners[i]))
+                    return i;
+            }
+            return -1;
+        }
+
+        protected Rectangle GetBoundingBox()
+        {
+            int xMin, xMax, yMin, yMax;
+            xMin = points[0].X;
+            yMin = points[0].Y;
+            xMax = points[0].X;
+            yMax = points[0].Y;
+            for (int i = 1; i < points.Count; i++)
+            {
+                Point p = points[i];
+                if (p.X > xMax)
+                    xMax = p.X;
+                if (p.Y > yMax)
+                    yMax = p.Y;
+                if (p.X < xMin)
+                    xMin = p.X;
+                if (p.Y < yMax)
+                    yMax = p.Y;
+            }
+
+            return new Rectangle(xMin, yMin, xMax - xMin, yMax - yMin);
+            //int Width = xMax - xMin;
+            //int Height = yMax - yMin;
+            //return new Rectangle(-Width/2, -Height/2, Width, Height);
+        }
+
+        protected void DrawBoudingBox(Graphics graphics, Rectangle boundingBox)
+        {
+            List<Point> corners = new List<Point>();
+            corners.Add(boundingBox.Location);
+            corners.Add(boundingBox.Location + new Size(boundingBox.Width, 0));
+            corners.Add(boundingBox.Location + new Size(0, boundingBox.Height));
+            corners.Add(boundingBox.Location + boundingBox.Size);
+
+            Pen penBound = new Pen(Color.Blue);
+            penBound.DashStyle = DashStyle.Dash;
+
+            graphics.DrawRectangle(penBound, boundingBox);
+
+            int size = 3;
+
+            for (int i = 0; i < 4; i++)
+                graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(corners[i] - new Size(size, size), new Size(size * 2, size * 2)));
+            Point rotatePoint = this.GetRotatePosition(boundingBox);
+            graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(rotatePoint - new Size(size, size), new Size(size * 2, size * 2)));
+        }
+
+        protected Point GetRotatePosition(Rectangle boudingBox) {
+            Point p = boudingBox.Location + new Size(boudingBox.Width / 2, -10);
+            return p;
+        }
+
         public abstract void Move(Point d);
         public abstract void Extend_ExtendableShape(Point p);
         public abstract void Set(Point point, int index);
         public abstract Point Get(int index);
 
         public abstract void Draw(Graphics graphics);
-
-        //public abstract void Translation(Point Src, Point Des);
-        //public abstract void Scaling(Point pivotPoint, float Sx, float Sy);
-        //public abstract void Rotation(double alpha);
 
 
         public abstract string getData(); 
@@ -60,6 +143,7 @@ namespace Project_DoHoa2D
             if (Angel.HasValue)
             {
                 angle += Angel.Value;
+
                 if (angle < -180)
                     angle = 360 + angle;
                 else if (angle > 180)
@@ -98,10 +182,10 @@ namespace Project_DoHoa2D
         public Point Center()
         {
             int x = 0, y = 0;
-            int n = point.Count;
+            int n = points.Count;
             for (int i = 0; i < n; i++)
             {
-                x += point[i].X; y += point[i].Y;
+                x += points[i].X; y += points[i].Y;
             }
             x /= n; y /= n;
             Point res = new Point(x, y);
@@ -110,11 +194,11 @@ namespace Project_DoHoa2D
 
         public void Normalize()
         {
-            Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
-            Point p1 = new Point(Math.Max(point[0].X, point[1].X), Math.Max(point[0].Y, point[1].Y));
+            Point p0 = new Point(Math.Min(points[0].X, points[1].X), Math.Min(points[0].Y, points[1].Y));
+            Point p1 = new Point(Math.Max(points[0].X, points[1].X), Math.Max(points[0].Y, points[1].Y));
 
-            point[0] = p0;
-            point[1] = p1;
+            points[0] = p0;
+            points[1] = p1;
         }
 
         private double Lenght(Point p)
@@ -124,9 +208,9 @@ namespace Project_DoHoa2D
 
         private double CalcAngleAOx(Point O, Point A)
         {
-            if (A.X == O.X)
-                return A.Y > O.Y ? 90 : -90;
-            double res = Math.Atan((1.0 * A.Y - O.Y) / (A.X - O.X));
+            double res = Math.Acos((A.X - O.X)/Lenght(A - new Size(O)));
+            if (A.Y < O.Y)
+                res = -res;
             return res * 180 / Math.PI;
         }
 
@@ -139,8 +223,48 @@ namespace Project_DoHoa2D
 
         public void RemoveLastPoint()
         {
-            point.RemoveAt(point.Count - 1);
+            points.RemoveAt(points.Count - 1);
             numPoint--;
+        }
+
+        internal MouseInfo CalcMousePosition(Point mousePos)
+        {
+            Rectangle boundingBox = this.GetBoundingBox();
+            Point pCenter = boundingBox.Location + new Size(boundingBox.Width / 2, boundingBox.Height / 2);
+
+            boundingBox.Location = new Point(-boundingBox.Width / 2, -boundingBox.Height / 2);
+            mousePos = this.Rotate(pCenter, mousePos, -angle);
+            mousePos -= new Size(pCenter);
+
+
+            MouseInfo mouseInfo = new MouseInfo();
+            if (isSelected)
+            {
+                if (AtRotatePosition(mousePos, boundingBox))
+                {
+                    mouseInfo.state = StateMouse.Rotate;
+                    mouseInfo.shapeUnder = this;
+                    return mouseInfo;
+                }
+                
+                int corner = AtScalePosition(mousePos, boundingBox);
+                if (corner >= 0)
+                {
+                    mouseInfo.state = StateMouse.Scale;
+                    mouseInfo.shapeUnder = this;
+                    mouseInfo.corner = (Corner)corner;
+                    return mouseInfo;
+                }
+            }
+            
+            if (Inside(mousePos, boundingBox))
+            {
+                mouseInfo.state = StateMouse.Inside;
+                mouseInfo.shapeUnder = this;
+                return mouseInfo;
+            }
+
+            return mouseInfo;
         }
     }
 }

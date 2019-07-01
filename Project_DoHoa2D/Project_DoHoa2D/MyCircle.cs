@@ -11,22 +11,22 @@ namespace Project_DoHoa2D
 
         public MyCircle()
         {
-            point = new List<Point>(2);
-            this.point.Add(new Point(10, 10));
-            this.point.Add(new Point(20, 20));
+            points = new List<Point>(2);
+            this.points.Add(new Point(10, 10));
+            this.points.Add(new Point(20, 20));
         }
 
         public MyCircle(Point p1, Point p2)
         {
-            point = new List<Point>(2);
-            point.Add(p1);
-            point.Add(p2);
+            points = new List<Point>(2);
+            points.Add(p1);
+            points.Add(p2);
         }
 
         public override void Set(Point p, int index)
         {
-            int d1 = p.X - point[1 - index].X;
-            int d2 = p.Y - point[1 - index].Y;
+            int d1 = p.X - points[1 - index].X;
+            int d2 = p.Y - points[1 - index].Y;
             int d = Math.Min(Math.Abs(d1), Math.Abs(d2)); //Đường kính
             int dx, dy;
             if (d1 < 0)
@@ -37,19 +37,19 @@ namespace Project_DoHoa2D
                 dy = -d;
             else dy = d;
 
-            point[index] = new Point(point[1 - index].X + dx, point[1 - index].Y + dy);
+            points[index] = new Point(points[1 - index].X + dx, points[1 - index].Y + dy);
 
         }
 
         public override Point Get(int index)
         {
-            return this.point[index];
+            return this.points[index];
         }
 
         public override void Draw(Graphics graphics){
 
-            Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
-            Point p1 = new Point(Math.Max(point[0].X, point[1].X), Math.Max(point[0].Y, point[1].Y));
+            Point p0 = new Point(Math.Min(points[0].X, points[1].X), Math.Min(points[0].Y, points[1].Y));
+            Point p1 = new Point(Math.Max(points[0].X, points[1].X), Math.Max(points[0].Y, points[1].Y));
 
             if (isSelected)
             {
@@ -94,9 +94,9 @@ namespace Project_DoHoa2D
             Point a = new Point(Int32.Parse(dt[1]), Int32.Parse(dt[2]));
             Point b = new Point(Int32.Parse(dt[3]), Int32.Parse(dt[4]));
 
-            point = new List<Point>(2);
-            point.Add(a);
-            point.Add(b);
+            points = new List<Point>(2);
+            points.Add(a);
+            points.Add(b);
 
             switch (dt[5])
             {
@@ -112,57 +112,39 @@ namespace Project_DoHoa2D
 
         }
 
-        public override bool Inside(Point p)
-        {
-            if (angle != 0)
-            {
-                p = base.Rotate(base.Center(), p, -angle);
-            }
-
-            bool res = false;
-            GraphicsPath path = new GraphicsPath();
-            path.AddEllipse(new Rectangle(point[0], new Size(point[1].X - point[0].X, point[1].Y - point[0].Y)));
-
-            if (isFill)
-                res = path.IsVisible(p);
-            else 
-            {
-                Pen pen = new Pen(borderColor, width + 2);
-                res = path.IsOutlineVisible(p, pen);
-            }
-            return res;
-        }
 
         public override void Move(Point d)
         {    
             for (int i = 0; i < 2; i++)
             {
-                Point p = new Point(point[i].X + d.X, point[i].Y + d.Y);
-                point[i] = p;
+                Point p = new Point(points[i].X + d.X, points[i].Y + d.Y);
+                points[i] = p;
             }
         }
 
-        public override bool AtScalePosition(Point p)
-        {
-            if (angle != 0)
-            {
-                p = base.Rotate(base.Center(), p, -angle);
-            }
-            Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
+        //public override bool AtScalePosition(Point p)
+        //{
+        //    if (angle != 0)
+        //    {
+        //        p = base.Rotate(base.Center(), p, -angle);
+        //    }
+        //    Point p0 = new Point(Math.Min(points[0].X, points[1].X), Math.Min(points[0].Y, points[1].Y));
 
-            if (Math.Abs(p.X - p0.X) < 5 && Math.Abs(p.Y - p0.Y) < 5)
-                return true;
-            return false;
-        }
-
-        public override bool AtRotatePosition(Point p)
-        {
-            return false;
-        }
+        //    if (Math.Abs(p.X - p0.X) < 5 && Math.Abs(p.Y - p0.Y) < 5)
+        //        return true;
+        //    return false;
+        //}
 
         public override void Extend_ExtendableShape(Point p)
         {
             throw new NotImplementedException();
+        }
+
+        protected override GraphicsPath GetGraphicsPath(Rectangle boundingBox)
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(new Rectangle(points[0], new Size(points[1].X - points[0].X, points[1].Y - points[0].Y)));
+            return path;
         }
 
         public override string getData()

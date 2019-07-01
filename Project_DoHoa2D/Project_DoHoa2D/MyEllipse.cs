@@ -13,41 +13,39 @@ namespace Project_DoHoa2D
     {
         public MyEllipse()
         {
-            point = new List<Point>(2);
-            this.point.Add(new Point(10, 10));
-            this.point.Add(new Point(20, 20));
+            points = new List<Point>(2);
+            this.points.Add(new Point(10, 10));
+            this.points.Add(new Point(20, 20));
         }
 
         public MyEllipse(Point p1, Point p2)
         {
-            point = new List<Point>(2);
-            point.Add(p1);
-            point.Add(p2);
+            points = new List<Point>(2);
+            points.Add(p1);
+            points.Add(p2);
         }
 
         public override void Set(Point p, int index)
         {
-            this.point[index] = base.Rotate(base.Center(), p, -angle);
+            this.points[index] = base.Rotate(base.Center(), p, -angle);
         }
 
         public override Point Get(int index)
         {
-            return this.point[index];
+            return this.points[index];
         }
 
         public override void Draw(Graphics graphics)
         {
-            Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
-            Point p1 = new Point(Math.Max(point[0].X, point[1].X), Math.Max(point[0].Y, point[1].Y));
+            Rectangle r = GetBoundingBox();
+            r.Location = new Point(-r.Width / 2, -r.Height / 2);
 
-            graphics.TranslateTransform((p0.X + p1.X) / 2, (p0.Y + p1.Y) / 2);
+            graphics.TranslateTransform(this.Center().X, this.Center().Y);
             graphics.RotateTransform(angle);
 
             Pen myPen = new Pen(borderColor);
             myPen.DashStyle = dashStyle;
             myPen.Width = width;
-            Point pTopLeft = new Point(-(p1.X - p0.X) / 2, -(p1.Y - p0.Y) / 2);
-            Rectangle r = new Rectangle(pTopLeft, new Size(p1.X - p0.X, p1.Y - p0.Y));
 
             if (isFill)
             {
@@ -57,20 +55,11 @@ namespace Project_DoHoa2D
                 {
                     HatchBrush hatchBrush = new HatchBrush(hatchStyle, backgroundColor);
                     graphics.FillEllipse(hatchBrush, r);
-
                 }
             }
             graphics.DrawEllipse(myPen, r);
             if (isSelected)
-            {
-                Pen penBound = new Pen(Color.Blue);
-                penBound.DashStyle = DashStyle.Dash;
-
-                graphics.DrawRectangle(penBound, r);
-
-                int size = 3;
-                graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(pTopLeft.X - size, pTopLeft.Y - size, size * 2, size * 2));
-            }
+                DrawBoudingBox(graphics, r);
             graphics.ResetTransform();
         }
 
@@ -82,8 +71,8 @@ namespace Project_DoHoa2D
             Point p1 = new Point(Int32.Parse(dt[1]), Int32.Parse(dt[2]));
             Point p2 = new Point(Int32.Parse(dt[3]), Int32.Parse(dt[4]));
 
-            point = new List<Point>(2);
-            point.Add(p1); point.Add(p2);
+            points = new List<Point>(2);
+            points.Add(p1); points.Add(p2);
 
             switch (dt[5])
             {
@@ -103,50 +92,24 @@ namespace Project_DoHoa2D
             this.angle = float.Parse(dt[12]);
         }
 
-        public override bool Inside(Point p)
-        {
-            if (angle != 0)
-            {
-                p = base.Rotate(base.Center(), p, -angle);
-            }
-
-            bool res = false;
-            GraphicsPath path = new GraphicsPath();
-            path.AddEllipse(new Rectangle(point[0], new Size(point[1].X - point[0].X, point[1].Y - point[0].Y)));
-
-            if (isFill)
-                res = path.IsVisible(p);
-            else
-            {
-                Pen pen = new Pen(borderColor, width + 2);
-                res = path.IsOutlineVisible(p, pen);
-            }
-            return res;
-        }
 
         public override void Move(Point d)
         {
             for (int i = 0; i < 2; i++)
             {
-                Point p = new Point(point[i].X + d.X, point[i].Y + d.Y);
-                point[i] = p;
+                Point p = new Point(points[i].X + d.X, points[i].Y + d.Y);
+                points[i] = p;
             }
         }
 
-        public override bool AtScalePosition(Point p)
-        {
-            p = base.Rotate(base.Center(), p, -angle);
-            if (Math.Abs(p.X - point[0].X) < 5 && Math.Abs(p.Y - point[0].Y) < 5)
-                return true;
-            return false;
-        }
+        //public override bool AtScalePosition(Point p)
+        //{
+        //    p = base.Rotate(base.Center(), p, -angle);
+        //    if (Math.Abs(p.X - points[0].X) < 5 && Math.Abs(p.Y - points[0].Y) < 5)
+        //        return true;
+        //    return false;
+        //}
 
-        public override bool AtRotatePosition(Point p)
-        {
-            p = base.Rotate(base.Center(), p, -angle);
-            return (point[0].X - p.X > 5 && point[0].X - p.X < 15
-                && point[0].Y - p.Y > 5 && point[0].Y - p.Y < 15);
-        }
 
         public override void Extend_ExtendableShape(Point p)
         {
@@ -163,6 +126,14 @@ namespace Project_DoHoa2D
                  + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + " " + backgroundColor.ToArgb().ToString()
                  + " " + fillStyle.ToString() + " " + isFill.ToString() + " " + hatchStyle.GetHashCode() + " " + angle.ToString() + "\n";
             return data;
+        }
+
+        protected override GraphicsPath GetGraphicsPath(Rectangle boudingBox)
+        {
+            GraphicsPath path = new GraphicsPath();
+            //path.AddEllipse(new Rectangle(points[0], new Size(points[1].X - points[0].X, points[1].Y - points[0].Y)));
+            path.AddEllipse(boudingBox);
+            return path;
         }
     }
 }

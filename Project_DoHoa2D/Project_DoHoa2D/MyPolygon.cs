@@ -13,11 +13,11 @@ namespace Project_DoHoa2D
     {
         public MyPolygon()
         {
-            point = new List<Point>(4);
-            point.Add(new Point(100, 100));
-            point.Add(new Point(110, 100));
-            point.Add(new Point(110, 110));
-            point.Add(new Point(100, 110));
+            points = new List<Point>(4);
+            points.Add(new Point(100, 100));
+            points.Add(new Point(110, 100));
+            points.Add(new Point(110, 110));
+            points.Add(new Point(100, 110));
 
             this.numPoint = 4;
         }
@@ -25,15 +25,15 @@ namespace Project_DoHoa2D
         public MyPolygon(params Point[] p)
         {
             int n = p.Length;
-            point = new List<Point>(n);
+            points = new List<Point>(n);
             foreach (Point pi in p)
-                point.Add(pi);
+                points.Add(pi);
             this.numPoint = n;
         }
 
         public override void Extend_ExtendableShape(Point p)
         {
-            point.Add(p);
+            points.Add(p);
             this.numPoint += 1;
         }
 
@@ -51,16 +51,16 @@ namespace Project_DoHoa2D
         public override void Draw(Graphics graphics)
         {
             int x_min, y_min, x_max, y_max;
-            x_min = x_max = point[0].X;
-            y_min = y_max = point[0].Y;
+            x_min = x_max = points[0].X;
+            y_min = y_max = points[0].Y;
             int x = 0, y = 0;
             for (int i = 0; i < numPoint; i++)
             {
-                x += point[i].X; y += point[i].Y;
-                if (x_min > point[i].X) x_min = point[i].X;
-                if (y_min > point[i].Y) y_min = point[i].Y;
-                if (x_max < point[i].X) x_max = point[i].X;
-                if (y_max < point[i].Y) y_max = point[i].Y;
+                x += points[i].X; y += points[i].Y;
+                if (x_min > points[i].X) x_min = points[i].X;
+                if (y_min > points[i].Y) y_min = points[i].Y;
+                if (x_max < points[i].X) x_max = points[i].X;
+                if (y_max < points[i].Y) y_max = points[i].Y;
             }
 
             Point p0 = new Point(x_min, y_min);
@@ -81,7 +81,7 @@ namespace Project_DoHoa2D
             x /= numPoint; y /= numPoint;
 
             Point pivot = new Point(x, y);
-            Point[] polygon = ConvertPoint(point, pivot);
+            Point[] polygon = ConvertPoint(points, pivot);
 
             graphics.TranslateTransform(x,y);
             graphics.RotateTransform(angle);
@@ -109,14 +109,14 @@ namespace Project_DoHoa2D
 
         public override void Set(Point p, int index)
         {
-            this.point[index] = base.Rotate(base.Center(), p, -angle);
+            this.points[index] = base.Rotate(base.Center(), p, -angle);
         }
 
         public override Point Get(int index)
         {
             if (index >= 0 && index <= numPoint - 1)
-                return this.point[index];
-            return this.point[0];
+                return this.points[index];
+            return this.points[0];
         }
 
     
@@ -131,9 +131,9 @@ namespace Project_DoHoa2D
             for (int i = 0, j = 0; i < numPoint; i++, j+=2)
                 p[i] = new Point(Int32.Parse(dt[(j+1)]), Int32.Parse(dt[(j+1)+1]));
 
-            point = new List<Point>(numPoint);
+            points = new List<Point>(numPoint);
             for (int i = 0; i < numPoint; i++)
-                point.Add(p[i]);
+                points.Add(p[i]);
 
             int k = numPoint;
             switch (dt[k * 2 +1])
@@ -155,85 +155,46 @@ namespace Project_DoHoa2D
 
         }
 
-
-
-        public override bool Inside(Point p)
-        {
-
-            p = base.Rotate(base.Center(), p, -angle);
-
-            bool res = false;
-
-            Point[] polygon = new Point[numPoint];
-            for (int i = 0; i < numPoint; i++)
-                polygon[i] = point[i];
-
-            GraphicsPath path = new GraphicsPath();
-            path.AddPolygon(polygon);
-
-            if (isFill)
-                res = path.IsVisible(p);
-            else
-            {
-                Pen pen = new Pen(borderColor, width + 2);
-                res = path.IsOutlineVisible(p, pen);
-            }
-            return res;
-
-
-        }
-
         public override void Move(Point d)
         {
             for (int i = 0; i < numPoint; i++)
             {
-                Point p = new Point(point[i].X + d.X, point[i].Y + d.Y);
-                point[i] = p;
+                Point p = new Point(points[i].X + d.X, points[i].Y + d.Y);
+                points[i] = p;
             }
         }
 
-        public override bool AtScalePosition(Point p)
+        //public override bool AtScalePosition(Point p)
+        //{
+        //    if (angle != 0)
+        //    {
+        //        p = base.Rotate(base.Center(), p, angle);
+        //    }
+
+        //    int x_min, y_min;
+        //    x_min = points[0].X; y_min = points[0].Y;
+        //    for (int i = 0; i < numPoint; i++)
+        //    {
+        //        if (x_min > points[i].X) x_min = points[i].X;
+        //        if (y_min > points[i].Y) y_min = points[i].Y;
+        //    }
+
+        //    Point p0 = new Point(x_min, y_min);
+
+        //    if (Math.Abs(p.X - p0.X) < 5 && Math.Abs(p.Y - p0.Y) < 5)
+        //        return true;
+        //    return false;
+        //}
+
+        protected override GraphicsPath GetGraphicsPath(Rectangle boundingBox)
         {
-            if (angle != 0)
-            {
-                p = base.Rotate(base.Center(), p, angle);
-            }
-
-            int x_min, y_min;
-            x_min = point[0].X; y_min = point[0].Y;
+            Point[] polygon = new Point[numPoint];
             for (int i = 0; i < numPoint; i++)
-            {
-                if (x_min > point[i].X) x_min = point[i].X;
-                if (y_min > point[i].Y) y_min = point[i].Y;
-            }
+                polygon[i] = points[i];
 
-            Point p0 = new Point(x_min, y_min);
-
-            if (Math.Abs(p.X - p0.X) < 5 && Math.Abs(p.Y - p0.Y) < 5)
-                return true;
-            return false;
-        }
-
-        public override bool AtRotatePosition(Point p)
-        {
-            if (angle != 0)
-            {
-                p = base.Rotate(base.Center(), p, angle);
-            }
-
-            int x_min, y_min;
-            x_min = point[0].X; y_min = point[0].Y;
-            for (int i = 0; i < numPoint; i++)
-            {
-                if (x_min > point[i].X) x_min = point[i].X;
-                if (y_min > point[i].Y) y_min = point[i].Y;
-            }
-
-            Point p0 = new Point(x_min, y_min);
-
-            return (p0.X - p.X > 5 && p0.X - p.X < 15
-                && p0.Y - p.Y > 5 && p0.Y - p.Y < 15);
-
+            GraphicsPath path = new GraphicsPath();
+            path.AddPolygon(polygon);
+            return path;
         }
 
         public override string getData()
