@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/dsltools/UseCaseModel"
+  dslVersion="1.0.0.0"
+  Id="d44dc3da-6572-4a50-81b6-b5dcc45a3065"
+  name="UseCase" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <actor
+        Id="4abaaf80-c381-4cf4-b610-d3466ada5106"
+        name="Người dùng"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="b678117f-c38c-47ba-bd17-91eff53b6ab9">
+            <useCaseMoniker
+              Id="cb0a3e7b-df04-4ac4-a6fd-bad8e855cbf0"
+              LastKnownName="Mở ứng dụng"
+              LastKnownLocation="UseCase.uml" />
+          </dependency>
+        </suppliersInternal>
+        <targetEnds>
+          <association
+            Id="925b648a-502a-4b8c-b64e-8812f3f74527"
+            isDerived="false"
+            sourceEndRoleName="Actor1"
+            targetEndRoleName="Chọn hình đã vẽ"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="70db77d9-289d-4ca3-8ff9-d939dd594b56"
+              LastKnownName="Chọn hình đã vẽ"
+              LastKnownLocation="UseCase.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9e8264ee-30b6-4a41-8fd6-0bced9d5c294"
+                  name="Actor1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="57a04b32-f0b9-4c53-a6cd-ef24c1812c49"
+                  name="Chọn hình đã vẽ"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="64f745e7-a694-4fe1-bdb9-6f38a709964b"
+            isDerived="false"
+            sourceEndRoleName="Actor1"
+            targetEndRoleName="Vẽ hình"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="5dce632c-e063-493d-9154-fec488db3c7d"
+              LastKnownName="Vẽ hình"
+              LastKnownLocation="UseCase.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b6b64f9d-b493-4a8b-b039-09b4dadd4db3"
+                  name="Actor1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="03f011af-5184-434b-bfe2-e072a4d71ca5"
+                  name="Vẽ hình"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="c94e477d-b77f-475f-be2c-bcd84321be81"
+            isDerived="false"
+            sourceEndRoleName="Actor1"
+            targetEndRoleName="Chọn các thuộc tính: nét vẽ, màu nền, màu nét vẽ, tô màu, kiểu tô,..."
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="8230b302-a19c-47d6-a41b-220971dca7e7"
+              LastKnownName="Chọn các thuộc tính: nét vẽ, màu nền, màu nét vẽ, tô màu, kiểu tô,..."
+              LastKnownLocation="UseCase.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3bab1428-4819-4b07-a44b-3694e919c2cb"
+                  name="Actor1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1e122adf-55f3-4fcc-8e45-b3d9d0c9bc5b"
+                  name="Chọn các thuộc tính: nét vẽ, màu nền, màu nét vẽ, tô màu, kiểu tô,..."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="a46b428b-f107-4dce-a3bf-36572d47f1c8"
+            isDerived="false"
+            sourceEndRoleName="Actor1"
+            targetEndRoleName="Undo, Redo"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="e00af16e-079c-44dd-9a1b-44b51b573ce4"
+              LastKnownName="Undo, Redo"
+              LastKnownLocation="UseCase.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="11dc593e-6e2b-4a60-9b7f-cf1acb3d2a92"
+                  name="Actor1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7fc08a5a-b43a-4e10-98e0-f8782fedce46"
+                  name="Undo, Redo"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="39f4db74-c0c2-45a6-b848-ad14299cf9d4"
+            isDerived="false"
+            sourceEndRoleName="Actor1"
+            targetEndRoleName="Save, Load file"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="1c22a3e1-768d-43fd-ae33-ab5b7f7b6d65"
+              LastKnownName="Save, Load file"
+              LastKnownLocation="UseCase.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="da1c7e1f-3363-471c-91f0-54754bc38b58"
+                  name="Actor1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ee206cd1-a4bd-494f-9243-a316f046868c"
+                  name="Save, Load file"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="f95bf2ca-5e44-42ef-90ea-a9db63537475"
+            isDerived="false"
+            sourceEndRoleName="Actor1"
+            targetEndRoleName="Export to Image (BMP, JPG, ...)"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="c7b6e0a7-6133-41fb-be6d-95aa19e737fc"
+              LastKnownName="Export to Image (BMP, JPG, ...)"
+              LastKnownLocation="UseCase.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d762380d-17dc-45f4-8f72-aeac28dbb0f7"
+                  name="Actor1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d9ec4e53-7ec5-4135-8a1e-cefba23cae81"
+                  name="Export to Image (BMP, JPG, ...)"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="1ce4497d-a47b-4134-8d6e-95561e894b9d"
+            isDerived="false"
+            sourceEndRoleName="Actor1"
+            targetEndRoleName="Add plugin"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="4861e013-3abd-4971-8067-c162739bbbf8"
+              LastKnownName="Add plugin"
+              LastKnownLocation="UseCase.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6b610b5c-bb3a-4467-aef6-d756e069537c"
+                  name="Actor1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c948471c-776b-4585-a3f9-63dc1bcbf63c"
+                  name="Add plugin"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="cb0a3e7b-df04-4ac4-a6fd-bad8e855cbf0"
+        name="Mở ứng dụng"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c069a02f-4247-421b-a328-ae7c63b95ae0"
+        name="UseCase1"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="70db77d9-289d-4ca3-8ff9-d939dd594b56"
+        name="Chọn hình đã vẽ"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="8230b302-a19c-47d6-a41b-220971dca7e7"
+        name="Chọn các thuộc tính: nét vẽ, màu nền, màu nét vẽ, tô màu, kiểu tô,..."
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="5dd86532-d9e5-47b8-bdf4-03a19fb5648f">
+            <useCaseMoniker
+              Id="70db77d9-289d-4ca3-8ff9-d939dd594b56"
+              LastKnownName="Chọn hình đã vẽ"
+              LastKnownLocation="UseCase.uml" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="5dce632c-e063-493d-9154-fec488db3c7d"
+        name="Vẽ hình"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="6e32d8df-8e8f-4e46-a2fe-d818d225b245"
+        name="Tạo hình mẫu từ những hình đã vẽ"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="8f74ed07-aba7-4068-a5c1-f6c7a658b8de">
+            <useCaseMoniker
+              Id="70db77d9-289d-4ca3-8ff9-d939dd594b56"
+              LastKnownName="Chọn hình đã vẽ"
+              LastKnownLocation="UseCase.uml" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="e00af16e-079c-44dd-9a1b-44b51b573ce4"
+        name="Undo, Redo"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="1c22a3e1-768d-43fd-ae33-ab5b7f7b6d65"
+        name="Save, Load file"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c7b6e0a7-6133-41fb-be6d-95aa19e737fc"
+        name="Export to Image (BMP, JPG, ...)"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="4861e013-3abd-4971-8067-c162739bbbf8"
+        name="Add plugin"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c6bf6e1a-0527-42bc-a13a-89031d1dfe24"
+        name="Xoay, scale, xóa hình"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="a7e39d9e-0ba7-40ea-ace4-7733bbf45aaa">
+            <useCaseMoniker
+              Id="70db77d9-289d-4ca3-8ff9-d939dd594b56"
+              LastKnownName="Chọn hình đã vẽ"
+              LastKnownLocation="UseCase.uml" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>
