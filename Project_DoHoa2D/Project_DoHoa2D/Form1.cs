@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_DoHoa2D.UndoRedo;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,7 @@ namespace Project_DoHoa2D
         List<MyShape> shapes = new List<MyShape>();
         Mode mode;
         MyShape selectedShape;
+        UndoRedoManager undoRedoManager;
 
         private Point prevPosition;
 
@@ -37,6 +39,7 @@ namespace Project_DoHoa2D
             mode = Mode.Select;
             ckbFill.Checked = false;
             cmbFillStyle.Enabled = false;
+            undoRedoManager = new UndoRedoManager();
 
             #endregion
 
@@ -51,7 +54,7 @@ namespace Project_DoHoa2D
         }
 
         private void pnlMain_MouseDown(object sender, MouseEventArgs e)
-        {          
+        {
             if (mode == Mode.Select)
             {
                 for (int i = 0; i < shapes.Count; i++)
@@ -270,6 +273,7 @@ namespace Project_DoHoa2D
                 mode = Mode.Select;
                 pnlMain.Invalidate();
             }
+
         }
 
         private void pnlMain_MouseMove(object sender, MouseEventArgs e)
@@ -343,6 +347,10 @@ namespace Project_DoHoa2D
 
         private void pnlMain_MouseUp(object sender, MouseEventArgs e)
         {
+            if (mode != Mode.Drawing)
+            {
+                undoRedoManager.AddNewStatus(shapes);
+            }
             switch (mode)
             {
                 case Mode.Scaling:

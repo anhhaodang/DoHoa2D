@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 
 namespace Project_DoHoa2D
 {
@@ -35,7 +36,15 @@ namespace Project_DoHoa2D
         //public abstract void Scaling(Point pivotPoint, float Sx, float Sy);
         //public abstract void Rotation(double alpha);
 
-        public abstract void Save(string filePath);
+
+        public abstract string getData(); 
+        public void Save(string filePath)
+        {
+            string data = getData();
+            StreamWriter sw = File.AppendText(filePath);
+            sw.WriteLine(data);
+            sw.Close();
+        }
         public abstract void Open(string data);
 
         public void Configure(Color? BorderColor = null, DashStyle? DashStyle = null, float? Width = null, 

@@ -86,20 +86,6 @@ namespace Project_DoHoa2D
             graphics.DrawEllipse(p, r);
         }
 
-        public override void Save(string filePath)
-        {
-            Point p1 = this.Get(0);
-            Point p2 = this.Get(1);
-
-            string data = "Circle " + p1.X.ToString() + " " + p1.Y.ToString() + " " + p2.X.ToString() + " " + p2.Y.ToString()
-                 + " " + dashStyle.ToString()
-                 + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + " " + backgroundColor.ToArgb().ToString()
-                 + " " + fillStyle.ToString() + " " + isFill.ToString() + " " + hatchStyle.GetHashCode() + "\n";
-
-            StreamWriter sw = File.AppendText(filePath);
-            sw.WriteLine(data);
-            sw.Close();
-        }
 
         public override void Open(string data)
         {
@@ -177,6 +163,18 @@ namespace Project_DoHoa2D
         public override void Extend_ExtendableShape(Point p)
         {
             throw new NotImplementedException();
+        }
+
+        public override string getData()
+        {
+            Point p1 = this.Get(0);
+            Point p2 = this.Get(1);
+
+            string data = "Circle " + p1.X.ToString() + " " + p1.Y.ToString() + " " + p2.X.ToString() + " " + p2.Y.ToString()
+                 + " " + dashStyle.ToString()
+                 + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + " " + backgroundColor.ToArgb().ToString()
+                 + " " + fillStyle.ToString() + " " + isFill.ToString() + " " + hatchStyle.GetHashCode() + "\n";
+            return data;
         }
     }
 }
