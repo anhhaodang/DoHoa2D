@@ -331,6 +331,11 @@ namespace Project_DoHoa2D
             cmbFillStyle.Enabled = ckbFill.Checked;
             attributes[AttributeType.isFill] = ckbFill.Checked;
             undoRedoManager.AddNewStatus(shapes);
+            if (selectedShape != null)
+            {
+                selectedShape.Configure(IsFill: ckbFill.Checked, BackgroundColor: btnBackColor.BackColor);
+                pnlMain.Invalidate();
+            }
         }
 
         private void cmbFillStyle_SelectedIndexChanged(object sender, EventArgs e)
@@ -394,9 +399,10 @@ namespace Project_DoHoa2D
             saveFile.Filter = "Txt files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFile.FilterIndex = 2;
             saveFile.RestoreDirectory = true;
-            saveFile.FileName = "MyShapes.txt";
+            saveFile.FileName = ".txt";
             if (saveFile.ShowDialog() == DialogResult.OK)
             {
+                File.Create(saveFile.FileName).Close();
                 for (int i = 0; i < shapes.Count; i++)
                 {
                     shapes[i].Save(saveFile.FileName);
@@ -410,6 +416,7 @@ namespace Project_DoHoa2D
 
             if (openFile.ShowDialog() == DialogResult.OK)
             {
+                shapes.Clear();
                 string filename = openFile.FileName;
                 StreamReader streamReader = new StreamReader(filename);
                 string line, firstWord = null;
@@ -483,6 +490,11 @@ namespace Project_DoHoa2D
         {
             if (attributes != null)
                 attributes[AttributeType.dashStyle] = cmbDashstyle.SelectedIndex;
+            if (selectedShape != null)
+            {
+                selectedShape.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex);
+                pnlMain.Invalidate();
+            }
         }
         #endregion
 
