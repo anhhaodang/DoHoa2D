@@ -31,7 +31,7 @@ namespace Project_DoHoa2D
             InitializeComponent();
 
             #region Add Shape Buttons
-            shapeButtons = new List<Button> { btnSelect, btnLine, btnRectangle, btnParallelogram, btnCircle, btnEllipse, btnPolygon, btnParabol, btnZigzag, btnBezier };
+            shapeButtons = new List<Button> { btnSelect, btnLine, btnRectangle, btnCircle, btnEllipse, btnPolygon, btnParabol, btnZigzag, btnBezier };
             #endregion
 
             #region Set Default Value
@@ -106,28 +106,6 @@ namespace Project_DoHoa2D
                     rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
 
                     shapes.Add(rectangle);
-                }
-
-                else if (BtnChecked(btnParallelogram))
-                {
-                    MyParallelogram parallelogram = new MyParallelogram(e.Location, e.Location);
-                    if (ckbFill.Checked)
-                    {
-                        parallelogram.isFill = true;
-                        if (cmbFillStyle.SelectedIndex == 0)
-                        {
-                            parallelogram.fillStyle = 0;
-                        }
-                        else if (cmbFillStyle.SelectedIndex > 0)
-                        {
-                            parallelogram.fillStyle = 1;
-                            parallelogram.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
-                        }
-                    }
-
-                    parallelogram.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
-
-                    shapes.Add(parallelogram);
                 }
 
                 else if (BtnChecked(btnPolygon))
@@ -351,7 +329,6 @@ namespace Project_DoHoa2D
             {
                 case Mode.Scaling:
                     if (selectedShape is MyRectangle
-                        || selectedShape is MyParallelogram
                         || selectedShape is MyCircle
                         )
                         shapes[shapes.Count - 1].Normalize();
@@ -365,7 +342,6 @@ namespace Project_DoHoa2D
 
                 case Mode.WaitingDraw: //Vẽ xong hình, cần Normalize
                     if (BtnChecked(btnRectangle)
-                        || BtnChecked(btnParallelogram)
                         || BtnChecked(btnCircle)
                         || BtnChecked(btnEllipse)
                         || BtnChecked(btnParabol)
@@ -569,11 +545,6 @@ namespace Project_DoHoa2D
                             MyShape myRectangle = new MyRectangle();
                             myRectangle.Open(line);
                             shapes.Add(myRectangle);
-                            break;
-                        case "Parallelogram":
-                            MyShape myParallelogram = new MyParallelogram();
-                            myParallelogram.Open(line);
-                            shapes.Add(myParallelogram);
                             break;
                         case "Circle":
                             MyShape myCircle = new MyCircle();

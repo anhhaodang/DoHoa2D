@@ -38,7 +38,6 @@
             this.pnlShape = new System.Windows.Forms.Panel();
             this.btnBezier = new System.Windows.Forms.Button();
             this.btnZigzag = new System.Windows.Forms.Button();
-            this.btnParallelogram = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbDashstyle = new System.Windows.Forms.ComboBox();
@@ -59,9 +58,9 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.cmbFillStyle = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.pnlMain = new Project_DoHoa2D.DrawArea();
             this.lblAngle = new System.Windows.Forms.Label();
             this.lblAngle2 = new System.Windows.Forms.Label();
+            this.pnlMain = new Project_DoHoa2D.DrawArea();
             this.pnlShape.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkWidth)).BeginInit();
@@ -192,7 +191,6 @@
             this.pnlShape.Controls.Add(this.btnBezier);
             this.pnlShape.Controls.Add(this.btnZigzag);
             this.pnlShape.Controls.Add(this.btnParabol);
-            this.pnlShape.Controls.Add(this.btnParallelogram);
             this.pnlShape.Controls.Add(this.btnEllipse);
             this.pnlShape.Controls.Add(this.btnLine);
             this.pnlShape.Controls.Add(this.btnCircle);
@@ -214,7 +212,7 @@
             this.btnBezier.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnBezier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBezier.Image = ((System.Drawing.Image)(resources.GetObject("btnBezier.Image")));
-            this.btnBezier.Location = new System.Drawing.Point(119, 41);
+            this.btnBezier.Location = new System.Drawing.Point(79, 2);
             this.btnBezier.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBezier.Name = "btnBezier";
             this.btnBezier.Size = new System.Drawing.Size(32, 32);
@@ -242,25 +240,6 @@
             this.btnZigzag.UseVisualStyleBackColor = false;
             this.btnZigzag.Click += new System.EventHandler(this.btnUnfillableShape_Click);
             this.btnZigzag.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
-            // 
-            // btnParallelogram
-            // 
-            this.btnParallelogram.BackColor = System.Drawing.Color.White;
-            this.btnParallelogram.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnParallelogram.FlatAppearance.BorderSize = 0;
-            this.btnParallelogram.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnParallelogram.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnParallelogram.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnParallelogram.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnParallelogram.Image = ((System.Drawing.Image)(resources.GetObject("btnParallelogram.Image")));
-            this.btnParallelogram.Location = new System.Drawing.Point(80, 2);
-            this.btnParallelogram.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnParallelogram.Name = "btnParallelogram";
-            this.btnParallelogram.Size = new System.Drawing.Size(32, 32);
-            this.btnParallelogram.TabIndex = 0;
-            this.btnParallelogram.UseVisualStyleBackColor = false;
-            this.btnParallelogram.Click += new System.EventHandler(this.btnFillableShape_Click);
-            this.btnParallelogram.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
             // 
             // label1
             // 
@@ -513,21 +492,6 @@
             this.label3.TabIndex = 16;
             this.label3.Text = "Fill Style";
             // 
-            // pnlMain
-            // 
-            this.pnlMain.BackColor = System.Drawing.Color.White;
-            this.pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlMain.Location = new System.Drawing.Point(0, 153);
-            this.pnlMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(1181, 606);
-            this.pnlMain.TabIndex = 12;
-            this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
-            this.pnlMain.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseDoubleClick);
-            this.pnlMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseDown);
-            this.pnlMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseMove);
-            this.pnlMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseUp);
-            // 
             // lblAngle
             // 
             this.lblAngle.AutoSize = true;
@@ -545,6 +509,21 @@
             this.lblAngle2.Size = new System.Drawing.Size(46, 17);
             this.lblAngle2.TabIndex = 20;
             this.lblAngle2.Text = "label4";
+            // 
+            // pnlMain
+            // 
+            this.pnlMain.BackColor = System.Drawing.Color.White;
+            this.pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlMain.Location = new System.Drawing.Point(0, 153);
+            this.pnlMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(1181, 606);
+            this.pnlMain.TabIndex = 12;
+            this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
+            this.pnlMain.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseDoubleClick);
+            this.pnlMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseDown);
+            this.pnlMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseMove);
+            this.pnlMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseUp);
             // 
             // Form1
             // 
@@ -615,7 +594,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbFillStyle;
-        private System.Windows.Forms.Button btnParallelogram;
         private System.Windows.Forms.Label lblAngle;
         private System.Windows.Forms.Label lblAngle2;
     }
