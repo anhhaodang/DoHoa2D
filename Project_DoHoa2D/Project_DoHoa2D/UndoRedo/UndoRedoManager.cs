@@ -37,12 +37,12 @@ namespace Project_DoHoa2D.UndoRedo
                 statusStack.Add(listShape);
                 currentStatus++;
             }
-            /*for (int i=0; i<statusStack.Count; i++)
+            for (int i = 0; i < statusStack.Count; i++)
                 Console.WriteLine(statusStack[i].ToString());
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine();*/
+            Console.WriteLine();
 
             return true;
         }
@@ -53,7 +53,12 @@ namespace Project_DoHoa2D.UndoRedo
             if (currentStatus < 0)
                 currentStatus = 0;
             Console.WriteLine(currentStatus.ToString());
-
+            for (int i = 0; i < statusStack.Count; i++)
+                Console.WriteLine(statusStack[i].ToString());
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
             return parseStringDataToListShapeObject(statusStack[currentStatus]);
         }
 
