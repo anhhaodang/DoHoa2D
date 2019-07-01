@@ -127,13 +127,6 @@ namespace Project_DoHoa2D
                     shapes.Add(rectangle);
                 }
 
-                else if (BtnChecked(btnParabol))
-                {
-                    MyParabol parabol = new MyParabol(e.Location, e.Location);
-                    parabol.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1);
-                    shapes.Add(parabol);
-                }
-
                 else if (BtnChecked(btnParallelogram))
                 {
                     MyParallelogram parallelogram = new MyParallelogram(e.Location, e.Location);
@@ -197,7 +190,7 @@ namespace Project_DoHoa2D
                 else if (BtnChecked(btnCircle))
                 {
                     MyCircle circle = new MyCircle(e.Location, e.Location);
-                   
+
                     if (ckbFill.Checked)
                     {
                         circle.isFill = true;
@@ -322,6 +315,7 @@ namespace Project_DoHoa2D
                 pnlMain.Cursor = Cursors.SizeAll;
                 Point distance = Point.Subtract(e.Location, new Size(prevPosition));
                 selectedShape.Move(distance);
+                
                 prevPosition = e.Location;
                 pnlMain.Invalidate();
             }
@@ -331,6 +325,8 @@ namespace Project_DoHoa2D
                 float alpha = (float)selectedShape.CalculateAngel(selectedShape.Center(), prevPosition, e.Location);
                 prevPosition = e.Location;
                 selectedShape.Configure(Angel: alpha);
+                lblAngle.Text = selectedShape.angle.ToString();
+                lblAngle2.Text = alpha.ToString();
                 pnlMain.Invalidate();
             }
             else if (mode == Mode.Scaling)

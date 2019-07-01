@@ -60,6 +60,8 @@
             this.cmbFillStyle = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.pnlMain = new Project_DoHoa2D.DrawArea();
+            this.lblAngle = new System.Windows.Forms.Label();
+            this.lblAngle2 = new System.Windows.Forms.Label();
             this.pnlShape.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkWidth)).BeginInit();
@@ -440,7 +442,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.cmbDashstyle);
             this.panel1.Location = new System.Drawing.Point(303, 33);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(252, 113);
             this.panel1.TabIndex = 17;
@@ -451,7 +453,7 @@
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.ckbFill);
             this.panel2.Location = new System.Drawing.Point(588, 33);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(267, 113);
             this.panel2.TabIndex = 18;
@@ -495,7 +497,7 @@
             "DashedHorizontal",
             "DashedVertical"});
             this.cmbFillStyle.Location = new System.Drawing.Point(75, 55);
-            this.cmbFillStyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbFillStyle.Margin = new System.Windows.Forms.Padding(4);
             this.cmbFillStyle.Name = "cmbFillStyle";
             this.cmbFillStyle.Size = new System.Drawing.Size(160, 24);
             this.cmbFillStyle.TabIndex = 17;
@@ -526,11 +528,31 @@
             this.pnlMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseMove);
             this.pnlMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseUp);
             // 
+            // lblAngle
+            // 
+            this.lblAngle.AutoSize = true;
+            this.lblAngle.Location = new System.Drawing.Point(1090, 70);
+            this.lblAngle.Name = "lblAngle";
+            this.lblAngle.Size = new System.Drawing.Size(43, 17);
+            this.lblAngle.TabIndex = 19;
+            this.lblAngle.Text = "angle";
+            // 
+            // lblAngle2
+            // 
+            this.lblAngle2.AutoSize = true;
+            this.lblAngle2.Location = new System.Drawing.Point(1093, 108);
+            this.lblAngle2.Name = "lblAngle2";
+            this.lblAngle2.Size = new System.Drawing.Size(46, 17);
+            this.lblAngle2.TabIndex = 20;
+            this.lblAngle2.Text = "label4";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1181, 750);
+            this.Controls.Add(this.lblAngle2);
+            this.Controls.Add(this.lblAngle);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label6);
@@ -543,7 +565,7 @@
             this.Controls.Add(this.btnBorderColor);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
@@ -594,6 +616,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbFillStyle;
         private System.Windows.Forms.Button btnParallelogram;
+        private System.Windows.Forms.Label lblAngle;
+        private System.Windows.Forms.Label lblAngle2;
     }
 }
 

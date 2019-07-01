@@ -14,25 +14,25 @@ namespace Project_DoHoa2D
 
         public MyRectangle()
         {
-            point = new List<Point> { new Point(100, 100), new Point(110, 110) };
+            points = new List<Point> { new Point(100, 100), new Point(110, 110) };
         }
 
         public MyRectangle(Point p1, Point p2)
         {
-            point = new List<Point> { p1, p2 };
+            points = new List<Point> { p1, p2 };
         }
 
         public MyRectangle(int x1, int y1, int x2, int y2)
         {
-            point = new List<Point>(2);
-            point.Add(new Point(x1, y1));
-            point.Add(new Point(x2, y2));
+            points = new List<Point>(2);
+            points.Add(new Point(x1, y1));
+            points.Add(new Point(x2, y2));
         }
 
         public override void Draw(Graphics graphics)
         {
-            Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
-            Point p1 = new Point(Math.Max(point[0].X, point[1].X), Math.Max(point[0].Y, point[1].Y));
+            Point p0 = new Point(Math.Min(points[0].X, points[1].X), Math.Min(points[0].Y, points[1].Y));
+            Point p1 = new Point(Math.Max(points[0].X, points[1].X), Math.Max(points[0].Y, points[1].Y));
 
             graphics.TranslateTransform((p0.X + p1.X) / 2, (p0.Y + p1.Y) / 2);
             graphics.RotateTransform(angle);
@@ -51,7 +51,6 @@ namespace Project_DoHoa2D
                 {
                     HatchBrush hatchBrush = new HatchBrush(hatchStyle, backgroundColor);
                     graphics.FillRectangle(hatchBrush, r);
-
                 }
             }
             graphics.DrawRectangle(myPen, r);
@@ -61,17 +60,16 @@ namespace Project_DoHoa2D
                 graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(pTopLeft.X - size, pTopLeft.Y - size, size * 2, size * 2));
             }
             graphics.ResetTransform();
-        }
-       
+        }       
 
         public override Point Get(int index)
         {
-                return this.point[index];
+                return this.points[index];
         }
 
         public override void Set(Point p, int index)
         {
-                this.point[index] = base.Rotate(base.Center(), p, -angle);
+                this.points[index] = base.Rotate(base.Center(), p, -angle);
         }
 
         public override void Save(string filePath)
@@ -97,8 +95,8 @@ namespace Project_DoHoa2D
             Point p1= new Point(Int32.Parse(dt[1]), Int32.Parse(dt[2]));
             Point p2= new Point(Int32.Parse(dt[3]), Int32.Parse(dt[4]));
 
-            point = new List<Point>(2);
-            point.Add(p1); point.Add(p2);
+            points = new List<Point>(2);
+            points.Add(p1); points.Add(p2);
 
             switch (dt[5])
             {
@@ -120,52 +118,33 @@ namespace Project_DoHoa2D
         }
 
 
-        public override bool Inside(Point p)
-        {
-            p = base.Rotate(base.Center(), p, -angle);
-
-            bool res = false;
-            GraphicsPath path = new GraphicsPath();
-            path.AddRectangle(new Rectangle(point[0], new Size(point[1].X - point[0].X, point[1].Y - point[0].Y)));
-
-
-            if (isFill)
-                res = path.IsVisible(p);
-            else
-            {
-                Pen pen = new Pen(borderColor, width + 2);
-                res = path.IsOutlineVisible(p, pen);
-            }
-            return res;
-        }
-
         public override void Move(Point d)
         {
             for (int i = 0; i < 2; i++)
             {
-                Point p = new Point(point[i].X + d.X, point[i].Y + d.Y);
-                point[i] = p;
+                Point p = new Point(points[i].X + d.X, points[i].Y + d.Y);
+                points[i] = p;
             }
         }
 
         public override bool AtScalePosition(Point p)
         {
             p = base.Rotate(base.Center(), p, -angle);
-            if (Math.Abs(p.X - point[0].X) < 5 && Math.Abs(p.Y - point[0].Y) < 5)
+            if (Math.Abs(p.X - points[0].X) < 5 && Math.Abs(p.Y - points[0].Y) < 5)
                     return true;
             return false;
-        }
-
-        public override bool AtRotatePosition(Point p)
-        {
-            p = base.Rotate(base.Center(), p, -angle);
-            return (point[0].X - p.X > 5 && point[0].X - p.X < 15 
-                && point[0].Y - p.Y > 5 && point[0].Y - p.Y < 15);
         }
 
         public override void Extend_ExtendableShape(Point p)
         {
             
+        }
+
+        protected override GraphicsPath GetGraphicsPath()
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddRectangle(new Rectangle(points[0], new Size(points[1].X - points[0].X, points[1].Y - points[0].Y)));
+            return path;
         }
     }
 }

@@ -34,4 +34,47 @@ namespace Project_DoHoa2D
         Polygon,
         NoDrawing
     }
+
+    public enum ShapeTypeDefine : int
+    {
+        LINE = 0,
+        RECTANGLE = 1,
+        CIRCLE = 2,
+        POLYGON = 3,
+        POLYLINE = 4,
+        CUSTOM = 5,
+        UNDEFINED = -1
+    }
+
+    public class MouseInfo
+    {
+        public StateMouse state;
+        public MyShape shapeUnder;
+        public Corner corner;
+
+        public MouseInfo()
+        {
+            state = 0;
+            shapeUnder = null;
+            corner = 0;
+        }
+    }
+
+    public enum StateMouse : int
+    {
+        Rotate,
+        Scale,
+        Move,
+        Outside,
+        Inside,
+        Draw
+    }
+
+    public enum Corner : int
+    {
+        TopLeft = 0,
+        DownLeft = 1,
+        DownRight = 2,
+        TopRight = 3
+    }
 }

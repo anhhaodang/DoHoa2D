@@ -13,24 +13,23 @@ namespace Project_DoHoa2D
     {
         public MyParallelogram()
         {
-            point = new List<Point>(2);
-            point.Add(new Point(500, 100));
-            point.Add(new Point(100, 300));
-
+            points = new List<Point>(2);
+            points.Add(new Point(500, 100));
+            points.Add(new Point(100, 300));
         }
 
         public MyParallelogram(Point p1, Point p2)
         {
-            point = new List<Point>(2);
-            point.Add(p1);
-            point.Add(p2);
+            points = new List<Point>(2);
+            points.Add(p1);
+            points.Add(p2);
         }
 
         public MyParallelogram(int x1, int y1, int x2, int y2)
         {
-            point = new List<Point>(2);
-            point.Add(new Point(x1, y1));
-            point.Add(new Point(x2, y2));
+            points = new List<Point>(2);
+            points.Add(new Point(x1, y1));
+            points.Add(new Point(x2, y2));
         }
         public Point[] ConvertPoint(List<Point> point, Point pivot)
         {
@@ -45,8 +44,8 @@ namespace Project_DoHoa2D
         public override void Draw(Graphics graphics)
         {
 
-            Point p0 = new Point(Math.Min(point[0].X, point[1].X), Math.Min(point[0].Y, point[1].Y));
-            Point p1 = new Point(Math.Max(point[0].X, point[1].X), Math.Max(point[0].Y, point[1].Y));
+            Point p0 = new Point(Math.Min(points[0].X, points[1].X), Math.Min(points[0].Y, points[1].Y));
+            Point p1 = new Point(Math.Max(points[0].X, points[1].X), Math.Max(points[0].Y, points[1].Y));
 
             Point pivot = new Point((p0.X + p1.X)/2, (p0.Y + p1.Y) / 2);
 
@@ -58,7 +57,7 @@ namespace Project_DoHoa2D
             myPen.Width = width;
 
 
-            Point[] parallelogram = ConvertPoint(point, pivot);
+            Point[] parallelogram = ConvertPoint(points, pivot);
             Point[] parallelogramToDraw = new Point[4];
             parallelogramToDraw[0] = parallelogram[0]; parallelogramToDraw[2] = parallelogram[1];
             parallelogramToDraw[1] = new Point((parallelogram[0].X+parallelogram[1].X) / 2, parallelogram[0].Y);
@@ -91,12 +90,12 @@ namespace Project_DoHoa2D
                
         public override void Set(Point p, int index)
         {
-            this.point[index] = base.Rotate(base.Center(), p, -angle);
+            this.points[index] = base.Rotate(base.Center(), p, -angle);
         }
 
         public override Point Get(int index)
         {
-            return this.point[index];
+            return this.points[index];
         }
 
 
@@ -123,8 +122,8 @@ namespace Project_DoHoa2D
             Point p1 = new Point(Int32.Parse(dt[1]), Int32.Parse(dt[2]));
             Point p2 = new Point(Int32.Parse(dt[3]), Int32.Parse(dt[4]));
 
-            point = new List<Point>(2);
-            point.Add(p1); point.Add(p2); 
+            points = new List<Point>(2);
+            points.Add(p1); points.Add(p2); 
 
             switch (dt[5])
             {
@@ -146,57 +145,38 @@ namespace Project_DoHoa2D
         }
 
 
-        public override bool Inside(Point p)
-        {
-            p = base.Rotate(base.Center(), p, -angle);
-
-            bool res = false;
-
-            Point[] parallelogramToDraw = new Point[4];
-            parallelogramToDraw[0] = point[0]; parallelogramToDraw[2] = point[1];
-            parallelogramToDraw[1] = new Point((point[0].X + point[1].X) / 2, point[0].Y);
-            parallelogramToDraw[3] = new Point((point[0].X + point[1].X) / 2, point[1].Y);
-
-            GraphicsPath path = new GraphicsPath();
-            path.AddPolygon(parallelogramToDraw);
-
-            if (isFill)
-                res = path.IsVisible(p);
-            else
-            {
-                Pen pen = new Pen(borderColor, width + 2);
-                res = path.IsOutlineVisible(p, pen);
-            }
-            return res;
-        }
-
         public override void Move(Point d)
         {
             for (int i = 0; i < 2; i++)
             {
-                Point p = new Point(point[i].X + d.X, point[i].Y + d.Y);
-                point[i] = p;
+                Point p = new Point(points[i].X + d.X, points[i].Y + d.Y);
+                points[i] = p;
             }
         }
 
         public override bool AtScalePosition(Point p)
         {
             p = base.Rotate(base.Center(), p, -angle);
-            if (Math.Abs(p.X - point[0].X) < 5 && Math.Abs(p.Y - point[0].Y) < 5)
+            if (Math.Abs(p.X - points[0].X) < 5 && Math.Abs(p.Y - points[0].Y) < 5)
                 return true;
             return false;
-        }
-
-        public override bool AtRotatePosition(Point p)
-        {
-            p = base.Rotate(base.Center(), p, -angle);
-            return (point[0].X - p.X > 5 && point[0].X - p.X < 15
-                && point[0].Y - p.Y > 5 && point[0].Y - p.Y < 15);
         }
 
         public override void Extend_ExtendableShape(Point p)
         {
             throw new NotImplementedException();
+        }
+
+        protected override GraphicsPath GetGraphicsPath()
+        {
+            Point[] parallelogramToDraw = new Point[4];
+            parallelogramToDraw[0] = points[0]; parallelogramToDraw[2] = points[1];
+            parallelogramToDraw[1] = new Point((points[0].X + points[1].X) / 2, points[0].Y);
+            parallelogramToDraw[3] = new Point((points[0].X + points[1].X) / 2, points[1].Y);
+
+            GraphicsPath path = new GraphicsPath();
+            path.AddPolygon(parallelogramToDraw);
+            return path;
         }
     }
 }
