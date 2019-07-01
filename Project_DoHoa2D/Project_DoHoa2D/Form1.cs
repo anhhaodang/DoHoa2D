@@ -315,9 +315,8 @@ namespace Project_DoHoa2D
             else if (mode == Mode.Moving)
             {
                 pnlMain.Cursor = Cursors.SizeAll;
-                Point distance = Point.Subtract(e.Location, new Size(prevPosition));
+                Size distance = new Size(e.Location) - new Size(prevPosition);
                 selectedShape.Move(distance);
-                
                 prevPosition = e.Location;
 
                 pnlMain.Invalidate();
@@ -334,8 +333,10 @@ namespace Project_DoHoa2D
             }
             else if (mode == Mode.Scaling)
             {
-                selectedShape.Set(e.Location, 0);
-
+                //selectedShape.Set(e.Location, 0);
+                Size distance = new Size(e.Location) - new Size(prevPosition);
+                selectedShape.Scale(prevPosition, e.Location);
+                prevPosition = e.Location;
                 pnlMain.Invalidate();
             }
         }

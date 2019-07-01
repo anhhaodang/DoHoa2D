@@ -130,15 +130,6 @@ namespace Project_DoHoa2D
 
         }
 
-        public override void Move(Point d)
-        {
-            for (int i = 0; i < numPoint; i++)
-            {
-                Point p = new Point(points[i].X + d.X, points[i].Y + d.Y);
-                points[i] = p;
-            }
-        }
-
         protected override GraphicsPath GetGraphicsPath(Rectangle boundingBox)
         {
             Point[] polygon = new Point[numPoint];

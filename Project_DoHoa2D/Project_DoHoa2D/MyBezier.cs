@@ -35,14 +35,6 @@ namespace Project_DoHoa2D
             return myPoint;
         }
 
-        public override void Move(Point d){
-            for (int i = 0; i < points.Count; i++)
-            {
-                Point p = new Point(points[i].X + d.X, points[i].Y + d.Y);
-                points[i] = p;
-            }
-        }
-
         public override void Set(Point p, int index)
         {
             this.points[index] = base.Rotate(base.GetCenterPoint(), p, -angle);

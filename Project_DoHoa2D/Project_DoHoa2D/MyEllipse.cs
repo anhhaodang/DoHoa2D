@@ -92,26 +92,7 @@ namespace Project_DoHoa2D
             this.hatchStyle = (HatchStyle)(Int32.Parse(dt[11]));
             this.angle = float.Parse(dt[12]);
         }
-
-
-        public override void Move(Point d)
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                Point p = new Point(points[i].X + d.X, points[i].Y + d.Y);
-                points[i] = p;
-            }
-        }
-
-        //public override bool AtScalePosition(Point p)
-        //{
-        //    p = base.Rotate(base.Center(), p, -angle);
-        //    if (Math.Abs(p.X - points[0].X) < 5 && Math.Abs(p.Y - points[0].Y) < 5)
-        //        return true;
-        //    return false;
-        //}
-
-
+       
         public override void Extend_ExtendableShape(Point p)
         {
             throw new NotImplementedException();
