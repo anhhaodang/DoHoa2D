@@ -58,17 +58,6 @@ namespace Project_DoHoa2D
                 DrawBoudingBox(graphics, r);
             graphics.ResetTransform();
         }       
-
-        public override Point Get(int index)
-        {
-                return this.points[index];
-        }
-
-        public override void Set(Point p, int index)
-        {
-                this.points[index] = base.Rotate(base.GetCenterPoint(), p, -angle);
-        }
-
        
         public override void Open(string data)
         {

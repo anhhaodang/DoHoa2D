@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CONST.cs" />
+    <Compile Include="Shape\My1CustomShape.cs" />
     <Compile Include="Shape\MyBezier.cs" />
     <Compile Include="DrawArea.cs">
       <SubType>Component</SubType>

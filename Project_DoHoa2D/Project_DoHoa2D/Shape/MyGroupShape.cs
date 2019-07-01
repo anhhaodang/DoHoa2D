@@ -10,19 +10,30 @@ namespace Project_DoHoa2D
 {
     class MyGroupShape : MyShape
     {
+        protected List<MyShape> listShape = new List<MyShape>();
+
+        public MyGroupShape()
+        {
+            listShape = new List<MyShape>();
+        }
+
         public override void Draw(Graphics graphics)
         {
-            throw new NotImplementedException();
+            foreach(MyShape shape in listShape)
+                shape.Draw(graphics);
+        }
+
+
+        public new void Configure(Color? BorderColor = null, DashStyle? DashStyle = null, float? Width = null,
+                        float? Angle = null, bool? IsSelected = null, Color? BackgroundColor = null,
+                        int? FillStyle = null, bool? IsFill = null, HatchStyle? HatchStyle = null)
+        {
+            foreach (MyShape shape in listShape)
+                shape.Configure(BorderColor, DashStyle, Width, Angle, IsSelected, BackgroundColor, FillStyle, IsFill, HatchStyle);
         }
 
         public override void Extend_ExtendableShape(Point p)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Point Get(int index)
-        {
-            throw new NotImplementedException();
         }
 
         public override string getData()
@@ -35,10 +46,7 @@ namespace Project_DoHoa2D
             throw new NotImplementedException();
         }
 
-        public override void Set(Point point, int index)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         protected override GraphicsPath GetGraphicsPath(Rectangle boundingBox)
         {

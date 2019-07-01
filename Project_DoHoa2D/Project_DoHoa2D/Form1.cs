@@ -22,6 +22,7 @@ namespace Project_DoHoa2D
         MyShape selectedShape;
         MouseInfo mouse = new MouseInfo();
         UndoRedoManager undoRedoManager;
+        ShapeTypeDefine currentTypeShape;
         bool undoRedoFlag = false;
 
         private Point prevPosition;
@@ -29,12 +30,12 @@ namespace Project_DoHoa2D
         public Form1()
         {
             InitializeComponent();
+            shapeButtons = GetListBtnShape();
+            InitDefaultValue();
+        }
 
-            #region Add Shape Buttons
-            shapeButtons = new List<Button> { btnSelect, btnLine, btnRectangle, btnCircle, btnEllipse, btnPolygon, btnParabol, btnZigzag, btnBezier };
-            #endregion
-
-            #region Set Default Value
+        private void InitDefaultValue()
+        {
             btnSelect.BackColor = Color.SkyBlue;
             cmbDashstyle.SelectedIndex = 0;
             trkWidth.Value = 1;
@@ -42,9 +43,11 @@ namespace Project_DoHoa2D
             ckbFill.Checked = false;
             cmbFillStyle.Enabled = false;
             undoRedoManager = new UndoRedoManager();
+        }
 
-            #endregion
-
+        public List<Button> GetListBtnShape()
+        {
+            return new List<Button> { btnSelect, btnLine, btnRectangle, btnCircle, btnEllipse, btnPolygon, btnZigzag, btnBezier };
         }
 
         #region Paint's Action
@@ -80,117 +83,81 @@ namespace Project_DoHoa2D
 
             else if (mode == Mode.WaitingDraw)
             {
-                if (BtnChecked(btnLine))
+                MyShape shape = MyShape.Create(currentTypeShape, e.Location, e.Location);
+                shapes.Add(shape);
+                mode = Mode.Drawing;
+
+                if (currentTypeShape == ShapeTypeDefine.LINE)
+                    shape.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
+                else if (currentTypeShape == ShapeTypeDefine.RECTANGLE)
                 {
-                    MyLine line = new MyLine(e.Location, e.Location);
-                    line.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
-                    shapes.Add(line);
-                }
-                else if (BtnChecked(btnRectangle))
-                {
-                    MyRectangle rectangle = new MyRectangle(e.Location, e.Location);
                     if (ckbFill.Checked)
                     {
-                        rectangle.isFill = true;
+                        shape.isFill = true;
                         if (cmbFillStyle.SelectedIndex == 0)
-                        {
-                            rectangle.fillStyle = 0;
-                        }
+                            shape.fillStyle = 0;
                         else if (cmbFillStyle.SelectedIndex > 0)
                         {
-                            rectangle.fillStyle = 1;
-                            rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
+                            shape.fillStyle = 1;
+                            shape.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
                         }
                     }
-
-                    rectangle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
-
-                    shapes.Add(rectangle);
+                    shape.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
                 }
 
                 else if (BtnChecked(btnPolygon))
                 {
-                    MyPolygon polygon = new MyPolygon(e.Location, e.Location);
                     if (ckbFill.Checked)
                     {
-                        polygon.isFill = true;
+                        shape.isFill = true;
                         if (cmbFillStyle.SelectedIndex == 0)
-                        {
-                            polygon.fillStyle = 0;
-                        }
+                            shape.fillStyle = 0;
                         else if (cmbFillStyle.SelectedIndex > 0)
                         {
-                            polygon.fillStyle = 1;
-                            polygon.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
+                            shape.fillStyle = 1;
+                            shape.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
                         }
                     }
 
-                    polygon.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
+                    shape.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
 
-                    shapes.Add(polygon);
                 }
 
                 else if (BtnChecked(btnZigzag))
-                {
-                    MyPolyline polyline = new MyPolyline(e.Location, e.Location);
-
-                    polyline.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
-
-                    shapes.Add(polyline);
-                }
-
+                    shape.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
                 else if (BtnChecked(btnBezier))
-                {
-                    MyBezier bezier = new MyBezier(e.Location, e.Location);
-                    bezier.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
-                    shapes.Add(bezier);
-                }
-
+                    shape.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
                 else if (BtnChecked(btnCircle))
                 {
-                    MyCircle circle = new MyCircle(e.Location, e.Location);
-
                     if (ckbFill.Checked)
                     {
-                        circle.isFill = true;
+                        shape.isFill = true;
                         if (cmbFillStyle.SelectedIndex == 0)
-                        {
-                            circle.fillStyle = 0;
-                        }
+                            shape.fillStyle = 0;
                         else if (cmbFillStyle.SelectedIndex > 0)
                         {
-                            circle.fillStyle = 1;
-                            circle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
+                            shape.fillStyle = 1;
+                            shape.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
                         }
                     }
-
-                    circle.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
-
-                    shapes.Add(circle);
+                    shape.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
                 }
 
                 else if (BtnChecked(btnEllipse))
                 {
-                    MyEllipse ellipse = new MyEllipse(e.Location, e.Location);
                     if (ckbFill.Checked)
                     {
-                        ellipse.isFill = true;
+                        shape.isFill = true;
                         if (cmbFillStyle.SelectedIndex == 0)
-                        {
-                            ellipse.fillStyle = 0;
-                        }
+                            shape.fillStyle = 0;
                         else if (cmbFillStyle.SelectedIndex > 0)
                         {
-                            ellipse.fillStyle = 1;
-                            ellipse.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
+                            shape.fillStyle = 1;
+                            shape.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor, HatchStyle: (HatchStyle)cmbFillStyle.SelectedIndex);
                         }
                     }
-
-                    ellipse.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
-
-                    shapes.Add(ellipse);
+                    shape.Configure(DashStyle: (DashStyle)cmbDashstyle.SelectedIndex, BorderColor: btnBorderColor.BackColor, Width: trkWidth.Value + 1, BackgroundColor: btnBackColor.BackColor);
                 }
-                mode = Mode.Drawing;
             }
             else if (mode == Mode.Drawing)
             {
@@ -201,21 +168,21 @@ namespace Project_DoHoa2D
                 }
                 if (BtnChecked(btnPolygon) || BtnChecked(btnZigzag))
                 {
-                    shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
+                    shapes.Last().Extend_ExtendableShape(e.Location);
                     mode = Mode.Drawing;
                 }
                 else if (BtnChecked(btnBezier))
                 {
-                    shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
-                    if (shapes[shapes.Count - 1].numPoint == 5)
+                    shapes.Last().Extend_ExtendableShape(e.Location);
+                    if (shapes.Last().numPoint == 5)
                     {
-                        mode = Mode.WaitingDraw; //Vẽ xong đối tượng
-                        shapes[shapes.Count - 1].RemoveLastPoint();
+                        mode = Mode.WaitingDraw; 
+                        shapes.Last().RemoveLastPoint();
                     }
                 }
                 else
                 {
-                    shapes[shapes.Count - 1].Set(e.Location, 1);
+                    shapes.Last().Set(e.Location, 1);
                     mode = Mode.WaitingDraw;
 
                 }
@@ -248,19 +215,12 @@ namespace Project_DoHoa2D
 
         private void pnlMain_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mode == Mode.WaitingDraw)
-            {
-
-            }
-
-            else if (mode == Mode.Drawing)
+            if (mode == Mode.Drawing)
             {
                 if (BtnChecked(btnPolygon) || BtnChecked(btnBezier) || BtnChecked(btnZigzag))
-                {
-                    shapes[shapes.Count - 1].Set(e.Location, shapes[shapes.Count - 1].numPoint - 1);
-                }
+                    shapes.Last().Set(e.Location, shapes.Last().numPoint - 1);
                 else
-                    shapes[shapes.Count - 1].Set(e.Location, 1); 
+                    shapes.Last().Set(e.Location, 1); 
 
                 pnlMain.Invalidate();
             }
@@ -304,14 +264,12 @@ namespace Project_DoHoa2D
             {
                 float alpha = (float)selectedShape.CalculateAngel(selectedShape.GetCenterPoint(), prevPosition, e.Location);
                 prevPosition = e.Location;
-                selectedShape.Configure(Angel: alpha);
-                lblAngle.Text = selectedShape.angle.ToString();
-                lblAngle2.Text = alpha.ToString();
+                selectedShape.Configure(Angle: alpha);
+               
                 pnlMain.Invalidate();
             }
             else if (mode == Mode.Scaling)
             {
-                //selectedShape.Set(e.Location, 0);
                 Size distance = new Size(e.Location) - new Size(prevPosition);
                 selectedShape.Scale(prevPosition, e.Location);
                 prevPosition = e.Location;
@@ -328,10 +286,8 @@ namespace Project_DoHoa2D
             switch (mode)
             {
                 case Mode.Scaling:
-                    if (selectedShape is MyRectangle
-                        || selectedShape is MyCircle
-                        )
-                        shapes[shapes.Count - 1].Normalize();
+                    if (selectedShape is MyRectangle || selectedShape is MyCircle)
+                        shapes.Last().Normalize();
                     mode = Mode.Select;
                     break;
                 case Mode.Rotating:
@@ -340,13 +296,9 @@ namespace Project_DoHoa2D
                     mode = Mode.Select;
                     break;
 
-                case Mode.WaitingDraw: //Vẽ xong hình, cần Normalize
-                    if (BtnChecked(btnRectangle)
-                        || BtnChecked(btnCircle)
-                        || BtnChecked(btnEllipse)
-                        || BtnChecked(btnParabol)
-                        )
-                        shapes[shapes.Count - 1].Normalize();
+                case Mode.WaitingDraw:
+                    if (BtnChecked(btnRectangle) || BtnChecked(btnCircle) || BtnChecked(btnEllipse))
+                        shapes.Last().Normalize();
                     mode = Mode.WaitingDraw;
                     break;
                 case Mode.Drawing:
@@ -366,15 +318,15 @@ namespace Project_DoHoa2D
             {
                 if (BtnChecked(btnPolygon) || BtnChecked(btnZigzag))
                 {
-                    //shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
-                    //shapes[shapes.Count - 1].RemoveLastPoint();
-                    //shapes[shapes.Count - 1].RemoveLastPoint();
+                    shapes.Last().Extend_ExtendableShape(e.Location);
+                    shapes.Last().RemoveLastPoint();
+                    shapes.Last().RemoveLastPoint();
                     mode = Mode.WaitingDraw;
                 }
                 else if (BtnChecked(btnBezier))
                 {
-                    shapes[shapes.Count - 1].RemoveLastPoint();
-                    shapes[shapes.Count - 1].RemoveLastPoint();
+                    shapes.Last().RemoveLastPoint();
+                    shapes.Last().RemoveLastPoint();
                     mode = Mode.WaitingDraw;
                 }
                
@@ -442,17 +394,20 @@ namespace Project_DoHoa2D
         private void btnFillableShape_Click(object sender, EventArgs e)
         {
             ckbFill.Enabled = true;
+            Button clickedShape = sender as Button;
+            currentTypeShape = (ShapeTypeDefine)(ShapeTypeDefine)Int32.Parse((clickedShape.Tag).ToString());
         }
 
         private void btnUnfillableShape_Click(object sender, EventArgs e)
         {
             ckbFill.Enabled = false;
             cmbFillStyle.Enabled = false;
+            Button clickedShape = sender as Button;
+            currentTypeShape = (ShapeTypeDefine)(ShapeTypeDefine)Int32.Parse((clickedShape.Tag).ToString());
         }
 
         private void ckbFill_CheckedChanged(object sender, EventArgs e)
         {
-
             cmbFillStyle.Enabled = ckbFill.Checked;
         }
 

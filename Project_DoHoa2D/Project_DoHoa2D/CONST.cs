@@ -42,7 +42,8 @@ namespace Project_DoHoa2D
         CIRCLE = 2,
         POLYGON = 3,
         POLYLINE = 4,
-        CUSTOM = 5,
+        ELLIPSE = 5,
+        BEZIER = 6,
         UNDEFINED = -1
     }
 

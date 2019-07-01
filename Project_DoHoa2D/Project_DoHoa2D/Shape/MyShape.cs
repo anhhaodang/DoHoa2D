@@ -36,6 +36,40 @@ namespace Project_DoHoa2D
             return res;
         }
 
+        public static MyShape Create(ShapeTypeDefine shapeType, Point p1, Point p2)
+        {
+            MyShape shape = null;
+            switch (shapeType)
+            {
+                case ShapeTypeDefine.LINE:
+                    shape = new MyLine(p1, p2);
+                    break;
+                case ShapeTypeDefine.CIRCLE:
+                    shape = new MyCircle(p1, p2);
+                    break;
+                case ShapeTypeDefine.ELLIPSE:
+                    shape = new MyEllipse(p1, p2);
+                    break;
+                case ShapeTypeDefine.POLYGON:
+                    shape = new MyPolygon(p1, p2);
+                    break;
+                case ShapeTypeDefine.POLYLINE:
+                    shape = new MyPolyline(p1, p2);
+                    break;
+                case ShapeTypeDefine.BEZIER:
+                    shape = new MyBezier(p1, p2);
+                    break;
+                case ShapeTypeDefine.RECTANGLE:
+                    shape = new MyRectangle(p1, p2);
+                    break;
+                default:
+                    shape = new MyRectangle(p1, p2);
+                    break;
+            }
+
+            return shape;
+        }
+
         protected abstract GraphicsPath GetGraphicsPath(Rectangle boundingBox);
 
         public bool AtRotatePosition(Point p, Rectangle boundingBox)
@@ -116,8 +150,15 @@ namespace Project_DoHoa2D
         }
 
         public abstract void Extend_ExtendableShape(Point p);
-        public abstract void Set(Point point, int index);
-        public abstract Point Get(int index);
+        public void Set(Point point, int index)
+        {
+            this.points[index] = Rotate(GetCenterPoint(), point, -angle);
+        }
+
+        public Point Get(int index)
+        {
+            return this.points[index];
+        }
 
         public abstract void Draw(Graphics graphics);
 
@@ -132,7 +173,7 @@ namespace Project_DoHoa2D
         public abstract void Open(string data);
 
         public void Configure(Color? BorderColor = null, DashStyle? DashStyle = null, float? Width = null,
-                        float? Angel = null, bool? IsSelected = null, Color? BackgroundColor = null,
+                        float? Angle = null, bool? IsSelected = null, Color? BackgroundColor = null,
                         int? FillStyle = null, bool? IsFill = null, HatchStyle? HatchStyle = null)
         {
             if (BorderColor.HasValue)
@@ -141,9 +182,9 @@ namespace Project_DoHoa2D
                 dashStyle = DashStyle.Value;
             if (Width.HasValue)
                 width = Width.Value;
-            if (Angel.HasValue)
+            if (Angle.HasValue)
             {
-                angle += Angel.Value;
+                angle += Angle.Value;
 
                 if (angle < -180)
                     angle = 360 + angle;

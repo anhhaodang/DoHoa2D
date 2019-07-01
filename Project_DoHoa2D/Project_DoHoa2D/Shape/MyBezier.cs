@@ -35,12 +35,7 @@ namespace Project_DoHoa2D
             return myPoint;
         }
 
-        public override void Set(Point p, int index)
-        {
-            this.points[index] = base.Rotate(base.GetCenterPoint(), p, -angle);
-        }
-
-        public override Point Get(int index)
+        public new Point Get(int index)
         {
             if (index >= 0 && index <= numPoint - 1)
                 return this.points[index];
@@ -49,38 +44,15 @@ namespace Project_DoHoa2D
 
         public override void Draw(Graphics graphics){
 
-            int x_min, y_min, x_max, y_max;
-            x_min = x_max = points[0].X;
-            y_min = y_max = points[0].Y;
+            Rectangle r = GetBoundingBox();
+            Point pCenter = r.Location + new Size(r.Width / 2, r.Height / 2);
+            r.Location = new Point(-r.Width / 2, -r.Height / 2);
 
-            for (int i = 1; i < points.Count; i++)
-            {
-                if (x_min > points[i].X) x_min = points[i].X;
-                if (y_min > points[i].Y) y_min = points[i].Y;
-                if (x_max < points[i].X) x_max = points[i].X;
-                if (y_max < points[i].Y) y_max = points[i].Y;
-            }
-
-            Point p0 = new Point(x_min, y_min);
-            Point p1 = new Point(x_max, y_max);
+            graphics.TranslateTransform(pCenter.X, pCenter.Y);
+            graphics.RotateTransform(angle);
 
             if (isSelected)
-            {
-                //vẽ bao
-
-                Pen penBound = new Pen(Color.Blue);
-                penBound.DashStyle = DashStyle.Dash;
-
-                graphics.DrawRectangle(penBound, new Rectangle(p0, new Size(p1.X - p0.X, p1.Y - p0.Y)));
-                int size = 3;
-                graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(p0.X - size, p0.Y - size, size * 2, size * 2));
-            }
-
-            Point pivot = base.GetCenterPoint();
-            
-
-            graphics.TranslateTransform(pivot.X, pivot.Y);
-            graphics.RotateTransform(angle);
+                DrawBoudingBox(graphics, r);
 
             Pen myPen = new Pen(borderColor);
             myPen.DashStyle = dashStyle;
@@ -94,10 +66,9 @@ namespace Project_DoHoa2D
                 if (idx < points.Count - 1)
                     idx++;
             }
-            Point[] bezier = ConvertPoint(pointArray, pivot);
+            Point[] bezier = ConvertPoint(pointArray, pCenter);
             graphics.DrawBezier(myPen, bezier[0], bezier[1], bezier[2], bezier[3]);
             graphics.ResetTransform();
-
         }
 
         public override void Open(string data)
@@ -127,12 +98,6 @@ namespace Project_DoHoa2D
             this.borderColor = Color.FromArgb(Convert.ToInt32(dt[numPoint * 2 + 4]));
             this.angle = 0;//float.Parse(dt[numPoint * 2 + 5]);
         }
-        
-
-        //public override bool AtScalePosition(Point p)
-        //{
-        //    return false;
-        //}
 
         public override void Extend_ExtendableShape(Point p)
         {

@@ -56,16 +56,6 @@ namespace Project_DoHoa2D
             graphics.ResetTransform();
         }
 
-        
-        public override void Set(Point p, int index)
-        {
-            this.points[index] = base.Rotate(base.GetCenterPoint(), p, -angle);
-        }
-        public override Point Get(int index)
-        {
-            return this.points[index];
-        }
-
         public override void Open(string data)
         {
             char delimiters = ' ';
