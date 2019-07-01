@@ -82,12 +82,8 @@ namespace Project_DoHoa2D
             graphics.ResetTransform();
         }
 
-        public override void Set(Point p, int index)
-        {
-            this.points[index] = base.Rotate(base.GetCenterPoint(), p, -angle);
-        }
-
-        public override Point Get(int index)
+       
+        public new Point Get(int index)
         {
             if (index >= 0 && index <= numPoint - 1)
                 return this.points[index];

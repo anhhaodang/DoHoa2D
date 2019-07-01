@@ -42,7 +42,8 @@ namespace Project_DoHoa2D
         CIRCLE = 2,
         POLYGON = 3,
         POLYLINE = 4,
-        CUSTOM = 5,
+        ELLIPSE = 5,
+        BEZIER = 6,
         UNDEFINED = -1
     }
 
@@ -77,5 +78,18 @@ namespace Project_DoHoa2D
         DownRight = 2,
         TopRight = 3,
         Undefined = -1
+    }
+
+    public static class AttributeType
+    {
+        public const string borderColor = "borderColor";
+        public const string dashStyle = "dashStyle";
+        public const string width = "width";
+        public const string angle = "angle";
+        public const string isSelected = "isSelected";
+        public const string backgroundColor = "backgroundColor";
+        public const string isFill = "isFill";
+        public const string hatchStyle = "hatchStyle";
+        public const string fillStyle = "yesNo";
     }
 }

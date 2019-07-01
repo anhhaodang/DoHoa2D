@@ -34,7 +34,6 @@
             this.btnCircle = new System.Windows.Forms.Button();
             this.btnEllipse = new System.Windows.Forms.Button();
             this.btnPolygon = new System.Windows.Forms.Button();
-            this.btnParabol = new System.Windows.Forms.Button();
             this.pnlShape = new System.Windows.Forms.Panel();
             this.btnBezier = new System.Windows.Forms.Button();
             this.btnZigzag = new System.Windows.Forms.Button();
@@ -58,8 +57,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.cmbFillStyle = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.lblAngle = new System.Windows.Forms.Label();
-            this.lblAngle2 = new System.Windows.Forms.Label();
             this.pnlMain = new Project_DoHoa2D.DrawArea();
             this.pnlShape.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -83,6 +80,7 @@
             this.btnLine.Name = "btnLine";
             this.btnLine.Size = new System.Drawing.Size(32, 32);
             this.btnLine.TabIndex = 0;
+            this.btnLine.Tag = "0";
             this.btnLine.UseVisualStyleBackColor = false;
             this.btnLine.Click += new System.EventHandler(this.btnUnfillableShape_Click);
             this.btnLine.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
@@ -102,6 +100,7 @@
             this.btnRectangle.Name = "btnRectangle";
             this.btnRectangle.Size = new System.Drawing.Size(32, 32);
             this.btnRectangle.TabIndex = 0;
+            this.btnRectangle.Tag = "1";
             this.btnRectangle.UseVisualStyleBackColor = false;
             this.btnRectangle.Click += new System.EventHandler(this.btnFillableShape_Click);
             this.btnRectangle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
@@ -121,6 +120,7 @@
             this.btnCircle.Name = "btnCircle";
             this.btnCircle.Size = new System.Drawing.Size(32, 32);
             this.btnCircle.TabIndex = 0;
+            this.btnCircle.Tag = "2";
             this.btnCircle.UseVisualStyleBackColor = false;
             this.btnCircle.Click += new System.EventHandler(this.btnFillableShape_Click);
             this.btnCircle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
@@ -140,6 +140,7 @@
             this.btnEllipse.Name = "btnEllipse";
             this.btnEllipse.Size = new System.Drawing.Size(32, 32);
             this.btnEllipse.TabIndex = 0;
+            this.btnEllipse.Tag = "5";
             this.btnEllipse.UseVisualStyleBackColor = false;
             this.btnEllipse.Click += new System.EventHandler(this.btnFillableShape_Click);
             this.btnEllipse.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
@@ -159,29 +160,10 @@
             this.btnPolygon.Name = "btnPolygon";
             this.btnPolygon.Size = new System.Drawing.Size(32, 32);
             this.btnPolygon.TabIndex = 0;
+            this.btnPolygon.Tag = "3";
             this.btnPolygon.UseVisualStyleBackColor = false;
             this.btnPolygon.Click += new System.EventHandler(this.btnFillableShape_Click);
             this.btnPolygon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
-            // 
-            // btnParabol
-            // 
-            this.btnParabol.BackColor = System.Drawing.Color.White;
-            this.btnParabol.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.btnParabol.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnParabol.FlatAppearance.BorderSize = 0;
-            this.btnParabol.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnParabol.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnParabol.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnParabol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnParabol.Image = ((System.Drawing.Image)(resources.GetObject("btnParabol.Image")));
-            this.btnParabol.Location = new System.Drawing.Point(41, 41);
-            this.btnParabol.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnParabol.Name = "btnParabol";
-            this.btnParabol.Size = new System.Drawing.Size(32, 32);
-            this.btnParabol.TabIndex = 0;
-            this.btnParabol.UseVisualStyleBackColor = false;
-            this.btnParabol.Click += new System.EventHandler(this.btnFillableShape_Click);
-            this.btnParabol.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
             // 
             // pnlShape
             // 
@@ -190,7 +172,6 @@
             this.pnlShape.Controls.Add(this.btnPolygon);
             this.pnlShape.Controls.Add(this.btnBezier);
             this.pnlShape.Controls.Add(this.btnZigzag);
-            this.pnlShape.Controls.Add(this.btnParabol);
             this.pnlShape.Controls.Add(this.btnEllipse);
             this.pnlShape.Controls.Add(this.btnLine);
             this.pnlShape.Controls.Add(this.btnCircle);
@@ -217,6 +198,7 @@
             this.btnBezier.Name = "btnBezier";
             this.btnBezier.Size = new System.Drawing.Size(32, 32);
             this.btnBezier.TabIndex = 0;
+            this.btnBezier.Tag = "6";
             this.btnBezier.UseVisualStyleBackColor = false;
             this.btnBezier.Click += new System.EventHandler(this.btnUnfillableShape_Click);
             this.btnBezier.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
@@ -232,11 +214,12 @@
             this.btnZigzag.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnZigzag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnZigzag.Image = ((System.Drawing.Image)(resources.GetObject("btnZigzag.Image")));
-            this.btnZigzag.Location = new System.Drawing.Point(80, 41);
+            this.btnZigzag.Location = new System.Drawing.Point(41, 39);
             this.btnZigzag.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnZigzag.Name = "btnZigzag";
             this.btnZigzag.Size = new System.Drawing.Size(32, 32);
             this.btnZigzag.TabIndex = 0;
+            this.btnZigzag.Tag = "4";
             this.btnZigzag.UseVisualStyleBackColor = false;
             this.btnZigzag.Click += new System.EventHandler(this.btnUnfillableShape_Click);
             this.btnZigzag.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnShape_MouseClick);
@@ -273,6 +256,7 @@
             this.cmbDashstyle.Name = "cmbDashstyle";
             this.cmbDashstyle.Size = new System.Drawing.Size(121, 24);
             this.cmbDashstyle.TabIndex = 4;
+            this.cmbDashstyle.SelectedIndexChanged += new System.EventHandler(this.cmbDashstyle_SelectedIndexChanged);
             // 
             // menuStrip1
             // 
@@ -492,24 +476,6 @@
             this.label3.TabIndex = 16;
             this.label3.Text = "Fill Style";
             // 
-            // lblAngle
-            // 
-            this.lblAngle.AutoSize = true;
-            this.lblAngle.Location = new System.Drawing.Point(1090, 70);
-            this.lblAngle.Name = "lblAngle";
-            this.lblAngle.Size = new System.Drawing.Size(43, 17);
-            this.lblAngle.TabIndex = 19;
-            this.lblAngle.Text = "angle";
-            // 
-            // lblAngle2
-            // 
-            this.lblAngle2.AutoSize = true;
-            this.lblAngle2.Location = new System.Drawing.Point(1093, 108);
-            this.lblAngle2.Name = "lblAngle2";
-            this.lblAngle2.Size = new System.Drawing.Size(46, 17);
-            this.lblAngle2.TabIndex = 20;
-            this.lblAngle2.Text = "label4";
-            // 
             // pnlMain
             // 
             this.pnlMain.BackColor = System.Drawing.Color.White;
@@ -530,8 +496,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1181, 750);
-            this.Controls.Add(this.lblAngle2);
-            this.Controls.Add(this.lblAngle);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label6);
@@ -549,6 +513,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "MyPaint";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.pnlShape.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -567,7 +532,6 @@
         private System.Windows.Forms.Button btnPolygon;
         private System.Windows.Forms.Button btnEllipse;
         private System.Windows.Forms.Button btnCircle;
-        private System.Windows.Forms.Button btnParabol;
         private System.Windows.Forms.Button btnRectangle;
         private System.Windows.Forms.Button btnLine;
         private System.Windows.Forms.Panel pnlShape;
@@ -594,8 +558,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbFillStyle;
-        private System.Windows.Forms.Label lblAngle;
-        private System.Windows.Forms.Label lblAngle2;
     }
 }
 

@@ -37,12 +37,6 @@ namespace Project_DoHoa2D.UndoRedo
                 statusStack.Add(listShape);
                 currentStatus++;
             }
-            for (int i = 0; i < statusStack.Count; i++)
-                Console.WriteLine(statusStack[i].ToString());
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
 
             return true;
         }
@@ -110,7 +104,6 @@ namespace Project_DoHoa2D.UndoRedo
                         myRectangle.Open(listShape[i]);
                         myShapes.Add(myRectangle);
                         break;
-                   
                     case "Circle":
                         MyShape myCircle = new MyCircle();
                         myCircle.Open(listShape[i]);

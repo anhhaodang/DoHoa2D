@@ -23,7 +23,7 @@ namespace Project_DoHoa2D
             points.Add(p2);
         }
 
-        public override void Set(Point p, int index)
+        public new void Set(Point p, int index)
         {
             int d1 = p.X - points[1 - index].X;
             int d2 = p.Y - points[1 - index].Y;
@@ -39,11 +39,6 @@ namespace Project_DoHoa2D
 
             points[index] = new Point(points[1 - index].X + dx, points[1 - index].Y + dy);
 
-        }
-
-        public override Point Get(int index)
-        {
-            return this.points[index];
         }
 
         public override void Draw(Graphics graphics){
