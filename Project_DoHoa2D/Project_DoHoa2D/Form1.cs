@@ -330,6 +330,7 @@ namespace Project_DoHoa2D
         {
             cmbFillStyle.Enabled = ckbFill.Checked;
             attributes[AttributeType.isFill] = ckbFill.Checked;
+            undoRedoManager.AddNewStatus(shapes);
         }
 
         private void cmbFillStyle_SelectedIndexChanged(object sender, EventArgs e)

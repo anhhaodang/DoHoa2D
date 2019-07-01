@@ -45,14 +45,11 @@ namespace Project_DoHoa2D.UndoRedo
         {
             currentStatus--;
             if (currentStatus < 0)
-                currentStatus = 0;
-            Console.WriteLine(currentStatus.ToString());
-            for (int i = 0; i < statusStack.Count; i++)
-                Console.WriteLine(statusStack[i].ToString());
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
+            {
+                currentStatus = -1;
+                return new List<MyShape>();
+            }
+
             return parseStringDataToListShapeObject(statusStack[currentStatus]);
         }
 
@@ -69,10 +66,15 @@ namespace Project_DoHoa2D.UndoRedo
 
         public void setDefauleStatus()
         {
-            string temp = statusStack[currentStatus];
-            currentStatus = 0;
-            statusStack.Clear();
-            statusStack.Add(temp);
+            if (currentStatus != -1)
+            {
+                string temp = statusStack[currentStatus];
+                currentStatus = 0;
+                statusStack.Clear();
+                statusStack.Add(temp);
+            }
+            else
+                statusStack.Clear();
         }
         private void shiftLeftOnePosition()
         {
