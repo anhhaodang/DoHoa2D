@@ -91,12 +91,6 @@ namespace Project_DoHoa2D
             this.angle = float.Parse(dt[8]);
         }
 
-        public override void Move(Point d)
-        {
-            for (int i = 0; i < 2; i++)
-                this.Set(new Point(points[i].X + d.X, points[i].Y + d.Y), i);
-        }
-
         public override void Extend_ExtendableShape(Point p)
         {
             

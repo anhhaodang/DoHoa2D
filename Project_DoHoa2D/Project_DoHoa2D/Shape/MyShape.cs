@@ -39,7 +39,7 @@ namespace Project_DoHoa2D
         protected abstract GraphicsPath GetGraphicsPath(Rectangle boundingBox);
 
         public bool AtRotatePosition(Point p, Rectangle boundingBox)
-        { 
+        {
             Point rotatePosition = this.GetRotatePosition(boundingBox);
             return Utils.Near(p, rotatePosition, 5);
         }
@@ -109,15 +109,19 @@ namespace Project_DoHoa2D
             return p;
         }
 
-        public abstract void Move(Point d);
+        public void Move(Size d)
+        {
+            for (int i = 0; i < points.Count; i++)
+                points[i] += d;
+        }
+
         public abstract void Extend_ExtendableShape(Point p);
         public abstract void Set(Point point, int index);
         public abstract Point Get(int index);
 
         public abstract void Draw(Graphics graphics);
 
-
-        public abstract string getData(); 
+        public abstract string getData();
         public void Save(string filePath)
         {
             string data = getData();
@@ -127,9 +131,9 @@ namespace Project_DoHoa2D
         }
         public abstract void Open(string data);
 
-        public void Configure(Color? BorderColor = null, DashStyle? DashStyle = null, float? Width = null, 
-                        float? Angel = null, bool? IsSelected = null, Color? BackgroundColor = null, 
-                        int? FillStyle = null, bool? IsFill =null, HatchStyle? HatchStyle = null)
+        public void Configure(Color? BorderColor = null, DashStyle? DashStyle = null, float? Width = null,
+                        float? Angel = null, bool? IsSelected = null, Color? BackgroundColor = null,
+                        int? FillStyle = null, bool? IsFill = null, HatchStyle? HatchStyle = null)
         {
             if (BorderColor.HasValue)
                 borderColor = BorderColor.Value;
@@ -185,7 +189,7 @@ namespace Project_DoHoa2D
             }
             x /= n; y /= n;
             Point res = new Point(x, y);
-            return res ;
+            return res;
         }
 
         public void Normalize()
@@ -204,7 +208,7 @@ namespace Project_DoHoa2D
 
         private double CalcAngleAOx(Point O, Point A)
         {
-            double res = Math.Acos((A.X - O.X)/Lenght(A - new Size(O)));
+            double res = Math.Acos((A.X - O.X) / Lenght(A - new Size(O)));
             if (A.Y < O.Y)
                 res = -res;
             return res * 180 / Math.PI;
@@ -228,7 +232,7 @@ namespace Project_DoHoa2D
             Rectangle boundingBox = this.GetBoundingBox();
 
             Rectangle originalBoundingBox = boundingBox;
-        
+
             Point pCenter = boundingBox.Location + new Size(boundingBox.Width / 2, boundingBox.Height / 2);
             boundingBox.Location = new Point(-boundingBox.Width / 2, -boundingBox.Height / 2);
             mousePos = this.Rotate(pCenter, mousePos, -angle);
@@ -245,7 +249,7 @@ namespace Project_DoHoa2D
                     mouseInfo.shapeUnder = this;
                     return mouseInfo;
                 }
-                
+
                 int corner = AtScalePosition(mousePos, boundingBox);
                 if (corner >= 0)
                 {
@@ -255,7 +259,7 @@ namespace Project_DoHoa2D
                     return mouseInfo;
                 }
             }
-            
+
             if (Inside(originalMousePos, originalBoundingBox))
             {
                 mouseInfo.state = StateMouse.Inside;
@@ -264,6 +268,32 @@ namespace Project_DoHoa2D
             }
 
             return mouseInfo;
+        }
+
+
+        internal void Scale(Point srcPos, Point desPos, Point? anchor = null)
+        {
+            Rectangle r = this.GetBoundingBox();
+            if (!anchor.HasValue)
+                anchor = r.Location + new Size(r.Width / 2, r.Height / 2);
+            Point anchorPoint = (Point)anchor;
+            float ratioX, ratioY;
+            float distance = (srcPos.X - anchorPoint.X);
+            if (distance == 0)
+                distance = 0.01F;
+            ratioX = (float) 1.0 * (desPos.X - anchorPoint.X) / distance;
+
+            distance = (srcPos.Y - anchorPoint.Y);
+            if (distance == 0)
+                distance = 0.01F;
+            ratioY = (float)1.0 * (desPos.Y - anchorPoint.Y) / distance;
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                int newX = (int) Math.Round(ratioX * (points[i].X - anchorPoint.X) + anchorPoint.X);
+                int newY = (int)Math.Round(ratioY * (points[i].Y - anchorPoint.Y) + anchorPoint.Y);
+                points[i] = new Point(newX, newY);
+            }
         }
     }
 }

@@ -99,16 +99,6 @@ namespace Project_DoHoa2D
 
         }
 
-
-        public override void Move(Point d)
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                Point p = new Point(points[i].X + d.X, points[i].Y + d.Y);
-                points[i] = p;
-            }
-        }
-
         public override void Extend_ExtendableShape(Point p)
         {
             

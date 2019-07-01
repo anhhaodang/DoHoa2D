@@ -105,11 +105,7 @@ namespace Project_DoHoa2D.UndoRedo
                         myRectangle.Open(listShape[i]);
                         myShapes.Add(myRectangle);
                         break;
-                    case "Parallelogram":
-                        MyShape myParallelogram = new MyParallelogram();
-                        myParallelogram.Open(listShape[i]);
-                        myShapes.Add(myParallelogram);
-                        break;
+                   
                     case "Circle":
                         MyShape myCircle = new MyCircle();
                         myCircle.Open(listShape[i]);

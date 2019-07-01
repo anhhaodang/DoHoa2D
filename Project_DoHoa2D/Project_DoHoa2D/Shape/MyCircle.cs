@@ -111,30 +111,7 @@ namespace Project_DoHoa2D
             this.borderColor = Color.FromArgb(Convert.ToInt32(dt[7]));
 
         }
-
-
-        public override void Move(Point d)
-        {    
-            for (int i = 0; i < 2; i++)
-            {
-                Point p = new Point(points[i].X + d.X, points[i].Y + d.Y);
-                points[i] = p;
-            }
-        }
-
-        //public override bool AtScalePosition(Point p)
-        //{
-        //    if (angle != 0)
-        //    {
-        //        p = base.Rotate(base.Center(), p, -angle);
-        //    }
-        //    Point p0 = new Point(Math.Min(points[0].X, points[1].X), Math.Min(points[0].Y, points[1].Y));
-
-        //    if (Math.Abs(p.X - p0.X) < 5 && Math.Abs(p.Y - p0.Y) < 5)
-        //        return true;
-        //    return false;
-        //}
-
+        
         public override void Extend_ExtendableShape(Point p)
         {
             throw new NotImplementedException();
