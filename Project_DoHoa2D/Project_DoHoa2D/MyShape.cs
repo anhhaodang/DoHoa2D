@@ -75,14 +75,11 @@ namespace Project_DoHoa2D
                     yMax = p.Y;
                 if (p.X < xMin)
                     xMin = p.X;
-                if (p.Y < yMax)
-                    yMax = p.Y;
+                if (p.Y < yMin)
+                    yMin = p.Y;
             }
 
             return new Rectangle(xMin, yMin, xMax - xMin, yMax - yMin);
-            //int Width = xMax - xMin;
-            //int Height = yMax - yMin;
-            //return new Rectangle(-Width/2, -Height/2, Width, Height);
         }
 
         protected void DrawBoudingBox(Graphics graphics, Rectangle boundingBox)
@@ -150,7 +147,6 @@ namespace Project_DoHoa2D
                 isFill = IsFill.Value;
             if (HatchStyle.HasValue)
                 hatchStyle = HatchStyle.Value;
-
         }
 
         public Point Rotate(Point origin, Point p, float alpha)
@@ -170,7 +166,7 @@ namespace Project_DoHoa2D
             return res;
         }
 
-        public Point Center()
+        public Point GetCenterPoint()
         {
             int x = 0, y = 0;
             int n = points.Count;
@@ -221,12 +217,15 @@ namespace Project_DoHoa2D
         internal MouseInfo CalcMousePosition(Point mousePos)
         {
             Rectangle boundingBox = this.GetBoundingBox();
-            Point pCenter = boundingBox.Location + new Size(boundingBox.Width / 2, boundingBox.Height / 2);
 
+            Rectangle originalBoundingBox = boundingBox;
+        
+            Point pCenter = boundingBox.Location + new Size(boundingBox.Width / 2, boundingBox.Height / 2);
             boundingBox.Location = new Point(-boundingBox.Width / 2, -boundingBox.Height / 2);
             mousePos = this.Rotate(pCenter, mousePos, -angle);
-            mousePos -= new Size(pCenter);
+            Point originalMousePos = mousePos;
 
+            mousePos -= new Size(pCenter);
 
             MouseInfo mouseInfo = new MouseInfo();
             if (isSelected)
@@ -248,7 +247,7 @@ namespace Project_DoHoa2D
                 }
             }
             
-            if (Inside(mousePos, boundingBox))
+            if (Inside(originalMousePos, originalBoundingBox))
             {
                 mouseInfo.state = StateMouse.Inside;
                 mouseInfo.shapeUnder = this;

@@ -90,7 +90,7 @@ namespace Project_DoHoa2D
                
         public override void Set(Point p, int index)
         {
-            this.points[index] = base.Rotate(base.Center(), p, -angle);
+            this.points[index] = base.Rotate(base.GetCenterPoint(), p, -angle);
         }
 
         public override Point Get(int index)

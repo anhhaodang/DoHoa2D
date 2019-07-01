@@ -15,5 +15,11 @@ namespace Project_DoHoa2D
                 radius = 5;
             return Math.Abs(p1.X - p2.X) < radius && Math.Abs(p1.Y - p2.Y) < radius;
         }
+
+        public static Point ConvertInnerPoint(Point p, Point anchor)
+        {
+            Point res = p - new Size(anchor);
+            return res;
+        }
     }
 }

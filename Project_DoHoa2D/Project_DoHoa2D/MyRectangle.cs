@@ -31,17 +31,16 @@ namespace Project_DoHoa2D
 
         public override void Draw(Graphics graphics)
         {
-            Point p0 = new Point(Math.Min(points[0].X, points[1].X), Math.Min(points[0].Y, points[1].Y));
-            Point p1 = new Point(Math.Max(points[0].X, points[1].X), Math.Max(points[0].Y, points[1].Y));
+            Rectangle r = GetBoundingBox();
+            Point pCenter = r.Location + new Size(r.Width / 2, r.Height / 2);
+            r.Location = new Point(-r.Width / 2, -r.Height / 2);
 
-            graphics.TranslateTransform((p0.X + p1.X) / 2, (p0.Y + p1.Y) / 2);
+            graphics.TranslateTransform(pCenter.X, pCenter.Y);
             graphics.RotateTransform(angle);
 
             Pen myPen = new Pen(borderColor);
             myPen.DashStyle = dashStyle;
             myPen.Width = width;
-            Point pTopLeft = new Point(-(p1.X - p0.X) / 2, -(p1.Y - p0.Y) / 2);
-            Rectangle r = new Rectangle(pTopLeft, new Size(p1.X - p0.X, p1.Y - p0.Y));
 
             if (isFill)
             {
@@ -54,11 +53,9 @@ namespace Project_DoHoa2D
                 }
             }
             graphics.DrawRectangle(myPen, r);
+
             if (isSelected)
-            {
-                int size = 3;
-                graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(pTopLeft.X - size, pTopLeft.Y - size, size * 2, size * 2));
-            }
+                DrawBoudingBox(graphics, r);
             graphics.ResetTransform();
         }       
 
@@ -69,7 +66,7 @@ namespace Project_DoHoa2D
 
         public override void Set(Point p, int index)
         {
-                this.points[index] = base.Rotate(base.Center(), p, -angle);
+                this.points[index] = base.Rotate(base.GetCenterPoint(), p, -angle);
         }
 
         public override void Save(string filePath)
@@ -126,14 +123,6 @@ namespace Project_DoHoa2D
                 points[i] = p;
             }
         }
-
-        //public override bool AtScalePosition(Point p)
-        //{
-        //    p = base.Rotate(base.Center(), p, -angle);
-        //    if (Math.Abs(p.X - points[0].X) < 5 && Math.Abs(p.Y - points[0].Y) < 5)
-        //            return true;
-        //    return false;
-        //}
 
         public override void Extend_ExtendableShape(Point p)
         {

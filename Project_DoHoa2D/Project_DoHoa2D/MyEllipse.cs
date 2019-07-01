@@ -27,7 +27,7 @@ namespace Project_DoHoa2D
 
         public override void Set(Point p, int index)
         {
-            this.points[index] = base.Rotate(base.Center(), p, -angle);
+            this.points[index] = base.Rotate(base.GetCenterPoint(), p, -angle);
         }
 
         public override Point Get(int index)
@@ -38,9 +38,10 @@ namespace Project_DoHoa2D
         public override void Draw(Graphics graphics)
         {
             Rectangle r = GetBoundingBox();
+            Point pCenter = r.Location + new Size(r.Width / 2, r.Height / 2);
             r.Location = new Point(-r.Width / 2, -r.Height / 2);
 
-            graphics.TranslateTransform(this.Center().X, this.Center().Y);
+            graphics.TranslateTransform(pCenter.X, pCenter.Y);
             graphics.RotateTransform(angle);
 
             Pen myPen = new Pen(borderColor);
@@ -133,7 +134,6 @@ namespace Project_DoHoa2D
         protected override GraphicsPath GetGraphicsPath(Rectangle boudingBox)
         {
             GraphicsPath path = new GraphicsPath();
-            //path.AddEllipse(new Rectangle(points[0], new Size(points[1].X - points[0].X, points[1].Y - points[0].Y)));
             path.AddEllipse(boudingBox);
             return path;
         }

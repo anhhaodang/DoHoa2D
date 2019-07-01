@@ -45,7 +45,7 @@ namespace Project_DoHoa2D
 
         public override void Set(Point p, int index)
         {
-            this.points[index] = base.Rotate(base.Center(), p, -angle);
+            this.points[index] = base.Rotate(base.GetCenterPoint(), p, -angle);
         }
 
         public override Point Get(int index)
@@ -84,7 +84,7 @@ namespace Project_DoHoa2D
                 graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(p0.X - size, p0.Y - size, size * 2, size * 2));
             }
 
-            Point pivot = base.Center();
+            Point pivot = base.GetCenterPoint();
             
 
             graphics.TranslateTransform(pivot.X, pivot.Y);

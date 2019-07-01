@@ -314,7 +314,7 @@ namespace Project_DoHoa2D
 
             else if (mode == Mode.Rotating)
             {
-                float alpha = (float)selectedShape.CalculateAngel(selectedShape.Center(), prevPosition, e.Location);
+                float alpha = (float)selectedShape.CalculateAngel(selectedShape.GetCenterPoint(), prevPosition, e.Location);
                 prevPosition = e.Location;
                 selectedShape.Configure(Angel: alpha);
                 lblAngle.Text = selectedShape.angle.ToString();

@@ -43,42 +43,17 @@ namespace Project_DoHoa2D
 
         public override void Draw(Graphics graphics)
         {
-            int x_min, y_min, x_max, y_max;
-            x_min = x_max = points[0].X;
-            y_min = y_max = points[0].Y;
-            int x = 0, y = 0;
-            for (int i = 0; i < numPoint; i++)
-            {
-                x += points[i].X; y += points[i].Y;
-                if (x_min > points[i].X) x_min = points[i].X;
-                if (y_min > points[i].Y) y_min = points[i].Y;
-                if (x_max < points[i].X) x_max = points[i].X;
-                if (y_max < points[i].Y) y_max = points[i].Y;
-            }
+            Rectangle r = GetBoundingBox();
+            Point pCenter = r.Location + new Size(r.Width / 2, r.Height / 2);
+            r.Location = new Point(-r.Width / 2, -r.Height / 2);
 
-            Point p0 = new Point(x_min, y_min);
-            Point p1 = new Point(x_max, y_max);
+            graphics.TranslateTransform(pCenter.X, pCenter.Y);
+            graphics.RotateTransform(angle);
 
             if (isSelected)
-            {
-                //vẽ bao
+                DrawBoudingBox(graphics, r);
 
-                Pen penBound = new Pen(Color.Blue);
-                penBound.DashStyle = DashStyle.Dash;
-
-                graphics.DrawRectangle(penBound, new Rectangle(p0, new Size(p1.X - p0.X, p1.Y - p0.Y)));
-                int size = 3;
-                graphics.FillEllipse(new SolidBrush(Color.Blue), new Rectangle(p0.X - size, p0.Y - size, size * 2, size * 2));
-            }
-
-            x /= numPoint; y /= numPoint;
-
-
-            Point pivot = new Point(x, y);
-            Point[] polyline = ConvertPoint(points, pivot);
-
-            graphics.TranslateTransform(x, y);
-            graphics.RotateTransform(angle);
+            Point[] polyline = ConvertPoint(points, pCenter);
 
             Pen myPen = new Pen(borderColor);
             myPen.DashStyle = dashStyle;
@@ -91,8 +66,7 @@ namespace Project_DoHoa2D
 
         public override void Set(Point p, int index)
         {
-            this.points[index] = base.Rotate(base.Center(), p, -angle);
-
+            this.points[index] = base.Rotate(base.GetCenterPoint(), p, -angle);
         }
 
         public override Point Get(int index)
@@ -159,28 +133,6 @@ namespace Project_DoHoa2D
                 points[i] = p;
             }
         }
-
-        //public override bool AtScalePosition(Point p)
-        //{
-        //    if (angle != 0)
-        //    {
-        //        p = base.Rotate(base.Center(), p, angle);
-        //    }
-
-        //    int x_min, y_min;
-        //    x_min = points[0].X; y_min = points[0].Y;
-        //    for (int i = 0; i < numPoint; i++)
-        //    {
-        //        if (x_min > points[i].X) x_min = points[i].X;
-        //        if (y_min > points[i].Y) y_min = points[i].Y;
-        //    }
-
-        //    Point p0 = new Point(x_min, y_min);
-
-        //    if (Math.Abs(p.X - p0.X) < 5 && Math.Abs(p.Y - p0.Y) < 5)
-        //        return true;
-        //    return false;
-        //}
 
 
         public override void Extend_ExtendableShape(Point p)
