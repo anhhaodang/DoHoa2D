@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2048
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_DoHoa2D", "Project_DoHoa2D\Project_DoHoa2D.csproj", "{382972BB-0776-4BA8-88FB-9BA357C88670}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_Paint", "Project_DoHoa2D\Project_Paint.csproj", "{382972BB-0776-4BA8-88FB-9BA357C88670}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
