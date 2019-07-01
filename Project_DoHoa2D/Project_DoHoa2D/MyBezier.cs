@@ -170,7 +170,7 @@ namespace Project_DoHoa2D
                 p[i] = this.Get(i);
 
             string data = "Bezier ";
-            data += point.Count.ToString() + " ";
+            data += points.Count.ToString() + " ";
 
             for (int i = 0; i < numPoint; i++)
             {
