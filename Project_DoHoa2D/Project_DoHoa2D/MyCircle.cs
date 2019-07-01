@@ -136,25 +136,25 @@ namespace Project_DoHoa2D
             }
         }
 
-        public override bool AtScalePosition(Point p)
-        {
-            if (angle != 0)
-            {
-                p = base.Rotate(base.Center(), p, -angle);
-            }
-            Point p0 = new Point(Math.Min(points[0].X, points[1].X), Math.Min(points[0].Y, points[1].Y));
+        //public override bool AtScalePosition(Point p)
+        //{
+        //    if (angle != 0)
+        //    {
+        //        p = base.Rotate(base.Center(), p, -angle);
+        //    }
+        //    Point p0 = new Point(Math.Min(points[0].X, points[1].X), Math.Min(points[0].Y, points[1].Y));
 
-            if (Math.Abs(p.X - p0.X) < 5 && Math.Abs(p.Y - p0.Y) < 5)
-                return true;
-            return false;
-        }
+        //    if (Math.Abs(p.X - p0.X) < 5 && Math.Abs(p.Y - p0.Y) < 5)
+        //        return true;
+        //    return false;
+        //}
 
         public override void Extend_ExtendableShape(Point p)
         {
             throw new NotImplementedException();
         }
 
-        protected override GraphicsPath GetGraphicsPath()
+        protected override GraphicsPath GetGraphicsPath(Rectangle boundingBox)
         {
             GraphicsPath path = new GraphicsPath();
             path.AddEllipse(new Rectangle(points[0], new Size(points[1].X - points[0].X, points[1].Y - points[0].Y)));

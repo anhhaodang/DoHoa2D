@@ -20,12 +20,10 @@ namespace Project_DoHoa2D
         public float angle = 0;
         public bool isSelected = false;
 
-        public bool Inside(Point p)
+        public bool Inside(Point p, Rectangle boundingBox)
         {
-            p = this.Rotate(this.Center(), p, -angle);
-
             bool res = false;
-            GraphicsPath path = this.GetGraphicsPath();
+            GraphicsPath path = this.GetGraphicsPath(boundingBox);
 
             if (isFill)
                 res = path.IsVisible(p);
@@ -37,13 +35,28 @@ namespace Project_DoHoa2D
             return res;
         }
 
-        protected abstract GraphicsPath GetGraphicsPath();
+        protected abstract GraphicsPath GetGraphicsPath(Rectangle boundingBox);
 
-        public bool AtRotatePosition(Point p)
-        {
-            p = this.Rotate(this.Center(), p, -angle);
-            Point rotatePosition = this.GetRotatePosition(this.GetBoundingBox());
+        public bool AtRotatePosition(Point p, Rectangle boundingBox)
+        { 
+            Point rotatePosition = this.GetRotatePosition(boundingBox);
             return Utils.Near(p, rotatePosition, 5);
+        }
+
+        public int AtScalePosition(Point p, Rectangle boundingBox)
+        {
+            List<Point> corners = new List<Point>();
+            corners.Add(boundingBox.Location);
+            corners.Add(boundingBox.Location + new Size(0, boundingBox.Height));
+            corners.Add(boundingBox.Location + boundingBox.Size);
+            corners.Add(boundingBox.Location + new Size(boundingBox.Width, 0));
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (Utils.Near(p, corners[i]))
+                    return i;
+            }
+            return -1;
         }
 
         protected Rectangle GetBoundingBox()
@@ -67,6 +80,9 @@ namespace Project_DoHoa2D
             }
 
             return new Rectangle(xMin, yMin, xMax - xMin, yMax - yMin);
+            //int Width = xMax - xMin;
+            //int Height = yMax - yMin;
+            //return new Rectangle(-Width/2, -Height/2, Width, Height);
         }
 
         protected void DrawBoudingBox(Graphics graphics, Rectangle boundingBox)
@@ -94,8 +110,6 @@ namespace Project_DoHoa2D
             Point p = boudingBox.Location + new Size(boudingBox.Width / 2, -10);
             return p;
         }
-
-        public abstract bool AtScalePosition(Point p);
 
         public abstract void Move(Point d);
         public abstract void Extend_ExtendableShape(Point p);
@@ -185,10 +199,7 @@ namespace Project_DoHoa2D
 
         private double CalcAngleAOx(Point O, Point A)
         {
-            //if (A.X == O.X)
-            //    return A.Y > O.Y ? 90 : -90;
-            //double res = Math.Atan((1.0 * A.Y - O.Y) / (A.X - O.X));
-            double res = Math.Acos((A.X - O.X)/Math.Sqrt((A.X - O.X) *(A.X - O.X) + (A.Y - O.Y) *(A.Y - O.Y)));
+            double res = Math.Acos((A.X - O.X)/Lenght(A - new Size(O)));
             if (A.Y < O.Y)
                 res = -res;
             return res * 180 / Math.PI;
@@ -205,6 +216,46 @@ namespace Project_DoHoa2D
         {
             points.RemoveAt(points.Count - 1);
             numPoint--;
+        }
+
+        internal MouseInfo CalcMousePosition(Point mousePos)
+        {
+            Rectangle boundingBox = this.GetBoundingBox();
+            Point pCenter = boundingBox.Location + new Size(boundingBox.Width / 2, boundingBox.Height / 2);
+
+            boundingBox.Location = new Point(-boundingBox.Width / 2, -boundingBox.Height / 2);
+            mousePos = this.Rotate(pCenter, mousePos, -angle);
+            mousePos -= new Size(pCenter);
+
+
+            MouseInfo mouseInfo = new MouseInfo();
+            if (isSelected)
+            {
+                if (AtRotatePosition(mousePos, boundingBox))
+                {
+                    mouseInfo.state = StateMouse.Rotate;
+                    mouseInfo.shapeUnder = this;
+                    return mouseInfo;
+                }
+                
+                int corner = AtScalePosition(mousePos, boundingBox);
+                if (corner >= 0)
+                {
+                    mouseInfo.state = StateMouse.Scale;
+                    mouseInfo.shapeUnder = this;
+                    mouseInfo.corner = (Corner)corner;
+                    return mouseInfo;
+                }
+            }
+            
+            if (Inside(mousePos, boundingBox))
+            {
+                mouseInfo.state = StateMouse.Inside;
+                mouseInfo.shapeUnder = this;
+                return mouseInfo;
+            }
+
+            return mouseInfo;
         }
     }
 }

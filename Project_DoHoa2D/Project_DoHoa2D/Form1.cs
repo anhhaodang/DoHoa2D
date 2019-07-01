@@ -19,6 +19,7 @@ namespace Project_DoHoa2D
         List<MyShape> shapes = new List<MyShape>();
         Mode mode;
         MyShape selectedShape;
+        MouseInfo mouse = new MouseInfo();
 
         private Point prevPosition;
 
@@ -51,50 +52,26 @@ namespace Project_DoHoa2D
         }
 
         private void pnlMain_MouseDown(object sender, MouseEventArgs e)
-        {          
+        {
             if (mode == Mode.Select)
             {
-                for (int i = 0; i < shapes.Count; i++)
-                    shapes[i].isSelected = false;
-                selectedShape = null;
+                DeselectAll();
                 mode = Mode.Select;
 
-                for (int i = shapes.Count - 1; i >= 0; i--)
+                if (mouse.state != StateMouse.Outside)
                 {
-                    if (shapes[i].AtScalePosition(e.Location))
-                    {
-                        shapes[i].isSelected = true;
-                        selectedShape = shapes[i];
-                        mode = Mode.Scaling;
-                    }
-                    else if (shapes[i].AtRotatePosition(e.Location))
-                    {
-                        shapes[i].isSelected = true;
-                        prevPosition = e.Location;
-                        selectedShape = shapes[i];
-                        mode = Mode.Rotating;
-                    }
-
-                    else
-
-                   //Nghiên cứu gộp 3 hàm Inside, AtPositionRotate và AtScale thành
-                   //StateCursor shapes[i].Calculate(e.Location)
-                   //Trả về StateCursor: inside, rotateSW, rotateSE, scaleSW, scaleSE...
-                   if (shapes[i].Inside(e.Location))
-                    {
-                        shapes[i].isSelected = true;
-                        pnlMain.Invalidate(); //Vẽ boundingbox hoặc 2 đầu mút
-                        selectedShape = shapes[i];
-                        mode = Mode.Moving;
-                        prevPosition = e.Location;
-                        break;
-                    }
+                    prevPosition = e.Location;
+                    AddSelectedShape(mouse.shapeUnder);
                 }
 
+                if (mouse.state == StateMouse.Rotate)
+                    mode = Mode.Rotating;
+                else if (mouse.state == StateMouse.Scale)
+                    mode = Mode.Scaling;
+                else if (mouse.state == StateMouse.Inside)
+                    mode = Mode.Moving;
+
                 pnlMain.Invalidate();
-
-
-
             }
 
             else if (mode == Mode.WaitingDraw)
@@ -233,9 +210,8 @@ namespace Project_DoHoa2D
                 }
                 mode = Mode.Drawing;
             }
-
             else if (mode == Mode.Drawing)
-            {                
+            {
                 if (BtnChecked(btnPolygon) || BtnChecked(btnZigzag))
                 {
                     shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
@@ -265,6 +241,23 @@ namespace Project_DoHoa2D
             }
         }
 
+        private void AddSelectedShape(MyShape shape)
+        {
+            if (selectedShape != null && selectedShape != shape)
+                DeselectAll();
+            selectedShape = shape;
+            shape.isSelected = true;
+        }
+
+        private void DeselectAll()
+        {
+            if (selectedShape != null)
+            {
+                selectedShape.isSelected = false;
+                selectedShape = null;
+            }
+        }
+
         private void pnlMain_MouseMove(object sender, MouseEventArgs e)
         {
             if (mode == Mode.WaitingDraw)
@@ -274,7 +267,6 @@ namespace Project_DoHoa2D
 
             else if (mode == Mode.Drawing)
             {
-               
                 if (BtnChecked(btnPolygon) || BtnChecked(btnBezier) || BtnChecked(btnZigzag))
                 {
                     shapes[shapes.Count - 1].Set(e.Location, shapes[shapes.Count - 1].numPoint - 1);
@@ -286,28 +278,28 @@ namespace Project_DoHoa2D
             }
             else if (mode == Mode.Select)
             {
-                pnlMain.Cursor = Cursors.Default;
-                for (int i = 0; i < shapes.Count; i++)
+                for (int i = shapes.Count - 1; i >= 0; i--)
                 {
-                    if (shapes[i].isSelected)
-                    {
-                        if (shapes[i].AtRotatePosition(e.Location))
-                        {
-                            pnlMain.Cursor = Cursors.PanEast;
-                            break;
-                        }
-                        if (shapes[i].AtScalePosition(e.Location))
-                        {
-                            pnlMain.Cursor = Cursors.SizeNESW;
-                            break;
-                        }
-                    }
-                    else if (shapes[i].Inside(e.Location))
-                    {
-                        pnlMain.Cursor = Cursors.SizeAll;
+                    mouse = shapes[i].CalcMousePosition(e.Location);
+                    if (mouse.state != StateMouse.Outside)
                         break;
+                }
+
+                if (mouse.state == StateMouse.Rotate)
+                    pnlMain.Cursor = Cursors.Hand;
+                else if (mouse.state == StateMouse.Inside)
+                    pnlMain.Cursor = Cursors.SizeAll;
+                else if (mouse.state == StateMouse.Scale)
+                {
+                    switch (mouse.corner)
+                    {
+                        case Corner.TopLeft: pnlMain.Cursor = Cursors.SizeNWSE; break;
+                        case Corner.TopRight: pnlMain.Cursor = Cursors.SizeNESW; break;
+                        case Corner.DownRight: pnlMain.Cursor = Cursors.SizeNWSE; break;
+                        case Corner.DownLeft: pnlMain.Cursor = Cursors.SizeNESW; break;
                     }
                 }
+                else pnlMain.Cursor = Cursors.Default;
             }
 
             else if (mode == Mode.Moving)

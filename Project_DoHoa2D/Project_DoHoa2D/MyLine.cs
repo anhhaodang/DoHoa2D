@@ -109,24 +109,24 @@ namespace Project_DoHoa2D
                 this.Set(new Point(points[i].X + d.X, points[i].Y + d.Y), i);
         }
 
-        public override bool AtScalePosition(Point p)
-        {
-            if (angle != 0)
-            {
-                p = base.Rotate(base.Center(), p, -angle);
-            }
+        //public override bool AtScalePosition(Point p)
+        //{
+        //    if (angle != 0)
+        //    {
+        //        p = base.Rotate(base.Center(), p, -angle);
+        //    }
 
-            if (Math.Abs(p.X - points[0].X) < 5 && Math.Abs(p.Y - points[0].Y) < 5)
-                return true;
-            return false;
-        }
+        //    if (Math.Abs(p.X - points[0].X) < 5 && Math.Abs(p.Y - points[0].Y) < 5)
+        //        return true;
+        //    return false;
+        //}
 
         public override void Extend_ExtendableShape(Point p)
         {
             
         }
 
-        protected override GraphicsPath GetGraphicsPath()
+        protected override GraphicsPath GetGraphicsPath(Rectangle boundingBox)
         {
             GraphicsPath path = new GraphicsPath();
             path.AddLine(points[0], points[1]);

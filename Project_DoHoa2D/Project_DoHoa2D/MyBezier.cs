@@ -156,10 +156,10 @@ namespace Project_DoHoa2D
         }
         
 
-        public override bool AtScalePosition(Point p)
-        {
-            return false;
-        }
+        //public override bool AtScalePosition(Point p)
+        //{
+        //    return false;
+        //}
 
         public override void Extend_ExtendableShape(Point p)
         {
@@ -167,7 +167,7 @@ namespace Project_DoHoa2D
             this.numPoint += 1;
         }
 
-        protected override GraphicsPath GetGraphicsPath()
+        protected override GraphicsPath GetGraphicsPath(Rectangle boundingBox)
         {
             GraphicsPath path = new GraphicsPath();
             List<Point> pointArray = new List<Point>();

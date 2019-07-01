@@ -160,27 +160,27 @@ namespace Project_DoHoa2D
             }
         }
 
-        public override bool AtScalePosition(Point p)
-        {
-            if (angle != 0)
-            {
-                p = base.Rotate(base.Center(), p, angle);
-            }
+        //public override bool AtScalePosition(Point p)
+        //{
+        //    if (angle != 0)
+        //    {
+        //        p = base.Rotate(base.Center(), p, angle);
+        //    }
 
-            int x_min, y_min;
-            x_min = points[0].X; y_min = points[0].Y;
-            for (int i = 0; i < numPoint; i++)
-            {
-                if (x_min > points[i].X) x_min = points[i].X;
-                if (y_min > points[i].Y) y_min = points[i].Y;
-            }
+        //    int x_min, y_min;
+        //    x_min = points[0].X; y_min = points[0].Y;
+        //    for (int i = 0; i < numPoint; i++)
+        //    {
+        //        if (x_min > points[i].X) x_min = points[i].X;
+        //        if (y_min > points[i].Y) y_min = points[i].Y;
+        //    }
 
-            Point p0 = new Point(x_min, y_min);
+        //    Point p0 = new Point(x_min, y_min);
 
-            if (Math.Abs(p.X - p0.X) < 5 && Math.Abs(p.Y - p0.Y) < 5)
-                return true;
-            return false;
-        }
+        //    if (Math.Abs(p.X - p0.X) < 5 && Math.Abs(p.Y - p0.Y) < 5)
+        //        return true;
+        //    return false;
+        //}
 
 
         public override void Extend_ExtendableShape(Point p)
@@ -189,7 +189,7 @@ namespace Project_DoHoa2D
             this.numPoint += 1;
         }
 
-        protected override GraphicsPath GetGraphicsPath()
+        protected override GraphicsPath GetGraphicsPath(Rectangle boundingBox)
         {
             Point[] polyline = new Point[numPoint];
             for (int i = 0; i < numPoint; i++)

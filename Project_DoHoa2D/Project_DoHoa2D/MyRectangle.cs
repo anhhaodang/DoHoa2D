@@ -127,23 +127,24 @@ namespace Project_DoHoa2D
             }
         }
 
-        public override bool AtScalePosition(Point p)
-        {
-            p = base.Rotate(base.Center(), p, -angle);
-            if (Math.Abs(p.X - points[0].X) < 5 && Math.Abs(p.Y - points[0].Y) < 5)
-                    return true;
-            return false;
-        }
+        //public override bool AtScalePosition(Point p)
+        //{
+        //    p = base.Rotate(base.Center(), p, -angle);
+        //    if (Math.Abs(p.X - points[0].X) < 5 && Math.Abs(p.Y - points[0].Y) < 5)
+        //            return true;
+        //    return false;
+        //}
 
         public override void Extend_ExtendableShape(Point p)
         {
             
         }
 
-        protected override GraphicsPath GetGraphicsPath()
+        protected override GraphicsPath GetGraphicsPath(Rectangle boundingBox)
         {
             GraphicsPath path = new GraphicsPath();
-            path.AddRectangle(new Rectangle(points[0], new Size(points[1].X - points[0].X, points[1].Y - points[0].Y)));
+            //path.AddRectangle(new Rectangle(points[0], new Size(points[1].X - points[0].X, points[1].Y - points[0].Y)));
+            path.AddRectangle(boundingBox);
             return path;
         }
     }

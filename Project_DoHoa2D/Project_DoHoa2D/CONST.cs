@@ -54,9 +54,9 @@ namespace Project_DoHoa2D
 
         public MouseInfo()
         {
-            state = 0;
+            state = StateMouse.Outside;
             shapeUnder = null;
-            corner = 0;
+            corner = Corner.Undefined;
         }
     }
 
@@ -75,6 +75,7 @@ namespace Project_DoHoa2D
         TopLeft = 0,
         DownLeft = 1,
         DownRight = 2,
-        TopRight = 3
+        TopRight = 3,
+        Undefined = -1
     }
 }

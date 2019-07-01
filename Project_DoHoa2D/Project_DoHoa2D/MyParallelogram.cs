@@ -154,20 +154,20 @@ namespace Project_DoHoa2D
             }
         }
 
-        public override bool AtScalePosition(Point p)
-        {
-            p = base.Rotate(base.Center(), p, -angle);
-            if (Math.Abs(p.X - points[0].X) < 5 && Math.Abs(p.Y - points[0].Y) < 5)
-                return true;
-            return false;
-        }
+        //public override bool AtScalePosition(Point p)
+        //{
+        //    p = base.Rotate(base.Center(), p, -angle);
+        //    if (Math.Abs(p.X - points[0].X) < 5 && Math.Abs(p.Y - points[0].Y) < 5)
+        //        return true;
+        //    return false;
+        //}
 
         public override void Extend_ExtendableShape(Point p)
         {
             throw new NotImplementedException();
         }
 
-        protected override GraphicsPath GetGraphicsPath()
+        protected override GraphicsPath GetGraphicsPath(Rectangle boundingBox)
         {
             Point[] parallelogramToDraw = new Point[4];
             parallelogramToDraw[0] = points[0]; parallelogramToDraw[2] = points[1];
