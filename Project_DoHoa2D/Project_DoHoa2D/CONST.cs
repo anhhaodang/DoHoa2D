@@ -79,4 +79,17 @@ namespace Project_DoHoa2D
         TopRight = 3,
         Undefined = -1
     }
+
+    public static class AttributeType
+    {
+        public const string borderColor = "borderColor";
+        public const string dashStyle = "dashStyle";
+        public const string width = "width";
+        public const string angle = "angle";
+        public const string isSelected = "isSelected";
+        public const string backgroundColor = "backgroundColor";
+        public const string isFill = "isFill";
+        public const string hatchStyle = "hatchStyle";
+        public const string fillStyle = "yesNo";
+    }
 }

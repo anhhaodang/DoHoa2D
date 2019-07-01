@@ -256,6 +256,7 @@
             this.cmbDashstyle.Name = "cmbDashstyle";
             this.cmbDashstyle.Size = new System.Drawing.Size(121, 24);
             this.cmbDashstyle.TabIndex = 4;
+            this.cmbDashstyle.SelectedIndexChanged += new System.EventHandler(this.cmbDashstyle_SelectedIndexChanged);
             // 
             // menuStrip1
             // 
@@ -512,6 +513,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "MyPaint";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.pnlShape.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
