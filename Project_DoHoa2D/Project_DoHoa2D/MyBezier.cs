@@ -108,25 +108,6 @@ namespace Project_DoHoa2D
 
         }
 
-        public override void Save(string filePath)
-        {
-            Point[] p = new Point[numPoint];
-            for (int i = 0; i < numPoint; i++)
-                p[i] = this.Get(i);
-
-            string data = "Bezier ";
-            data += points.Count.ToString() + " ";
-
-            for (int i = 0; i < numPoint; i++)
-            {
-                data += p[i].X.ToString() + " ";
-                data += p[i].Y.ToString() + " ";
-            }
-            data += dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + " " + angle.ToString() + "\n";
-            StreamWriter sw = File.AppendText(filePath);
-            sw.WriteLine(data);
-            sw.Close();
-        }
         public override void Open(string data)
         {
             char delimiters = ' ';
@@ -180,6 +161,24 @@ namespace Project_DoHoa2D
             }
             path.AddBezier(pointArray[0], pointArray[1], pointArray[2], pointArray[3]);
             return path;
+        }
+
+        public override string getData()
+        {
+            Point[] p = new Point[numPoint];
+            for (int i = 0; i < numPoint; i++)
+                p[i] = this.Get(i);
+
+            string data = "Bezier ";
+            data += points.Count.ToString() + " ";
+
+            for (int i = 0; i < numPoint; i++)
+            {
+                data += p[i].X.ToString() + " ";
+                data += p[i].Y.ToString() + " ";
+            }
+            data += dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString() + " " + angle.ToString() + "\n";
+            return data;
         }
     }
 }

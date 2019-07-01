@@ -66,19 +66,6 @@ namespace Project_DoHoa2D
             return this.points[index];
         }
 
-        public override void Save(string filePath)
-        {
-            Point a = this.Get(0);
-            Point b = this.Get(1);
-            string data = "Line " +  a.X.ToString() + " " + a.Y.ToString() + " " + b.X.ToString() + " " + b.Y.ToString()
-                 + " " + dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString() 
-                 + " " + angle.ToString() + "\n";
-
-            StreamWriter sw = File.AppendText(filePath);
-            sw.WriteLine(data);
-            sw.Close();
-        }
-
         public override void Open(string data)
         {
             char delimiters = ' ';
@@ -120,6 +107,16 @@ namespace Project_DoHoa2D
             GraphicsPath path = new GraphicsPath();
             path.AddLine(points[0], points[1]);
             return path;
+        }
+
+        public override string getData()
+        {
+            Point a = this.Get(0);
+            Point b = this.Get(1);
+            string data = "Line " + a.X.ToString() + " " + a.Y.ToString() + " " + b.X.ToString() + " " + b.Y.ToString()
+                 + " " + dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString()
+                 + " " + angle.ToString() + "\n";
+            return data;
         }
     }
 }

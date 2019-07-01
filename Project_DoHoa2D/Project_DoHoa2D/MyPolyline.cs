@@ -76,25 +76,7 @@ namespace Project_DoHoa2D
             return this.points[0];
         }
 
-        public override void Save(string filePath)
-        {
-            Point[] p = new Point[numPoint];
-            for (int i = 0; i < numPoint; i++)
-                p[i] = this.Get(i);
-
-            string data = "Polyline ";
-            for (int i = 0; i < numPoint - 2; i++)
-            {
-                data += p[i].X.ToString() + " ";
-                data += p[i].Y.ToString() + " ";
-            }
-            data += dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString()
-              + " " + angle.ToString() + "\n";
-            StreamWriter sw = File.AppendText(filePath);
-            sw.WriteLine(data);
-            sw.Close();
-        }
-
+       
         public override void Open(string data)
         {
             char delimiters = ' ';
@@ -150,6 +132,23 @@ namespace Project_DoHoa2D
             GraphicsPath path = new GraphicsPath();
             path.AddLines(polyline);
             return path;
+        }
+
+        public override string getData()
+        {
+            Point[] p = new Point[numPoint];
+            for (int i = 0; i < numPoint; i++)
+                p[i] = this.Get(i);
+
+            string data = "Polyline ";
+            for (int i = 0; i < numPoint - 2; i++)
+            {
+                data += p[i].X.ToString() + " ";
+                data += p[i].Y.ToString() + " ";
+            }
+            data += dashStyle.ToString() + " " + width.ToString() + " " + borderColor.ToArgb().ToString()
+              + " " + angle.ToString() + "\n";
+            return data;
         }
     }
 }
