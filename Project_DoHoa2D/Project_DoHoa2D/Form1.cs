@@ -22,6 +22,7 @@ namespace Project_DoHoa2D
         MyShape selectedShape;
         MouseInfo mouse = new MouseInfo();
         UndoRedoManager undoRedoManager;
+        bool undoRedoFlag = false;
 
         private Point prevPosition;
 
@@ -215,6 +216,11 @@ namespace Project_DoHoa2D
             }
             else if (mode == Mode.Drawing)
             {
+                if (undoRedoFlag)
+                {
+                    undoRedoManager.setDefauleStatus();
+                    undoRedoFlag = false;
+                }
                 if (BtnChecked(btnPolygon) || BtnChecked(btnZigzag))
                 {
                     shapes[shapes.Count - 1].Extend_ExtendableShape(e.Location);
@@ -313,6 +319,7 @@ namespace Project_DoHoa2D
                 selectedShape.Move(distance);
                 
                 prevPosition = e.Location;
+
                 pnlMain.Invalidate();
             }
 
@@ -432,6 +439,7 @@ namespace Project_DoHoa2D
                 if (shapes[i].isSelected)
                     shapes[i].Configure(BorderColor: btnBorderColor.BackColor);
             }
+            undoRedoManager.AddNewStatus(shapes);
             pnlMain.Invalidate();
 
         }
@@ -449,6 +457,8 @@ namespace Project_DoHoa2D
                 if (shapes[i].isSelected && shapes[i].isFill)
                     shapes[i].Configure(BackgroundColor: btnBackColor.BackColor);
             }
+            undoRedoManager.AddNewStatus(shapes);
+
             pnlMain.Invalidate();
         }
 
@@ -481,6 +491,7 @@ namespace Project_DoHoa2D
                 if (shapes[i].isSelected && shapes[i].isFill && cmbFillStyle.SelectedIndex == 0)
                     shapes[i].Configure(FillStyle: 0); // chon solid color
             }
+            undoRedoManager.AddNewStatus(shapes);
             pnlMain.Invalidate();
         }
 
@@ -493,9 +504,25 @@ namespace Project_DoHoa2D
                     {
                         shapes.RemoveAt(i);
                         selectedShape = null;
+                        undoRedoManager.AddNewStatus(shapes);
+
                         pnlMain.Invalidate();
                     }
             }
+            if ((e.KeyCode == Keys.Z && (e.Control) && (e.Shift)) || (e.KeyCode == Keys.Y && (e.Control)))
+            {
+                shapes = undoRedoManager.HandleRedo();
+                undoRedoFlag = true;
+                pnlMain.Invalidate();
+            }
+            if (e.KeyCode == Keys.Z && (e.Control))
+            {
+                shapes = undoRedoManager.HandleUndo();
+                undoRedoFlag = true;
+                pnlMain.Invalidate();
+            }
+            
+            
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -589,8 +616,9 @@ namespace Project_DoHoa2D
             if (selectedShape != null)
             {
                 selectedShape.Configure(Width: trkWidth.Value + 1);
+                undoRedoManager.AddNewStatus(shapes);
                 pnlMain.Invalidate();
-                    }
+            }
 
         }
     }
